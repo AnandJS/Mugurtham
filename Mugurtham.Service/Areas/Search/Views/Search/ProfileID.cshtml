@@ -1,0 +1,108 @@
+﻿@{
+    ViewBag.Title = "ProfileID";
+    Layout = "~/Areas/Search/Views/Shared/layoutSearch.cshtml";
+}
+<!-- Tabs-->
+<div id="divnavBarSearch">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="#ProfileID" id="tabProfileID"><span class="glyphicon glyphicon-home"></span>{{ 'GENPROFID' | translate }}</a></li>
+        <li><a href="#AllProfiles" id="tabAllProfiles"><span class="glyphicon glyphicon-home"></span>{{ 'LYTSRCALLPROF' | translate }}</a></li>
+        <li><a href="#GeneralSearch" id="tabGeneralSearch"><span class="glyphicon glyphicon-home"></span>{{ 'LYTGENSRC' | translate }}</a></li>
+        <li><a href="#SangamSearch" id="tabSangamSearch"><span class="glyphicon glyphicon-home"></span>{{ 'LYTSGMSRC' | translate }}</a></li>
+    </ul>
+</div>
+<br />
+<div class="col-lg-8" data-ng-init="hideDiv();">
+    <div class="panel panel-primary bs-example well bs-component FormShadow">
+        <div class="panel-heading">
+            <h3 class="panel-title text-center">{{ 'SRCIDPROFID' | translate }}
+            </h3>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-sm-12">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label for="NomineeName" class="col-lg-3 control-label">{{ 'GENPROFID' | translate }}</label>
+                            <div class="col-lg-9">
+                                <input type="text" class="form-control" id="txtNomineeName" name="txtNomineeName" ng-model="frmData[0].ProfileID" placeholder="Profile ID">
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <div class="col-lg-10 col-lg-offset-10">
+                                <button class="btn btn-primary" ng-click="getByProfileID();">{{ 'LYTSRCH' | translate }}</button>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-lg-4">
+    <blockquote>
+        <p>{{ 'SRCIDHLP' | translate }}</p>
+    </blockquote>
+</div>
+<br />
+<div class="col-lg-12" id="divProfileBasicView">
+    <div class="panel panel-primary FormShadow">
+        <div class="panel-heading">
+            <h3 class="panel-title text-center">{{AllProfiles.BasicInfoCoreEntity.Name }}
+            </h3>
+        </div>
+        <div class="panel-body bgImage">
+            <table class="mugurthamTable">
+                <tr>
+                    <td width="15%" class="FormShadow">
+                        <div class="flexslider">
+                            <ul class="slides">
+                                <li ng-repeat="objProfilePhoto in AllProfiles.PhotoCoreEntityList">
+                                    <img src="{{objProfilePhoto.PhotoPath }}" />
+                                </li>
+                            </ul>
+                        </div>
+                    </td>
+                    <td width="85%" valign="top">
+                        <table class="mugurthamTable table-striped table-bordered table-hover FormShadow ">
+                            <tr>
+                                <td class="col-lg-3">{{ 'GENPROFID' | translate}}</td>
+                                <td class="col-lg-9"><a href="#/FullView/{{AllProfiles.BasicInfoCoreEntity.ProfileID}}" target="_blank">{{AllProfiles.BasicInfoCoreEntity.ProfileID }}</a></td>
+                            </tr>
+                            <tr>
+                                <td>{{ 'BIAGE' | translate}}</td>
+                                <td>{{AllProfiles.BasicInfoCoreEntity.Age }}</td>
+                            </tr>
+                            <tr>
+                                <td>{{ 'BIGEN' | translate}}</td>
+                                <td>{{AllProfiles.BasicInfoCoreEntity.Gender }}</td>
+                            </tr>
+                            <tr>
+                                <td>{{ 'LYTPRFTABLOC' | translate}}</td>
+                                <td>{{AllProfiles.LocationCoreEntity.CountryLivingIn }}</td>
+                            </tr>
+                            <tr>
+                                <td>{{ 'CREDUC' | translate}}</td>
+                                <td>{{AllProfiles.CareerCoreEntity.Education }}</td>
+                            </tr>
+                            <tr>
+                                <td>{{ 'CROCCPTN' | translate}}</td>
+                                <td>{{AllProfiles.CareerCoreEntity.Occupation }}</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td valign="top" colspan="2">
+                        <br />
+                        {{AllProfiles.BasicInfoCoreEntity.AboutMe }}
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="panel-footer">© {{'GENCOPYRT' | translate }} 2013 - {{AllProfiles.SangamCoreEntity.Name }}</div>
+    </div>
+</div>

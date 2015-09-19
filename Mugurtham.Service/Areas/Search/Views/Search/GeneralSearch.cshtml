@@ -1,0 +1,167 @@
+﻿@{
+    Layout = "~/Areas/Search/Views/Shared/layoutSearch.cshtml";
+}
+<div class="col-lg-12">
+    <!-- Tabs-->
+    <div id="divnavBarSearch">
+        <ul class="nav nav-tabs">
+            <li><a href="#ProfileID" id="tabProfileID"><span class="glyphicon glyphicon-home"></span>{{ 'GENPROFID' | translate }}</a></li>
+            <li><a href="#AllProfiles" id="tabAllProfiles"><span class="glyphicon glyphicon-home"></span>{{ 'LYTSRCALLPROF' | translate }}</a></li>
+            <li class="active"><a href="#GeneralSearch" id="tabGeneralSearch"><span class="glyphicon glyphicon-home"></span>{{ 'LYTGENSRC' | translate }}</a></li>
+            <li><a href="#SangamSearch" id="tabSangamSearch"><span class="glyphicon glyphicon-home"></span>{{ 'LYTSGMSRC' | translate }}</a></li>
+        </ul>
+    </div>
+</div>
+<div class="col-lg-12">
+    <br />
+</div>
+<div class="col-lg-8">
+    <div class="panel panel-primary bs-example well bs-component FormShadow">
+        <div class="panel-heading">
+            <h3 class="panel-title text-center">{{ 'LYTGENSRC' | translate }}
+            </h3>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-sm-12">
+                    <form class="form-horizontal">
+                        <!--<div class="form-group">
+                            <label for="NomineeName" class="col-lg-3 control-label">Profiles on </label>
+                            <div class="col-lg-9">
+                                <select class="form-control" ng-model="Gender" id="ddlGender">
+                                    <option value="">All Profiles</option>
+                                    <option value="groom">Groom</option>
+                                    <option value="bride">Bride</option>
+
+                                </select>
+                            </div>
+                        </div>-->
+                        <div class="form-group">
+                            <label for="Star" class="col-lg-3 control-label">{{ 'BISUBCST' | translate }}</label>
+                            <div class="col-lg-9">
+                                <select class="form-control" ng-model="SubCaste">
+                                    <option value="">All SubCaste</option>
+                                    <option ng-repeat="arrSubCaste in arrSubCaste" value="{{arrSubCaste}}">{{arrSubCaste}}</option>
+
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="Star" class="col-lg-3 control-label">{{ 'BISTR' | translate }}</label>
+                            <div class="col-lg-9">
+                                <select class="form-control" id="ddlStar" ng-model="Star">
+                                    <option value="">All Stars</option>
+                                    <option ng-repeat="arrStar in arrStar" value="{{arrStar}}">{{arrStar}}</option>
+
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="NomineeName" class="col-lg-3 control-label">{{ 'GENSANGAM' | translate}}</label>
+                            <div class="col-lg-9">
+                                <select class="form-control" ng-model="SangamID" id="ddlSangams">
+                                    <option value="">All Sangams</option>
+                                    <option ng-repeat="Sangam in arrSangamID" value="{{Sangam.ID}}">{{Sangam.Name}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-lg-4">
+    <blockquote>
+        <p>{{ 'SRCGENHLP' | translate}}</p>
+    </blockquote>
+</div>
+<div id="divAllProfileSearch" class="col-lg-12" data-ng-init="getLookup();">
+    <div class="col-lg-12" id="TopPagination">
+        <ul class="pagination">
+            <li><a ng-disabled="currentPage == 0" ng-click="currentPage=0;showPage(0);">First</a></li>
+            <li id="liTopPreviousPage"><a ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1;showPage(currentPage);">Previous </a></li>
+        </ul>
+        <ul id="ulPageNumber" class="pagination" ng-repeat="x in pageNumber">
+            <li id="lipageNumber{{x}}"><a id="apageNumber{{x}}" ng-click="currentPage=x-1;showPage(currentPage);">{{ x }}</a></li>
+        </ul>
+        <ul class="pagination">
+            <li id="liTopNextPage"><a ng-disabled="currentPage >= AllProfiles.length/pageSize - 1" ng-click="currentPage=currentPage+1;showPage(currentPage);">Next</a></li>
+            <li><a ng-disabled="currentPage >= AllProfiles.length/pageSize - 1" ng-click="currentPage=roundNumber(AllProfiles.length/pageSize);showPage(roundNumber(AllProfiles.length/pageSize));">Last</a></li>
+        </ul>
+
+    </div>
+    <div class="col-lg-12">
+        <div class="panel panel-primary FormShadow" ng-repeat="data in AllProfiles | filter: ({Gender :Gender,  SubCaste: SubCaste, Star: Star,  SangamID :SangamID} || {Age: '7'} || {Age: '6'})  | orderBy: 'BasicInfoCoreEntity.Name' | startFrom:currentPage*pageSize | limitTo:pageSize">
+            <div class="panel-heading">
+                <h3 class="panel-title text-center">{{data.BasicInfoCoreEntity.Name }}
+                </h3>
+            </div>
+            <div class="panel-body bgImage">
+                <table class="mugurthamTable">
+                    <tr>
+                        <td width="15%" class="FormShadow">
+                            <div class="flexslider">
+                                <ul class="slides">
+                                    <li ng-repeat="objProfilePhoto in data.PhotoCoreEntityList">
+                                        <img src="{{objProfilePhoto.PhotoPath }}" />
+                                    </li>
+                                </ul>
+                            </div>
+                        </td>
+                        <td width="85%" valign="top">
+                            <table class="mugurthamTable table-striped table-bordered table-hover FormShadow ">
+                                <tr>
+                                    <td class="col-lg-3">{{ 'GENPROFID' | translate}}</td>
+                                    <td class="col-lg-9"><a href="#/FullView/{{data.BasicInfoCoreEntity.ProfileID}}" target="_blank">{{data.BasicInfoCoreEntity.ProfileID }}</a></td>
+                                </tr>
+                                <tr>
+                                    <td>{{ 'BIAGE' | translate}}</td>
+                                    <td>{{data.BasicInfoCoreEntity.Age }}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{ 'BIGEN' | translate}}</td>
+                                    <td>{{data.BasicInfoCoreEntity.Gender }}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{ 'LYTPRFTABLOC' | translate}}</td>
+                                    <td>{{data.LocationCoreEntity.CountryLivingIn }}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{ 'CREDUC' | translate}}</td>
+                                    <td>{{data.CareerCoreEntity.Education }}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{ 'CROCCPTN' | translate}}</td>
+                                    <td>{{data.CareerCoreEntity.Occupation }}</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td valign="top" colspan="2">
+                            <br />
+                            {{data.BasicInfoCoreEntity.AboutMe }}
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="panel-footer">© {{'GENCOPYRT' | translate }} 2013 - {{data.SangamCoreEntity.Name }}</div>
+        </div>
+    </div>
+    <div class="col-lg-12" id="BottomPagination">
+        <ul class="pagination">
+            <li><a ng-disabled="currentPage == 0" ng-click="currentPage=0;showPage(0);showPage(0);">First</a></li>
+            <li id="liBottomPreviousPage"><a ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1;showPage(currentPage);">Previous </a></li>
+        </ul>
+        <ul id="ulbottomPageNumber" class="pagination" ng-repeat="x in pageNumber">
+
+
+            <li id="libottompageNumber{{x}}"><a id="abottompageNumber{{x}}" ng-click="currentPage=x-1;showPage(currentPage);">{{ x }}</a></li>
+        </ul>
+        <ul class="pagination">
+            <li id="liBottomNextPage"><a ng-disabled="currentPage >= AllProfiles.length/pageSize - 1" ng-click="currentPage=currentPage+1;showPage(currentPage);">Next</a></li>
+            <li><a ng-disabled="currentPage >= AllProfiles.length/pageSize - 1" ng-click="currentPage=roundNumber(AllProfiles.length/pageSize);showPage(roundNumber(AllProfiles.length/pageSize));">Last</a></li>
+        </ul>
+    </div>
+</div>

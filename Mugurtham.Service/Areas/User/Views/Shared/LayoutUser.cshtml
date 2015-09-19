@@ -1,0 +1,55 @@
+﻿@{
+    Mugurtham.Core.Login.LoggedInUser objLoggedIn = (Mugurtham.Core.Login.LoggedInUser)Session["LoggedInUser"];
+}
+<!--
+    THIS PAGE IS THE LAYOUT PAGE FOR THE MUGURTHAM ADMIN MODULE
+    -->
+<!-- Rending Body from child page-->
+<div ng-controller="ControllerUserChamber" data-ng-init="geUserChamberBadgeCount();">
+    <ul class="breadcrumb">
+        <li class="active" translate="">{{ 'GENHOME' | translate }} </li>
+    </ul>
+</div>
+<div class="panel panel-primary bs-example FormShadow">
+    <div class="panel-heading">
+        <h3 class="panel-title">{{ 'LYTUSRHOME' | translate }} </h3>
+        @RenderSection("featured", required: false)
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-sm-3">
+                <ul class="list-group">
+                    <li class="list-group-item"><a href="#ProfileID">{{ 'LYTSRCH' | translate }}</a>
+                    </li>
+                    <li class="list-group-item">
+                        <span id="badgeInterestedInMeProfiles" class="badge">0</span>
+                        <a href="#InterestedProfiles">{{ 'LYTSHRTLISPROFILES' | translate }}</a>
+                    </li>
+                    <li class="list-group-item">
+                        <span id="badgeInterestedProfiles"  class="badge">0</span>
+                        <a href="#InterestedInMeProfiles">{{ 'LYTPROFILESLKDME' | translate }}</a>
+                    </li>
+                    <li class="list-group-item">
+                        <span id="badgeViewNotifications"  class="badge">0</span>
+                        <a href="#ViewNotifications">{{ 'LYTPROFILESVWDME' | translate }}</a>
+                    </li>
+                    <li class="list-group-item">
+                        <span id="badgeRecentlyJoined"  class="badge">0</span>
+                        <a href="#RecentlyJoined">{{ 'LYTRCNTLYJNDPROFILES' | translate }}</a>
+                    </li>
+                    <li class="list-group-item">
+                        <span id="badgeHighlightedProfiles"  class="badge">0</span>
+                        <a href="#ProfileUserDashboard">{{'LYTPROFILESHGLTD' | translate}}</a>
+                    </li>
+                    <li class="list-group-item"><a href="#BasicInfo/@objLoggedIn.LoginID">{{ 'LYTEDITMYPROFILE' | translate }}</a>
+                    </li>
+                    <li class="list-group-item"><a href="#UserSettingsForm">{{ 'LYTSETTINGS' | translate }}</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-sm-9">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+</div>
