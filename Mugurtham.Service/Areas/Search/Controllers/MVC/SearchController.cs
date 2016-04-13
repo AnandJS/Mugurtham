@@ -1,4 +1,5 @@
 ﻿using Mugurtham.Core.Profile.API;
+using Mugurtham.Core.Profile.View;
 using Mugurtham.Core.ProfileInterested;
 using System;
 using System.Collections.Generic;
@@ -49,12 +50,25 @@ namespace Mugurtham.Service.Areas.Search.Controllers
                         strGender = "male";
                 }
             }
+            //string cs = System.Configuration.ConfigurationManager.ConnectionStrings["connectionStringName"].ConnectionString;
+            ProfileBasicViewEntity objProfileBasicViewEntity = new ProfileBasicViewEntity();
+            PorfileBasicInfoViewCore objPorfileBasicInfoViewCore = new PorfileBasicInfoViewCore();
+            using (objPorfileBasicInfoViewCore as IDisposable)
+            {
+                objPorfileBasicInfoViewCore.GetAllProfiles(strGender,
+                    ref objProfileBasicViewEntity,
+                    ref objLoggedIn
+                    );
+            }
+            objPorfileBasicInfoViewCore = null;
+            //Uncommented the below code for performance optimization - Apr 11 2016 - Anand J
+            /*
             List<ProfileCore> objProfileCoreList = new List<ProfileCore>();
             ProfileCore objProfileCore = new ProfileCore();
             using (objProfileCore as IDisposable)
                 objProfileCore.GetAll(ref objProfileCoreList, strGender, objLoggedIn.sangamID);
-            objProfileCore = null;
-            return this.Json(objProfileCoreList, JsonRequestBehavior.AllowGet);
+            objProfileCore = null;*/
+            return this.Json(objProfileBasicViewEntity, JsonRequestBehavior.AllowGet);
         }
         [HttpGet]
         public ActionResult getRecentlyJoined()

@@ -140,6 +140,7 @@ namespace Mugurtham.Core.BasicInfo
         private int AssignDTOFromEntity(ref Mugurtham.DTO.Profile.BasicInfo objBasicInfo, ref Mugurtham.Core.BasicInfo.BasicInfoCoreEntity objBasicInfoCoreEntity)
         {
             objBasicInfo.ProfileID = objBasicInfoCoreEntity.ProfileID;
+            objBasicInfo.SangamProfileID = objBasicInfoCoreEntity.SangamProfileID;
             objBasicInfo.AboutMe = objBasicInfoCoreEntity.AboutMe;
             objBasicInfo.Age = objBasicInfoCoreEntity.Age;
             objBasicInfo.AnyDosham = objBasicInfoCoreEntity.AnyDhosham;
@@ -188,46 +189,54 @@ namespace Mugurtham.Core.BasicInfo
 
         public int AssignEntityFromDTO(BasicInfoCoreEntity objBasicInfoCoreEntity, Mugurtham.DTO.Profile.BasicInfo objBasicInfo)
         {
-            objBasicInfoCoreEntity.ProfileID = objBasicInfo.ProfileID;
-            objBasicInfoCoreEntity.AboutMe = objBasicInfo.AboutMe;
-            objBasicInfoCoreEntity.Age = objBasicInfo.Age;
-            objBasicInfoCoreEntity.AnyDhosham = objBasicInfo.AnyDosham;
-            objBasicInfoCoreEntity.BloodGroup = objBasicInfo.BloodGroup;
-            objBasicInfoCoreEntity.BodyType = objBasicInfo.BodyType;
-            objBasicInfoCoreEntity.Caste = objBasicInfo.Caste;
-            objBasicInfoCoreEntity.ChildrenLivingStatus = objBasicInfo.ChildrenLivingStatus;
-            objBasicInfoCoreEntity.Complexion = objBasicInfo.Complexion;
-            objBasicInfoCoreEntity.DOB = objBasicInfo.DateOfBirth;
-            objBasicInfoCoreEntity.Drinking = objBasicInfo.Drinking;
-            objBasicInfoCoreEntity.Eating = objBasicInfo.Eating;
-            objBasicInfoCoreEntity.ElanUserID = objBasicInfo.ElanUserID;
-            objBasicInfoCoreEntity.Gender = objBasicInfo.Gender;
-            objBasicInfoCoreEntity.Gothram = objBasicInfo.Gothram;
-            objBasicInfoCoreEntity.Height = objBasicInfo.Height;
-            objBasicInfoCoreEntity.HoroscopeMatch = objBasicInfo.HoroscopeMatch;
-            objBasicInfoCoreEntity.MaritalStatus = objBasicInfo.MaritalStatus;
-            objBasicInfoCoreEntity.MotherTongue = objBasicInfo.MotherTongue;
-            objBasicInfoCoreEntity.Name = objBasicInfo.Name;
-            objBasicInfoCoreEntity.NoOfChildren = objBasicInfo.NoOfChildren;
-            objBasicInfoCoreEntity.PartnerExpectation = objBasicInfo.PartnerExpectations;
-            objBasicInfoCoreEntity.PhysicalStatus = objBasicInfo.PhysicalStatus;
-            objBasicInfoCoreEntity.PlaceOfBirth = objBasicInfo.PlaceOfBirth;
-            objBasicInfoCoreEntity.ProfileCreatedBy = objBasicInfo.ProfileCreatedBy;
-            objBasicInfoCoreEntity.Raasi = objBasicInfo.Raasi;
-            objBasicInfoCoreEntity.Religion = objBasicInfo.Religion;
-            objBasicInfoCoreEntity.SangamID = objBasicInfo.SangamID;
-            objBasicInfoCoreEntity.Smoking = objBasicInfo.Smoking;
-            objBasicInfoCoreEntity.Star = objBasicInfo.Star;
-            objBasicInfoCoreEntity.SubCaste = objBasicInfo.SubCaste;
-            objBasicInfoCoreEntity.TamilDOB = objBasicInfo.TamilDOB;
-            objBasicInfoCoreEntity.TOB = objBasicInfo.TimeOfBirth;
-            objBasicInfoCoreEntity.Weight = objBasicInfo.Weight;
-            objBasicInfoCoreEntity.Zodiac = objBasicInfo.Zodiac;
-            objBasicInfoCoreEntity.ZodiacDay = objBasicInfo.ZodiacDay;
-            objBasicInfoCoreEntity.ZodiacMonth = objBasicInfo.ZodiacMonth;
-            objBasicInfoCoreEntity.ZodiacYear = objBasicInfo.ZodiacYear;
-            objBasicInfoCoreEntity.PhotoPath = objBasicInfo.PhotoPath;
-            objBasicInfoCoreEntity.CreatedDate = objBasicInfo.CreatedDate;
+            try
+            {
+                objBasicInfoCoreEntity.ProfileID = objBasicInfo.ProfileID;
+                objBasicInfoCoreEntity.SangamProfileID = objBasicInfo.SangamProfileID;
+                objBasicInfoCoreEntity.AboutMe = objBasicInfo.AboutMe;
+                objBasicInfoCoreEntity.Age = objBasicInfo.Age;
+                objBasicInfoCoreEntity.AnyDhosham = objBasicInfo.AnyDosham;
+                objBasicInfoCoreEntity.BloodGroup = objBasicInfo.BloodGroup;
+                objBasicInfoCoreEntity.BodyType = objBasicInfo.BodyType;
+                objBasicInfoCoreEntity.Caste = objBasicInfo.Caste;
+                objBasicInfoCoreEntity.ChildrenLivingStatus = objBasicInfo.ChildrenLivingStatus;
+                objBasicInfoCoreEntity.Complexion = objBasicInfo.Complexion;
+                objBasicInfoCoreEntity.DOB = objBasicInfo.DateOfBirth;
+                objBasicInfoCoreEntity.Drinking = objBasicInfo.Drinking;
+                objBasicInfoCoreEntity.Eating = objBasicInfo.Eating;
+                objBasicInfoCoreEntity.ElanUserID = objBasicInfo.ElanUserID;
+                objBasicInfoCoreEntity.Gender = objBasicInfo.Gender;
+                objBasicInfoCoreEntity.Gothram = objBasicInfo.Gothram;
+                objBasicInfoCoreEntity.Height = objBasicInfo.Height;
+                objBasicInfoCoreEntity.HoroscopeMatch = objBasicInfo.HoroscopeMatch;
+                objBasicInfoCoreEntity.MaritalStatus = objBasicInfo.MaritalStatus;
+                objBasicInfoCoreEntity.MotherTongue = objBasicInfo.MotherTongue;
+                objBasicInfoCoreEntity.Name = objBasicInfo.Name;
+                objBasicInfoCoreEntity.NoOfChildren = objBasicInfo.NoOfChildren;
+                objBasicInfoCoreEntity.PartnerExpectation = objBasicInfo.PartnerExpectations;
+                objBasicInfoCoreEntity.PhysicalStatus = objBasicInfo.PhysicalStatus;
+                objBasicInfoCoreEntity.PlaceOfBirth = objBasicInfo.PlaceOfBirth;
+                objBasicInfoCoreEntity.ProfileCreatedBy = objBasicInfo.ProfileCreatedBy;
+                objBasicInfoCoreEntity.Raasi = objBasicInfo.Raasi;
+                objBasicInfoCoreEntity.Religion = objBasicInfo.Religion;
+                objBasicInfoCoreEntity.SangamID = objBasicInfo.SangamID;
+                objBasicInfoCoreEntity.Smoking = objBasicInfo.Smoking;
+                objBasicInfoCoreEntity.Star = objBasicInfo.Star;
+                objBasicInfoCoreEntity.SubCaste = objBasicInfo.SubCaste;
+                objBasicInfoCoreEntity.TamilDOB = objBasicInfo.TamilDOB;
+                objBasicInfoCoreEntity.TOB = objBasicInfo.TimeOfBirth;
+                objBasicInfoCoreEntity.Weight = objBasicInfo.Weight;
+                objBasicInfoCoreEntity.Zodiac = objBasicInfo.Zodiac;
+                objBasicInfoCoreEntity.ZodiacDay = objBasicInfo.ZodiacDay;
+                objBasicInfoCoreEntity.ZodiacMonth = objBasicInfo.ZodiacMonth;
+                objBasicInfoCoreEntity.ZodiacYear = objBasicInfo.ZodiacYear;
+                objBasicInfoCoreEntity.PhotoPath = objBasicInfo.PhotoPath;
+                objBasicInfoCoreEntity.CreatedDate = objBasicInfo.CreatedDate;
+            }
+            catch (Exception objEx)
+            {
+
+            }
             return 0;
         }
     }

@@ -6,8 +6,8 @@ using System.Web.Mvc;
 using Mugurtham.Core.ProfileViewed;
 using Mugurtham.Core.ProfileInterested;
 using Mugurtham.Core.Profile.API;
-
-
+using System.Data.SqlClient;
+using System.Data;
 
 namespace Mugurtham.Service.Areas.User.Controllers.MVC
 {
@@ -170,6 +170,47 @@ namespace Mugurtham.Service.Areas.User.Controllers.MVC
             objUserBadgeCount.ViewedProfiles = 0;
             objUserBadgeCount.HighlightedProfiles = 0;
             objUserBadgeCount.RecentlyJoined = 0;
+            /*www.codeproject.com/Articles/420217/DataSet-vs-DataReader*/
+            //string cs = System.Configuration.ConfigurationManager.ConnectionStrings["connectionStringName"].ConnectionString;
+            using (SqlConnection objSqlConnection = new SqlConnection("data source=(local);initial catalog=Mugurtham;user id=sa;password=Welcome@07"))
+            {
+                objSqlConnection.Open();
+                // 1.  create a command object identifying the stored procedure
+                SqlCommand objSqlCommand = new SqlCommand("uspGetProfileBadgeCount", objSqlConnection);
+
+                // 2. set the command object so it knows to execute a stored procedure
+                objSqlCommand.CommandType = CommandType.StoredProcedure;
+
+                // 3. add parameter to command, which will be passed to the stored procedure
+                objSqlCommand.Parameters.Add(new SqlParameter("@GENDER", strGender));
+                objSqlCommand.Parameters.Add(new SqlParameter("@INTERESTEDID", objLoggedIn.LoginID));
+                objSqlCommand.Parameters.Add(new SqlParameter("@SANGAMID", objLoggedIn.sangamID));
+
+                // execute the command
+                using (SqlDataReader objSqlDataReader = objSqlCommand.ExecuteReader())
+                {
+                    while (objSqlDataReader.Read())
+                    {
+                        if (objSqlDataReader["HighlightedProfilesCount"] != null)
+                            objUserBadgeCount.HighlightedProfiles = Convert.ToInt32(objSqlDataReader["HighlightedProfilesCount"].ToString());
+                        if (objSqlDataReader["InterestedInMeProfilesCount"] != null)
+                            objUserBadgeCount.InterestedInMeProfiles = Convert.ToInt32(objSqlDataReader["InterestedInMeProfilesCount"].ToString());
+                        if (objSqlDataReader["InterestedProfilesCount"] != null)
+                            objUserBadgeCount.InterestedProfiles = Convert.ToInt32(objSqlDataReader["InterestedProfilesCount"].ToString());
+                        if (objSqlDataReader["ProfilesJoinedThisWeekCount"] != null)
+                            objUserBadgeCount.RecentlyJoined = Convert.ToInt32(objSqlDataReader["ProfilesJoinedThisWeekCount"].ToString());
+                        if (objSqlDataReader["ProfilesViewedMeCount"] != null)
+                            objUserBadgeCount.ViewedProfiles = Convert.ToInt32(objSqlDataReader["ProfilesViewedMeCount"].ToString());
+                    }
+                    objSqlDataReader.Close();
+                }
+                objSqlCommand.Cancel();
+                objSqlCommand.Dispose();
+                objSqlConnection.Close();
+                objSqlConnection.Dispose();
+            }
+
+            /*
             List<ProfileCore> objProfileCoreList = new List<ProfileCore>();
             ProfileInterestedCore objProfileInterestedCore = new ProfileInterestedCore();
             using (objProfileInterestedCore as IDisposable)
@@ -203,6 +244,7 @@ namespace Mugurtham.Service.Areas.User.Controllers.MVC
                 objRecentlyProfileCoreList = null;
             }
             objProfileCore = null;
+            */
             return this.Json(objUserBadgeCount, JsonRequestBehavior.AllowGet);
         }
     }

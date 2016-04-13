@@ -52,11 +52,11 @@ var ControllerSearchGeneral = angular.module('MugurthamApp').controller('Control
                 $scope.currentPage = 0;
                 $scope.pageSize = 5;
                 $scope.pageNumber = [];
-                for (i = 0; i <= $scope.AllProfiles.length / $scope.pageSize; i++) {
+                for (i = 0; i <= $scope.AllProfiles.ProfileBasicInfoViewCoreEntityList.length / $scope.pageSize; i++) {
                     $scope.pageNumber.push(i + 1);
                 }
                 $scope.numberOfPages = function () {
-                    return Math.ceil($scope.AllProfiles.length / $scope.pageSize);
+                    return Math.ceil($scope.AllProfiles.ProfileBasicInfoViewCoreEntityList.length / $scope.pageSize);
                 }
 
                 $scope.roundNumber = function (value) {

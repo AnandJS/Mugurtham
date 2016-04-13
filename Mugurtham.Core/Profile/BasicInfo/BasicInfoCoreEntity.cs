@@ -20,6 +20,7 @@ namespace Mugurtham.Core.BasicInfo
         public DateTime? CreatedDate { get; set; }
 
         public string ProfileID { get; set; }
+        public string SangamProfileID { get; set; }
         public string SangamID { get; set; }
         public string Name { get; set; }
         public string MaritalStatus { get; set; }

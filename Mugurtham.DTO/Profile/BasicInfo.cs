@@ -26,6 +26,7 @@ namespace Mugurtham.DTO.Profile
         public string ElanUserID { get; set; }
         [Key]
         public string ProfileID { get; set; }
+        public string SangamProfileID { get; set; }
         public string Name { get; set; }
         public string Gender { get; set; }
         public string TimeOfBirth { get; set; }

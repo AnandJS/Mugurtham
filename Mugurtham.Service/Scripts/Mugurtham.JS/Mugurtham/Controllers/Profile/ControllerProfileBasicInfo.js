@@ -6,11 +6,14 @@ THIS CONTROLLER IS SPECIFICALLY FOR BASIC INFO PAGE ON PROFILE REGISTRATION
 var ControllerProfileBasicInfo = angular.module('MugurthamApp').controller('ControllerProfileBasicInfo',
         ['$http', '$scope', '$routeParams', '$rootScope', function ($http, $scope, $routeParams, $rootScope) {
 
+            //Code commented - As to use the HTML5 DTPicker instead of JQuery DTPicker
             $("#dtDOB").datepicker({
                 showOn: "button",
                 buttonImage: "images/Mugurtham/calendar.gif",
                 buttonImageOnly: true,
-                buttonText: "Select date"
+                buttonText: "Select date",
+                changeMonth: true,
+                changeYear: true
             });
             //========================================
             //GLOBAL VARIABLES FOR THIS CONTROLLER
@@ -32,22 +35,24 @@ var ControllerProfileBasicInfo = angular.module('MugurthamApp').controller('Cont
             $scope.arrComplexion = ['Fair', 'Very Fair', 'Dark', 'Wheatish'];
             $scope.arrPhysicalStatus = ['Normal', 'Physically Challenged'];
             $scope.arrMotherToungue = ['Tamil', 'Telugu', 'Malayalam'];
-            $scope.arrRaasi = ['Capricon', 'Libra', 'Aries', 'Scorpio', 'Leo', 'Cancer', 'Pisces', 'Virgo', 'Aquarius', 'Gemini', 'Sagittarius', 'Taurus'];
+            //$scope.arrRaasi = ['Capricon', 'Libra', 'Aries', 'Scorpio', 'Leo', 'Cancer', 'Pisces', 'Virgo', 'Aquarius', 'Gemini', 'Sagittarius', 'Taurus'];
+            $scope.arrRaasi = ['Mesham', 'Rishabam', 'Mithunam', 'Katakam', 'Simmam', 'Kanni', 'Thulam', 'Viruchigam', 'Dhanusu', 'Makaram', 'Kumbam', 'Meenam'];
             $scope.arrHoroscopeMatch = ['Yes', 'No'];
-            $scope.arrDhosham = ['Naga', 'Sevvai', 'Kalathira'];
-            $scope.arrEating = ['Vegetarian', 'Non-Vegetarian'];
-            $scope.arrSmoking = ['Occassionally', 'Yes', 'No'];
-            $scope.arrDrinking = ['Occassionally', 'Yes', 'No'];
+            $scope.arrDhosham = ['No', 'Naga', 'Sevvai', 'Kalathira'];
+            $scope.arrEating = ['Eggetarian', 'Vegetarian', 'Non-Vegetarian'];
+            $scope.arrSmoking = ['Occasionally', 'Yes', 'No'];
+            $scope.arrDrinking = ['Occasionally', 'Yes', 'No'];
 
             $scope.arrHeight = ['4ft 5in - 134 cm', '4ft 6in - 137 cm', '4ft 7in - 139 cm', '4ft 8in - 142 cm', '4ft 9in - 144 cm', '4ft 10in - 147 cm', '4ft 11in - 149 cm', '5ft 1in - 154 cm', '5ft 2in - 157 cm', '5ft 3in - 160 cm', '5ft 4in - 162 cm', '5ft 5in - 165 cm', '5ft 6in - 167 cm', '5ft 7in - 170 cm', '5ft 8in - 172 cm', '5ft 9in - 175 cm', '5ft 10in - 177 cm', '5ft 11in - 180 cm', '6ft - 182 cm', '6ft 1in - 185 cm', '6ft 2in - 187 cm', '6ft 3in - 190 cm', '6ft 4in - 193 cm', '6ft 5in - 195 cm', '6in - 198 cm', '6ft 7in - 200 cm', '8in - 203 cm', '6ft 9in - 205 cm', '6ft 10in - 208 cm', '6ft 11in - 210 cm', '7ft - 213 cm'];
             $scope.arrBlodGroup = ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'];
-            $scope.arrProfileCreatedBy = ['Parents', 'Gaurdian', 'Relative', 'Friend'];
+            $scope.arrProfileCreatedBy = ['Self', 'Parents', 'Gaurdian', 'Relative', 'Friend'];
             $scope.arrSubCaste = ['Kamalar', 'Achari'];
             $scope.arrStar = ['Anusham', 'Aswini', 'Avittam', 'Aayilyam', 'Bharani', 'Chithirai', 'Hastham', 'Karthigai', 'Kettai', 'Makam', 'Moolam', 'Mrigasheersham', 'Pooraadam', 'Pooram', 'Poorattathi', 'Poosam', 'Punarpoosam', 'Revathi', 'Rohini', 'Sadayam', 'Swaathi', 'Thiruvaathirai', 'Thiruvonam', 'Uthiraadam', 'Uthiram', 'Uthirattathi', 'Visaakam'];
 
             if ($rootScope.globalProfileID != 'New')
                 getBasicInfoByProfileID();
             $scope.SangamID = '';
+            $scope.SangamProfileID = '';
             $scope.Name = '';
             $scope.Age = '';
             $scope.Gender = '';
@@ -96,6 +101,7 @@ var ControllerProfileBasicInfo = angular.module('MugurthamApp').controller('Cont
             //PRIVATE METHODS FOR THIS CONTROLLER
             //====================================
             $scope.initFormData = function () {
+                $scope.SangamProfileID = $scope.frmData[0].SangamProfileID;
                 $scope.Name = $scope.frmData[0].Name;
                 $scope.Age = $scope.frmData[0].Age;
                 $scope.Gender = $('.radProfileGender:checked').val();
@@ -127,15 +133,18 @@ var ControllerProfileBasicInfo = angular.module('MugurthamApp').controller('Cont
                 $scope.PartnerExpectation = $scope.frmData[0].PartnerExpectation;
                 $scope.PhotoPath = $scope.frmData[0].PhotoPath;
                 $scope.ProfileCreatedDate = $scope.frmData[0].ProfileCreatedDate;
+
             }
 
             //=========================================
             //AJAX POST REQUEST - CREATING NEW PROFILE
             //==========================================
             $scope.Add = function () {
+                $("#body").mask("Saving Basic Information please wait...");
                 $http({
                     method: "post", url: '/Profile/Profile/Add', data: $.param({
                         ProfileID: $scope.ProfileID,
+                        SangamProfileID: $scope.SangamProfileID,
                         SangamID: $scope.SangamID,
                         Name: $scope.Name,
                         Age: $scope.Age,
@@ -170,12 +179,14 @@ var ControllerProfileBasicInfo = angular.module('MugurthamApp').controller('Cont
                     headers: { 'content-Type': 'application/x-www-form-urlencoded' }
                 }).
             success(function (data, status, headers, config) {
+                $("#body").unmask();
                 data = data.replace('"', ''); data = data.replace('"', '')
                 $rootScope.globalProfileID = data;
                 $scope.ProfileID = data;
                 NotifySuccessStatus(1);
             }).
             error(function (data, status, headers, config) {
+                $("#body").unmask();
                 NotifyErrorStatus(data, status);
             });
             }
@@ -185,9 +196,11 @@ var ControllerProfileBasicInfo = angular.module('MugurthamApp').controller('Cont
             //AJAX PUT REQUEST - UPDATING EXISITING PROFILE
             //==========================================
             $scope.Edit = function () {
+                $("#body").mask("Updating Basic Information please wait...");
                 $http({
                     method: "PUT", url: '/BasicInfo/BasicInfoAPI/', data: $.param({
                         ProfileID: $scope.ProfileID,
+                        SangamProfileID: $scope.SangamProfileID,
                         SangamID: $scope.SangamID,
                         Name: $scope.Name,
                         Age: $scope.Age,
@@ -226,9 +239,11 @@ var ControllerProfileBasicInfo = angular.module('MugurthamApp').controller('Cont
                     headers: { 'content-Type': 'application/x-www-form-urlencoded' }
                 }).
             success(function (data, status, headers, config) {
+                $("#body").unmask();
                 NotifySuccessStatus(2);
             }).
             error(function (data, status, headers, config) {
+                $("#body").unmask();
                 NotifyErrorStatus(data, status);
             });
             }
@@ -239,6 +254,7 @@ var ControllerProfileBasicInfo = angular.module('MugurthamApp').controller('Cont
             //===================================================
             function getBasicInfoByProfileID() {
                 var strGetURL = '/BasicInfo/BasicInfoAPI/' + $scope.ProfileID;
+                $("#body").mask("Retreiving Profile please wait...");
                 $http({
                     method: "GET", url: strGetURL
                 }).
@@ -248,9 +264,10 @@ var ControllerProfileBasicInfo = angular.module('MugurthamApp').controller('Cont
                 $scope.ElanUserID = data.ElanUserID;
                 $scope.frmData.push({
                     ID: data.ID,
+                    SangamProfileID: data.SangamProfileID,
                     Name: data.Name,
                     Age: data.Age,
-                    //DOB: data.DOB,                                        
+                    DOB: data.DOB,
                     TOB: data.TOB,
                     MaritalStatus: data.MaritalStatus,
                     NoOfChildren: data.NoOfChildren,
@@ -278,13 +295,24 @@ var ControllerProfileBasicInfo = angular.module('MugurthamApp').controller('Cont
                     PartnerExpectation: data.PartnerExpectation,
                     PhotoPath: data.PhotoPath
                 });
+
+                /*Logic to add 1 day to JQuery Formatting*/
+                //<!--http://www.miuaiga.com/index.cfm/2009/11/11/Javascript-How-To-Add-a-Number-of-Days-to-a-Date-->
+                var intAddNoOfDays = 1;
+                var startDate = new Date(Date.parse(data.DOB));
+                var dtDOB = startDate;
+                dtDOB.setDate(startDate.getDate() + intAddNoOfDays);
+                /*Logic to add 1 day to JQuery Formatting Ends*/
+
                 if (data.DOB != null)
-                    $scope.frmData[0].DOB = $.datepicker.formatDate('dd-M-yy', new Date(data.DOB));
-                if (data.CreatedDate != null) {                    
+                    $scope.frmData[0].DOB = $.datepicker.formatDate('dd-M-yy', new Date(dtDOB));
+                if (data.CreatedDate != null) {
                     $scope.frmData[0].ProfileCreatedDate = data.CreatedDate;
                 }
+                $("#body").unmask();
             }).
             error(function (data, status, headers, config) {
+                $("#body").unmask();
                 NotifyErrorStatus(data, status);
             });
             }

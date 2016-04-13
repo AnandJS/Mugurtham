@@ -59,15 +59,27 @@ namespace Mugurtham.Service.Controllers
         {
             int inLoginStatus = 0;
             bool boolLogin = false;
-            Mugurtham.Core.User.UserCore objUserCore = new Mugurtham.Core.User.UserCore();
-            using (objUserCore as IDisposable)
+            try
             {
-                inLoginStatus = objUserCore.validateLogin(ref objUserCoreEntity, out boolLogin);
+                Mugurtham.Core.User.UserCore objUserCore = new Mugurtham.Core.User.UserCore();
+                using (objUserCore as IDisposable)
+                {
+                    inLoginStatus = objUserCore.validateLogin(ref objUserCoreEntity, out boolLogin);
+                }
+                objUserCore = null;
+                if (inLoginStatus == 1)
+                {                    
+                    FormsAuthentication.SetAuthCookie(objUserCoreEntity.LoginID, false);
+                    Session.Timeout = 60;
+                }
+                
             }
-            objUserCore = null;
-            if (inLoginStatus == 1)
+            catch(Exception objEx)
             {
-                FormsAuthentication.SetAuthCookie(objUserCoreEntity.LoginID, false);
+                throw;
+                string str = string.Empty;
+                str = objEx.Message;
+                str = objEx.InnerException.Source;
             }
             LoggedInUser objLoggedIn = new LoggedInUser(objUserCoreEntity.LoginID);
             Session["LoggedInUser"] = objLoggedIn;

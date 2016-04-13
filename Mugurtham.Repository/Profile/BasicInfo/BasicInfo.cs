@@ -96,6 +96,7 @@ namespace Mugurtham.Repository.Profile.BasicInfo
             };
             var objBasicInfo = objMugurthamDBContext.Database.SqlQuery<Mugurtham.DTO.Profile.BasicInfo>(
            "exec uspGetViewedProfiles  @Gender,@ViewedID,@SangamID", paramGender, paramViewedID, paramSangamID).ToList<Mugurtham.DTO.Profile.BasicInfo>();
+
             return objBasicInfo;
         }
     }

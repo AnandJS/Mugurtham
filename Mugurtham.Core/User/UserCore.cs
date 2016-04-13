@@ -116,7 +116,7 @@ namespace Mugurtham.Core.User
                     }
                     _objSangam = null;
                 }
-            }
+            }            
             return 0;
         }
         public int GetAllSangamUsers(ref List<UserCoreEntity> objUserCoreEntityList, string strSangamID)

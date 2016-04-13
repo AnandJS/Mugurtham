@@ -7,7 +7,7 @@
 <head runat="server">
     <title>Mugurtham - Associations Integrated</title>
     <meta name="viewport" content="width=device-width" />
-    <link id="stylesheet" rel="stylesheet" href="@Url.Content("~/App_Themes/MugurthamTheme/css/Mugurtham/Bootstrap/bootstrap.min.css")"  class="pull-right"/>
+    <link id="stylesheet" rel="stylesheet" href="@Url.Content("~/App_Themes/MugurthamTheme/css/Mugurtham/Bootstrap/bootstrap.min.css")" class="pull-right" />
     <link id="stylesheet" rel="stylesheet" href="@Url.Content("~/App_Themes/MugurthamTheme/css/Mugurtham/Mugurtham.css")" />
     @Styles.Render("~/Content/MugurthamJQueryUI")
     @Styles.Render("~/Content/MugurthamToastr")
@@ -32,26 +32,27 @@
                             <li class="navbar-brand">@objLoggedIn.SangamName</li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right ">
-                            <li><a id="lblName">Hii @objLoggedIn.Name  !!! &nbsp;&nbsp;</a>
+                            <li>
+                                <a id="lblName">Hii @objLoggedIn.Name  !!! &nbsp;&nbsp;</a>
                             </li>
                             <li><a onclick="window.location = '/Home/Logout';" id="tabLogout" data-toggle="tab" style="cursor: pointer">Logout</a></li>
                             <li class="dropdown">
                                 <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" id="aSelectStyle" style="cursor: pointer">Switch Style <span class="caret"></span></a>
                                 <ul id="ddlThemes" class="dropdown-menu" role="menu">
-                                    <li class="active"><a id = "Bootstrap" cssurl='@Url.Content("~/App_Themes/MugurthamTheme/css/Mugurtham/Bootstrap/bootstrap.min.css")'>Bootstrap</a></li>
-                                    <li><a id = "Cerulean" cssurl='@Url.Content("~/App_Themes/MugurthamTheme/css/Mugurtham/Bootstrap/bootstrap-Cerulean.min.css")'>Cerulean</a></li>
-                                    <li><a id = "Cyborg" cssurl='@Url.Content("~/App_Themes/MugurthamTheme/css/Mugurtham/Bootstrap/bootstrap-Cyborg.min.css")'>Cyborg</a></li>
-                                    <li><a id = "Darkly" cssurl='@Url.Content("~/App_Themes/MugurthamTheme/css/Mugurtham/Bootstrap/bootstrap-Darkly.min.css")'>Darkly</a></li>
-                                    <li><a id = "Flatly" cssurl='@Url.Content("~/App_Themes/MugurthamTheme/css/Mugurtham/Bootstrap/bootstrap-Flatly.min.css")'>Flatly</a></li>
-                                    <li><a id = "Lumen" cssurl='@Url.Content("~/App_Themes/MugurthamTheme/css/Mugurtham/Bootstrap/bootstrap-Lumen.min.css")'>Lumen</a></li>
-                                    <li><a id = "Paper" cssurl='@Url.Content("~/App_Themes/MugurthamTheme/css/Mugurtham/Bootstrap/bootstrap-Paper.min.css")'>Paper</a></li>
-                                    <li><a id = "Readable" cssurl='@Url.Content("~/App_Themes/MugurthamTheme/css/Mugurtham/Bootstrap/bootstrap-Readable.min.css")'>Readable</a></li>
-                                    <li><a id = "Simplex" cssurl='@Url.Content("~/App_Themes/MugurthamTheme/css/Mugurtham/Bootstrap/bootstrap-Simplex.min.css")'>Simplex</a></li>
-                                    <li><a id = "Slate" cssurl='@Url.Content("~/App_Themes/MugurthamTheme/css/Mugurtham/Bootstrap/bootstrap-Slate.min.css")'>Slate</a></li>
-                                    <li><a id = "Spacelab" cssurl='@Url.Content("~/App_Themes/MugurthamTheme/css/Mugurtham/Bootstrap/bootstrap-Spacelab.min.css")'>Spacelab</a></li>
-                                    <li><a id = "Superhero" cssurl='@Url.Content("~/App_Themes/MugurthamTheme/css/Mugurtham/Bootstrap/bootstrap-United.min.css")'>Superhero</a></li>
-                                    <li><a id = "United" cssurl='@Url.Content("~/App_Themes/MugurthamTheme/css/Mugurtham/Bootstrap/bootstrap-United.min.css")'>United</a></li>
-                                    <li><a id = "Yeti" cssurl='@Url.Content("~/App_Themes/MugurthamTheme/css/Mugurtham/Bootstrap/bootstrap-Yeti.min.css")'>Yeti</a></li>
+                                    <li class="active"><a id="Bootstrap" cssurl='@Url.Content("~/App_Themes/MugurthamTheme/css/Mugurtham/Bootstrap/bootstrap.min.css")'>Bootstrap</a></li>
+                                    <li><a id="Cerulean" cssurl='@Url.Content("~/App_Themes/MugurthamTheme/css/Mugurtham/Bootstrap/bootstrap-Cerulean.min.css")'>Cerulean</a></li>
+                                    <li><a id="Cyborg" cssurl='@Url.Content("~/App_Themes/MugurthamTheme/css/Mugurtham/Bootstrap/bootstrap-Cyborg.min.css")'>Cyborg</a></li>
+                                    <li><a id="Darkly" cssurl='@Url.Content("~/App_Themes/MugurthamTheme/css/Mugurtham/Bootstrap/bootstrap-Darkly.min.css")'>Darkly</a></li>
+                                    <li><a id="Flatly" cssurl='@Url.Content("~/App_Themes/MugurthamTheme/css/Mugurtham/Bootstrap/bootstrap-Flatly.min.css")'>Flatly</a></li>
+                                    <li><a id="Lumen" cssurl='@Url.Content("~/App_Themes/MugurthamTheme/css/Mugurtham/Bootstrap/bootstrap-Lumen.min.css")'>Lumen</a></li>
+                                    <li><a id="Paper" cssurl='@Url.Content("~/App_Themes/MugurthamTheme/css/Mugurtham/Bootstrap/bootstrap-Paper.min.css")'>Paper</a></li>
+                                    <li><a id="Readable" cssurl='@Url.Content("~/App_Themes/MugurthamTheme/css/Mugurtham/Bootstrap/bootstrap-Readable.min.css")'>Readable</a></li>
+                                    <li><a id="Simplex" cssurl='@Url.Content("~/App_Themes/MugurthamTheme/css/Mugurtham/Bootstrap/bootstrap-Simplex.min.css")'>Simplex</a></li>
+                                    <li><a id="Slate" cssurl='@Url.Content("~/App_Themes/MugurthamTheme/css/Mugurtham/Bootstrap/bootstrap-Slate.min.css")'>Slate</a></li>
+                                    <li><a id="Spacelab" cssurl='@Url.Content("~/App_Themes/MugurthamTheme/css/Mugurtham/Bootstrap/bootstrap-Spacelab.min.css")'>Spacelab</a></li>
+                                    <li><a id="Superhero" cssurl='@Url.Content("~/App_Themes/MugurthamTheme/css/Mugurtham/Bootstrap/bootstrap-United.min.css")'>Superhero</a></li>
+                                    <li><a id="United" cssurl='@Url.Content("~/App_Themes/MugurthamTheme/css/Mugurtham/Bootstrap/bootstrap-United.min.css")'>United</a></li>
+                                    <li><a id="Yeti" cssurl='@Url.Content("~/App_Themes/MugurthamTheme/css/Mugurtham/Bootstrap/bootstrap-Yeti.min.css")'>Yeti</a></li>
                                     <li class="divider"></li>
                                 </ul>
                             </li>
@@ -74,13 +75,16 @@
                     <table width="100%">
                         <tr>
                             <td width="10%">
-                                <img src="@objLoggedIn.SangamLogoPath" height="90px" width="100%" /></td>
+                                <img src="@objLoggedIn.SangamLogoPath" height="90px" width="100%" />
+                            </td>
                             <td width="90%">
-                                <img src="@objLoggedIn.SangamBannerPath"  height="90px" width="100%"/></td>
+                                <img src="@objLoggedIn.SangamBannerPath" height="90px" width="100%" />
+                            </td>
                         </tr>
                         <tr>
                             <td colspan="2">
-                                <br />@objLoggedIn.AboutSangam</td>
+                                <br />@objLoggedIn.AboutSangam
+                            </td>
                         </tr>
                     </table>
                 </div>
@@ -91,19 +95,60 @@
 
                 <hr />
                 <!-- Footer Inofmraion-->
-                <div class="panel-footer col-lg-6">
-                    &#169 {{ 'GENCOPYRT' | translate }} 2013 @objLoggedIn.SangamName
+
+                
+                <div class="panel-footer col-lg-12">
+                    <div class="col-lg-6">
+                        &#169 {{ 'GENCOPYRT' | translate }} 2013 @objLoggedIn.SangamName
+                    </div>
+                    <div class="col-lg-6 text-right">
+                        <img src="~/Images/Mugurtham/Flag.jpg" height="19" width="35" />
+                        Powered by Mugurtham &#174
+                        &nbsp; v 2.3.0
+                    </div>
+                    <br /><br />
                 </div>
-                <div class="panel-footer col-lg-6 text-right">
-                    <img src="~/Images/Mugurtham/Flag.jpg" height="19" width="35" />
-                    Powered by Mugurtham &#174
-                    &nbsp; v 2.2.8
+                <div class="panel-footer col-lg-12 text-justify">
+                    <img src="/favicon.ico" height="25" width="40" />   Mugurtham was founded in 2012 with one simple objective - to provide a superior collaborative matchmaking experience by expanding the opportunities available to meet potential life partners. Since then we have created a world renowned service that has touched the lives of millions of people all over the world and helping accelarint revenue for sangams. We have, however, never rested on our laurels. Software division providing cutting edge business solutions to Matrimony Industry. An innovator in teleMatrimony and analytics. Partner focused on quality and growth.
                 </div>
-                <div class="col-lg-12">
-                    <br />
+                <div class="panel-footer col-lg-12">
+                    <div class="col-lg-3">
+                        <div class="footer-head">Help</div>
+                        <ul class="pointlink">
+                            <li><a href="Faq.php">FAQs</a></li>
+                            <li><a href="http://mugurtham.com/mockup1/contact-us.html">Contact Us</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-3">
+                        <div class="footer-head">Privacy</div>
+                        <ul class="pointlink">
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#">Terms Conditions</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="footer-head">Information</div>
+                        <ul class="pointlink">
+                            <li><a href="#">Services</a></li>
+                            <li><a href="#">Training</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="footer-box2">
+                            <div class="footer-head">Follow us on</div>
+                            <ul class="soc">
+                                <li class="icon-1"><a href="#" target="_blank">Facebook</a></li>
+                                <li class="icon-2" style="width:60px;"><a href="#">Twitter</a></li>
+                                <li class="icon-3"><a href="#">Google Plus</a></li>
+
+                            </ul>
+                        </div>
+
+                        <div class="clear"></div>
+                    </div>
                 </div>
             </div>
-        </div>
     </form>
     @Scripts.Render("~/bundles/MugurthamJQuery")
     @Scripts.Render("~/bundles/MugurthamBootstrap")

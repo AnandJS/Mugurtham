@@ -72,52 +72,52 @@ function setUserStyleLocale(themeID) {
 
 function NotifySuccessStatus(intStatus) {
     if (intStatus == '1') {
-        toastr.success('BasicInfo created successfullly');
+        toastr.success('BasicInfo created successfully');
     }
     else if (intStatus == '2') {
-        toastr.success('BasicInfo updated successfullly');
+        toastr.success('BasicInfo updated successfully');
     }
     else if (intStatus == '3') {
-        toastr.success('Career updated successfullly');
+        toastr.success('Career updated successfully');
     }
     else if (intStatus == '4') {
-        toastr.success('Contact updated successfullly');
+        toastr.success('Contact updated successfully');
     }
     else if (intStatus == '5') {
-        toastr.success('Family updated successfullly');
+        toastr.success('Family updated successfully');
     }
     else if (intStatus == '6') {
-        toastr.success('Horoscope updated successfullly');
+        toastr.success('Horoscope updated successfully');
     }
     else if (intStatus == '7') {
-        toastr.success('Location updated successfullly');
+        toastr.success('Location updated successfully');
     }
     else if (intStatus == '8') {
-        toastr.success('Reference updated successfullly');
+        toastr.success('Reference updated successfully');
     }
     else if (intStatus == '9') {
-        toastr.success('User added successfullly');
+        toastr.success('User added successfully');
     }
     else if (intStatus == '10') {
-        toastr.success('User updated successfullly');
+        toastr.success('User updated successfully');
     }
     else if (intStatus == '11') {
-        toastr.success('Role added successfullly');
+        toastr.success('Role added successfully');
     }
     else if (intStatus == '12') {
-        toastr.success('Role updated successfullly');
+        toastr.success('Role updated successfully');
     }
     else if (intStatus == '13') {
-        toastr.success('Sangam added successfullly');
+        toastr.success('Sangam added successfully');
     }
     else if (intStatus == '14') {
-        toastr.success('Sangam updated successfullly');
+        toastr.success('Sangam updated successfully');
     }
     else if (intStatus == '15') {
-        toastr.success('Interest shown on this profile successfullly');
+        toastr.success('Interest shown on this profile successfully');
     }
     else if (intStatus == '16') {
-        toastr.success('Interest removed on this profile successfullly');
+        toastr.success('Interest removed on this profile successfully');
     }
     else if (intStatus == '17') {
         toastr.success('Profile picture updated successfully');
