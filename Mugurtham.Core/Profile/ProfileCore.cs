@@ -264,8 +264,6 @@ namespace Mugurtham.Core.Profile.API
                     }
                     objBICore = null;
 
-                    validateUserAccessToThisProfile(objProfileCore.BasicInfoCoreEntity.ProfileID, ref objProfileCore, objLoggedIn);
-
                     Photo.PhotoCore objPhotoCore = new Photo.PhotoCore();
                     using (objPhotoCore as IDisposable)
                     {
@@ -306,7 +304,8 @@ namespace Mugurtham.Core.Profile.API
                     using (objAmsamCore as IDisposable)
                         objProfileCore.AmsamCoreEntity = objAmsamCore.GetByProfileID(strProfileID);
                     objRaasiCore = null;
-
+                                        
+                    validateUserAccessToThisProfile(objProfileCore.BasicInfoCoreEntity.ProfileID, ref objProfileCore, objLoggedIn);
                 }
             }
             catch (Exception objEx)
@@ -317,6 +316,7 @@ namespace Mugurtham.Core.Profile.API
         private int validateUserAccessToThisProfile(string strProfileID, ref ProfileCore objProfileCore, Mugurtham.Core.Login.LoggedInUser objLoggedIn = null)
         {
             objProfileCore.validateFullViewAccess = false;
+
             if (objLoggedIn != null)
             {
                 // When LoggedIn user is this Profile user then grant access to view
@@ -347,8 +347,7 @@ namespace Mugurtham.Core.Profile.API
         /// <returns></returns>
         public int setEmptyInfoToProfile(ref ProfileCore objProfileCore)
         {
-            // Reset BasicInformation Object to Empty - [Never Nullify it]
-
+            // Reset BasicInformation Object to Empty - [Never Nullify it]            
             objProfileCore.BasicInfoCoreEntity.AboutMe = string.Empty;
             objProfileCore.BasicInfoCoreEntity.Age = 0;
             objProfileCore.BasicInfoCoreEntity.AnyDhosham = string.Empty;
@@ -357,11 +356,7 @@ namespace Mugurtham.Core.Profile.API
             objProfileCore.BasicInfoCoreEntity.Caste = string.Empty;
             objProfileCore.BasicInfoCoreEntity.ChildrenLivingStatus = string.Empty;
             objProfileCore.BasicInfoCoreEntity.Complexion = string.Empty;
-
-
             objProfileCore.BasicInfoCoreEntity.Gender = string.Empty;
-
-
             return 0;
         }
         public int GetAll(ref List<ProfileCore> objProfileCoreList, string strGender, string strSangamID)
