@@ -16,6 +16,10 @@ using Mugurtham.Core.Login;
 using Mugurtham.Common.Utilities;
 using Mugurtham.UOW;
 using Mugurtham.Core.User;
+using Mugurtham.Core.Profile.View;
+using Mugurtham.Core.Profile.Photo;
+using System.Data.SqlClient;
+using System.Data;
 
 namespace Mugurtham.Core.Profile.API
 {
@@ -451,96 +455,165 @@ namespace Mugurtham.Core.Profile.API
             objBasicInfoCore = null;
             return 0;
         }
-        public int GetHighlightedProfiles(ref List<ProfileCore> objProfileCoreList, string strGender, string strSangmID)
+        public int GetHighlightedProfiles(string strConnectionString, string strGender, string strSangamID,
+              ref ProfileBasicViewEntity objProfileBasicViewEntity,
+              ref Mugurtham.Core.Login.LoggedInUser objLoggedIn)
         {
-            BasicInfoCore objBasicInfoCore = new BasicInfoCore();
-            using (objBasicInfoCore as IDisposable)
+            List<PhotoCoreEntity> objPhotoCoreEntityList = new List<PhotoCoreEntity>();
+            List<ProfileBasicInfoViewCoreEntity> objProfileBasicInfoViewCoreEntityList = new List<ProfileBasicInfoViewCoreEntity>();
+            if (objLoggedIn.roleID == "F62DDFBE55448E3A3") // User Profiles 
             {
-                List<BasicInfoCoreEntity> objBasicInfoCoreEntityList = new List<BasicInfoCoreEntity>();
-                IUnitOfWork objIUnitOfWork = new UnitOfWork();
-                using (objIUnitOfWork as IDisposable)
+                if (!string.IsNullOrWhiteSpace(objLoggedIn.BasicInfoCoreEntity.Gender))
                 {
-                    if ((objIUnitOfWork.RepositoryBasicInfo.getHighlightedProfiles(strGender, strSangmID) != null) &&
-                        (objIUnitOfWork.RepositoryBasicInfo.getHighlightedProfiles(strGender, strSangmID).Count > 0))
-                    {
-                        List<Mugurtham.DTO.Profile.BasicInfo> objListBasicInfo = new List<Mugurtham.DTO.Profile.BasicInfo>();
-                        objListBasicInfo = objIUnitOfWork.RepositoryBasicInfo.getHighlightedProfiles(strGender, strSangmID);
-                        if (objListBasicInfo != null && objListBasicInfo.Count > 0)
-                        {
-                            foreach (Mugurtham.DTO.Profile.BasicInfo objBasicInfo in objListBasicInfo)
-                            {
-                                using (objBasicInfo as IDisposable)
-                                {
-                                    BasicInfoCoreEntity objBasicInfoCoreEntity = new BasicInfoCoreEntity();
-                                    using (objBasicInfoCoreEntity as IDisposable)
-                                    {
-                                        objBasicInfoCore.AssignEntityFromDTO(objBasicInfoCoreEntity, objBasicInfo);
-                                        objBasicInfoCoreEntityList.Add(objBasicInfoCoreEntity);
-                                    }
-                                    objBasicInfoCoreEntity = null;
-                                }
-                            }
-                        }
-                    }
-                }
-                objIUnitOfWork = null;
-                foreach (BasicInfoCoreEntity objBasicInfoCoreEntity in objBasicInfoCoreEntityList)
-                {
-                    ProfileCore objProfileCore = null;
-                    GetByProfileID(objBasicInfoCoreEntity.ProfileID, out objProfileCore);
-                    objProfileCoreList.Add(objProfileCore);
-                    using (objProfileCore as IDisposable) { }
-                    objProfileCore = null;
+                    if (objLoggedIn.BasicInfoCoreEntity.Gender.ToLower().Trim() == "male".ToLower().Trim())
+                        strGender = "female";
+                    else
+                        strGender = "male";
                 }
             }
-            objBasicInfoCore = null;
-            return 0;
-        }
-        public int GetViewedProfiles(ref List<ProfileCore> objProfileCoreList, string strGender, string strViewdProfileID, string strSangamID)
-        {
-            BasicInfoCore objBasicInfoCore = new BasicInfoCore();
-            using (objBasicInfoCore as IDisposable)
+            using (SqlConnection objSqlConnection = new SqlConnection(strConnectionString))
             {
-                List<BasicInfoCoreEntity> objBasicInfoCoreEntityList = new List<BasicInfoCoreEntity>();
-                IUnitOfWork objIUnitOfWork = new UnitOfWork();
-                using (objIUnitOfWork as IDisposable)
+                objSqlConnection.Open();
+                // 1.  create a command object identifying the stored procedure
+                SqlCommand objSqlCommand = new SqlCommand("uspGetHighlightedProfiles", objSqlConnection);
+
+                // 2. set the command object so it knows to execute a stored procedure
+                objSqlCommand.CommandType = CommandType.StoredProcedure;
+
+                // 3. add parameter to command, which will be passed to the stored procedure
+                objSqlCommand.Parameters.Add(new SqlParameter("@GENDER", strGender));
+                objSqlCommand.Parameters.Add(new SqlParameter("@SangamID", strSangamID));
+                // execute the command
+                using (SqlDataReader objSqlDataReader = objSqlCommand.ExecuteReader())
                 {
-                    if ((objIUnitOfWork.RepositoryBasicInfo.getViewedProfiles(strGender, strViewdProfileID, strSangamID) != null) &&
-                        (objIUnitOfWork.RepositoryBasicInfo.getViewedProfiles(strGender, strViewdProfileID, strSangamID).Count > 0))
+                    while (objSqlDataReader.Read())
                     {
-                        List<Mugurtham.DTO.Profile.BasicInfo> objListBasicInfo = new List<Mugurtham.DTO.Profile.BasicInfo>();
-                        objListBasicInfo = objIUnitOfWork.RepositoryBasicInfo.getViewedProfiles(strGender, strViewdProfileID, strSangamID);
-                        if (objListBasicInfo != null && objListBasicInfo.Count > 0)
+                        ProfileBasicInfoViewCoreEntity objProfileBasicInfoViewCoreEntity = new ProfileBasicInfoViewCoreEntity();
+                        objProfileBasicInfoViewCoreEntity.SangamProfileID = objSqlDataReader["SangamProfileID"].ToString();
+                        objProfileBasicInfoViewCoreEntity.MugurthamProfileID = objSqlDataReader["MugurthamProfileID"].ToString();
+                        objProfileBasicInfoViewCoreEntity.Name = objSqlDataReader["Name"].ToString();
+                        objProfileBasicInfoViewCoreEntity.Gender = objSqlDataReader["Gender"].ToString();
+                        objProfileBasicInfoViewCoreEntity.Education = objSqlDataReader["Education"].ToString();
+                        objProfileBasicInfoViewCoreEntity.Location = objSqlDataReader["Location"].ToString();
+                        objProfileBasicInfoViewCoreEntity.Occupation = objSqlDataReader["Occupation"].ToString();
+                        objProfileBasicInfoViewCoreEntity.SangamID = objSqlDataReader["SangamID"].ToString();
+                        objProfileBasicInfoViewCoreEntity.SangamName = objSqlDataReader["SangamName"].ToString();
+                        objProfileBasicInfoViewCoreEntity.SubCaste = objSqlDataReader["Subcaste"].ToString();
+                        objProfileBasicInfoViewCoreEntity.Star = objSqlDataReader["Star"].ToString();
+                        if (!string.IsNullOrEmpty(objSqlDataReader["Age"].ToString()))
+                            objProfileBasicInfoViewCoreEntity.Age = Convert.ToInt32(objSqlDataReader["Age"].ToString());
+                        objProfileBasicInfoViewCoreEntityList.Add(objProfileBasicInfoViewCoreEntity);
+                    }
+                    if (objSqlDataReader.NextResult())
+                    {
+                        while (objSqlDataReader.Read())
                         {
-                            foreach (Mugurtham.DTO.Profile.BasicInfo objBasicInfo in objListBasicInfo)
+                            PhotoCoreEntity objPhotoCoreEntity = new PhotoCoreEntity();
+                            using (objPhotoCoreEntity as IDisposable)
                             {
-                                using (objBasicInfo as IDisposable)
-                                {
-                                    BasicInfoCoreEntity objBasicInfoCoreEntity = new BasicInfoCoreEntity();
-                                    using (objBasicInfoCoreEntity as IDisposable)
-                                    {
-                                        objBasicInfoCore.AssignEntityFromDTO(objBasicInfoCoreEntity, objBasicInfo);
-                                        objBasicInfoCoreEntityList.Add(objBasicInfoCoreEntity);
-                                    }
-                                    objBasicInfoCoreEntity = null;
-                                }
+                                objPhotoCoreEntity.ID = objSqlDataReader["ID"].ToString();
+                                objPhotoCoreEntity.ProfileID = objSqlDataReader["ProfileID"].ToString();
+                                objPhotoCoreEntity.PhotoPath = objSqlDataReader["PhotoPath"].ToString();
+                                objPhotoCoreEntity.IsProfilePic = Convert.ToDecimal(objSqlDataReader["IsProfilePic"].ToString());
+                                objPhotoCoreEntityList.Add(objPhotoCoreEntity);
                             }
+                            objPhotoCoreEntity = null;
                         }
                     }
+                    objProfileBasicViewEntity.ProfileBasicInfoViewCoreEntityList = objProfileBasicInfoViewCoreEntityList;
+                    objProfileBasicViewEntity.PhotoCoreEntityList = objPhotoCoreEntityList;
+                    objSqlDataReader.Close();
                 }
-                objIUnitOfWork = null;
-                foreach (BasicInfoCoreEntity objBasicInfoCoreEntity in objBasicInfoCoreEntityList)
-                {
-                    ProfileCore objProfileCore = null;
-                    GetByProfileID(objBasicInfoCoreEntity.ProfileID, out objProfileCore);
-                    objProfileCoreList.Add(objProfileCore);
-                    using (objProfileCore as IDisposable) { }
-                    objProfileCore = null;
-                }
+                objSqlCommand.Cancel();
+                objSqlCommand.Dispose();
+                objSqlConnection.Close();
+                objSqlConnection.Dispose();
+
             }
-            objBasicInfoCore = null;
             return 0;
         }
+        public int GetViewedProfiles(string strConnectionString, string strGender,
+               string strViewdProfileID, string strSangamID,
+              ref ProfileBasicViewEntity objProfileBasicViewEntity,
+              ref Mugurtham.Core.Login.LoggedInUser objLoggedIn)
+        {
+            List<PhotoCoreEntity> objPhotoCoreEntityList = new List<PhotoCoreEntity>();
+            List<ProfileBasicInfoViewCoreEntity> objProfileBasicInfoViewCoreEntityList = new List<ProfileBasicInfoViewCoreEntity>();
+            if (objLoggedIn.roleID == "F62DDFBE55448E3A3") // User Profiles 
+            {
+                if (!string.IsNullOrWhiteSpace(objLoggedIn.BasicInfoCoreEntity.Gender))
+                {
+                    if (objLoggedIn.BasicInfoCoreEntity.Gender.ToLower().Trim() == "male".ToLower().Trim())
+                        strGender = "female";
+                    else
+                        strGender = "male";
+                }
+            }
+            using (SqlConnection objSqlConnection = new SqlConnection(strConnectionString))
+            {
+                objSqlConnection.Open();
+                // 1.  create a command object identifying the stored procedure
+                SqlCommand objSqlCommand = new SqlCommand("uspGetViewedProfiles", objSqlConnection);
+
+                // 2. set the command object so it knows to execute a stored procedure
+                objSqlCommand.CommandType = CommandType.StoredProcedure;
+
+                // 3. add parameter to command, which will be passed to the stored procedure
+                objSqlCommand.Parameters.Add(new SqlParameter("@GENDER", strGender));
+                objSqlCommand.Parameters.Add(new SqlParameter("@InterestedID", strViewdProfileID));
+                objSqlCommand.Parameters.Add(new SqlParameter("@SangamID", strSangamID));
+                // execute the command
+                using (SqlDataReader objSqlDataReader = objSqlCommand.ExecuteReader())
+                {
+                    while (objSqlDataReader.Read())
+                    {
+                        ProfileBasicInfoViewCoreEntity objProfileBasicInfoViewCoreEntity = new ProfileBasicInfoViewCoreEntity();
+                        objProfileBasicInfoViewCoreEntity.SangamProfileID = objSqlDataReader["SangamProfileID"].ToString();
+                        objProfileBasicInfoViewCoreEntity.MugurthamProfileID = objSqlDataReader["MugurthamProfileID"].ToString();
+                        objProfileBasicInfoViewCoreEntity.Name = objSqlDataReader["Name"].ToString();
+                        objProfileBasicInfoViewCoreEntity.Gender = objSqlDataReader["Gender"].ToString();
+                        objProfileBasicInfoViewCoreEntity.Education = objSqlDataReader["Education"].ToString();
+                        objProfileBasicInfoViewCoreEntity.Location = objSqlDataReader["Location"].ToString();
+                        objProfileBasicInfoViewCoreEntity.Occupation = objSqlDataReader["Occupation"].ToString();
+                        objProfileBasicInfoViewCoreEntity.SangamID = objSqlDataReader["SangamID"].ToString();
+                        objProfileBasicInfoViewCoreEntity.SangamName = objSqlDataReader["SangamName"].ToString();
+                        objProfileBasicInfoViewCoreEntity.SubCaste = objSqlDataReader["Subcaste"].ToString();
+                        objProfileBasicInfoViewCoreEntity.Star = objSqlDataReader["Star"].ToString();
+                        if (!string.IsNullOrEmpty(objSqlDataReader["Age"].ToString()))
+                            objProfileBasicInfoViewCoreEntity.Age = Convert.ToInt32(objSqlDataReader["Age"].ToString());
+                        objProfileBasicInfoViewCoreEntityList.Add(objProfileBasicInfoViewCoreEntity);
+                    }
+                    if (objSqlDataReader.NextResult())
+                    {
+                        while (objSqlDataReader.Read())
+                        {
+                            PhotoCoreEntity objPhotoCoreEntity = new PhotoCoreEntity();
+                            using (objPhotoCoreEntity as IDisposable)
+                            {
+                                objPhotoCoreEntity.ID = objSqlDataReader["ID"].ToString();
+                                objPhotoCoreEntity.ProfileID = objSqlDataReader["ProfileID"].ToString();
+                                objPhotoCoreEntity.PhotoPath = objSqlDataReader["PhotoPath"].ToString();
+                                objPhotoCoreEntity.IsProfilePic = Convert.ToDecimal(objSqlDataReader["IsProfilePic"].ToString());
+                                objPhotoCoreEntityList.Add(objPhotoCoreEntity);
+                            }
+                            objPhotoCoreEntity = null;
+                        }
+                    }
+                    objProfileBasicViewEntity.ProfileBasicInfoViewCoreEntityList = objProfileBasicInfoViewCoreEntityList;
+                    objProfileBasicViewEntity.PhotoCoreEntityList = objPhotoCoreEntityList;
+                    objSqlDataReader.Close();
+                }
+                objSqlCommand.Cancel();
+                objSqlCommand.Dispose();
+                objSqlConnection.Close();
+                objSqlConnection.Dispose();
+
+            }
+            return 0;
+        }
+
+
+
         public int GetProfilePhotos(ref List<Mugurtham.Core.Profile.Photo.PhotoCoreEntity> objPhotoCoreEntityList, string strProfileID)
         {
             IQueryable<DTO.Profile.Photo> objIQPhoto;

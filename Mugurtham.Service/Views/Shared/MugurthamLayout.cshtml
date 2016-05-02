@@ -15,7 +15,7 @@
     @Styles.Render("~/Content/MugurthamMask")
     @Styles.Render("~/Content/MugurthamJqplot")
     @Styles.Render("~/Content/Flexslider")
-    @Styles.Render("~/Content/Lightbox")
+    @Styles.Render("~/Content/Lightbox")    
 </head>
 <body onload="javascript:setUserStyleLocale('@objLoggedIn.themeID');">
     <form ng-app="MugurthamApp" name="frmPortal" novalidate>
@@ -104,7 +104,7 @@
                     <div class="col-lg-6 text-right">
                         <img src="~/Images/Mugurtham/Flag.jpg" height="19" width="35" />
                         Powered by Mugurtham &#174
-                        &nbsp; v 2.3.0
+                        &nbsp; v 2.3.2
                     </div>
                     <br /><br />
                 </div>
@@ -157,6 +157,7 @@
     @Scripts.Render("~/bundles/MugurthamJqplot")
     @Scripts.Render("~/bundles/FlexSlider")
     @Scripts.Render("~/bundles/Lightbox")
+    @Scripts.Render("~/bundles/Paging")
     @Scripts.Render("~/bundles/MugurthamApp")
     <script type="text/javascript" src="@Url.Content("~/Scripts/Mugurtham.js/Mugurtham/Controllers/ControllerMugurtham.js")"></script>
     @Scripts.Render("~/bundles/MugurthamDashboard")

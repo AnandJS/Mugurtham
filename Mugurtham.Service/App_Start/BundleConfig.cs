@@ -30,7 +30,8 @@ namespace Mugurtham.Service
                        "~/Scripts/Mugurtham.JS/FlexSlider/*.js"));
             bundles.Add(new ScriptBundle("~/bundles/Lightbox").Include(
                        "~/Scripts/Mugurtham.JS/Lightbox/*.js"));
-
+            bundles.Add(new ScriptBundle("~/bundles/Paging").Include(
+                       "~/Scripts/Mugurtham.JS/Paging/*.js"));
             bundles.Add(new ScriptBundle("~/bundles/MugurthamApp").Include(
                     "~/Scripts/Mugurtham.JS/Mugurtham/app.js"));
             bundles.Add(new ScriptBundle("~/bundles/MugurthamControllerBase").Include(

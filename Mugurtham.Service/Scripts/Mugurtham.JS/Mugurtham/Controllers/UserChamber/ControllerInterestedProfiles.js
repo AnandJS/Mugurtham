@@ -6,10 +6,7 @@ THIS CONTROLLER IS SPECIFICALLY FOR DISPLAYING VIEWED PROFILES IN USER HOME PAGE
 var ControllerInterestedProfiles = angular.module('MugurthamApp').controller('ControllerInterestedProfiles',
         ['$http', '$scope', function ($http, $scope) {
 
-            $scope.ControllerName = 'ControllerInterestedProfiles';
-            $('#BottomPagination').hide();
-            $('#TopPagination').hide();
-            $scope.tester = '';
+            $scope.ControllerName = 'ControllerInterestedProfiles';            
             //===================================================
             //AJAX GET REQUEST - GETTING ALL PROFILES
             //===================================================
@@ -22,45 +19,12 @@ var ControllerInterestedProfiles = angular.module('MugurthamApp').controller('Co
             success(function (data, status, headers, config) {
                 $("#divContainer").unmask();
                 $scope.AllProfiles = data;
-                $scope.currentPage = 0;
+                $scope.currentPage = 1;
                 $scope.pageSize = 5;
-                $scope.pageNumber = [];
-                for (i = 0; i <= $scope.AllProfiles.length / $scope.pageSize; i++) {
-                    $scope.pageNumber.push(i + 1);
-                }
-                $scope.numberOfPages = function () {
-                    return Math.ceil($scope.AllProfiles.length / $scope.pageSize);
-                }
-
-                $scope.roundNumber = function (value) {
-                    return (Math.round(value) - 1);
-                }
-                $('#BottomPagination').show();
-                $('#TopPagination').show();
-                $('#liTopPreviousPage').hide();
-                $('#liBottomPreviousPage').hide();
-                $scope.showPage = function (value) {
-                    setTimeout(displayThumbnailSlider, 1000);
-                    $scope.currentPage = value;
-                    $('#liBottomNextPage').show();
-                    $('#liTopNextPage').show();
-                    if ($scope.currentPage == 0) {
-                        $('#liTopPreviousPage').hide();
-                        $('#liBottomPreviousPage').hide();
-                    }
-                    else {
-                        $('#liTopPreviousPage').show();
-                        $('#liBottomPreviousPage').show();
-                    }
-                    $('#ulPageNumber li').removeClass('active');
-                    $('#apageNumber' + (value + 1)).parent().addClass('active');
-                    $('#ulbottomPageNumber li').removeClass('active');
-                    $('#abottompageNumber' + (value + 1)).parent().addClass('active');
-                    if (value == ($scope.numberOfPages() - 1)) {
-                        $('#liBottomNextPage').hide();
-                        $('#liTopNextPage').hide();
-                    }
-                }
+                $scope.SearchedProfiles = data.ProfileBasicInfoViewCoreEntityList;
+                $scope.pageChangeHandler = function (num) {
+                    console.log('Profiles page changed to ' + num);
+                };
                 setTimeout(displayThumbnailSlider, 1000);
             }).
                 error(function (data, status, headers, config) {

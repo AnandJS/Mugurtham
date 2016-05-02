@@ -1,6 +1,7 @@
 ﻿using Mugurtham.Core.Profile.API;
 using Mugurtham.Core.Profile.View;
 using Mugurtham.Core.ProfileInterested;
+using Mugurtham.Service.App_Code.Utility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -55,7 +56,7 @@ namespace Mugurtham.Service.Areas.Search.Controllers
             PorfileBasicInfoViewCore objPorfileBasicInfoViewCore = new PorfileBasicInfoViewCore();
             using (objPorfileBasicInfoViewCore as IDisposable)
             {
-                objPorfileBasicInfoViewCore.GetAllProfiles(strGender,
+                objPorfileBasicInfoViewCore.GetAllProfiles(Utility.connectionString(), strGender,
                     ref objProfileBasicViewEntity,
                     ref objLoggedIn
                     );
@@ -107,12 +108,18 @@ namespace Mugurtham.Service.Areas.Search.Controllers
                         strGender = "male";
                 }
             }
-            List<ProfileCore> objProfileCoreList = new List<ProfileCore>();
             ProfileCore objProfileCore = new ProfileCore();
+            ProfileBasicViewEntity objProfileBasicViewEntity = new ProfileBasicViewEntity();
             using (objProfileCore as IDisposable)
-                objProfileCore.GetHighlightedProfiles(ref objProfileCoreList, strGender, objLoggedIn.sangamID);
+            {
+                objProfileCore.GetHighlightedProfiles(Utility.connectionString(),strGender,
+                    objLoggedIn.sangamID,
+                    ref objProfileBasicViewEntity,
+                    ref objLoggedIn
+                    );
+            }
             objProfileCore = null;
-            return this.Json(objProfileCoreList, JsonRequestBehavior.AllowGet);
+            return this.Json(objProfileBasicViewEntity, JsonRequestBehavior.AllowGet);
         }
         [HttpGet]
         public ActionResult getViewedProfiles()
@@ -129,12 +136,18 @@ namespace Mugurtham.Service.Areas.Search.Controllers
                         strGender = "male";
                 }
             }
-            List<ProfileCore> objProfileCoreList = new List<ProfileCore>();
             ProfileCore objProfileCore = new ProfileCore();
+            ProfileBasicViewEntity objProfileBasicViewEntity = new ProfileBasicViewEntity();
             using (objProfileCore as IDisposable)
-                objProfileCore.GetViewedProfiles(ref objProfileCoreList, strGender, objLoggedIn.LoginID, objLoggedIn.sangamID);
+            {
+                objProfileCore.GetViewedProfiles(Utility.connectionString(), strGender,
+                    objLoggedIn.LoginID, objLoggedIn.sangamID,
+                    ref objProfileBasicViewEntity,
+                    ref objLoggedIn
+                    );
+            }
             objProfileCore = null;
-            return this.Json(objProfileCoreList, JsonRequestBehavior.AllowGet);
+            return this.Json(objProfileBasicViewEntity, JsonRequestBehavior.AllowGet);
         }
         [HttpGet]
         public ActionResult getProfilePhotos()

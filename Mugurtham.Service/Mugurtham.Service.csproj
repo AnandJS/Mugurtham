@@ -122,6 +122,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Code\Utility\Utility.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -295,6 +296,9 @@
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\Controllers\UserChamber\ControllerInterestedProfiles.js" />
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\Controllers\View\ControllerFullView.js" />
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\Login\Login.js" />
+    <Content Include="Scripts\Mugurtham.JS\Paging\angular-table.min.js" />
+    <Content Include="Scripts\Mugurtham.JS\Paging\dirPagination.js" />
+    <Content Include="Scripts\Mugurtham.JS\Paging\dirPagination.tpl.html" />
     <Content Include="Scripts\Mugurtham.JS\toastr\toastr.min.js" />
     <Content Include="Views\Home\login-form-paper-style.html" />
     <Content Include="Web.config">

@@ -10,93 +10,103 @@
         <li class="active">{{ 'LYTPROFILESVWDME' | translate }}</li>
     </ul>
 </div>
-<div class="col-lg-12">
-    <br />
-</div>
-<div class="col-lg-12" id="TopPagination">
-    <ul class="pagination">
-        <li><a ng-disabled="currentPage == 0" ng-click="currentPage=0;showPage(0);">First</a></li>
-        <li id="liTopPreviousPage"><a ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1;showPage(currentPage);">Previous </a></li>
-    </ul>
-    <ul id="ulPageNumber" class="pagination" ng-repeat="x in pageNumber">
-        <li id="lipageNumber{{x}}"><a id="apageNumber{{x}}" ng-click="currentPage=x-1;showPage(currentPage);">{{ x }}</a></li>
-    </ul>
-    <ul class="pagination">
-        <li id="liTopNextPage"><a ng-disabled="currentPage >= AllProfiles.length/pageSize - 1" ng-click="currentPage=currentPage+1;showPage(currentPage);">Next</a></li>
-        <li><a ng-disabled="currentPage >= AllProfiles.length/pageSize - 1" ng-click="currentPage=roundNumber(AllProfiles.length/pageSize);showPage(roundNumber(AllProfiles.length/pageSize));">Last</a></li>
-    </ul>
+<div id="divViewedProfiles">
+    <div class="col-lg-12">
+        <!-- Filter Header-->
+        <div class="row">
+            <div class="col-xs-6">
+                <label for="search">Open Search:</label>
+                <input ng-model="q" id="opensearch" class="form-control" placeholder="Search using Profile ID or Name or Location or Education or more" oninput="setTimeout(displayThumbnailSlider, 1000);">
+            </div>
+            <div class="col-xs-6">
+                <label for="search">Profiles per page:</label>
+                <input type="number" min="1" max="100" class="form-control" ng-model="pageSize">
+            </div><br /><br /><br /><br />
+            <div class="col-xs-4">
+                <h5><b>Total Searched Profiles : {{ SearchedProfiles.length }} &nbsp;&nbsp;</b></h5>
+            </div>
+            <div class="col-xs-4">
+                <h5>
+                    <b>
+                        Total Filtered Profiles : {{ (SearchedProfiles |filter: (q)).length}}
+                    </b>
+                </h5>
+            </div>
+            <div class="col-xs-4">
 
-</div>
-<div class="col-lg-12">
-    <div class="panel panel-primary FormShadow" ng-repeat="data in AllProfiles | startFrom:currentPage*pageSize | limitTo:pageSize">
-        <div class="panel-heading">
-            <h3 class="panel-title text-center">{{data.BasicInfoCoreEntity.Name }} 
-            </h3>
+                <h5>
+                    <b>
+                        Showing Profiles {{ (((currentPage * pageSize) - pageSize) + 1)  }}  through {{ currentPage * pageSize }} of  {{ (SearchedProfiles |filter: (q || {SangamID :SangamID, Star: Star, SubCaste: SubCaste}  || {Age: '7'} || {Age: '6'})).length}} &nbsp;&nbsp;
+                    </b>
+                </h5>
+            </div>
         </div>
-        <div class="panel-body bgImage">
-            <table class="mugurthamTable">
-                <tr>
-                    <td width="20%" class="FormShadow">
-                        <div class="flexslider">
-                            <ul class="slides">
-                                <li ng-repeat="objProfilePhoto in data.PhotoCoreEntityList">
-                                    <img src="{{objProfilePhoto.PhotoPath }}" />
-                                </li>
-                            </ul>
-                        </div>
-                    </td>
-                    <td width="80%" valign="top">
-                        <table class="mugurthamTable table-striped table-bordered table-hover FormShadow ">
-                            <tr>
-                                <td class="col-lg-3">{{ 'GENPROFID' | translate}}</td>
-                                <td class="col-lg-9"><a href="#/FullView/{{data.BasicInfoCoreEntity.ProfileID}}" target="_blank">{{data.BasicInfoCoreEntity.ProfileID }}</a></td>
-                            </tr>
-                            <tr>
-                                <td>{{ 'BIAGE' | translate}}</td>
-                                <td>{{data.BasicInfoCoreEntity.Age }}</td>
-                            </tr>
-                            <tr>
-                                <td>{{ 'BIGEN' | translate}}</td>
-                                <td>{{data.BasicInfoCoreEntity.Gender }}</td>
-                            </tr>
-                            <tr>
-                                <td>{{ 'LYTPRFTABLOC' | translate}}</td>
-                                <td>{{data.LocationCoreEntity.CountryLivingIn }}</td>
-                            </tr>
-                            <tr>
-                                <td>{{ 'CREDUC' | translate}}</td>
-                                <td>{{data.CareerCoreEntity.Education }}</td>
-                            </tr>
-                            <tr>
-                                <td>{{ 'CROCCPTN' | translate}}</td>
-                                <td>{{data.CareerCoreEntity.Occupation }}</td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-                <tr>
-                    <td valign="top" colspan="2">
-                        <br />
-                        {{data.BasicInfoCoreEntity.AboutMe }}
-                    </td>
-                </tr>
-            </table>
+        <!-- Top Pagination-->
+        <div class="text-center">
+            <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="/Scripts/Mugurtham.JS/Paging/dirPagination.tpl.html"></dir-pagination-controls>
         </div>
-        <div class="panel-footer">© {{'GENCOPYRT' | translate }} 2013 - {{data.SangamCoreEntity.Name }}</div>
+        <br />
+        <!-- Profiles Listing-->
+        <div class="panel panel-primary FormShadow" dir-paginate="data in AllProfiles.ProfileBasicInfoViewCoreEntityList | filter: (q)  | orderBy: 'Name' | itemsPerPage: pageSize" current-page="currentPage">
+            <div class="panel-heading">
+                <h3 class="panel-title text-center">
+                    {{data.Name }}
+                </h3>
+            </div>
+            <div class="panel-body bgImage">
+                <table class="mugurthamTable">
+                    <tr>
+                        <td width="15%" class="FormShadow">
+                            <div class="flexslider">
+                                <ul class="slides">
+                                    <li ng-repeat="objProfilePhoto in AllProfiles.PhotoCoreEntityList | filter: {ProfileID: data.MugurthamProfileID}">
+                                        <img src="{{objProfilePhoto.PhotoPath }}" />
+                                    </li>
+                                </ul>
+                            </div>
+                        </td>
+                        <td width="85%" valign="top">
+                            <table class="mugurthamTable table-striped table-bordered table-hover FormShadow ">
+                                <tr>
+                                    <td class="col-lg-3">{{ 'GENPROFID' | translate}}</td>
+                                    <td class="col-lg-9"><a href="#/FullView/{{data.MugurthamProfileID}}" target="_blank">{{data.MugurthamProfileID }}</a></td>
+                                </tr>
+                                <tr>
+                                    <td>{{ 'BIAGE' | translate}}</td>
+                                    <td>{{data.Age }}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{ 'BIGEN' | translate}}</td>
+                                    <td>{{data.Gender }}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{ 'LYTPRFTABLOC' | translate}}</td>
+                                    <td>{{data.CountryLivingIn }}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{ 'CREDUC' | translate}}</td>
+                                    <td>{{data.Education }}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{ 'CROCCPTN' | translate}}</td>
+                                    <td>{{data.Occupation }}</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td valign="top" colspan="2">
+                            <br />
+                            {{data.AboutMe }}
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="panel-footer">© {{'GENCOPYRT' | translate }} 2013 - {{data.SangamName }}</div>
+        </div>
+        <!-- Bottom Pagination-->
+        <div class="text-center">
+            <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="/Scripts/Mugurtham.JS/Paging/dirPagination.tpl.html"></dir-pagination-controls>
+        </div>
     </div>
-</div>
-<div class="col-lg-12" id="BottomPagination">
-    <ul class="pagination">
-        <li><a ng-disabled="currentPage == 0" ng-click="currentPage=0;showPage(0);showPage(0);">First</a></li>
-        <li id="liBottomPreviousPage"><a ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1;showPage(currentPage);">Previous </a></li>
-    </ul>
-    <ul id="ulbottomPageNumber" class="pagination" ng-repeat="x in pageNumber">
-
-
-        <li id="libottompageNumber{{x}}"><a id="abottompageNumber{{x}}" ng-click="currentPage=x-1;showPage(currentPage);">{{ x }}</a></li>
-    </ul>
-    <ul class="pagination">
-        <li id="liBottomNextPage"><a ng-disabled="currentPage >= AllProfiles.length/pageSize - 1" ng-click="currentPage=currentPage+1;showPage(currentPage);">Next</a></li>
-        <li><a ng-disabled="currentPage >= AllProfiles.length/pageSize - 1" ng-click="currentPage=roundNumber(AllProfiles.length/pageSize);showPage(roundNumber(AllProfiles.length/pageSize));">Last</a></li>
-    </ul>
 </div>

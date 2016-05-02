@@ -23,7 +23,7 @@ namespace Mugurtham.DAL
          */
 
         public MugurthamDBContext()
-            : base("data source=(local);initial catalog=Mugurtham;user id=sa;password=Welcome@07")
+            : base("103.235.104.24;initial catalog=TestMugurtham;user id=TestMugurthamAdmin;password=Swingsys@1")
         {
             Database.SetInitializer<MugurthamDBContext>(null);
         }

@@ -8,6 +8,9 @@ using Mugurtham.Core.ProfileInterested;
 using Mugurtham.Core.Profile.API;
 using System.Data.SqlClient;
 using System.Data;
+using Mugurtham.Core.Profile.View;
+using Mugurtham.Common.Utilities;
+using Mugurtham.Service.App_Code.Utility;
 
 namespace Mugurtham.Service.Areas.User.Controllers.MVC
 {
@@ -120,12 +123,18 @@ namespace Mugurtham.Service.Areas.User.Controllers.MVC
                         strGender = "male";
                 }
             }
-            List<ProfileCore> objProfileCoreList = new List<ProfileCore>();
+            ProfileBasicViewEntity objProfileBasicViewEntity = new ProfileBasicViewEntity();
             ProfileInterestedCore objProfileInterestedCore = new ProfileInterestedCore();
             using (objProfileInterestedCore as IDisposable)
-                objProfileInterestedCore.GetInterestedProfiles(ref objProfileCoreList, strGender, objLoggedIn.LoginID, objLoggedIn.sangamID);
+            {
+                objProfileInterestedCore.GetInterestedProfiles(Utility.connectionString(), strGender,
+                    objLoggedIn.LoginID, objLoggedIn.sangamID,
+                    ref objProfileBasicViewEntity,
+                    ref objLoggedIn
+                    );
+            }
             objProfileInterestedCore = null;
-            return this.Json(objProfileCoreList, JsonRequestBehavior.AllowGet);
+            return this.Json(objProfileBasicViewEntity, JsonRequestBehavior.AllowGet);
         }
         [HttpGet]
         public ActionResult getInterestedInMeProfiles()
@@ -142,12 +151,18 @@ namespace Mugurtham.Service.Areas.User.Controllers.MVC
                         strGender = "male";
                 }
             }
-            List<ProfileCore> objProfileCoreList = new List<ProfileCore>();
+            ProfileBasicViewEntity objProfileBasicViewEntity = new ProfileBasicViewEntity();
             ProfileInterestedCore objProfileInterestedCore = new ProfileInterestedCore();
             using (objProfileInterestedCore as IDisposable)
-                objProfileInterestedCore.GetInterestedInMeProfiles(ref objProfileCoreList, strGender, objLoggedIn.LoginID, objLoggedIn.sangamID);
+            {
+                objProfileInterestedCore.GetInterestedInMeProfiles(Utility.connectionString(), strGender,
+                    objLoggedIn.LoginID, objLoggedIn.sangamID,
+                    ref objProfileBasicViewEntity,
+                    ref objLoggedIn
+                    );
+            }
             objProfileInterestedCore = null;
-            return this.Json(objProfileCoreList, JsonRequestBehavior.AllowGet);
+            return this.Json(objProfileBasicViewEntity, JsonRequestBehavior.AllowGet);
         }
         [HttpGet]
         public ActionResult getUserBadgeCount()
@@ -170,9 +185,7 @@ namespace Mugurtham.Service.Areas.User.Controllers.MVC
             objUserBadgeCount.ViewedProfiles = 0;
             objUserBadgeCount.HighlightedProfiles = 0;
             objUserBadgeCount.RecentlyJoined = 0;
-            /*www.codeproject.com/Articles/420217/DataSet-vs-DataReader*/
-            //string cs = System.Configuration.ConfigurationManager.ConnectionStrings["connectionStringName"].ConnectionString;
-            using (SqlConnection objSqlConnection = new SqlConnection("data source=(local);initial catalog=Mugurtham;user id=sa;password=Welcome@07"))
+            using (SqlConnection objSqlConnection = new SqlConnection(Utility.connectionString()))
             {
                 objSqlConnection.Open();
                 // 1.  create a command object identifying the stored procedure

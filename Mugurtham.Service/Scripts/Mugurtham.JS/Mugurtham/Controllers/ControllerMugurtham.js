@@ -9,13 +9,12 @@ This Learning controller is the global Mugurtham controller for global operation
     $translate.use(key);
   };*/
 function displayThumbnailSlider() {
-    if ($(".flexslider")[0]) {
+    if ($(".flexslider")[0]) {        
         $('.flexslider').flexslider({
             animation: "slide",
             controlsContainer: $(".custom-controls-container"),
             customDirectionNav: $(".custom-navigation a"),
-            start: function (slider) {
-
+            start: function (slider) {                
             }
         })
     }

@@ -9,8 +9,8 @@ namespace Mugurtham.Common.Utilities
     public static class Helpers
     {
         public static string primaryKey()
-        {            
+        {
             return Guid.NewGuid().ToString().Substring(1, 20).Replace("-", "").ToUpper();
-        }              
+        }
     }
 }

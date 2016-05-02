@@ -14,7 +14,7 @@ namespace Mugurtham.Core.Profile.View
     /// </summary>
     public class PorfileBasicInfoViewCore
     {
-        public int GetAllProfiles(string strGender,
+        public int GetAllProfiles(string strConnectionString, string strGender,
             ref ProfileBasicViewEntity objProfileBasicViewEntity,
             ref Mugurtham.Core.Login.LoggedInUser objLoggedIn)
         {
@@ -30,7 +30,7 @@ namespace Mugurtham.Core.Profile.View
                         strGender = "male";
                 }
             }
-            using (SqlConnection objSqlConnection = new SqlConnection("data source=(local);initial catalog=Mugurtham;user id=sa;password=Welcome@07"))
+            using (SqlConnection objSqlConnection = new SqlConnection(strConnectionString))
             {
                 objSqlConnection.Open();
                 // 1.  create a command object identifying the stored procedure

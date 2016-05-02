@@ -4,7 +4,7 @@
 
    
 
-    var app = angular.module('MugurthamApp', ['ngRoute', 'pascalprecht.translate'])
+    var app = angular.module('MugurthamApp', ['ngRoute', 'pascalprecht.translate', 'angular-table', 'angularUtils.directives.dirPagination'])
 
     /*=====================================================================*/
     /*COMPLETE PAGINATION IS HANDLED BELOW*/
