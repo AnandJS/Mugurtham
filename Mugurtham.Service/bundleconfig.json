@@ -94,5 +94,17 @@
     "inputFiles": [
       "Scripts/Mugurtham.JS/FlexSlider/flexslider.js"
     ]
+  },
+  {
+    "outputFileName": "Scripts/Mugurtham.JS/JQuery/jquery.loadmask.js",
+    "inputFiles": [
+      "Scripts/Mugurtham.JS/JQuery/jquery.loadmask.js"
+    ]
+  },
+  {
+    "outputFileName": "App_Themes/MugurthamTheme/css/Mugurtham/Mugurtham.css",
+    "inputFiles": [
+      "App_Themes/MugurthamTheme/css/Mugurtham/Mugurtham.css"
+    ]
   }
 ]

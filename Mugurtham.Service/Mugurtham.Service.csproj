@@ -204,6 +204,9 @@
     <Content Include="App_Themes\MugurthamTheme\css\Mugurtham\Mask\jquery.loadmask.css" />
     <Content Include="App_Themes\MugurthamTheme\css\Mugurtham\Mask\loading.gif" />
     <Content Include="App_Themes\MugurthamTheme\css\Mugurtham\Mugurtham.css" />
+    <Content Include="App_Themes\MugurthamTheme\css\Mugurtham\Mugurtham.min.css">
+      <DependentUpon>Mugurtham.css</DependentUpon>
+    </Content>
     <Content Include="App_Themes\MugurthamTheme\css\Mugurtham\Toastr\toaster.min.css" />
     <Content Include="App_Themes\MugurthamTheme\css\Mugurtham\Toastr\toastr.min.css" />
     <Content Include="Areas\Profile\Images\ProfilePhoto\Default.txt" />
@@ -274,6 +277,9 @@
     <Content Include="Scripts\Mugurtham.JS\JQuery\jquery-2.1.1.min.js" />
     <Content Include="Scripts\Mugurtham.JS\JQuery\jquery-ui.js" />
     <Content Include="Scripts\Mugurtham.JS\JQuery\jquery.loadmask.js" />
+    <Content Include="Scripts\Mugurtham.JS\JQuery\jquery.loadmask.min.js">
+      <DependentUpon>jquery.loadmask.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\Mugurtham.JS\Lightbox\lightbox.js" />
     <Content Include="Scripts\Mugurtham.JS\Lightbox\lightbox.min.js">
       <DependentUpon>lightbox.js</DependentUpon>
