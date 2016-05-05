@@ -70,18 +70,27 @@ namespace Mugurtham.Core.User
         {
             UserCoreEntity objUserCoreEntity = new UserCoreEntity();
             Mugurtham.DTO.User.User objSangam = new Mugurtham.DTO.User.User();
-            IUnitOfWork objUOW = new UnitOfWork();
-            using (objUOW as IDisposable)
-                objSangam = objUOW.RepositoryUser.GetAll().ToList().Where(p => p.LoginID.Trim().ToLower() == strID.Trim().ToLower()).FirstOrDefault();
-            objUOW = null;
-            if (objSangam != null)
-            {
-                using (objSangam as IDisposable)
+            try {
+                IUnitOfWork objUOW = new UnitOfWork();
+                using (objUOW as IDisposable)
+                    objSangam = objUOW.RepositoryUser.GetAll().ToList().Where(p => p.LoginID.Trim().ToLower() == strID.Trim().ToLower()).FirstOrDefault();
+                objUOW = null;
+                if (objSangam != null)
                 {
-                    AssignEntityFromDTO(ref objSangam, ref objUserCoreEntity);
+                    using (objSangam as IDisposable)
+                    {
+                        AssignEntityFromDTO(ref objSangam, ref objUserCoreEntity);
+                    }
                 }
+                objSangam = null;
             }
-            objSangam = null;
+            catch(Exception objEx)
+            {
+                // Add useful information to the exception
+                string s = objEx.Message;
+                throw new ApplicationException("Something wrong happened in the calculation module :", objEx);
+
+            }
             return objUserCoreEntity;
         }
         public int GetAll(ref List<UserCoreEntity> objUserCoreEntityList)

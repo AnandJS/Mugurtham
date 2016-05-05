@@ -27,6 +27,8 @@
     </UpgradeBackupLocation>
     <OldToolsVersion>4.0</OldToolsVersion>
     <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -262,6 +264,9 @@
     <Content Include="Scripts\Mugurtham.JS\bootstrap\bootstrap.js" />
     <Content Include="Scripts\Mugurtham.JS\bootstrap\bootstrap.min.js" />
     <Content Include="Scripts\Mugurtham.JS\FlexSlider\flexslider.js" />
+    <Content Include="Scripts\Mugurtham.JS\FlexSlider\flexslider.min.js">
+      <DependentUpon>flexslider.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\Mugurtham.JS\Jqplot\jqplot.pieRenderer.min.js" />
     <Content Include="Scripts\Mugurtham.JS\Jqplot\jquery.jqplot.min.js" />
     <Content Include="Scripts\Mugurtham.JS\JQuery\jqprint.js" />
@@ -270,9 +275,29 @@
     <Content Include="Scripts\Mugurtham.JS\JQuery\jquery-ui.js" />
     <Content Include="Scripts\Mugurtham.JS\JQuery\jquery.loadmask.js" />
     <Content Include="Scripts\Mugurtham.JS\Lightbox\lightbox.js" />
+    <Content Include="Scripts\Mugurtham.JS\Lightbox\lightbox.min.js">
+      <DependentUpon>lightbox.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\app.js" />
+    <Content Include="Scripts\Mugurtham.JS\Mugurtham\app.min.js">
+      <DependentUpon>app.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\Controllers\ControllerMugurtham.js" />
+    <Content Include="Scripts\Mugurtham.JS\Mugurtham\Controllers\ControllerMugurtham.min.js">
+      <DependentUpon>ControllerMugurtham.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\Controllers\Dashboard\ControllerSangamDashboard.js" />
+    <Content Include="Scripts\Mugurtham.JS\Mugurtham\Controllers\Dashboard\ControllerSangamDashboard.min.js">
+      <DependentUpon>ControllerSangamDashboard.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\Mugurtham.JS\Mugurtham\Controllers\MugurthamAdmin\bundle.js" />
+    <Content Include="Scripts\Mugurtham.JS\Mugurtham\Controllers\MugurthamAdmin\bundle.min.js">
+      <DependentUpon>bundle.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\Mugurtham.JS\Mugurtham\Controllers\Profile\bundle.js" />
+    <Content Include="Scripts\Mugurtham.JS\Mugurtham\Controllers\Profile\bundle.min.js">
+      <DependentUpon>bundle.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\Controllers\Profile\ControllerProfileBasicInfo.js" />
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\Controllers\Profile\ControllerProfileContact.js" />
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\Controllers\Profile\ControllerProfileCareer.js" />
@@ -283,6 +308,14 @@
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\Controllers\Profile\ControllerProfileReference.js" />
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\Controllers\MugurthamAdmin\ControllerRole.js" />
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\Controllers\MugurthamAdmin\ControllerSangam.js" />
+    <Content Include="Scripts\Mugurtham.JS\Mugurtham\Controllers\Search\bundle.js" />
+    <Content Include="Scripts\Mugurtham.JS\Mugurtham\Controllers\Search\bundle.min.js">
+      <DependentUpon>bundle.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\Mugurtham.JS\Mugurtham\Controllers\UserChamber\bundle.js" />
+    <Content Include="Scripts\Mugurtham.JS\Mugurtham\Controllers\UserChamber\bundle.min.js">
+      <DependentUpon>bundle.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\Controllers\UserChamber\ControllerHighlightedProfiles.js" />
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\Controllers\UserChamber\ControllerInterestedInMeProfiles.js" />
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\Controllers\UserChamber\ControllerRecentlyJoined.js" />
@@ -295,11 +328,24 @@
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\Controllers\UserChamber\ControllerViewedProfiles.js" />
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\Controllers\UserChamber\ControllerInterestedProfiles.js" />
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\Controllers\View\ControllerFullView.js" />
+    <Content Include="Scripts\Mugurtham.JS\Mugurtham\Controllers\View\ControllerFullView.min.js">
+      <DependentUpon>ControllerFullView.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\Login\Login.js" />
+    <Content Include="Scripts\Mugurtham.JS\Mugurtham\Login\Login.min.js">
+      <DependentUpon>Login.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\Mugurtham.JS\Paging\angular-table.min.js" />
+    <Content Include="Scripts\Mugurtham.JS\Paging\bundle.js" />
+    <Content Include="Scripts\Mugurtham.JS\Paging\bundle.min.js">
+      <DependentUpon>bundle.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\Mugurtham.JS\Paging\dirPagination.js" />
     <Content Include="Scripts\Mugurtham.JS\Paging\dirPagination.tpl.html" />
     <Content Include="Scripts\Mugurtham.JS\toastr\toastr.min.js" />
+    <Content Include="Scripts\Mugurtham.JS\toastr\toastr.min.min.js">
+      <DependentUpon>toastr.min.js</DependentUpon>
+    </Content>
     <Content Include="Views\Home\login-form-paper-style.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -386,6 +432,7 @@
     <Content Include="Areas\User\Views\User\InterestedProfiles.cshtml" />
     <Content Include="Areas\User\Views\User\InterestedInMeProfiles.cshtml" />
     <Content Include="Images\Mugurtham\Lightbox\demopage\.DS_Store" />
+    <None Include="bundleconfig.json" />
     <None Include="Properties\PublishProfiles\ProfileMugurtham.pubxml" />
     <Content Include="Views\Mugurtham\Home.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
@@ -419,6 +466,13 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+  <Import Project="..\packages\BuildBundlerMinifier.1.8.148\build\BuildBundlerMinifier.targets" Condition="Exists('..\packages\BuildBundlerMinifier.1.8.148\build\BuildBundlerMinifier.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\BuildBundlerMinifier.1.8.148\build\BuildBundlerMinifier.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\BuildBundlerMinifier.1.8.148\build\BuildBundlerMinifier.targets'))" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

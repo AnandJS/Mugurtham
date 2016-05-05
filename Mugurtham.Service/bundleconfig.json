@@ -1,0 +1,98 @@
+[
+  {
+    "outputFileName": "Scripts/Mugurtham.JS/Mugurtham/Controllers/View/ControllerFullView.js",
+    "inputFiles": [
+      "Scripts/Mugurtham.JS/Mugurtham/Controllers/View/ControllerFullView.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/Mugurtham.JS/Mugurtham/Controllers/UserChamber/bundle.js",
+    "inputFiles": [
+      "Scripts/Mugurtham.JS/Mugurtham/Controllers/UserChamber/ControllerViewedProfiles.js",
+      "Scripts/Mugurtham.JS/Mugurtham/Controllers/UserChamber/ControllerHighlightedProfiles.js",
+      "Scripts/Mugurtham.JS/Mugurtham/Controllers/UserChamber/ControllerInterestedInMeProfiles.js",
+      "Scripts/Mugurtham.JS/Mugurtham/Controllers/UserChamber/ControllerInterestedProfiles.js",
+      "Scripts/Mugurtham.JS/Mugurtham/Controllers/UserChamber/ControllerRecentlyJoined.js",
+      "Scripts/Mugurtham.JS/Mugurtham/Controllers/UserChamber/ControllerUserChamber.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/Mugurtham.JS/Mugurtham/Controllers/Profile/bundle.js",
+    "inputFiles": [
+      "Scripts/Mugurtham.JS/Mugurtham/Controllers/Profile/ControllerProfileBasicInfo.js",
+      "Scripts/Mugurtham.JS/Mugurtham/Controllers/Profile/ControllerProfileCareer.js",
+      "Scripts/Mugurtham.JS/Mugurtham/Controllers/Profile/ControllerProfileContact.js",
+      "Scripts/Mugurtham.JS/Mugurtham/Controllers/Profile/ControllerProfileFamily.js",
+      "Scripts/Mugurtham.JS/Mugurtham/Controllers/Profile/ControllerProfileHoroscope.js",
+      "Scripts/Mugurtham.JS/Mugurtham/Controllers/Profile/ControllerProfileLocation.js",
+      "Scripts/Mugurtham.JS/Mugurtham/Controllers/Profile/ControllerProfilePhoto.js",
+      "Scripts/Mugurtham.JS/Mugurtham/Controllers/Profile/ControllerProfileReference.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/Mugurtham.JS/Mugurtham/Controllers/Search/bundle.js",
+    "inputFiles": [
+      "Scripts/Mugurtham.JS/Mugurtham/Controllers/Search/ControllerSearchAllProfiles.js",
+      "Scripts/Mugurtham.JS/Mugurtham/Controllers/Search/ControllerSearchGeneral.js",
+      "Scripts/Mugurtham.JS/Mugurtham/Controllers/Search/ControllerSearchProfileID.js",
+      "Scripts/Mugurtham.JS/Mugurtham/Controllers/Search/ControllerSearchSangam.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/Mugurtham.JS/Mugurtham/Login/Login.js",
+    "inputFiles": [
+      "Scripts/Mugurtham.JS/Mugurtham/Login/Login.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/Mugurtham.JS/Mugurtham/Controllers/ControllerMugurtham.js",
+    "inputFiles": [
+      "Scripts/Mugurtham.JS/Mugurtham/Controllers/ControllerMugurtham.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/Mugurtham.JS/Mugurtham/app.js",
+    "inputFiles": [
+      "Scripts/Mugurtham.JS/Mugurtham/app.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/Mugurtham.JS/Paging/bundle.js",
+    "inputFiles": [
+      "Scripts/Mugurtham.JS/Paging/angular-table.min.js",
+      "Scripts/Mugurtham.JS/Paging/dirPagination.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/Mugurtham.JS/toastr/toastr.min.js",
+    "inputFiles": [
+      "Scripts/Mugurtham.JS/toastr/toastr.min.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/Mugurtham.JS/Mugurtham/Controllers/Dashboard/ControllerSangamDashboard.js",
+    "inputFiles": [
+      "Scripts/Mugurtham.JS/Mugurtham/Controllers/Dashboard/ControllerSangamDashboard.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/Mugurtham.JS/Mugurtham/Controllers/MugurthamAdmin/bundle.js",
+    "inputFiles": [
+      "Scripts/Mugurtham.JS/Mugurtham/Controllers/MugurthamAdmin/ControllerRole.js",
+      "Scripts/Mugurtham.JS/Mugurtham/Controllers/MugurthamAdmin/ControllerSangam.js",
+      "Scripts/Mugurtham.JS/Mugurtham/Controllers/MugurthamAdmin/ControllerUser.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/Mugurtham.JS/Lightbox/lightbox.js",
+    "inputFiles": [
+      "Scripts/Mugurtham.JS/Lightbox/lightbox.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/Mugurtham.JS/FlexSlider/flexslider.js",
+    "inputFiles": [
+      "Scripts/Mugurtham.JS/FlexSlider/flexslider.js"
+    ]
+  }
+]
