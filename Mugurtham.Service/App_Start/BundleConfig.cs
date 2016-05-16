@@ -24,14 +24,19 @@ namespace Mugurtham.Service
                      ));
             bundles.Add(new ScriptBundle("~/bundles/MugurthamJqplot").Include(
                      "~/Scripts/Mugurtham.JS/Jqplot/jquery.jqplot.min.js",
-                     "~/Scripts/Mugurtham.JS/Jqplot/jqplot.pieRenderer.min.js"
+                     "~/Scripts/Mugurtham.JS/Jqplot/jqplot.pieRenderer.min.js",
+                      "~/Scripts/Mugurtham.JS/Jqplot/jqplot.barRenderer.JS",
+                      "~/Scripts/Mugurtham.JS/Jqplot/jqplot.categoryAxisRenderer.js",
+                      "~/Scripts/Mugurtham.JS/Jqplot/jqplot.pointLabels.js"
                      ));
-            bundles.Add(new ScriptBundle("~/bundles/FlexSlider").Include(
+            bundles.Add(new ScriptBundle("~/bundles/MugurthamFlexSlider").Include(
                        "~/Scripts/Mugurtham.JS/FlexSlider/*.js"));
-            bundles.Add(new ScriptBundle("~/bundles/Lightbox").Include(
+            bundles.Add(new ScriptBundle("~/bundles/MugurthamLightbox").Include(
                        "~/Scripts/Mugurtham.JS/Lightbox/*.js"));
-            bundles.Add(new ScriptBundle("~/bundles/Paging").Include(
+            bundles.Add(new ScriptBundle("~/bundles/MugurthamPaging").Include(
                        "~/Scripts/Mugurtham.JS/Paging/*.js"));
+            bundles.Add(new ScriptBundle("~/bundles/MugurthamSlider").Include(
+                 "~/Scripts/Mugurtham.JS/Slider/jssor.slider.mini.js"));
             bundles.Add(new ScriptBundle("~/bundles/MugurthamApp").Include(
                     "~/Scripts/Mugurtham.JS/Mugurtham/app.js"));
             bundles.Add(new ScriptBundle("~/bundles/MugurthamControllerBase").Include(
@@ -48,6 +53,7 @@ namespace Mugurtham.Service
                    "~/Scripts/Mugurtham.JS/Mugurtham/Controllers/View/*.js"));
             bundles.Add(new ScriptBundle("~/bundles/MugurthamControllerMugurthamAdmin").Include(
                    "~/Scripts/Mugurtham.JS/Mugurtham/Controllers/MugurthamAdmin/*.js"));
+           
 
             /*===============================================================================================*/
             /*MUGURTHAM STYLE BUNDLE STARTS*/
@@ -59,7 +65,8 @@ namespace Mugurtham.Service
             bundles.Add(new StyleBundle("~/Content/MugurthamMask").Include("~/App_Themes/MugurthamTheme/css/Mugurtham/Mask/jquery.loadmask.css"));
             bundles.Add(new StyleBundle("~/Content/MugurthamJqplot").Include("~/App_Themes/MugurthamTheme/css/Mugurtham/Jqplot/jquery.jqplot.min.css"));
             bundles.Add(new StyleBundle("~/Content/Flexslider").Include("~/App_Themes/MugurthamTheme/css/Mugurtham/Flexslider/Flexslider.css"));
-            bundles.Add(new StyleBundle("~/Content/Lightbox").Include("~/App_Themes/MugurthamTheme/css/Mugurtham/Lightbox/*.css"));            
+            bundles.Add(new StyleBundle("~/Content/Lightbox").Include("~/App_Themes/MugurthamTheme/css/Mugurtham/Lightbox/*.css"));
+            bundles.Add(new StyleBundle("~/Content/font-awesome").Include("~/App_Themes/MugurthamTheme/css/Mugurtham/font-awesome/*.css"));
             BundleTable.EnableOptimizations = true;
         }
     }

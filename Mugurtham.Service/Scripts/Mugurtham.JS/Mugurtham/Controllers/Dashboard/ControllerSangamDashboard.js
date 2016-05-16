@@ -4,9 +4,58 @@ THIS CONTROLLER IS SPECIFICALLY FOR ROLE REGISTRATION
 ==========================================================================================
 */
 
+ 
 function displayChart(data) {
+    $(document).ready(function () {
+        $.jqplot.config.enablePlugins = true;
+        var s1 = [2, 6, 7, 10];
+        var ticks = ['a', 'b', 'c', 'd'];
 
-    var plot1 = jQuery.jqplot('chart1', [data],
+        plot1 = $.jqplot('divBarReport', [s1], {
+            // Only animate if we're not using excanvas (not in IE 7 or IE 8)..
+            animate: !$.jqplot.use_excanvas,
+            seriesDefaults: {
+                renderer: $.jqplot.BarRenderer,
+                pointLabels: { show: true }
+            },
+            axes: {
+                xaxis: {
+                    renderer: $.jqplot.CategoryAxisRenderer,
+                    ticks: ticks
+                }
+            },
+            highlighter: { show: false }
+        });
+
+      
+
+        plot4 = $.jqplot('divStackStar', [[[2, 1], [6, 2], [7, 3], [10, 4]], [[7, 1], [5, 2], [3, 3], [2, 4]], [[14, 1], [9, 2], [9, 3], [8, 4]]], {
+            stackSeries: true,
+            captureRightClick: true,
+            seriesDefaults: {
+                renderer: $.jqplot.BarRenderer,
+                shadowAngle: 135,
+                rendererOptions: {
+                    barDirection: 'horizontal',
+                    highlightMouseDown: true
+                },
+                pointLabels: { show: true, formatString: '%d' }
+            },
+            legend: {
+                show: true,
+                location: 'e',
+                placement: 'outside'
+            },
+            axes: {
+                yaxis: {
+                    renderer: $.jqplot.CategoryAxisRenderer
+                }
+            }
+        });
+    });
+
+
+    var plot1 = jQuery.jqplot('divPieSales', [data],
       {
           seriesDefaults: {
               // Make this a pie chart.
@@ -35,6 +84,7 @@ var ControllerSangamDashboard = angular.module('MugurthamApp').controller('Contr
             //===================================================
             $scope.getChartData = function () {
                 var strGetURL = '/Home/getSangamDashBoardChart';
+                
                 $http({
                     method: "GET", url: strGetURL
                 }).
@@ -58,6 +108,4 @@ var ControllerSangamDashboard = angular.module('MugurthamApp').controller('Contr
             };
 
         }])
-
-
 

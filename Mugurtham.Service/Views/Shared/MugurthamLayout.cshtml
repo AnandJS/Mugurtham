@@ -15,18 +15,30 @@
     @Styles.Render("~/Content/MugurthamMask")
     @Styles.Render("~/Content/MugurthamJqplot")
     @Styles.Render("~/Content/Flexslider")
-    @Styles.Render("~/Content/Lightbox")    
+    @Styles.Render("~/Content/Lightbox")
+    @Styles.Render("~/Content/font-awesome")
 </head>
 <body onload="javascript:setUserStyleLocale('@objLoggedIn.themeID');">
-    <form ng-app="MugurthamApp" name="frmPortal" novalidate>
-        <div id="body" ng-controller="MugurthamController" class="bgImage" data-ng-init="changeLanguage('@objLoggedIn.localeID');">
-            <!-- Page top navigation-->
-            <nav id="myNavbar" class="navbar navbar-default navbar-inverse navbar-fixed-top" role="navigation">
-                <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="container">
+    <!-- Navigation -->
+   
 
+    <form ng-app="MugurthamApp" name="frmPortal" novalidate>
+        <div id="body" ng-controller="MugurthamController" class="bgBodyImage" data-ng-init="changeLanguage('@objLoggedIn.localeID');">
+            <!-- Page top navigation-->
+            <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+                <div class="container">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+
+                    </div>
                     <!-- Collect the nav links, forms, and other content for toggling -->
-                    <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
                         <ul class="nav navbar-nav navbar-middle ">
                             <li class="navbar-brand">@objLoggedIn.SangamName</li>
@@ -67,7 +79,9 @@
                             </li>
                         </ul>
                     </div>
+                    <!-- /.navbar-collapse -->
                 </div>
+                <!-- /.container -->
             </nav>
             <div class="container ">
                 <!-- The big header-->
@@ -96,68 +110,43 @@
                 <hr />
                 <!-- Footer Inofmraion-->
 
-                
-                <div class="panel-footer col-lg-12">
-                    <div class="col-lg-6">
-                        &#169 {{ 'GENCOPYRT' | translate }} 2013 @objLoggedIn.SangamName
-                    </div>
-                    <div class="col-lg-6 text-right">
-                        <img src="~/Images/Mugurtham/Flag.jpg" height="19" width="35" />
-                        Powered by Mugurtham &#174
-                        &nbsp; v 2.3.3
-                    </div>
-                    <br /><br />
-                </div>
-                <div class="panel-footer col-lg-12 text-justify">
-                    <img src="/favicon.ico" height="25" width="40" />   Mugurtham was founded in 2012 with one simple objective - to provide a superior collaborative matchmaking experience by expanding the opportunities available to meet potential life partners. Since then we have created a world renowned service that has touched the lives of millions of people all over the world and helping accelarint revenue for sangams. We have, however, never rested on our laurels. Software division providing cutting edge business solutions to Matrimony Industry. An innovator in teleMatrimony and analytics. Partner focused on quality and growth.
-                </div>
-                <div class="panel-footer col-lg-12">
-                    <div class="col-lg-3">
-                        <div class="footer-head">Help</div>
-                        <ul class="pointlink">
-                            <li><a href="Faq.php">FAQs</a></li>
-                            <li><a href="http://mugurtham.com/mockup1/contact-us.html">Contact Us</a></li>
-                        </ul>
-                    </div>
 
-                    <div class="col-lg-3">
-                        <div class="footer-head">Privacy</div>
-                        <ul class="pointlink">
-                            <li><a href="#">Privacy Policy</a></li>
-                            <li><a href="#">Terms Conditions</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="footer-head">Information</div>
-                        <ul class="pointlink">
-                            <li><a href="#">Services</a></li>
-                            <li><a href="#">Training</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="footer-box2">
-                            <div class="footer-head">Follow us on</div>
-                            <ul class="soc">
-                                <li class="icon-1"><a href="#" target="_blank">Facebook</a></li>
-                                <li class="icon-2" style="width:60px;"><a href="#">Twitter</a></li>
-                                <li class="icon-3"><a href="#">Google Plus</a></li>
 
-                            </ul>
-                        </div>
-
-                        <div class="clear"></div>
-                    </div>
-                </div>
             </div>
+
+
+
+
     </form>
+
+    <div class="panel-footer col-lg-12">
+        <div class="col-lg-6">
+            &#169 {{ 'GENCOPYRT' | translate }} 2013 @objLoggedIn.SangamName
+        </div>
+        <div class="col-lg-6 text-right">
+            <img src="~/Images/Mugurtham/Flag.jpg" height="19" width="35" />
+            Powered by Mugurtham &#174
+            &nbsp; v 2.3.3
+        </div>
+        <br /><br />
+    </div>
+    <div class="panel-footer col-lg-12 text-justify">
+        <img src="/favicon.ico" height="25" width="40" />   Mugurtham was founded in 2012 with one simple objective - to provide a superior collaborative matchmaking experience by expanding the opportunities available to meet potential life partners. Since then we have created a world renowned service that has touched the lives of millions of people all over the world and helping accelarint revenue for sangams. We have, however, never rested on our laurels. Software division providing cutting edge business solutions to Matrimony Industry. An innovator in teleMatrimony and analytics. Partner focused on quality and growth.
+    </div>
+    <div class="panel-footer col-lg-12">
+        தென்னிந்தியாவில் குறிப்பாக, தமிழ்நாட்டில் வாழும் 65மூ ஐந்தொழில் விஸ்வகர்மா இன மக்களுக்கு தங்கள் கடவுள் ஸ்ரீவிஸ்வகர்மா மற்றும் ஸ்ரீகாயத்ரி தேவி என்பதே தெரியாமல் வாழ்கிறார்கள். இதில் மீதி 30மூ பேர் கூட ஸ்ரீசதாசிவமூர்த்தியை தான் ஸ்ரீவிஸ்வகர்மா என்று வணங்குகிறார்கள். தன் ஐந்து நெற்றிகளில் திருநாமம் அணிந்தவர் தான் ஸ்ரீவிஸ்வகர்மா (படைப்புக் கடவுள்) மாறாக, விபுதி பட்டை அணிந்தவர் ஸ்ரீசதாசிவமூர்த்தி (அழிக்கும் கடவுள்). நம்மவர்கள் பெரும்பாலும் ஸ்ரீசதாசிவமூர்த்தியையே ஸ்ரீவிஸ்வகர்மா என்று நினைத்து வணங்கி வருகிறார்கள். இது இரு பெரும் கடவுள்களும் கிட்டத்தட்ட ஒரே மாதிரி இருப்பதால் ஏற்பட்ட குழப்பம் மற்றும் இது ஏற்படுத்தப்பட்ட குழப்பம். ஸ்ரீவிஸ்வகர்மாவின் முக்கிய ஆயுதமான சுத்தியல் ஸ்ரீசதாசிவமூர்த்தியின் கரங்கள் எதிலும் இருக்காது என்பது குறிப்பிடத்தக்கது மற்றும் கவனிக்கத்தக்கது. ஆதியில் சிவபெருமானும் நாமத்துடன் தான் ஸ்ரீவிஸ்வகர்மாவால் படைக்கப்பட்டார் ஆனால் பிறகு வந்த காலத்தி்ல் தனது அழிக்கும் பணி சிறப்பாக நடைபெறுகிறது என்பதை உலகிற்கும் மற்றவர்களுக்கும் உணர்த்தும் பொருட்டே சிவபெருமான் தான் அழித்தப் பொருட்களின் சாம்பலை எடுத்து விபுதியாகப் புசிக் கொண்டார் என்பது வரலாறு.
+        உலகின் முதல் வேதமான ரிக் வேதம் ஸ்ரீவிஸ்வகர்மா-வை அனைத்து கடவுள்களையும் படைத்தவர் என்றும் அவர்களுக்கு பெயரிட்டவர் என்றும் பிரபஞ்சத்தின் மூலக்கருவையே தோற்றுவித்தவர் என்றும் 10ம் அதிகாரம் முழுவதும் தெளிவாக கூறுகிறது. ரிக் வேதம் மட்டுமல்ல, யஜுர், சாம, அதர்வணம் என அனைத்து வேதங்களும் நம் கடவுள் ஸ்ரீவிஸ்வகர்மாவை துதிப்பாடுகின்றன. எந்த யாகம் நடத்தப்பட்டாலும் அதில் ஸ்ரீவிஸ்வகர்மாவிற்கு உரிய அவில்பாகம் கொடுக்கப்படுகிறது. எந்த கோயில் கும்பாபிஷேகம் நடந்தாலும் புனித நீரை நம் குலக்கடவுள் ஸ்ரீவிஸ்வகர்மாவின் பெயரை சொல்லி தான் தெளிக்கப்படுகிறது. அப்படிப்பட்ட உயர்ந்த கடவுளை நாம், அதாவது அவரின் குழந்தைகள் மறந்து விட்டு கஷ்டப்பட்டு கொண்டு இருக்கிறோம். 
+    </div>
+
     @Scripts.Render("~/bundles/MugurthamJQuery")
     @Scripts.Render("~/bundles/MugurthamBootstrap")
     @Scripts.Render("~/bundles/MugurthamToastr")
     @Scripts.Render("~/bundles/MugurthamAngularJS")
     @Scripts.Render("~/bundles/MugurthamJqplot")
-    @Scripts.Render("~/bundles/FlexSlider")
-    @Scripts.Render("~/bundles/Lightbox")
-    @Scripts.Render("~/bundles/Paging")
+    @Scripts.Render("~/bundles/MugurthamFlexSlider")
+    @Scripts.Render("~/bundles/MugurthamLightbox")
+    @Scripts.Render("~/bundles/MugurthamPaging")
+    @Scripts.Render("~/bundles/MugurthamSlider")
     @Scripts.Render("~/bundles/MugurthamApp")
     <script type="text/javascript" src="@Url.Content("~/Scripts/Mugurtham.js/Mugurtham/Controllers/ControllerMugurtham.js")"></script>
     @Scripts.Render("~/bundles/MugurthamDashboard")
@@ -166,6 +155,11 @@
     @Scripts.Render("~/bundles/MugurthamControllerUserChamber")
     @Scripts.Render("~/bundles/MugurthamControllerFullView")
     @Scripts.Render("~/bundles/MugurthamControllerMugurthamAdmin")
+
+
+
+
+
 
 </body>
 </html>

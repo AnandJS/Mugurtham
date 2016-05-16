@@ -69,6 +69,7 @@ namespace Mugurtham.Service.Areas.Search.Controllers
             using (objProfileCore as IDisposable)
                 objProfileCore.GetAll(ref objProfileCoreList, strGender, objLoggedIn.sangamID);
             objProfileCore = null;*/
+            //Response.AddHeader("Content-Encoding", "gzip");
             return this.Json(objProfileBasicViewEntity, JsonRequestBehavior.AllowGet);
         }
         [HttpGet]
