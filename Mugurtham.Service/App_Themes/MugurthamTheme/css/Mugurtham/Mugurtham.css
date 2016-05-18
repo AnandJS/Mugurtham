@@ -111,7 +111,7 @@ body {
             line-height: 21px;
             color: white;
             font-size: 12px;
-            background: url('img/b03.png') no-repeat;
+            background: url('Images/b03.png') no-repeat;
             overflow: hidden;
             cursor: pointer;
         }
@@ -136,7 +136,7 @@ body {
             width: 55px;
             height: 55px;
             cursor: pointer;
-            background: url('img/a03.png') no-repeat;
+            background: url('Images/a03.png') no-repeat;
             overflow: hidden;
         }
         .jssora03l { background-position: -3px -33px; }

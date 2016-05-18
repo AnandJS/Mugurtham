@@ -198,6 +198,12 @@
     <Content Include="App_Themes\MugurthamTheme\css\Mugurtham\Flexslider\next.png" />
     <Content Include="App_Themes\MugurthamTheme\css\Mugurtham\Flexslider\prev.png" />
     <Content Include="App_Themes\MugurthamTheme\css\Mugurtham\formbg.gif" />
+    <Content Include="App_Themes\MugurthamTheme\css\Mugurtham\Images\a03.png" />
+    <Content Include="App_Themes\MugurthamTheme\css\Mugurtham\Images\b03.png" />
+    <Content Include="App_Themes\MugurthamTheme\css\Mugurtham\Images\close.png" />
+    <Content Include="App_Themes\MugurthamTheme\css\Mugurtham\Images\loading.gif" />
+    <Content Include="App_Themes\MugurthamTheme\css\Mugurtham\Images\next.png" />
+    <Content Include="App_Themes\MugurthamTheme\css\Mugurtham\Images\prev.png" />
     <Content Include="App_Themes\MugurthamTheme\css\Mugurtham\Jquery\ui-icons_222222_256x240.png" />
     <Content Include="App_Themes\MugurthamTheme\css\Mugurtham\Jqplot\examples.min.css" />
     <Content Include="App_Themes\MugurthamTheme\css\Mugurtham\Jqplot\jquery.jqplot.min.css" />
@@ -359,7 +365,6 @@
     <Content Include="Views\Mugurtham\Info.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Themes\MugurthamTheme\css\Mugurtham\Images\" />
     <Folder Include="Areas\MugurthamAdmin\Models\" />
     <Folder Include="Areas\Profile\Models\" />
     <Folder Include="Areas\SangamAdmin\Models\" />

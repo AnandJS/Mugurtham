@@ -19,7 +19,7 @@ var ControllerViewFullView = angular.module('MugurthamApp').controller('Controll
               //===================================================
               //AJAX GET REQUEST - GETTING ALL PROFILES
               //===================================================
-              $scope.getByProfileID = function () {
+              $scope.getByProfileID = function () {                  
                   $("#divContainer").mask("Loading profile please wait...");
                   $("#divSangamInfomration").hide();
                   $("#divFullProfile").hide();
@@ -72,7 +72,7 @@ var ControllerViewFullView = angular.module('MugurthamApp').controller('Controll
                        $("#divContainer").unmask();
                        NotifyStatus('2');
                    })
-              };
+              };              
               $scope.showInterest = function () {                 
                   $http({
                       method: "GET", url: '/User/User/ShowInterest/' + $scope.globalProfileID
@@ -97,6 +97,25 @@ var ControllerViewFullView = angular.module('MugurthamApp').controller('Controll
                        NotifyStatus('2');
                    })
               };
+
+              $scope.getHighlightedProfiles = function () {
+                  var strGetURL = "Search/Search/getHighlightedProfiles";
+                  $("#divContainer").mask("Searching profiles please wait...");
+                  $http({
+                      method: "GET", url: strGetURL
+                  }).
+              success(function (data, status, headers, config) {
+                  $("#divContainer").unmask();
+                  $scope.AllProfiles = data;
+                  $scope.SearchedProfiles = data.ProfileBasicInfoViewCoreEntityList;
+                  $scope.profilePhotos = data.PhotoCoreEntityList;
+              }).
+                  error(function (data, status, headers, config) {
+                      $("#divContainer").unmask();
+                      NotifyStatus('2');
+                  });
+              }
+              
           }]);
 
 

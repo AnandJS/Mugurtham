@@ -22,6 +22,7 @@ namespace Mugurtham.Core.Profile.View
         public string SangamName { get; set; }
         public string SubCaste { get; set; }
         public string Star { get; set; }
+        public string AboutMe { get; set; }
         public List<PhotoCoreEntity> objPhotoCoreEntityList { get; set; }
     }
 }

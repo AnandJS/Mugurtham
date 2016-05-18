@@ -17,7 +17,7 @@ var ControllerHighlightedProfiles = angular.module('MugurthamApp').controller('C
                 $http({
                     method: "GET", url: strGetURL
                 }).
-            success(function (data, status, headers, config) {                
+            success(function (data, status, headers, config) {
                 $("#divContainer").unmask();
                 $scope.AllProfiles = data;
                 $scope.currentPage = 1;
