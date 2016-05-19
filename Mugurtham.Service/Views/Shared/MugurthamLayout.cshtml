@@ -45,6 +45,9 @@
                         </ul>
                         <ul class="nav navbar-nav navbar-right ">
                             <li>
+                                <img src="@objLoggedIn.BasicInfoCoreEntity.PhotoPath" class="navbar-brand img-circle" width="70" height="5930"  />
+                            </li>
+                            <li>
                                 <a id="lblName">Hii @objLoggedIn.Name  !!! &nbsp;&nbsp;</a>
                             </li>
                             <li><a onclick="window.location = '/Home/Logout';" id="tabLogout" data-toggle="tab" style="cursor: pointer">Logout</a></li>
@@ -98,6 +101,14 @@
                          
                     </table>
                 </div>
+                <table width="135" border="0" cellpadding="2" cellspacing="0" title="Click to Verify - This site chose Symantec SSL for secure e-commerce and confidential communications.">
+                    <tr>
+                        <td width="135" align="center" valign="top">
+                            <script type="text/javascript" src="https://seal.websecurity.norton.com/getseal?host_name=vishwakarma.mugurtham.com&amp;size=L&amp;use_flash=NO&amp;use_transparent=YES&amp;lang=en"></script><br />
+                            <a href="http://www.symantec.com/ssl-certificates" target="_blank" style="color:#000000; text-decoration:none; font:bold 7px verdana,sans-serif; letter-spacing:.5px; text-align:center; margin:0px; padding:0px;">ABOUT SSL CERTIFICATES</a>
+                        </td>
+                    </tr>
+                </table>
                 <!-- Rending Body from child page-->
                 @RenderSection("featured", required: false)
                 @RenderBody()

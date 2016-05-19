@@ -174,8 +174,6 @@
   <ItemGroup>
     <Content Include="App_Data\SQLServer\uspGetAllProfiles.sql" />
     <Content Include="App_Themes\MugurthamTheme\css\Mugurtham\font-awesome\font-awesome.css" />
-    <Content Include="App_Themes\MugurthamTheme\css\Mugurtham\formbg1.jpg" />
-    <Content Include="App_Themes\MugurthamTheme\css\Mugurtham\formbg.jpg" />
     <Content Include="App_Themes\MugurthamTheme\css\Mugurtham\Bootstrap\bootstrap-Cerulean.min.css" />
     <Content Include="App_Themes\MugurthamTheme\css\Mugurtham\Bootstrap\bootstrap-Cosmo.min.css" />
     <Content Include="App_Themes\MugurthamTheme\css\Mugurtham\Bootstrap\bootstrap-Cyborg.min.css" />
