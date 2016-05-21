@@ -66,7 +66,7 @@ namespace Mugurtham.Service
             bundles.Add(new StyleBundle("~/Content/MugurthamJqplot").Include("~/App_Themes/MugurthamTheme/css/Mugurtham/Jqplot/jquery.jqplot.min.css"));
             bundles.Add(new StyleBundle("~/Content/Flexslider").Include("~/App_Themes/MugurthamTheme/css/Mugurtham/Flexslider/Flexslider.css"));
             bundles.Add(new StyleBundle("~/Content/Lightbox").Include("~/App_Themes/MugurthamTheme/css/Mugurtham/Lightbox/*.css"));
-            bundles.Add(new StyleBundle("~/Content/font-awesome").Include("~/App_Themes/MugurthamTheme/css/Mugurtham/font-awesome/*.css"));
+            //bundles.Add(new StyleBundle("~/Content/font-awesome").Include("~/App_Themes/MugurthamTheme/css/Mugurtham/font-awesome/*.css"));
             BundleTable.EnableOptimizations = true;
         }
     }

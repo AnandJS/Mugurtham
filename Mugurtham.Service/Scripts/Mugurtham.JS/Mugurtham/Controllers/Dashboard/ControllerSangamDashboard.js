@@ -9,7 +9,7 @@ function displayChart(data) {
     $(document).ready(function () {
         $.jqplot.config.enablePlugins = true;
         var s1 = [2, 6, 7, 10];
-        var ticks = ['a', 'b', 'c', 'd'];
+        var ticks = ['Brides', 'Grooms', 'Active Profiles', 'InActive Profiles'];
 
         plot1 = $.jqplot('divBarReport', [s1], {
             // Only animate if we're not using excanvas (not in IE 7 or IE 8)..
@@ -63,7 +63,8 @@ function displayChart(data) {
               rendererOptions: {
                   // Put data labels on the pie slices.
                   // By default, labels show the percentage of the slice.
-                  showDataLabels: true
+                  showDataLabels: true,
+                  placement: 'inside'
               }
           },
           legend: { show: true, location: 'e' }

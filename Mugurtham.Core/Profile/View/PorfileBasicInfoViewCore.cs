@@ -41,6 +41,7 @@ namespace Mugurtham.Core.Profile.View
 
                 // 3. add parameter to command, which will be passed to the stored procedure
                 objSqlCommand.Parameters.Add(new SqlParameter("@GENDER", strGender));
+                objSqlCommand.Parameters.Add(new SqlParameter("@SangamID", objLoggedIn.sangamID));
 
                 //using (SqlDataAdapter objSqlDataAdapter = new SqlDataAdapter(objSqlCommand))
                 //{

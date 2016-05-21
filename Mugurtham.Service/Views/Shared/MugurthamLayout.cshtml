@@ -8,7 +8,10 @@
     <title>Mugurtham - Associations Integrated</title>
     <meta name="viewport" content="width=device-width" />
     <link id="stylesheet" rel="stylesheet" href="@Url.Content("~/App_Themes/MugurthamTheme/css/Mugurtham/Bootstrap/bootstrap.min.css")" class="pull-right" />
-    <link id="stylesheet" rel="stylesheet" href="@Url.Content("~/App_Themes/MugurthamTheme/css/Mugurtham/Mugurtham.css")" />
+    <link id="stylesheet" rel="stylesheet" href="@Url.Content("~/App_Themes/MugurthamTheme/css/Mugurtham/Mugurtham.min.css")" />
+    <link id="stylesheet" rel="stylesheet" href="@Url.Content("~/App_Themes/MugurthamTheme/css/Mugurtham/font-awesome/css/font-awesome.min.css")" />
+
+
     @Styles.Render("~/Content/MugurthamJQueryUI")
     @Styles.Render("~/Content/MugurthamToastr")
     <!--@Styles.Render("~/Content/MugurthamBase")-->
@@ -45,7 +48,7 @@
                         </ul>
                         <ul class="nav navbar-nav navbar-right ">
                             <li>
-                                <img src="@objLoggedIn.BasicInfoCoreEntity.PhotoPath" class="navbar-brand img-circle" width="70" height="5930"  />
+                                <img src="@objLoggedIn.BasicInfoCoreEntity.PhotoPath" class="navbar-brand img-circle" width="70" height="5930" />
                             </li>
                             <li>
                                 <a id="lblName">Hii @objLoggedIn.Name  !!! &nbsp;&nbsp;</a>
@@ -94,11 +97,11 @@
                             <td width="10%">
                                 <img src="@objLoggedIn.SangamLogoPath" height="90px" width="100%" />
                             </td>
-                            <td width="90%" class="text-justify" style="padding:10px"><br />@objLoggedIn.AboutSangam
+                            <td width="90%" class="text-justify" style="padding:10px">
+                                <br />@objLoggedIn.AboutSangam
                                 <!--    <img src="@objLoggedIn.SangamBannerPath" height="90px" width="100%" />
                                 </td>-->
                         </tr>
-                         
                     </table>
                 </div>
                 <table width="135" border="0" cellpadding="2" cellspacing="0" title="Click to Verify - This site chose Symantec SSL for secure e-commerce and confidential communications.">
@@ -135,7 +138,30 @@
             Powered by <img src="/favicon.ico" height="25" width="40" />  Mugurtham &#174
             &nbsp; v 2.3.4
         </div>
-        <br /><br />
+        <div class="text-center follow-us">
+            Follow Us
+        </div>
+        <div class="text-center">
+            <a class="fa fa-facebook social-icon" href="http://www.facebook.com/Mugurtham" target="_blank"></a>
+            <a class="fa fa-twitter social-icon" href="#" target="_blank"></a>
+            <a class="fa fa-linkedin social-icon" href="#" target="_blank"></a>
+            <a class="fa fa-google-plus social-icon" href="#" target="_blank"></a>
+            <a class="fa fa-youtube social-icon" href="#" target="_blank"></a>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     </div>
     <!-- <div class="panel-footer col-lg-12 text-justify">
          <img src="/favicon.ico" height="25" width="40" />   Mugurtham provides superior collaborative matchmaking experience by expanding the opportunities available to meet potential life partners. Since then we have created a world renowned service that has touched the lives of millions of people all over the world and helping accelarint revenue for sangams. We have, however, never rested on our laurels. Software division providing cutting edge business solutions to Matrimony Industry. An innovator in teleMatrimony and analytics. Partner focused on quality and growth.

@@ -47,7 +47,7 @@
         </div>
         <br />
         <!-- Profiles Listing-->
-        <div class="panel panel-primary FormShadow" dir-paginate="data in AllProfiles.ProfileBasicInfoViewCoreEntityList | filter: (q)  | orderBy: 'Name' | itemsPerPage: pageSize" current-page="currentPage">
+        <div class="panel panel-primary FormShadow" dir-paginate="data in AllProfiles.ProfileBasicInfoViewCoreEntityList | filter: (q)  |  itemsPerPage: pageSize" current-page="currentPage">
             <div class="panel-heading">
                 <h3 class="panel-title text-center">
                     {{data.Name }}

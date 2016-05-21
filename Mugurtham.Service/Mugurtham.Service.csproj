@@ -173,7 +173,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\SQLServer\uspGetAllProfiles.sql" />
-    <Content Include="App_Themes\MugurthamTheme\css\Mugurtham\font-awesome\font-awesome.css" />
     <Content Include="App_Themes\MugurthamTheme\css\Mugurtham\Bootstrap\bootstrap-Cerulean.min.css" />
     <Content Include="App_Themes\MugurthamTheme\css\Mugurtham\Bootstrap\bootstrap-Cosmo.min.css" />
     <Content Include="App_Themes\MugurthamTheme\css\Mugurtham\Bootstrap\bootstrap-Cyborg.min.css" />
@@ -301,9 +300,6 @@
       <DependentUpon>lightbox.js</DependentUpon>
     </Content>
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\app.js" />
-    <Content Include="Scripts\Mugurtham.JS\Mugurtham\app.min.js">
-      <DependentUpon>app.js</DependentUpon>
-    </Content>
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\Controllers\ControllerMugurtham.js" />
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\Controllers\ControllerMugurtham.min.js">
       <DependentUpon>ControllerMugurtham.js</DependentUpon>
@@ -332,9 +328,6 @@
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\Controllers\UserChamber\ControllerInterestedProfiles.js" />
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\Controllers\View\ControllerFullView.js" />
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\Login\Login.js" />
-    <Content Include="Scripts\Mugurtham.JS\Mugurtham\Login\Login.min.js">
-      <DependentUpon>Login.js</DependentUpon>
-    </Content>
     <Content Include="Scripts\Mugurtham.JS\Paging\angular-table.min.js" />
     <Content Include="Scripts\Mugurtham.JS\Paging\dirPagination.js" />
     <Content Include="Scripts\Mugurtham.JS\Paging\dirPagination.tpl.html" />
@@ -365,6 +358,8 @@
     <Content Include="Views\Mugurtham\Info.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Themes\MugurthamTheme\css\Mugurtham\font-awesome\css\" />
+    <Folder Include="App_Themes\MugurthamTheme\css\Mugurtham\font-awesome\fonts\" />
     <Folder Include="Areas\MugurthamAdmin\Models\" />
     <Folder Include="Areas\Profile\Models\" />
     <Folder Include="Areas\SangamAdmin\Models\" />
@@ -432,6 +427,7 @@
     <Content Include="Areas\User\Views\User\InterestedProfiles.cshtml" />
     <Content Include="Areas\User\Views\User\InterestedInMeProfiles.cshtml" />
     <Content Include="Images\Mugurtham\Lightbox\demopage\.DS_Store" />
+    <None Include="bundleconfig.json" />
     <None Include="Properties\PublishProfiles\ProfileMugurtham.pubxml" />
     <Content Include="Views\Mugurtham\Home.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
