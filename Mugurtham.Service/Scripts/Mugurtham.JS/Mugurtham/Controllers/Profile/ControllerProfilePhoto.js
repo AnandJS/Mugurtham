@@ -75,8 +75,6 @@ success(function (data, status, headers, config) {
             success(function (data, status, headers, config) {
                 NotifySuccessStatus(17);
                 flipProfilePic(strImagePath);
-                alert($scope.globalProfileID);
-
             }).
             error(function (data, status, headers, config) {
                 NotifyErrorStatus(data, status);
