@@ -14,6 +14,8 @@ var ControllerProfilePhoto = angular.module('MugurthamApp').controller('Controll
             //AJAX GET REQUEST - GET PROFILE BY PROFILEID
             //===================================================
             $scope.getByProfileID = function () {
+                $scope.globalProfileID = $("#ProfileID").val();
+                $rootScope.globalProfileID = $scope.globalProfileID;
                 $http({
                     method: "GET", url: '/SearchAPI/AllProfilesAPI/getByProfileID/' + $scope.globalProfileID
                 }).
@@ -73,6 +75,8 @@ success(function (data, status, headers, config) {
             success(function (data, status, headers, config) {
                 NotifySuccessStatus(17);
                 flipProfilePic(strImagePath);
+                alert($scope.globalProfileID);
+
             }).
             error(function (data, status, headers, config) {
                 NotifyErrorStatus(data, status);

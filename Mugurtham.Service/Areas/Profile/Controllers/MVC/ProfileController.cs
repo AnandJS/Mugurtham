@@ -60,7 +60,7 @@ namespace Mugurtham.Service.Areas.Profile.Controllers.MVC
             if (file != null && file.ContentLength > 0)
                 try
                 {
-                    Mugurtham.Core.Login.LoggedInUser objLoggedIn = (Mugurtham.Core.Login.LoggedInUser)Session["LoggedInUser"];
+                    Mugurtham.Core.Login.LoggedInUser objLoggedIn = (Mugurtham.Core.Login.LoggedInUser)Session["LoggedInUser"];                    
                     Mugurtham.Core.BasicInfo.BasicInfoCore objBasicInfoCore = new Core.BasicInfo.BasicInfoCore();
                     using (objBasicInfoCore as IDisposable)
                     {
