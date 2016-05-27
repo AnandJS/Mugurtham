@@ -131,6 +131,7 @@ namespace Mugurtham.Core.ProfileInterested
                         objProfileBasicInfoViewCoreEntity.SangamName = objSqlDataReader["SangamName"].ToString();
                         objProfileBasicInfoViewCoreEntity.SubCaste = objSqlDataReader["Subcaste"].ToString();
                         objProfileBasicInfoViewCoreEntity.Star = objSqlDataReader["Star"].ToString();
+                        objProfileBasicInfoViewCoreEntity.AboutMe = objSqlDataReader["AboutMe"].ToString();
                         if (!string.IsNullOrEmpty(objSqlDataReader["Age"].ToString()))
                             objProfileBasicInfoViewCoreEntity.Age = Convert.ToInt32(objSqlDataReader["Age"].ToString());
                         objProfileBasicInfoViewCoreEntityList.Add(objProfileBasicInfoViewCoreEntity);
@@ -210,6 +211,7 @@ namespace Mugurtham.Core.ProfileInterested
                         objProfileBasicInfoViewCoreEntity.SangamName = objSqlDataReader["SangamName"].ToString();
                         objProfileBasicInfoViewCoreEntity.SubCaste = objSqlDataReader["Subcaste"].ToString();
                         objProfileBasicInfoViewCoreEntity.Star = objSqlDataReader["Star"].ToString();
+                        objProfileBasicInfoViewCoreEntity.AboutMe = objSqlDataReader["AboutMe"].ToString();
                         if (!string.IsNullOrEmpty(objSqlDataReader["Age"].ToString()))
                             objProfileBasicInfoViewCoreEntity.Age = Convert.ToInt32(objSqlDataReader["Age"].ToString());
                         objProfileBasicInfoViewCoreEntityList.Add(objProfileBasicInfoViewCoreEntity);

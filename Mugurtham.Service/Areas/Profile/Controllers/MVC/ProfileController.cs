@@ -121,10 +121,10 @@ namespace Mugurtham.Service.Areas.Profile.Controllers.MVC
                 }
                 //if (Array.Exists(model.FilesToBeUploaded.Split(','), s => s.Equals(item.FileName)))                
                 if (
-                    Path.GetExtension(Path.GetFileName(item.FileName)) == ".jpg" ||
-                    Path.GetExtension(Path.GetFileName(item.FileName)) == ".jpeg" ||
-                    Path.GetExtension(Path.GetFileName(item.FileName)) == ".gif" ||
-                    Path.GetExtension(Path.GetFileName(item.FileName)) == ".png"
+                    Path.GetExtension(Path.GetFileName(item.FileName)).ToString().ToLower() == ".jpg".ToString().ToLower() ||
+                    Path.GetExtension(Path.GetFileName(item.FileName)).ToString().ToLower() == ".jpeg".ToString().ToLower() ||
+                    Path.GetExtension(Path.GetFileName(item.FileName)).ToString().ToLower() == ".gif".ToString().ToLower() ||
+                    Path.GetExtension(Path.GetFileName(item.FileName)).ToString().ToLower() == ".png".ToString().ToLower()
                     )
                 {
                     try

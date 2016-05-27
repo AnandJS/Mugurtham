@@ -91,11 +91,11 @@
             <div class="panel-body bgImage">
                 <table class="mugurthamTable">
                     <tr>
-                        <td width="15%" class="FormShadow">
+                        <td width="25%" class="FormShadow">
                             <div class="flexslider">
                                 <ul class="slides">
                                     <li ng-repeat="objProfilePhoto in AllProfiles.PhotoCoreEntityList | filter: {ProfileID: data.MugurthamProfileID}">
-                                        <img src="{{objProfilePhoto.PhotoPath }}" />
+                                        <img src="{{objProfilePhoto.PhotoPath }}"  class = "img-thumbnail" style="height:200px; width:350px" />
                                     </li>
                                 </ul>
                             </div>

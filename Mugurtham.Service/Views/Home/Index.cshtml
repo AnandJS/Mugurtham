@@ -3,6 +3,9 @@
 }
 <html>
 <head>
+    @Scripts.Render("~/bundles/MugurthamJQuery")
+
+   
     <link rel="stylesheet" href="@Url.Content("~/App_Themes/MugurthamTheme/css/Mugurtham/Mask/jquery.loadmask.css")" />
     <script type="text/javascript" src="@Url.Content("~/Scripts/Mugurtham.js/JQuery/jquery-1.11.1.min.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Scripts/Mugurtham.js/Mugurtham/Login/Login.js")"></script>
@@ -71,5 +74,11 @@
         </table>
     </div>
     <!-- container -->
+
+    <script>
+        $(document).ready(function () {
+           // window.location.href = "/Areas/HomePage/index.html";
+        });
+    </script>
 </body>
 </html>

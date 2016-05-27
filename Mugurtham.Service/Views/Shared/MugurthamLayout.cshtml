@@ -7,7 +7,7 @@
 <head runat="server">
     <title>Mugurtham - Associations Integrated</title>
     <meta name="viewport" content="width=device-width" />
-    <link id="stylesheet" rel="stylesheet" href="@Url.Content("~/App_Themes/MugurthamTheme/css/Mugurtham/Bootstrap/bootstrap.min.css")" class="pull-right" />
+    <link id="stylesheet" rel="stylesheet" href="@Url.Content("~/App_Themes/MugurthamTheme/css/Mugurtham/Bootstrap/bootstrap.min.css")"/>    
     <link id="stylesheet" rel="stylesheet" href="@Url.Content("~/App_Themes/MugurthamTheme/css/Mugurtham/Mugurtham.min.css")" />
     <link id="stylesheet" rel="stylesheet" href="@Url.Content("~/App_Themes/MugurthamTheme/css/Mugurtham/font-awesome/css/font-awesome.min.css")" />
 
@@ -20,6 +20,8 @@
     @Styles.Render("~/Content/Flexslider")
     @Styles.Render("~/Content/Lightbox")
     @Styles.Render("~/Content/font-awesome")
+    
+
 </head>
 <body onload="javascript:setUserStyleLocale('@objLoggedIn.themeID');">
     <!-- Navigation -->
@@ -130,25 +132,30 @@
     </form>
 
     <div class="panel-footer col-lg-12">
-        <div class="col-lg-6">
+        <div class="col-lg-3">
             &#169 {{ 'GENCOPYRT' | translate }} 2013 @objLoggedIn.SangamName
         </div>
-        <div class="col-lg-6 text-right">
+        <div class="col-lg-5 text-center">
+            <div class="featurette" id="about">
+                <!------------------------code---------------start---------------->
+                <div class="col-md-12">
+                    <ul class="social-network social-circle">
+                        <li><a href="#" class="icoRss" title="Rss"><i class="fa fa-rss"></i></a></li>
+                        <li><a href="#" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="#" class="icoTwitter" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="#" class="icoGoogle" title="Google +"><i class="fa fa-google-plus"></i></a></li>
+                        <li><a href="#" class="icoLinkedin" title="Linkedin"><i class="fa fa-linkedin"></i></a></li>
+                    </ul>
+                </div>
+                <!----Code------end----------------------------------->
+            </div>
+        </div>
+        <div class="col-lg-4 text-right">
             <img src="~/Images/Mugurtham/Flag.jpg" height="19" width="35" />
             Powered by <img src="/favicon.ico" height="25" width="40" />  Mugurtham &#174
             &nbsp; v 2.3.4
         </div>
-        <div class="text-center follow-us">
-            Follow Us
-        </div>
-        <div class="text-center">
-            <a class="fa fa-facebook social-icon" href="http://www.facebook.com/Mugurtham" target="_blank"></a>
-            <a class="fa fa-twitter social-icon" href="#" target="_blank"></a>
-            <a class="fa fa-linkedin social-icon" href="#" target="_blank"></a>
-            <a class="fa fa-google-plus social-icon" href="#" target="_blank"></a>
-            <a class="fa fa-youtube social-icon" href="#" target="_blank"></a>
-        </div>
-
+        
 
 
 
