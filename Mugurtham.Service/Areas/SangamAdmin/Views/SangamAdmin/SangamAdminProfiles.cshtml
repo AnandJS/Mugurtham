@@ -57,8 +57,8 @@
         <tbody class="example-animate-container">
             <tr class="animate-repeat" ng-repeat="data in AllProfiles.ProfileBasicInfoViewCoreEntityList | filter: {SangamID: '@objLoggedIn.sangamID', MugurthamProfileID: frmData[0].MugurthamProfileID, SangamProfileID: frmData[0].SangamProfiledID,Gender: frmData[0].Gender} | orderBy:'MugurthamProfileID'">
 
-                <td><a href="#/BasicInfo/{{data.MugurthamProfileID }}">{{data.SangamProfileID }}</a></td>
-                <td><a href="#/BasicInfo/{{data.MugurthamProfileID }}">{{data.MugurthamProfileID }}</a></td>
+                <td><a ng-click="setProfileIDBySangamAdminForProfilePic(data.MugurthamProfileID);" href="#/BasicInfo/{{data.MugurthamProfileID }}">{{data.SangamProfileID }}</a></td>
+                <td><a ng-click="setProfileIDBySangamAdminForProfilePic(data.MugurthamProfileID);" href="#/BasicInfo/{{data.MugurthamProfileID }}">{{data.MugurthamProfileID }}</a></td>
                 <td>{{data.Name }}</td>
                 <td>{{data.Age }}</td>
                 <td>{{data.Gender }}</td>

@@ -14,13 +14,20 @@ var ControllerProfilePhoto = angular.module('MugurthamApp').controller('Controll
             //AJAX GET REQUEST - GET PROFILE BY PROFILEID
             //===================================================
             $scope.getByProfileID = function () {
-                $scope.globalProfileID = $("#ProfileID").val();
-                $rootScope.globalProfileID = $scope.globalProfileID;
+                if ($rootScope.globalProfileID == '') { //Uploading
+                }
+                else { // Viewing
+                    localStorage.setItem("ProfileID", $rootScope.globalProfileID);
+                }
+                $rootScope.globalProfileID = localStorage.getItem("ProfileID");
+                if (localStorage.getItem("ProfileIDBySangamAdminForProfilePic") === null) {
+                }
+                $('#ProfileID').val($rootScope.globalProfileID);
                 $http({
-                    method: "GET", url: '/SearchAPI/AllProfilesAPI/getByProfileID/' + $scope.globalProfileID
+                    method: "GET", url: '/SearchAPI/AllProfilesAPI/getByProfileID/' + $rootScope.globalProfileID
                 }).
 success(function (data, status, headers, config) {
-
+    localStorage.removeItem("ProfileIDBySangamAdminForProfilePic");
     $scope.AllProfiles = data;
 }).
     error(function (data, status, headers, config) {
@@ -89,7 +96,7 @@ success(function (data, status, headers, config) {
                 $http({
                     method: "GET", url: '/Profile/Profile/RemoveProfilePic/' + strPhotoID
                 }).
-success(function (data, status, headers, config) {    
+success(function (data, status, headers, config) {
     NotifySuccessStatus(18);
 }).
     error(function (data, status, headers, config) {

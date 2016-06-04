@@ -33,7 +33,13 @@ var ControllerSearchAllProfiles = angular.module('MugurthamApp').controller('Con
                     NotifyStatus('2');
                 });
             }
+
+            $scope.setProfileIDBySangamAdminForProfilePic = function(ProfileID)
+            {
+                localStorage.setItem("ProfileIDBySangamAdminForProfilePic", ProfileID);
+            }
         }])
+
 
 function NotifyStatus(intStatus) {
     /*
