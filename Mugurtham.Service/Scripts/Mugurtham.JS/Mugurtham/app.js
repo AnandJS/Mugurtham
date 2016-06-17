@@ -164,7 +164,7 @@
         })
         .when('/SangamAdminProfiles', {
             templateUrl: '/SangamAdmin/SangamAdmin/SangamAdminProfiles',
-            controller: 'ControllerSearchAllProfiles'
+            controller: 'ControllerSangamAdminProfiles'
         })
         .when('/SangamUserList', {
             templateUrl: '/SangamAdmin/SangamUser/List',

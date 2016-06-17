@@ -28,7 +28,7 @@
                         <div class="form-group">
                             <label for="NomineeName" class="col-lg-3 control-label">{{ 'SRCSGMFLTRBYSGM' | translate}}</label>
                             <div class="col-lg-9">
-                                <select class="form-control" ng-model="SangamID" id="ddlRoles">
+                                <select class="form-control" ng-model="SangamID" id="ddlRoles" onchange="javascript: setTimeout(displayThumbnailSlider, 1000);">
                                     <option value="">All Sangams</option>
                                     <option ng-repeat="Sangam in arrSangamID" value="{{Sangam.ID}}">{{Sangam.Name}}</option>
                                 </select>

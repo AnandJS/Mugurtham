@@ -235,8 +235,8 @@ var ControllerUser = angular.module('MugurthamApp').controller('ControllerUser',
                         Password: $scope.userFormData[0].Password,
                         SangamID: SangamID,
                         RoleID: RoleID,
-                        ThemeID: $scope.userFormData[0].ThemeID,
-                        LocaleID: $scope.userFormData[0].LocaleID,
+                        ThemeID: $('#ddlTheme').val(),
+                        LocaleID: $('#ddlUserLocale').val(),
                         IsActivated: '1',
                         IsHighlighted: $scope.userFormData[0].IsHighlighted,
                         ShowHoroscope: $scope.userFormData[0].ShowHoroscope
@@ -260,6 +260,8 @@ var ControllerUser = angular.module('MugurthamApp').controller('ControllerUser',
                     method: "GET", url: strGetURL
                 }).
             success(function (data, status, headers, config) {
+                $('#ddlUserLocale').val(data.LocaleID);
+                $('#ddlTheme').val(data.ThemeID);
                 $scope.userFormData = [];
                 $scope.userFormData.push({
                     ID: data.ID,
@@ -273,12 +275,11 @@ var ControllerUser = angular.module('MugurthamApp').controller('ControllerUser',
                     IsHighlighted: data.IsHighlighted,
                     ShowHoroscope: $scope.userFormData[0].ShowHoroscope,
                     SangamID: data.SangamID
-                });
+                });                
             }).
             error(function (data, status, headers, config) {
                 NotifyErrorStatus(data, status);
-            });
-
+            });                
             }
 
         }])

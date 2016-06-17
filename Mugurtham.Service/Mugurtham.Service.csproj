@@ -366,6 +366,7 @@
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\Controllers\ControllerMugurtham.min.js">
       <DependentUpon>ControllerMugurtham.js</DependentUpon>
     </Content>
+    <Content Include="Scripts\Mugurtham.JS\Mugurtham\Controllers\Dashboard\ControllerSangamAdminProfiles.js" />
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\Controllers\Dashboard\ControllerSangamDashboard.js" />
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\Controllers\Profile\ControllerProfileBasicInfo.js" />
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\Controllers\Profile\ControllerProfileContact.js" />

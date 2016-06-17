@@ -1,17 +1,17 @@
 ﻿/*
 ==========================================================================================
-THIS CONTROLLER IS SPECIFICALLY FOR RECENTLY JOINED PROFILES BY LASTWEEK IN USER HOME PAGE
+THIS CONTROLLER IS SPECIFICALLY FOR ALL-PROFILES PAGE ON SEARCH MODULE
 ==========================================================================================
 */
-var ControllerRecentlyJoined = angular.module('MugurthamApp').controller('ControllerRecentlyJoined',
-        ['$http', '$scope', function ($http, $scope) {
-            
+var ControllerSearchAllProfiles = angular.module('MugurthamApp').controller('ControllerSangamAdminProfiles',
+        ['$http', '$scope', '$filter', function ($http, $scope, $filter) {
 
+            $scope.ControllerName = 'ControllerSangamAdminProfiles';
             //===================================================
             //AJAX GET REQUEST - GETTING ALL PROFILES
             //===================================================
-            $scope.getHighlightedProfiles = function () {
-                var strGetURL = "Search/Search/GetRecentlyJoinedProfiles";
+            $scope.getAllProfilesBySangam = function () {
+                var strGetURL = "Search/Search/getAllProfilesBySangam";
                 $("#divContainer").mask("Searching profiles please wait...");
                 $http({
                     method: "GET", url: strGetURL
@@ -22,7 +22,6 @@ var ControllerRecentlyJoined = angular.module('MugurthamApp').controller('Contro
                 $scope.currentPage = 1;
                 $scope.pageSize = 5;
                 $scope.SearchedProfiles = data.ProfileBasicInfoViewCoreEntityList;
-                $scope.profilePhotos = data.PhotoCoreEntityList;
                 $scope.pageChangeHandler = function (num) {
                     setTimeout(displayThumbnailSlider, 1000);
                     console.log('Profiles page changed to ' + num);
@@ -35,19 +34,21 @@ var ControllerRecentlyJoined = angular.module('MugurthamApp').controller('Contro
                 });
             }
 
+            $scope.setProfileIDBySangamAdminForProfilePic = function (ProfileID) {
+                localStorage.setItem("ProfileIDBySangamAdminForProfilePic", ProfileID);
+            }
         }])
 
-        function NotifyStatus(intStatus) {
-            /*
-                 1-> Success
-                 2-> Error
-            */
-            if (intStatus == '1') {
-                toastr.success('Profiles Received Successfully');
-            }
-            else if (intStatus == '2') {
-                toastr.Error('Error occured in ControllerHighlightedProfiles - getData');
-            }
-        }
- 
 
+function NotifyStatus(intStatus) {
+    /*
+         1-> Success
+         2-> Error
+    */
+    if (intStatus == '1') {
+        toastr.success('Profiles Received Successfully');
+    }
+    else if (intStatus == '2') {
+        toastr.Error('Error occured in ControllerSearchAllProfiles - getData');
+    }
+}

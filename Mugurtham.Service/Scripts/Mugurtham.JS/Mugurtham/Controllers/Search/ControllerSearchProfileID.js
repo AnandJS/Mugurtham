@@ -16,7 +16,7 @@ var ControllerSearchProfileID = angular.module('MugurthamApp').controller('Contr
                     method: "GET", url: '/SearchAPI/AllProfilesAPI/getByProfileID/' + $scope.frmData[0].ProfileID
                 }).
             success(function (data, status, headers, config) {
-                if (data.BasicInfoCoreEntity.ProfileID != null) {
+                if (data.BasicInfoCoreEntity.ProfileID != null) {                    
                     $('#divProfileBasicView').show();
                     $scope.AllProfiles = data;
                 }

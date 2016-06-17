@@ -73,7 +73,7 @@ namespace Mugurtham.Service.Areas.Search.Controllers
             return this.Json(objProfileBasicViewEntity, JsonRequestBehavior.AllowGet);
         }
         [HttpGet]
-        public ActionResult getRecentlyJoined()
+        public ActionResult GetRecentlyJoinedProfiles()
         {
             string strGender = "admin"; // Mugurtham admin, Sangam admin, public user
             Mugurtham.Core.Login.LoggedInUser objLoggedIn = (Mugurtham.Core.Login.LoggedInUser)Session["LoggedInUser"];
@@ -87,12 +87,16 @@ namespace Mugurtham.Service.Areas.Search.Controllers
                         strGender = "male";
                 }
             }
-            List<ProfileCore> objProfileCoreList = new List<ProfileCore>();
             ProfileCore objProfileCore = new ProfileCore();
+            ProfileBasicViewEntity objProfileBasicViewEntity = new ProfileBasicViewEntity();
             using (objProfileCore as IDisposable)
-                objProfileCore.GetRecentlyJoined(ref objProfileCoreList, strGender, objLoggedIn.sangamID);
+                objProfileCore.GetRecentlyJoinedProfiles(Utility.connectionString(), strGender,
+                    objLoggedIn.sangamID,
+                    ref objProfileBasicViewEntity,
+                    ref objLoggedIn
+                    );
             objProfileCore = null;
-            return this.Json(objProfileCoreList, JsonRequestBehavior.AllowGet);
+            return this.Json(objProfileBasicViewEntity, JsonRequestBehavior.AllowGet);
         }
         [HttpGet]
         public ActionResult getHighlightedProfiles()
@@ -160,6 +164,42 @@ namespace Mugurtham.Service.Areas.Search.Controllers
                 objProfileCore.GetProfilePhotos(ref objPhotoCoreEntityList, objLoggedIn.LoginID);
             objProfileCore = null;
             return this.Json(objPhotoCoreEntityList, JsonRequestBehavior.AllowGet);
+        }
+        [HttpGet]
+        public ActionResult getAllProfilesBySangam()
+        {
+            string strGender = "admin"; // Mugurtham admin, Sangam admin, public user
+            Mugurtham.Core.Login.LoggedInUser objLoggedIn = (Mugurtham.Core.Login.LoggedInUser)Session["LoggedInUser"];
+            if (objLoggedIn.roleID == "F62DDFBE55448E3A3") // User Profiles 
+            {
+                if (!string.IsNullOrWhiteSpace(objLoggedIn.BasicInfoCoreEntity.Gender))
+                {
+                    if (objLoggedIn.BasicInfoCoreEntity.Gender.ToLower().Trim() == "male".ToLower().Trim())
+                        strGender = "female";
+                    else
+                        strGender = "male";
+                }
+            }
+            //string cs = System.Configuration.ConfigurationManager.ConnectionStrings["connectionStringName"].ConnectionString;
+            ProfileBasicViewEntity objProfileBasicViewEntity = new ProfileBasicViewEntity();
+            PorfileBasicInfoViewCore objPorfileBasicInfoViewCore = new PorfileBasicInfoViewCore();
+            using (objPorfileBasicInfoViewCore as IDisposable)
+            {
+                objPorfileBasicInfoViewCore.GetAllProfilesBySangam(Utility.connectionString(), strGender,
+                    ref objProfileBasicViewEntity,
+                    ref objLoggedIn
+                    );
+            }
+            objPorfileBasicInfoViewCore = null;
+            //Uncommented the below code for performance optimization - Apr 11 2016 - Anand J
+            /*
+            List<ProfileCore> objProfileCoreList = new List<ProfileCore>();
+            ProfileCore objProfileCore = new ProfileCore();
+            using (objProfileCore as IDisposable)
+                objProfileCore.GetAll(ref objProfileCoreList, strGender, objLoggedIn.sangamID);
+            objProfileCore = null;*/
+            //Response.AddHeader("Content-Encoding", "gzip");
+            return this.Json(objProfileBasicViewEntity, JsonRequestBehavior.AllowGet);
         }
     }
 }

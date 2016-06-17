@@ -7,7 +7,7 @@
 <head runat="server">
     <title>Mugurtham - Associations Integrated</title>
     <meta name="viewport" content="width=device-width" />
-    <link id="stylesheet" rel="stylesheet" href="@Url.Content("~/App_Themes/MugurthamTheme/css/Mugurtham/Bootstrap/bootstrap.min.css")"/>    
+    <link id="stylesheet" rel="stylesheet" href="@Url.Content("~/App_Themes/MugurthamTheme/css/Mugurtham/Bootstrap/bootstrap.min.css")" />
     <link id="stylesheet" rel="stylesheet" href="@Url.Content("~/App_Themes/MugurthamTheme/css/Mugurtham/Mugurtham.min.css")" />
     <link id="stylesheet" rel="stylesheet" href="@Url.Content("~/App_Themes/MugurthamTheme/css/Mugurtham/font-awesome/css/font-awesome.min.css")" />
 
@@ -20,10 +20,10 @@
     @Styles.Render("~/Content/Flexslider")
     @Styles.Render("~/Content/Lightbox")
     @Styles.Render("~/Content/font-awesome")
-    
+
 
 </head>
-<body onload="javascript:setUserStyleLocale('@objLoggedIn.themeID');">
+<body>
     <!-- Navigation -->
 
 
@@ -55,7 +55,7 @@
                             <li>
                                 <a id="lblName">Hii @objLoggedIn.Name  !!! &nbsp;&nbsp;</a>
                             </li>
-                            <li><a onclick="window.location = '/Home/Logout';" id="tabLogout" data-toggle="tab" style="cursor: pointer">Logout</a></li>
+                            <li><a onclick="localStorage.landingFirstTimeCount=0; window.location = '/Home/Logout';" id="tabLogout" data-toggle="tab" style="cursor: pointer">Logout</a></li>
                             <li class="dropdown">
                                 <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" id="aSelectStyle" style="cursor: pointer">Switch Style <span class="caret"></span></a>
                                 <ul id="ddlThemes" class="dropdown-menu" role="menu">
@@ -105,7 +105,7 @@
                                 </td>-->
                         </tr>
                     </table>
-                </div>
+                </div><!--
                 <table width="135" border="0" cellpadding="2" cellspacing="0" title="Click to Verify - This site chose Symantec SSL for secure e-commerce and confidential communications.">
                     <tr>
                         <td width="135" align="center" valign="top">
@@ -113,7 +113,7 @@
                             <a href="http://www.symantec.com/ssl-certificates" target="_blank" style="color:#000000; text-decoration:none; font:bold 7px verdana,sans-serif; letter-spacing:.5px; text-align:center; margin:0px; padding:0px;">ABOUT SSL CERTIFICATES</a>
                         </td>
                     </tr>
-                </table>
+                </table>-->
                 <!-- Rending Body from child page-->
                 @RenderSection("featured", required: false)
                 @RenderBody()
@@ -155,20 +155,22 @@
             Powered by <img src="/favicon.ico" height="25" width="40" />  Mugurtham &#174
             &nbsp; v 2.3.4
         </div>
-        
+    </div>
+    <div class="modal fade alert" id="squarespaceModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">x</span><span class="sr-only">Close</span></button>
+                    <h3 class="modal-title" id="lineModalLabel">Mugurtham Join Ventures with</h3>
+                </div>
+                <div class="modal-body">
+                    <h4>Panjasakthi</h4><br />
+                    <h4>Viswamalar</h4><br />
+                    <h4>Kalpana Thirumana Thagaval Maiyam</h4><br />
 
-
-
-
-
-
-
-
-
-
-
-
-
+                </div>
+            </div>
+        </div>
     </div>
     <!-- <div class="panel-footer col-lg-12 text-justify">
          <img src="/favicon.ico" height="25" width="40" />   Mugurtham provides superior collaborative matchmaking experience by expanding the opportunities available to meet potential life partners. Since then we have created a world renowned service that has touched the lives of millions of people all over the world and helping accelarint revenue for sangams. We have, however, never rested on our laurels. Software division providing cutting edge business solutions to Matrimony Industry. An innovator in teleMatrimony and analytics. Partner focused on quality and growth.
@@ -196,7 +198,12 @@
     @Scripts.Render("~/bundles/MugurthamControllerFullView")
     @Scripts.Render("~/bundles/MugurthamControllerMugurthamAdmin")
 
-
+    <script type="text/javascript">
+        $(document).ready(function () {
+            landingPageCounter();
+            setUserStyleLocale('@objLoggedIn.themeID');
+        });
+    </script>
 
 
 

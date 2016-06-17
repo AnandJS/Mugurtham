@@ -130,3 +130,18 @@ function NotifyErrorStatus(data, status) {
     toastr.error(status + ' : ' + data.Message);
 }
 
+//This method listens to open the Modal window only when loggedin first time
+function landingPageCounter() {
+    if (typeof (Storage) !== "undefined") {
+        if (localStorage.landingFirstTimeCount) {
+            localStorage.landingFirstTimeCount = Number(localStorage.landingFirstTimeCount) + 1;
+        } else {
+            localStorage.landingFirstTimeCount = 0;
+        }
+        if (Number(localStorage.landingFirstTimeCount) < 2) {
+            $('#squarespaceModal').modal('show');
+        }
+    } else {
+        toastr.error("Sorry, your browser does not support web storage...");
+    }
+}
