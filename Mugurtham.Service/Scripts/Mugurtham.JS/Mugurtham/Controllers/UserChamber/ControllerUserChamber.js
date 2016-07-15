@@ -31,10 +31,19 @@ var ControllerUserChamber = angular.module('MugurthamApp').controller('Controlle
 
 function setBadgeValue(objData) {
     $('#badgeInterestedInMeProfiles').text(objData.InterestedProfiles);
+    $('#badgeInterestedInMeProfilesInGblNav').text(objData.InterestedProfiles);
+    
     $('#badgeInterestedProfiles').text(objData.InterestedInMeProfiles);
+    $('#badgeInterestedProfilesInGblNav').text(objData.InterestedInMeProfiles);
+
     $('#badgeViewNotifications').text(objData.ViewedProfiles);
+    $('#badgeViewNotificationsInGblNav').text(objData.ViewedProfiles);
+
     $('#badgeRecentlyJoined').text(objData.RecentlyJoined);
+    $('#badgeRecentlyJoinedInGblNav').text(objData.RecentlyJoined);
+
     $('#badgeHighlightedProfiles').text(objData.HighlightedProfiles);
+    $('#badgeHighlightedProfilesInGblNav').text(objData.HighlightedProfiles);
 }
 
 function NotifyStatus(intStatus) {

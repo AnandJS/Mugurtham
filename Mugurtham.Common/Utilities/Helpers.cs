@@ -12,5 +12,9 @@ namespace Mugurtham.Common.Utilities
         {
             return Guid.NewGuid().ToString().Substring(1, 20).Replace("-", "").ToUpper();
         }
+        public static string passwordGenerator()
+        {
+            return Guid.NewGuid().ToString().Substring(1, 5).Replace("-", "").ToUpper();
+        }
     }
 }

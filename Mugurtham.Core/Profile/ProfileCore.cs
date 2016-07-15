@@ -65,7 +65,6 @@ namespace Mugurtham.Core.Profile.API
         {
             strProfileID = string.Empty;
             string strUserID = string.Empty;
-
             SangamCore objSangamCore = new SangamCore();
             using (objSangamCore as IDisposable)
             {
@@ -74,6 +73,8 @@ namespace Mugurtham.Core.Profile.API
                 using (objSangamCoreEntity as IDisposable)
                 {
                     objSangamCoreEntity = objSangamCore.GetByID(objLoggedIn.sangamID);
+                    if (string.IsNullOrEmpty(objSangamCoreEntity.LastProfileIDNo.ToString()))
+                        return -1;
                     objSangamCoreEntity.LastProfileIDNo += 1;
                     objSangamCore.Edit(ref objSangamCoreEntity);
                 }
@@ -90,7 +91,7 @@ namespace Mugurtham.Core.Profile.API
                     objUserCoreEntity.ID = Helpers.primaryKey();
                     objUserCoreEntity.Name = objBasicInfoCoreEntity.Name;
                     objUserCoreEntity.LoginID = strProfileID;
-                    objUserCoreEntity.Password = strProfileID;
+                    objUserCoreEntity.Password = Helpers.passwordGenerator();
                     objUserCoreEntity.SangamID = objLoggedIn.sangamID;
                     objUserCoreEntity.RoleID = Constants.RoleIDForUserProfile;
                     objUserCoreEntity.ThemeID = Constants.ThemeBootstrap;
@@ -477,6 +478,7 @@ namespace Mugurtham.Core.Profile.API
 
                 // 3. add parameter to command, which will be passed to the stored procedure
                 objSqlCommand.Parameters.Add(new SqlParameter("@GENDER", strGender));
+                objSqlCommand.Parameters.Add(new SqlParameter("@SangamID", strSangamID));
                 // execute the command
                 using (SqlDataReader objSqlDataReader = objSqlCommand.ExecuteReader())
                 {

@@ -240,7 +240,7 @@
             GENCOPYRT: 'Copyright',
             GENSANGAM: 'Sangam',
             GENABOUT: 'About',
-            LYTSRCH: 'Search',
+            LYTSRCH: 'Search for Profiles',
             LYTPROFILES: 'Profiles',
             LYTSHRTLISPROFILES: 'Profiles I liked',
             LYTEDITMYPROFILE: 'Edit My Profile',

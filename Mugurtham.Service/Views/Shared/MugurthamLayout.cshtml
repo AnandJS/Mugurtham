@@ -10,7 +10,55 @@
     <link id="stylesheet" rel="stylesheet" href="@Url.Content("~/App_Themes/MugurthamTheme/css/Mugurtham/Bootstrap/bootstrap.min.css")" />
     <link id="stylesheet" rel="stylesheet" href="@Url.Content("~/App_Themes/MugurthamTheme/css/Mugurtham/Mugurtham.min.css")" />
     <link id="stylesheet" rel="stylesheet" href="@Url.Content("~/App_Themes/MugurthamTheme/css/Mugurtham/font-awesome/css/font-awesome.min.css")" />
+    <style>
+        .dropdown-submenu {
+            position: relative;
+        }
 
+            .dropdown-submenu > .dropdown-menu {
+                top: 0;
+                left: 100%;
+                margin-top: -6px;
+                margin-left: -1px;
+                -webkit-border-radius: 0 6px 6px 6px;
+                -moz-border-radius: 0 6px 6px;
+                border-radius: 0 6px 6px 6px;
+            }
+
+            .dropdown-submenu:hover > .dropdown-menu {
+                display: block;
+            }
+
+            .dropdown-submenu > a:after {
+                display: block;
+                content: " ";
+                float: right;
+                width: 0;
+                height: 0;
+                border-color: transparent;
+                border-style: solid;
+                border-width: 5px 0 5px 5px;
+                border-left-color: #ccc;
+                margin-top: 5px;
+                margin-right: -10px;
+            }
+
+            .dropdown-submenu:hover > a:after {
+                border-left-color: #fff;
+            }
+
+            .dropdown-submenu.pull-left {
+                float: none;
+            }
+
+                .dropdown-submenu.pull-left > .dropdown-menu {
+                    left: -100%;
+                    margin-left: 10px;
+                    -webkit-border-radius: 6px 0 6px 6px;
+                    -moz-border-radius: 6px 0 6px 6px;
+                    border-radius: 6px 0 6px 6px;
+                }
+    </style>
 
     @Styles.Render("~/Content/MugurthamJQueryUI")
     @Styles.Render("~/Content/MugurthamToastr")
@@ -43,7 +91,7 @@
 
                     </div>
                     <!-- Collect the nav links, forms, and other content for toggling -->
-                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" ng-controller="ControllerUserChamber">
 
                         <ul class="nav navbar-nav navbar-middle ">
                             <li class="navbar-brand">@objLoggedIn.SangamName</li>
@@ -55,36 +103,104 @@
                             <li>
                                 <a id="lblName">Hii @objLoggedIn.Name  !!! &nbsp;&nbsp;</a>
                             </li>
-                            <li><a onclick="localStorage.landingFirstTimeCount=0; window.location = '/Home/Logout';" id="tabLogout" data-toggle="tab" style="cursor: pointer">Logout</a></li>
+
                             <li class="dropdown">
-                                <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" id="aSelectStyle" style="cursor: pointer">Switch Style <span class="caret"></span></a>
-                                <ul id="ddlThemes" class="dropdown-menu" role="menu">
-                                    <li class="active"><a id="Bootstrap" cssurl='@Url.Content("~/App_Themes/MugurthamTheme/css/Mugurtham/Bootstrap/bootstrap.min.css")'>Bootstrap</a></li>
-                                    <li><a id="Cerulean" cssurl='@Url.Content("~/App_Themes/MugurthamTheme/css/Mugurtham/Bootstrap/bootstrap-Cerulean.min.css")'>Cerulean</a></li>
-                                    <li><a id="Cyborg" cssurl='@Url.Content("~/App_Themes/MugurthamTheme/css/Mugurtham/Bootstrap/bootstrap-Cyborg.min.css")'>Cyborg</a></li>
-                                    <li><a id="Darkly" cssurl='@Url.Content("~/App_Themes/MugurthamTheme/css/Mugurtham/Bootstrap/bootstrap-Darkly.min.css")'>Darkly</a></li>
-                                    <li><a id="Flatly" cssurl='@Url.Content("~/App_Themes/MugurthamTheme/css/Mugurtham/Bootstrap/bootstrap-Flatly.min.css")'>Flatly</a></li>
-                                    <li><a id="Lumen" cssurl='@Url.Content("~/App_Themes/MugurthamTheme/css/Mugurtham/Bootstrap/bootstrap-Lumen.min.css")'>Lumen</a></li>
-                                    <li><a id="Paper" cssurl='@Url.Content("~/App_Themes/MugurthamTheme/css/Mugurtham/Bootstrap/bootstrap-Paper.min.css")'>Paper</a></li>
-                                    <li><a id="Readable" cssurl='@Url.Content("~/App_Themes/MugurthamTheme/css/Mugurtham/Bootstrap/bootstrap-Readable.min.css")'>Readable</a></li>
-                                    <li><a id="Simplex" cssurl='@Url.Content("~/App_Themes/MugurthamTheme/css/Mugurtham/Bootstrap/bootstrap-Simplex.min.css")'>Simplex</a></li>
-                                    <li><a id="Slate" cssurl='@Url.Content("~/App_Themes/MugurthamTheme/css/Mugurtham/Bootstrap/bootstrap-Slate.min.css")'>Slate</a></li>
-                                    <li><a id="Spacelab" cssurl='@Url.Content("~/App_Themes/MugurthamTheme/css/Mugurtham/Bootstrap/bootstrap-Spacelab.min.css")'>Spacelab</a></li>
-                                    <li><a id="Superhero" cssurl='@Url.Content("~/App_Themes/MugurthamTheme/css/Mugurtham/Bootstrap/bootstrap-United.min.css")'>Superhero</a></li>
-                                    <li><a id="United" cssurl='@Url.Content("~/App_Themes/MugurthamTheme/css/Mugurtham/Bootstrap/bootstrap-United.min.css")'>United</a></li>
-                                    <li><a id="Yeti" cssurl='@Url.Content("~/App_Themes/MugurthamTheme/css/Mugurtham/Bootstrap/bootstrap-Yeti.min.css")'>Yeti</a></li>
+                                <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" id="aSelectLang" style="cursor: pointer">
+                                    Search
+                                    <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
+                                    <li><a href="/Mugurtham#/ProfileID">Search By Profile ID</a></li>
+                                    <li><a href="/Mugurtham#/GeneralSearch">General Search</a></li>
                                     <li class="divider"></li>
+                                    <li> <a href="#InterestedProfiles">{{ 'LYTSHRTLISPROFILES' | translate }}  &nbsp;&nbsp;<i class="text-right badge" id="badgeInterestedInMeProfilesInGblNav"></i></a></li>
+                                    <li> <a href="#InterestedInMeProfiles">{{ 'LYTPROFILESLKDME' | translate }}  &nbsp;&nbsp;<i class="text-right badge" id="badgeInterestedProfilesInGblNav"></i></a></li>
+                                    <li> <a href="#ViewNotifications">{{ 'LYTPROFILESVWDME' | translate }}  &nbsp;&nbsp;<i class="text-right badge" id="badgeViewNotificationsInGblNav"></i></a></li>
+                                    <li> <a href="#RecentlyJoined">{{ 'LYTRCNTLYJNDPROFILES' | translate }}  &nbsp;&nbsp;<i class="text-right badge" id="badgeRecentlyJoinedInGblNav"></i></a></li>
+                                    <li> <a href="#ProfileUserDashboard">{{ 'LYTPROFILESHGLTD' | translate }}  &nbsp;&nbsp;<i class="text-right badge" id="badgeHighlightedProfilesInGblNav"></i></a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="/Mugurtham#/AllProfiles">Search All Profiles </a> </li>
+                                    <li><a href="/Mugurtham#/SangamSearch">Search by Sangam  </a></li>
+                                     
                                 </ul>
                             </li>
+
                             <li class="dropdown">
-                                <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" id="aSelectLang" style="cursor: pointer">Switch Language <span class="caret"></span></a>
-                                <ul id="ddlLocale" class="dropdown-menu" role="menu">
-                                    <li><a id="0449" localeid="0449">Tamil</a></li>
-                                    <li class="active"><a id="0409" localeid="0409">English</a></li>
-                                    <li><a id="0439" localeid="0439">Hindi</a></li>
-                                    <li><a id="044a" localeid="044a">Telgu</a></li>
+                                <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" id="aSelectLang" style="cursor: pointer">Settings <span class="caret"></span></a>
+                                <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
+                                    <li>
+                                        <a href="#BasicInfo/@objLoggedIn.LoginID">
+                                            <i class="fa fa-edit" style="font-size:24px"></i> &nbsp;&nbsp;Edit My Profile
+                                        </a>
+                                    </li>
+                                    <li><a href="/Mugurtham#/UserSettingsForm"><i class="fa fa-cog fa-spin" style="font-size:24px"></i> &nbsp;&nbsp;Settings</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="/Mugurtham#/UserSettingsForm"><i class="fa fa-lock" style="font-size:24px"></i> &nbsp;&nbsp;Change Password</a></li>
+                                    <li><a href="/Mugurtham#/UserSettingsForm"><i class="fa fa-user" style="font-size:24px"></i> &nbsp;&nbsp;Personalize </a></li>
+                                    <li class="divider"></li>
+
+                                    <li class="dropdown-submenu">
+                                        <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" id="aSelectLang" style="cursor: pointer"><i class="fa fa-language" style="font-size:24px"></i> &nbsp;&nbsp;Switch Language </a>
+                                        <ul id="ddlLocale" class="dropdown-menu" role="menu">
+                                            <li><a id="0449" localeid="0449">Tamil</a></li>
+                                            <li class="active"><a id="0409" localeid="0409">English</a></li>
+                                            <li><a id="0439" localeid="0439">Hindi</a></li>
+                                            <li><a id="044a" localeid="044a">Telgu</a></li>
+                                        </ul>
+                                    </li>
+
+                                    <li class="dropdown-submenu">
+                                        <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" id="aSelectStyle" style="cursor: pointer"><i class="fa fa-smile-o" style="font-size:24px"></i> &nbsp;&nbsp;Switch Style</a>
+                                        <ul id="ddlThemes" class="dropdown-menu" role="menu">
+                                            <li class="active"><a id="Bootstrap" cssurl='@Url.Content("~/App_Themes/MugurthamTheme/css/Mugurtham/Bootstrap/bootstrap.min.css")'>Bootstrap</a></li>
+                                            <li><a id="Cerulean" cssurl='@Url.Content("~/App_Themes/MugurthamTheme/css/Mugurtham/Bootstrap/bootstrap-Cerulean.min.css")'>Cerulean</a></li>
+                                            <li><a id="Cyborg" cssurl='@Url.Content("~/App_Themes/MugurthamTheme/css/Mugurtham/Bootstrap/bootstrap-Cyborg.min.css")'>Cyborg</a></li>
+                                            <li><a id="Darkly" cssurl='@Url.Content("~/App_Themes/MugurthamTheme/css/Mugurtham/Bootstrap/bootstrap-Darkly.min.css")'>Darkly</a></li>
+                                            <li><a id="Flatly" cssurl='@Url.Content("~/App_Themes/MugurthamTheme/css/Mugurtham/Bootstrap/bootstrap-Flatly.min.css")'>Flatly</a></li>
+                                            <li><a id="Lumen" cssurl='@Url.Content("~/App_Themes/MugurthamTheme/css/Mugurtham/Bootstrap/bootstrap-Lumen.min.css")'>Lumen</a></li>
+                                            <li><a id="Paper" cssurl='@Url.Content("~/App_Themes/MugurthamTheme/css/Mugurtham/Bootstrap/bootstrap-Paper.min.css")'>Paper</a></li>
+                                            <li><a id="Readable" cssurl='@Url.Content("~/App_Themes/MugurthamTheme/css/Mugurtham/Bootstrap/bootstrap-Readable.min.css")'>Readable</a></li>
+                                            <li><a id="Simplex" cssurl='@Url.Content("~/App_Themes/MugurthamTheme/css/Mugurtham/Bootstrap/bootstrap-Simplex.min.css")'>Simplex</a></li>
+                                            <li><a id="Slate" cssurl='@Url.Content("~/App_Themes/MugurthamTheme/css/Mugurtham/Bootstrap/bootstrap-Slate.min.css")'>Slate</a></li>
+                                            <li><a id="Spacelab" cssurl='@Url.Content("~/App_Themes/MugurthamTheme/css/Mugurtham/Bootstrap/bootstrap-Spacelab.min.css")'>Spacelab</a></li>
+                                            <li><a id="Superhero" cssurl='@Url.Content("~/App_Themes/MugurthamTheme/css/Mugurtham/Bootstrap/bootstrap-United.min.css")'>Superhero</a></li>
+                                            <li><a id="United" cssurl='@Url.Content("~/App_Themes/MugurthamTheme/css/Mugurtham/Bootstrap/bootstrap-United.min.css")'>United</a></li>
+                                            <li><a id="Yeti" cssurl='@Url.Content("~/App_Themes/MugurthamTheme/css/Mugurtham/Bootstrap/bootstrap-Yeti.min.css")'>Yeti</a></li>
+                                            <li class="divider"></li>
+                                        </ul>
+                                    </li>
+
+
+
+                                    <!-- Third Menu Sliding OUt
+
+                                    <li class="dropdown-submenu">
+                                        <a tabindex="-1" href="#">Hover me for more options</a>
+                                        <ul class="dropdown-menu">
+                                            <li class="dropdown-submenu">
+                                                <a href="#">Even More..</a>
+                                                <ul class="dropdown-menu">
+                                                    <li><a href="#">3rd level</a></li>
+                                                    <li><a href="#">3rd level</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="#">Second level</a></li>
+                                            <li><a href="#">Second level</a></li>
+                                        </ul>
+                                    </li>
+
+                                    -->
+
                                 </ul>
                             </li>
+
+
+                            <li><a onclick="localStorage.landingFirstTimeCount=0; window.location = '/Home/Logout';" id="tabLogout" data-toggle="tab" style="cursor: pointer">Logout</a></li>
+
+
+
+
+
                         </ul>
                     </div>
                     <!-- /.navbar-collapse -->
@@ -101,11 +217,14 @@
                             </td>
                             <td width="90%" class="text-justify" style="padding:10px">
                                 <br />@objLoggedIn.AboutSangam
+
                                 <!--    <img src="@objLoggedIn.SangamBannerPath" height="90px" width="100%" />
                                 </td>-->
                         </tr>
+                                  </table>
                     </table>
-                </div><!--
+                </div>
+                <!--
                 <table width="135" border="0" cellpadding="2" cellspacing="0" title="Click to Verify - This site chose Symantec SSL for secure e-commerce and confidential communications.">
                     <tr>
                         <td width="135" align="center" valign="top">
@@ -153,7 +272,8 @@
         <div class="col-lg-4 text-right">
             <img src="~/Images/Mugurtham/Flag.jpg" height="19" width="35" />
             Powered by <img src="/favicon.ico" height="25" width="40" />  Mugurtham &#174
-            &nbsp; v 2.3.4
+            &nbsp; v 2.3.5
+            <br /> Reach Mugurtham at &nbsp;&nbsp;<i class="fa fa-phone-square">&nbsp;&nbsp;+91 98408 18831</i> <i class="fa fa-envelope" >&nbsp;&nbsp;info@mugurtham.com</i>
         </div>
     </div>
     <div class="modal fade alert" id="squarespaceModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
