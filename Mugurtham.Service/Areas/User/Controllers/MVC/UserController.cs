@@ -14,7 +14,7 @@ using Mugurtham.Service.App_Code.Utility;
 
 namespace Mugurtham.Service.Areas.User.Controllers.MVC
 {
-    public class UserController : Controller
+    public class UserController : MugurthamBaseController
     {
         //
         // GET: /User/User/
@@ -108,12 +108,13 @@ namespace Mugurtham.Service.Areas.User.Controllers.MVC
             objProfileInterestedCore = null;
             return this.Json("Success", JsonRequestBehavior.AllowGet);
         }
+
         [HttpGet]
         public ActionResult getInterestedProfiles()
         {
             string strGender = "admin"; // Mugurtham admin, Sangam admin, public user
             Mugurtham.Core.Login.LoggedInUser objLoggedIn = (Mugurtham.Core.Login.LoggedInUser)Session["LoggedInUser"];
-            if (objLoggedIn.roleID == "F62DDFBE55448E3A3") // User Profiles 
+            if (objLoggedIn.roleID == Mugurtham.Core.Constants.RoleIDForUserProfile) // User Profiles 
             {
                 if (!string.IsNullOrWhiteSpace(objLoggedIn.BasicInfoCoreEntity.Gender))
                 {
@@ -141,7 +142,7 @@ namespace Mugurtham.Service.Areas.User.Controllers.MVC
         {
             string strGender = "admin"; // Mugurtham admin, Sangam admin, public user
             Mugurtham.Core.Login.LoggedInUser objLoggedIn = (Mugurtham.Core.Login.LoggedInUser)Session["LoggedInUser"];
-            if (objLoggedIn.roleID == "F62DDFBE55448E3A3") // User Profiles 
+            if (objLoggedIn.roleID == Mugurtham.Core.Constants.RoleIDForUserProfile) // User Profiles 
             {
                 if (!string.IsNullOrWhiteSpace(objLoggedIn.BasicInfoCoreEntity.Gender))
                 {
@@ -169,7 +170,7 @@ namespace Mugurtham.Service.Areas.User.Controllers.MVC
         {
             string strGender = "admin"; // Mugurtham admin, Sangam admin, public user
             Mugurtham.Core.Login.LoggedInUser objLoggedIn = (Mugurtham.Core.Login.LoggedInUser)Session["LoggedInUser"];
-            if (objLoggedIn.roleID == "F62DDFBE55448E3A3") // User Profiles 
+            if (objLoggedIn.roleID == Mugurtham.Core.Constants.RoleIDForUserProfile) // User Profiles 
             {
                 if (!string.IsNullOrWhiteSpace(objLoggedIn.BasicInfoCoreEntity.Gender))
                 {
