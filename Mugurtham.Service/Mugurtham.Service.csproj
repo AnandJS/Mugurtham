@@ -433,7 +433,6 @@
     <Folder Include="Areas\View\Models\" />
     <Folder Include="Areas\View\Views\Shared\" />
     <Folder Include="Content\" />
-    <Folder Include="Log\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
@@ -508,6 +507,7 @@
     <Content Include="Areas\HomePage\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Areas\HomePage\fonts\glyphicons-halflings-regular.woff2" />
     <None Include="bundleconfig.json" />
+    <Content Include="Log\MugurthamLog.log" />
     <None Include="Properties\PublishProfiles\ProfileMugurtham.pubxml" />
     <Content Include="Views\Mugurtham\Home.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
