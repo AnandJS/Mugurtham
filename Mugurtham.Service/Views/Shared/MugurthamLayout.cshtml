@@ -69,7 +69,14 @@
     @Styles.Render("~/Content/Lightbox")
     @Styles.Render("~/Content/font-awesome")
 
-
+    <script>
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.7";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 </head>
 <body>
     <!-- Navigation -->
@@ -109,18 +116,20 @@
                                     Search
                                     <span class="caret"></span>
                                 </a>
+                                
+                                
                                 <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
-                                    <li><a href="/Mugurtham#/ProfileID">Search By Profile ID</a></li>
-                                    <li><a href="/Mugurtham#/GeneralSearch">General Search</a></li>
+                                    <li><a href="/Mugurtham#/ProfileID"><i class="fa fa-user" style="font-size:24px"></i> &nbsp;&nbsp;Search By Profile ID</a></li>
+                                    <li><a href="/Mugurtham#/GeneralSearch"><i class="fa fa-search" style="font-size:24px"></i> &nbsp;&nbsp;General Search</a></li>
                                     <li class="divider"></li>
-                                    <li> <a href="#InterestedProfiles">{{ 'LYTSHRTLISPROFILES' | translate }}  &nbsp;&nbsp;<i class="text-right badge" id="badgeInterestedInMeProfilesInGblNav"></i></a></li>
-                                    <li> <a href="#InterestedInMeProfiles">{{ 'LYTPROFILESLKDME' | translate }}  &nbsp;&nbsp;<i class="text-right badge" id="badgeInterestedProfilesInGblNav"></i></a></li>
-                                    <li> <a href="#ViewNotifications">{{ 'LYTPROFILESVWDME' | translate }}  &nbsp;&nbsp;<i class="text-right badge" id="badgeViewNotificationsInGblNav"></i></a></li>
-                                    <li> <a href="#RecentlyJoined">{{ 'LYTRCNTLYJNDPROFILES' | translate }}  &nbsp;&nbsp;<i class="text-right badge" id="badgeRecentlyJoinedInGblNav"></i></a></li>
-                                    <li> <a href="#ProfileUserDashboard">{{ 'LYTPROFILESHGLTD' | translate }}  &nbsp;&nbsp;<i class="text-right badge" id="badgeHighlightedProfilesInGblNav"></i></a></li>
+                                    <li> <a href="#InterestedProfiles"><i class="fa fa-hand-pointer-o" style="font-size:24px"></i> &nbsp;&nbsp;{{ 'LYTSHRTLISPROFILES' | translate }}  &nbsp;&nbsp;<i class="text-right badge" id="badgeInterestedInMeProfilesInGblNav"></i></a></li>
+                                    <li> <a href="#InterestedInMeProfiles"><i class="fa fa-users" style="font-size:24px"></i> &nbsp;&nbsp;{{ 'LYTPROFILESLKDME' | translate }}  &nbsp;&nbsp;<i class="text-right badge" id="badgeInterestedProfilesInGblNav"></i></a></li>
+                                    <li> <a href="#ViewNotifications"><i class="fa fa-users" style="font-size:24px"></i> &nbsp;&nbsp;{{ 'LYTPROFILESVWDME' | translate }}  &nbsp;&nbsp;<i class="text-right badge" id="badgeViewNotificationsInGblNav"></i></a></li>
+                                    <li> <a href="#RecentlyJoined"><i class="fa fa-users" style="font-size:24px"></i> &nbsp;&nbsp;{{ 'LYTRCNTLYJNDPROFILES' | translate }}  &nbsp;&nbsp;<i class="text-right badge" id="badgeRecentlyJoinedInGblNav"></i></a></li>
+                                    <li> <a href="#ProfileUserDashboard"><i class="fa  fa-lightbulb-o" style="font-size:24px"></i> &nbsp;&nbsp;{{ 'LYTPROFILESHGLTD' | translate }}  &nbsp;&nbsp;<i class="text-right badge" id="badgeHighlightedProfilesInGblNav"></i></a></li>
                                     <li class="divider"></li>
-                                    <li><a href="/Mugurtham#/AllProfiles">Search All Profiles </a> </li>
-                                    <li><a href="/Mugurtham#/SangamSearch">Search by Sangam  </a></li>
+                                    <li><a href="/Mugurtham#/AllProfiles"><i class="fa fa-users" style="font-size:24px"></i> &nbsp;&nbsp;Search All Profiles </a> </li>
+                                    <li><a href="/Mugurtham#/SangamSearch"><i class="fa fa-building-o" style="font-size:24px"></i> &nbsp;&nbsp;Search by Sangam  </a></li>
                                      
                                 </ul>
                             </li>
@@ -281,14 +290,17 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">x</span><span class="sr-only">Close</span></button>
-                    <h3 class="modal-title" id="lineModalLabel">Mugurtham Join Ventures with</h3>
+                    <h3 class="modal-title" id="lineModalLabel">Partnering for positive change in our community</h3>
                 </div>
                 <div class="modal-body">
+                    
                     <h4>Panjasakthi</h4><br />
                     <h4>Viswamalar</h4><br />
                     <h4>Kalpana Thirumana Thagaval Maiyam</h4><br />
 
                 </div>
+                <div id="fb-root"></div>
+                <div class="fb-like" data-href="http://www.mugurtham.com" data-width="500" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
             </div>
         </div>
     </div>

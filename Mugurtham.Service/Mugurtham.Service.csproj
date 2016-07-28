@@ -247,11 +247,13 @@
     <Content Include="Areas\HomePage\images\blog-05.jpg" />
     <Content Include="Areas\HomePage\images\catering.jpg" />
     <Content Include="Areas\HomePage\images\event.png" />
+    <Content Include="Areas\HomePage\images\kalpana.JPG" />
     <Content Include="Areas\HomePage\images\logo\logo-mugurtha - Copy.jpg" />
     <Content Include="Areas\HomePage\images\logo\logo-mugurtha.jpg" />
     <Content Include="Areas\HomePage\images\logo\logo-mugurtha.png" />
     <Content Include="Areas\HomePage\images\logo\Untitled-2.png" />
     <Content Include="Areas\HomePage\images\makeup.jpg" />
+    <Content Include="Areas\HomePage\images\panjasakthi.png" />
     <Content Include="Areas\HomePage\images\patterns\6.png" />
     <Content Include="Areas\HomePage\images\photography.jpg" />
     <Content Include="Areas\HomePage\images\slide-01-bg.jpg" />
@@ -262,6 +264,9 @@
     <Content Include="Areas\HomePage\images\test-1.jpg" />
     <Content Include="Areas\HomePage\images\test-2.jpg" />
     <Content Include="Areas\HomePage\images\testimonials-bg.jpg" />
+    <Content Include="Areas\HomePage\images\title.JPG" />
+    <Content Include="Areas\HomePage\images\viswajothi.JPG" />
+    <Content Include="Areas\HomePage\images\viswamalar.JPG" />
     <Content Include="Areas\HomePage\index.html" />
     <Content Include="Areas\HomePage\js\contact.js" />
     <Content Include="Areas\HomePage\js\count-to.js" />
