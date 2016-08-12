@@ -70,13 +70,13 @@
     @Styles.Render("~/Content/font-awesome")
 
     <script>
-(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.7";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.7";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
 </head>
 <body>
     <!-- Navigation -->
@@ -116,21 +116,21 @@
                                     Search
                                     <span class="caret"></span>
                                 </a>
-                                
-                                
+
+
                                 <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
                                     <li><a href="/Mugurtham#/ProfileID"><i class="fa fa-user" style="font-size:24px"></i> &nbsp;&nbsp;Search By Profile ID</a></li>
                                     <li><a href="/Mugurtham#/GeneralSearch"><i class="fa fa-search" style="font-size:24px"></i> &nbsp;&nbsp;General Search</a></li>
+                                    <li><a href="/Mugurtham#/AllProfiles"><i class="fa fa-users" style="font-size:24px"></i> &nbsp;&nbsp;Search All Profiles </a> </li>
+                                    <li><a href="/Mugurtham#/SangamSearch"><i class="fa fa-building-o" style="font-size:24px"></i> &nbsp;&nbsp;Search by Sangam  </a></li>
                                     <li class="divider"></li>
                                     <li> <a href="#InterestedProfiles"><i class="fa fa-hand-pointer-o" style="font-size:24px"></i> &nbsp;&nbsp;{{ 'LYTSHRTLISPROFILES' | translate }}  &nbsp;&nbsp;<i class="text-right badge" id="badgeInterestedInMeProfilesInGblNav"></i></a></li>
                                     <li> <a href="#InterestedInMeProfiles"><i class="fa fa-users" style="font-size:24px"></i> &nbsp;&nbsp;{{ 'LYTPROFILESLKDME' | translate }}  &nbsp;&nbsp;<i class="text-right badge" id="badgeInterestedProfilesInGblNav"></i></a></li>
                                     <li> <a href="#ViewNotifications"><i class="fa fa-users" style="font-size:24px"></i> &nbsp;&nbsp;{{ 'LYTPROFILESVWDME' | translate }}  &nbsp;&nbsp;<i class="text-right badge" id="badgeViewNotificationsInGblNav"></i></a></li>
                                     <li> <a href="#RecentlyJoined"><i class="fa fa-users" style="font-size:24px"></i> &nbsp;&nbsp;{{ 'LYTRCNTLYJNDPROFILES' | translate }}  &nbsp;&nbsp;<i class="text-right badge" id="badgeRecentlyJoinedInGblNav"></i></a></li>
                                     <li> <a href="#ProfileUserDashboard"><i class="fa  fa-lightbulb-o" style="font-size:24px"></i> &nbsp;&nbsp;{{ 'LYTPROFILESHGLTD' | translate }}  &nbsp;&nbsp;<i class="text-right badge" id="badgeHighlightedProfilesInGblNav"></i></a></li>
-                                    <li class="divider"></li>
-                                    <li><a href="/Mugurtham#/AllProfiles"><i class="fa fa-users" style="font-size:24px"></i> &nbsp;&nbsp;Search All Profiles </a> </li>
-                                    <li><a href="/Mugurtham#/SangamSearch"><i class="fa fa-building-o" style="font-size:24px"></i> &nbsp;&nbsp;Search by Sangam  </a></li>
-                                     
+                                   
+
                                 </ul>
                             </li>
 
@@ -230,7 +230,7 @@
                                 <!--    <img src="@objLoggedIn.SangamBannerPath" height="90px" width="100%" />
                                 </td>-->
                         </tr>
-                                  </table>
+                    </table>
                     </table>
                 </div>
                 <!--
@@ -282,7 +282,7 @@
             <img src="~/Images/Mugurtham/Flag.jpg" height="19" width="35" />
             Powered by <img src="/favicon.ico" height="25" width="40" />  Mugurtham &#174
             &nbsp; v 2.3.5
-            <br /> Reach Mugurtham at &nbsp;&nbsp;<i class="fa fa-phone-square">&nbsp;&nbsp;+91 98408 18831</i> <i class="fa fa-envelope" >&nbsp;&nbsp;info@mugurtham.com</i>
+            <br /> Reach Mugurtham at &nbsp;&nbsp;<i class="fa fa-phone-square">&nbsp;&nbsp;+91 96770 94206</i> <i class="fa fa-envelope">&nbsp;&nbsp;info@mugurtham.com</i>
         </div>
     </div>
     <div class="modal fade alert" id="squarespaceModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
@@ -293,14 +293,17 @@
                     <h3 class="modal-title" id="lineModalLabel">Partnering for positive change in our community</h3>
                 </div>
                 <div class="modal-body">
-                    
+
                     <h4>Panjasakthi</h4><br />
                     <h4>Viswamalar</h4><br />
                     <h4>Kalpana Thirumana Thagaval Maiyam</h4><br />
+                    <h4>ViswaJothi</h4><br />
 
                 </div>
+                <!--
                 <div id="fb-root"></div>
                 <div class="fb-like" data-href="http://www.mugurtham.com" data-width="500" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
+                    -->
             </div>
         </div>
     </div>

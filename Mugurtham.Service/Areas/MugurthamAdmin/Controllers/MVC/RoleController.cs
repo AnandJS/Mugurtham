@@ -4,11 +4,12 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Mugurtham.Service.Controllers;
+using Mugurtham.Common.Utilities;
 
 namespace Mugurtham.Service.Areas.MugurthamAdmin.Controllers.MVC
 {
     [MugurthamAuthorizeAttribute(Mugurtham.Core.Constants.RoleIDForMugurthamAdmin)]
-    public class RoleController : Controller
+    public class RoleController : MugurthamBaseController
     {        
         public ActionResult Index()
         {

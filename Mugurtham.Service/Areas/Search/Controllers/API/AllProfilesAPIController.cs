@@ -6,13 +6,17 @@ using System.Net.Http;
 using System.Web.Http;
 using Mugurtham.Core.BasicInfo;
 using Mugurtham.Core.Profile.API;
+using Mugurtham.Common.Utilities;
 
 namespace Mugurtham.Service.Areas.Search.Controllers.API
 {
+    [MugurthamBaseAPIController]
     public class AllProfilesAPIController : ApiController
     {
+
         public HttpResponseMessage getByProfileID(string ID)
         {
+            raiseErrorForSample();
             ProfileCore objProfCore = null;
             if (!string.IsNullOrWhiteSpace(ID))
             {
@@ -23,6 +27,19 @@ namespace Mugurtham.Service.Areas.Search.Controllers.API
             }
             return Request.CreateResponse(HttpStatusCode.OK, objProfCore,
               Configuration.Formatters.JsonFormatter);
+        }
+
+        public void raiseErrorForSample()
+        {
+            var resp = new HttpResponseMessage(HttpStatusCode.NotFound)
+            {
+                Content = new StringContent(string.Format("No product with ID = {0}", "ss")),
+                ReasonPhrase = "Product ID Not Found"
+            };
+            int aa = 0;
+            int a = (45 / aa);
+            //throw new DivideByZeroException();
+            //throw new NotImplementedException("This method is not implemented");
         }
     }
 }
