@@ -29,6 +29,16 @@ namespace Mugurtham.Service
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
 
+
+        protected void Application_Error(object sender, EventArgs e)
+        {
+            Exception exception = Server.GetLastError();
+            Mugurtham.Common.Utilities.Helpers.LogMessage(exception.StackTrace);
+            //HttpContext.Current.Response.Write(exception.StackTrace);
+            Server.ClearError();
+            //Response.Redirect("/Home/Error");
+        }
+
         /*public static void RegisterGlobalFilters(GlobalFilterCollection objFilters)
         {
             // Default Handler

@@ -1,11 +1,20 @@
-﻿
+﻿FB Like API
+============
 https://developers.facebook.com/docs/plugins/like-button
-
-
-http://www.asp.net/web-api/overview/error-handling/exception-handling
-
 
 Encrypting Password
 =======================
 https://www.junian.net/2014/07/password-encryption-using-md5-hash.html (Selected for Muugurtham Password storage)
 https://crackstation.net/hashing-security.htm#normalhashing
+
+Exception Handling
+==================
+http://www.codeproject.com/Articles/850062/Exception-handling-in-ASP-NET-MVC-methods-explaine
+http://www.asp.net/web-api/overview/error-handling/exception-handling
+
+Business Layer Exception Handling
+=================================
+http://codereview.stackexchange.com/questions/63049/returning-status-codes-from-business-layer
+
+
+

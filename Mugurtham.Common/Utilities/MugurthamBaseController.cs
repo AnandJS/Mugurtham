@@ -5,9 +5,6 @@ namespace Mugurtham.Common.Utilities
 {
     public class MugurthamBaseController : Controller, IDisposable
     {
-        private static readonly log4net.ILog objLog =
-          log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-
         protected void SetAuthInfo(Guid Id, string Email, string FullName, string Role)
         {
             //AuthUtil.SetAuthInfo(Id, Email, FullName, Role);
@@ -16,8 +13,7 @@ namespace Mugurtham.Common.Utilities
         {
             //write your custom code here            
             //objLog.Info(filterContext.Exception.Data.Values); will get the controller and action method
-            objLog.Info(filterContext.Exception.StackTrace);
-            objLog.Info("========================================================================");
+            AsyncLogger.Error(filterContext.Exception.StackTrace);
 
 
         }

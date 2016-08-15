@@ -12,15 +12,11 @@ namespace Mugurtham.Common.Utilities
 {
     public class MugurthamBaseAPIControllerAttribute : ExceptionFilterAttribute
     {
-        private static readonly log4net.ILog objLog =
-        log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-
-        public override void OnException(HttpActionExecutedContext context)
+        public override void OnException(HttpActionExecutedContext objContext)
         {
-            objLog.Info(context.Exception.StackTrace);
-            objLog.Info("========================================================================");
+            AsyncLogger.Error(objContext.Exception.StackTrace);
 
-            if (context.Exception is NotImplementedException)
+            if (objContext.Exception is NotImplementedException)
             {
                 //context.Response = new  HttpResponseMessage(HttpStatusCode.NotImplemented);
                 //write your custom code here            

@@ -4,14 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Security.Cryptography;
+using System.IO;
 
 namespace Mugurtham.Common.Utilities
 {
     [MugurthamBaseAPIController]
     public static class Helpers
     {
-        private static readonly log4net.ILog objLog =
-         log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         public static string primaryKey()
         {
@@ -28,7 +27,23 @@ namespace Mugurtham.Common.Utilities
         /// <param name="strText">Text to log</param>
         public static void LogMessage(string strText)
         {
-            objLog.Info(strText);
+            AsyncLogger.Info(strText);
+
+        }
+
+        public static void LogMessageInFlatFile(string strText)
+        {
+            string strFilePath = "D:\\Mugurtham\\GIT\\Mugurtham\\Mugurtham.Service\\Log\\" + DateTime.Today.Date.ToShortDateString().Replace(@"/", "-") + ".txt";
+            StringBuilder objSB = new StringBuilder();
+            objSB.Append("==============================================================================" + "\r\n");
+            objSB.Append(DateTime.Now.ToLongDateString() + " " + DateTime.Now.ToShortTimeString() + "\r\n");
+            objSB.Append(strText + "\r\n");
+            objSB.Append("==============================================================================" + "\r\n");
+            // flush every 20 seconds as you do it
+            File.AppendAllText(strFilePath, objSB.ToString());
+            objSB.Remove(0, objSB.Length);
+            objSB.Clear();
+            objSB = null;
         }
 
         /// <summary>
