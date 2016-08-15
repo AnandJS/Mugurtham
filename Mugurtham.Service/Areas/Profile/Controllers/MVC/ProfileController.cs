@@ -11,8 +11,10 @@ using Mugurtham.Core.Profile.Photo;
 
 namespace Mugurtham.Service.Areas.Profile.Controllers.MVC
 {
-    [MugurthamAuthorizeAttribute(Mugurtham.Core.Constants.RoleIDForSangamAdmin, Mugurtham.Core.Constants.RoleIDForUserProfile, Mugurtham.Core.Constants.RoleIDForMugurthamAdmin)]
-    public class ProfileController : Controller
+    [MugurthamAuthorizeAttribute(Mugurtham.Core.Constants.RoleIDForSangamAdmin, 
+                                 Mugurtham.Core.Constants.RoleIDForUserProfile, 
+                                 Mugurtham.Core.Constants.RoleIDForMugurthamAdmin)]
+    public class ProfileController : MugurthamBaseController
     {
         public ActionResult Index()
         {

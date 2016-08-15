@@ -91,7 +91,7 @@ namespace Mugurtham.Core.Profile.API
                     objUserCoreEntity.ID = Helpers.primaryKey();
                     objUserCoreEntity.Name = objBasicInfoCoreEntity.Name;
                     objUserCoreEntity.LoginID = strProfileID;
-                    objUserCoreEntity.Password = Helpers.passwordGenerator();
+                    objUserCoreEntity.Password = strProfileID; // Helpers.passwordGenerator();
                     objUserCoreEntity.SangamID = objLoggedIn.sangamID;
                     objUserCoreEntity.RoleID = Constants.RoleIDForUserProfile;
                     objUserCoreEntity.ThemeID = Constants.ThemeBootstrap;
@@ -305,7 +305,7 @@ namespace Mugurtham.Core.Profile.API
                     using (objAmsamCore as IDisposable)
                         objProfileCore.AmsamCoreEntity = objAmsamCore.GetByProfileID(strProfileID);
                     objRaasiCore = null;
-                                        
+
                     validateUserAccessToThisProfile(objProfileCore.BasicInfoCoreEntity.ProfileID, ref objProfileCore, objLoggedIn);
                 }
             }

@@ -429,6 +429,7 @@
     <Content Include="Views\Shared\MugurthamLayout.cshtml" />
     <Content Include="Views\Mugurtham\Index.cshtml" />
     <Content Include="Views\Mugurtham\Info.cshtml" />
+    <Content Include="WebReference.txt" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\MugurthamAdmin\Models\" />

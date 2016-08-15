@@ -3,10 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Mugurtham.Service.Controllers;
+using Mugurtham.Common.Utilities;
 
 namespace Mugurtham.Service.Areas.View.Controllers
 {
-    public class FullViewController : Controller
+    [MugurthamAuthorizeAttribute(Mugurtham.Core.Constants.RoleIDForSangamAdmin,
+                                Mugurtham.Core.Constants.RoleIDForUserProfile,
+                                Mugurtham.Core.Constants.RoleIDForMugurthamAdmin)]
+    public class FullViewController : MugurthamBaseController
     {
         public ActionResult FullView(string ID)
         {

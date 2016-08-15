@@ -7,10 +7,14 @@ using System.Web.Http;
 using Mugurtham.Core.BasicInfo;
 using Mugurtham.Core.Profile.API;
 using Mugurtham.Common.Utilities;
+using Mugurtham.Service.Controllers;
 
 namespace Mugurtham.Service.Areas.Search.Controllers.API
 {
     [MugurthamBaseAPIController]
+    [MugurthamAuthorizeAttribute(Mugurtham.Core.Constants.RoleIDForSangamAdmin,
+                                 Mugurtham.Core.Constants.RoleIDForUserProfile,
+                                 Mugurtham.Core.Constants.RoleIDForMugurthamAdmin)]
     public class AllProfilesAPIController : ApiController
     {
 

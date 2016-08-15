@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Mugurtham.Common.Utilities;
 
 namespace Mugurtham.Service.Controllers
 {
-    public class MugurthamController : Controller
+    [MugurthamAuthorizeAttribute(Mugurtham.Core.Constants.RoleIDForSangamAdmin, Mugurtham.Core.Constants.RoleIDForUserProfile, Mugurtham.Core.Constants.RoleIDForMugurthamAdmin)]
+    public class MugurthamController : MugurthamBaseController
     {
         //
         // GET: /Mugurtham/

@@ -5,9 +5,15 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Mugurtham.Common.Utilities;
+using Mugurtham.Service.Controllers;
 
 namespace Mugurtham.Service.Areas.View.Controllers.API
 {
+    [MugurthamBaseAPIController]
+    [MugurthamAuthorizeAttribute(Mugurtham.Core.Constants.RoleIDForSangamAdmin,
+                                   Mugurtham.Core.Constants.RoleIDForUserProfile,
+                                   Mugurtham.Core.Constants.RoleIDForMugurthamAdmin)]
     public class ProfileViewAPIController : ApiController
     {
         [HttpGet]

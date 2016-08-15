@@ -11,9 +11,13 @@ using System.Data;
 using Mugurtham.Core.Profile.View;
 using Mugurtham.Common.Utilities;
 using Mugurtham.Service.App_Code.Utility;
+using Mugurtham.Service.Controllers;
 
 namespace Mugurtham.Service.Areas.User.Controllers.MVC
 {
+    [MugurthamAuthorizeAttribute(Mugurtham.Core.Constants.RoleIDForSangamAdmin,
+                             Mugurtham.Core.Constants.RoleIDForUserProfile,
+                             Mugurtham.Core.Constants.RoleIDForMugurthamAdmin)]
     public class UserController : MugurthamBaseController
     {
         //

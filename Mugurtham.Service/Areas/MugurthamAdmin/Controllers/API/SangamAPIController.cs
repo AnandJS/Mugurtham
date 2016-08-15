@@ -5,9 +5,13 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using Mugurtham.Core.Sangam;
+using Mugurtham.Common.Utilities;
+using Mugurtham.Service.Controllers;
 
 namespace Mugurtham.Service.Areas.MugurthamAdmin.Controllers.API
 {
+    [MugurthamBaseAPIController]
+    [MugurthamAuthorizeAttribute(Mugurtham.Core.Constants.RoleIDForMugurthamAdmin)]
     public class SangamAPIController : ApiController
     {
         [HttpPost]

@@ -169,7 +169,7 @@ namespace Mugurtham.Core.User
             objDTOUser.CreatedDate = DateTime.Now;
             objDTOUser.ID = objUserCoreEntity.ID;
             objDTOUser.LoginID = objUserCoreEntity.LoginID;
-            objDTOUser.Password = objUserCoreEntity.Password;
+            objDTOUser.Password = Helpers.EncodePasswordToBase64(objUserCoreEntity.Password);
             objDTOUser.IsActivated = objUserCoreEntity.IsActivated;
             objDTOUser.LocaleID = objUserCoreEntity.LocaleID;
             objDTOUser.ModifiedBy = objUserCoreEntity.ModifiedBy;
@@ -252,7 +252,7 @@ namespace Mugurtham.Core.User
                 return intLoginStatus;
             }
             //Validate if loginid and password matches
-            if ((_objUserCoreEntity.Password.Trim() == objUserCoreEntity.Password.Trim()))
+            if (_objUserCoreEntity.Password.Trim() == Helpers.EncodePasswordToBase64(objUserCoreEntity.Password.Trim()))
             {
                 intLoginStatus = 1;
                 _objUserCoreEntity.LoginStatus = "1";

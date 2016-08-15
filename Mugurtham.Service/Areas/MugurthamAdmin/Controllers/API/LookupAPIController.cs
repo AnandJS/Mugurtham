@@ -4,9 +4,13 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Mugurtham.Common.Utilities;
+using Mugurtham.Service.Controllers;
 
 namespace Mugurtham.Service.Controllers
 {
+    [MugurthamBaseAPIController]
+    [MugurthamAuthorizeAttribute(Mugurtham.Core.Constants.RoleIDForMugurthamAdmin)]
     public class LookupAPIController : ApiController
     {
         [HttpGet]

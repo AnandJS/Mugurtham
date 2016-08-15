@@ -1,0 +1,11 @@
+﻿
+https://developers.facebook.com/docs/plugins/like-button
+
+
+http://www.asp.net/web-api/overview/error-handling/exception-handling
+
+
+Encrypting Password
+=======================
+https://www.junian.net/2014/07/password-encryption-using-md5-hash.html (Selected for Muugurtham Password storage)
+https://crackstation.net/hashing-security.htm#normalhashing

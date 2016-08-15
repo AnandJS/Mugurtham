@@ -5,11 +5,12 @@ using System.Web;
 using System.Web.Mvc;
 using Mugurtham.Service.Controllers;
 using System.IO;
+using Mugurtham.Common.Utilities;
 
 namespace Mugurtham.Service.Areas.SangamAdmin.Controllers.MVC
 {
     [MugurthamAuthorizeAttribute(Mugurtham.Core.Constants.RoleIDForSangamAdmin)]
-    public class SangamAdminController : Controller
+    public class SangamAdminController :  MugurthamBaseController
     {
         public ActionResult Index()
         {

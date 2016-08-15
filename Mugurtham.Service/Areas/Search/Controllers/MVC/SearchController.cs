@@ -7,10 +7,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Mugurtham.Common.Utilities;
+using Mugurtham.Service.Controllers;
 
 namespace Mugurtham.Service.Areas.Search.Controllers
 {
-    public class SearchController : Controller
+    [MugurthamAuthorizeAttribute(Mugurtham.Core.Constants.RoleIDForSangamAdmin,
+                              Mugurtham.Core.Constants.RoleIDForUserProfile,
+                              Mugurtham.Core.Constants.RoleIDForMugurthamAdmin)]
+    public class SearchController : MugurthamBaseController
     {
         public ActionResult Index()
         {
