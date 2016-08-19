@@ -23,28 +23,35 @@ namespace Mugurtham.Core.Login
 
         private int initializeUser()
         {
-            Core.User.UserCore objUserCore = new Core.User.UserCore();
-            using (objUserCore as IDisposable)
+            try
             {
-                objUserCoreEntity = objUserCore.GetByLoginID(_strLoggedInID);
-            }
-            objUserCore = null;
-            Core.BasicInfo.BasicInfoCore objBasicInfoCore = new BasicInfo.BasicInfoCore();
-            using (objBasicInfoCore as IDisposable)
-                objBasicInfoCoreEntity = objBasicInfoCore.GetByProfileID(_strLoggedInID);
-            objBasicInfoCore = null;
-            if (objUserCoreEntity.SangamID != null)
-            {
-                Core.Sangam.SangamCore objSangamCore = new Sangam.SangamCore();
-                using (objSangamCore as IDisposable)
+                Core.User.UserCore objUserCore = new Core.User.UserCore();
+                using (objUserCore as IDisposable)
                 {
-                    objSangamCoreEntity = objSangamCore.GetByID(objUserCoreEntity.SangamID);
+                    objUserCoreEntity = objUserCore.GetByLoginID(_strLoggedInID);
                 }
-                objSangamCore = null;
+                objUserCore = null;
+                Core.BasicInfo.BasicInfoCore objBasicInfoCore = new BasicInfo.BasicInfoCore();
+                using (objBasicInfoCore as IDisposable)
+                    objBasicInfoCoreEntity = objBasicInfoCore.GetByProfileID(_strLoggedInID);
+                objBasicInfoCore = null;
+                if (objUserCoreEntity.SangamID != null)
+                {
+                    Core.Sangam.SangamCore objSangamCore = new Sangam.SangamCore();
+                    using (objSangamCore as IDisposable)
+                    {
+                        objSangamCoreEntity = objSangamCore.GetByID(objUserCoreEntity.SangamID);
+                    }
+                    objSangamCore = null;
+                }
+                else
+                {
+                    return -1;
+                }
             }
-            else
+            catch (Exception objEx)
             {
-                return -1;
+                Helpers.LogExceptionInFlatFile(objEx);
             }
             return 0;
         }

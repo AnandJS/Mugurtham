@@ -246,7 +246,7 @@ var ControllerUser = angular.module('MugurthamApp').controller('ControllerUser',
             success(function (data, status, headers, config) {
                 NotifySuccessStatus('10');
             }).
-            error(function (data, status, headers, config) {
+            error(function (data, status, headers, config, statusText) {
                 NotifyErrorStatus(data, status);
             });
             }

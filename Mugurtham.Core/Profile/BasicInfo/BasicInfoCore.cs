@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Mugurtham.UOW;
+using Mugurtham.Common.Utilities;
 
 namespace Mugurtham.Core.BasicInfo
 {
@@ -11,80 +12,108 @@ namespace Mugurtham.Core.BasicInfo
     {
         public int Add(ref Mugurtham.Core.BasicInfo.BasicInfoCoreEntity objBasicInfoCoreEntity)
         {
-            IUnitOfWork objIUnitOfWork = new UnitOfWork();
-            using (objIUnitOfWork as IDisposable)
+            try
             {
-                Mugurtham.DTO.Profile.BasicInfo objDTOBasicInfo = new DTO.Profile.BasicInfo();
-                using (objDTOBasicInfo as IDisposable)
+                IUnitOfWork objIUnitOfWork = new UnitOfWork();
+                using (objIUnitOfWork as IDisposable)
                 {
-                    AssignDTOFromEntity(ref objDTOBasicInfo, ref objBasicInfoCoreEntity);
-                    objDTOBasicInfo.CreatedDate = DateTime.Now;
+                    Mugurtham.DTO.Profile.BasicInfo objDTOBasicInfo = new DTO.Profile.BasicInfo();
+                    using (objDTOBasicInfo as IDisposable)
+                    {
+                        AssignDTOFromEntity(ref objDTOBasicInfo, ref objBasicInfoCoreEntity);
+                        objDTOBasicInfo.CreatedDate = DateTime.Now;
+                    }
+                    objIUnitOfWork.RepositoryBasicInfo.Add(objDTOBasicInfo);
+                    objDTOBasicInfo = null;
                 }
-                objIUnitOfWork.RepositoryBasicInfo.Add(objDTOBasicInfo);
-                objDTOBasicInfo = null;
+                objIUnitOfWork.commit();
+                objIUnitOfWork = null;
             }
-            objIUnitOfWork.commit();
-            objIUnitOfWork = null;
+            catch (Exception objEx)
+            {
+                Helpers.LogExceptionInFlatFile(objEx);
+            }
             return 0;
         }
 
         public int Edit(ref Mugurtham.Core.BasicInfo.BasicInfoCoreEntity objBasicInfoCoreEntity)
         {
-            IUnitOfWork objIUnitOfWork = new UnitOfWork();
-            using (objIUnitOfWork as IDisposable)
+            try
             {
-                Mugurtham.DTO.Profile.BasicInfo objDTOBasicInfo = new DTO.Profile.BasicInfo();
-                using (objDTOBasicInfo as IDisposable)
+                IUnitOfWork objIUnitOfWork = new UnitOfWork();
+                using (objIUnitOfWork as IDisposable)
                 {
-                    AssignDTOFromEntity(ref objDTOBasicInfo, ref objBasicInfoCoreEntity);
+                    Mugurtham.DTO.Profile.BasicInfo objDTOBasicInfo = new DTO.Profile.BasicInfo();
+                    using (objDTOBasicInfo as IDisposable)
+                    {
+                        AssignDTOFromEntity(ref objDTOBasicInfo, ref objBasicInfoCoreEntity);
+                    }
+                    objIUnitOfWork.RepositoryBasicInfo.Edit(objDTOBasicInfo);
+                    objDTOBasicInfo = null;
                 }
-                objIUnitOfWork.RepositoryBasicInfo.Edit(objDTOBasicInfo);
-                objDTOBasicInfo = null;
+                objIUnitOfWork.commit();
+                objIUnitOfWork = null;
             }
-            objIUnitOfWork.commit();
-            objIUnitOfWork = null;
+            catch (Exception objEx)
+            {
+                Helpers.LogExceptionInFlatFile(objEx);
+            }
             return 0;
         }
 
         public BasicInfoCoreEntity GetByProfileID(string strProfileID)
         {
             BasicInfoCoreEntity objBasicInfoCoreEntity = new BasicInfoCoreEntity();
-            Mugurtham.DTO.Profile.BasicInfo objBasicInfo = new Mugurtham.DTO.Profile.BasicInfo();
-            IUnitOfWork objUOW = new UnitOfWork();
-            using (objUOW as IDisposable)
-                objBasicInfo = objUOW.RepositoryBasicInfo.GetAll().ToList().Where(p => p.ProfileID.Trim().ToLower() == strProfileID.Trim().ToLower()).FirstOrDefault();
-            objUOW = null;
-            if (objBasicInfo != null)
+            try
             {
-                using (objBasicInfo as IDisposable)
+                Mugurtham.DTO.Profile.BasicInfo objBasicInfo = new Mugurtham.DTO.Profile.BasicInfo();
+                IUnitOfWork objUOW = new UnitOfWork();
+                using (objUOW as IDisposable)
+                    objBasicInfo = objUOW.RepositoryBasicInfo.GetAll().ToList().Where(p => p.ProfileID.Trim().ToLower() == strProfileID.Trim().ToLower()).FirstOrDefault();
+                objUOW = null;
+                if (objBasicInfo != null)
                 {
-                    AssignEntityFromDTO(objBasicInfoCoreEntity, objBasicInfo);
+                    using (objBasicInfo as IDisposable)
+                    {
+                        AssignEntityFromDTO(objBasicInfoCoreEntity, objBasicInfo);
+                    }
                 }
+                objBasicInfo = null;
             }
-            objBasicInfo = null;
+            catch (Exception objEx)
+            {
+                Helpers.LogExceptionInFlatFile(objEx);
+            }
             return objBasicInfoCoreEntity;
         }
 
         public List<BasicInfoCoreEntity> GetAll()
         {
             List<BasicInfoCoreEntity> objListBasicInfoCoreEntity = new List<BasicInfoCoreEntity>();
-            List<Mugurtham.DTO.Profile.BasicInfo> objListBasicInfo = new List<Mugurtham.DTO.Profile.BasicInfo>();
-            IUnitOfWork objUOW = new UnitOfWork();
-            using (objUOW as IDisposable)
-                objListBasicInfo = objUOW.RepositoryBasicInfo.GetAll().ToList();
-            objUOW = null;
-            if (objListBasicInfo != null && objListBasicInfo.Count > 0)
+            try
             {
-                foreach (Mugurtham.DTO.Profile.BasicInfo objBasicInfo in objListBasicInfo)
+                List<Mugurtham.DTO.Profile.BasicInfo> objListBasicInfo = new List<Mugurtham.DTO.Profile.BasicInfo>();
+                IUnitOfWork objUOW = new UnitOfWork();
+                using (objUOW as IDisposable)
+                    objListBasicInfo = objUOW.RepositoryBasicInfo.GetAll().ToList();
+                objUOW = null;
+                if (objListBasicInfo != null && objListBasicInfo.Count > 0)
                 {
-                    using (objBasicInfo as IDisposable)
+                    foreach (Mugurtham.DTO.Profile.BasicInfo objBasicInfo in objListBasicInfo)
                     {
-                        BasicInfoCoreEntity objBasicInfoCoreEntity = new BasicInfoCoreEntity();
-                        AssignEntityFromDTO(objBasicInfoCoreEntity, objBasicInfo);
-                        objListBasicInfoCoreEntity.Add(objBasicInfoCoreEntity);
-                        objBasicInfoCoreEntity = null;
+                        using (objBasicInfo as IDisposable)
+                        {
+                            BasicInfoCoreEntity objBasicInfoCoreEntity = new BasicInfoCoreEntity();
+                            AssignEntityFromDTO(objBasicInfoCoreEntity, objBasicInfo);
+                            objListBasicInfoCoreEntity.Add(objBasicInfoCoreEntity);
+                            objBasicInfoCoreEntity = null;
+                        }
                     }
                 }
+            }
+            catch (Exception objEx)
+            {
+                Helpers.LogExceptionInFlatFile(objEx);
             }
             return objListBasicInfoCoreEntity;
         }
@@ -92,23 +121,30 @@ namespace Mugurtham.Core.BasicInfo
         public List<BasicInfoCoreEntity> GetAllBySangam()
         {
             List<BasicInfoCoreEntity> objListBasicInfoCoreEntity = new List<BasicInfoCoreEntity>();
-            List<Mugurtham.DTO.Profile.BasicInfo> objListBasicInfo = new List<Mugurtham.DTO.Profile.BasicInfo>();
-            IUnitOfWork objUOW = new UnitOfWork();
-            using (objUOW as IDisposable)
-                objListBasicInfo = objUOW.RepositoryBasicInfo.GetAll().ToList();
-            objUOW = null;
-            if (objListBasicInfo != null && objListBasicInfo.Count > 0)
+            try
             {
-                foreach (Mugurtham.DTO.Profile.BasicInfo objBasicInfo in objListBasicInfo)
+                List<Mugurtham.DTO.Profile.BasicInfo> objListBasicInfo = new List<Mugurtham.DTO.Profile.BasicInfo>();
+                IUnitOfWork objUOW = new UnitOfWork();
+                using (objUOW as IDisposable)
+                    objListBasicInfo = objUOW.RepositoryBasicInfo.GetAll().ToList();
+                objUOW = null;
+                if (objListBasicInfo != null && objListBasicInfo.Count > 0)
                 {
-                    using (objBasicInfo as IDisposable)
+                    foreach (Mugurtham.DTO.Profile.BasicInfo objBasicInfo in objListBasicInfo)
                     {
-                        BasicInfoCoreEntity objBasicInfoCoreEntity = new BasicInfoCoreEntity();
-                        AssignEntityFromDTO(objBasicInfoCoreEntity, objBasicInfo);
-                        objListBasicInfoCoreEntity.Add(objBasicInfoCoreEntity);
-                        objBasicInfoCoreEntity = null;
+                        using (objBasicInfo as IDisposable)
+                        {
+                            BasicInfoCoreEntity objBasicInfoCoreEntity = new BasicInfoCoreEntity();
+                            AssignEntityFromDTO(objBasicInfoCoreEntity, objBasicInfo);
+                            objListBasicInfoCoreEntity.Add(objBasicInfoCoreEntity);
+                            objBasicInfoCoreEntity = null;
+                        }
                     }
                 }
+            }
+            catch (Exception objEx)
+            {
+                Helpers.LogExceptionInFlatFile(objEx);
             }
             return objListBasicInfoCoreEntity;
         }
@@ -116,73 +152,87 @@ namespace Mugurtham.Core.BasicInfo
         public List<BasicInfoCoreEntity> GetAllBySangam(string strSangamID)
         {
             List<BasicInfoCoreEntity> objListBasicInfoCoreEntity = new List<BasicInfoCoreEntity>();
-            List<Mugurtham.DTO.Profile.BasicInfo> objListBasicInfo = new List<Mugurtham.DTO.Profile.BasicInfo>();
-            IUnitOfWork objUOW = new UnitOfWork();
-            using (objUOW as IDisposable)
-                objListBasicInfo = objUOW.RepositoryBasicInfo.GetAll().ToList().Where(p => p.SangamID == strSangamID).ToList();
-            objUOW = null;
-            if (objListBasicInfo != null && objListBasicInfo.Count > 0)
+            try
             {
-                foreach (Mugurtham.DTO.Profile.BasicInfo objBasicInfo in objListBasicInfo)
+                List<Mugurtham.DTO.Profile.BasicInfo> objListBasicInfo = new List<Mugurtham.DTO.Profile.BasicInfo>();
+                IUnitOfWork objUOW = new UnitOfWork();
+                using (objUOW as IDisposable)
+                    objListBasicInfo = objUOW.RepositoryBasicInfo.GetAll().ToList().Where(p => p.SangamID == strSangamID).ToList();
+                objUOW = null;
+                if (objListBasicInfo != null && objListBasicInfo.Count > 0)
                 {
-                    using (objBasicInfo as IDisposable)
+                    foreach (Mugurtham.DTO.Profile.BasicInfo objBasicInfo in objListBasicInfo)
                     {
-                        BasicInfoCoreEntity objBasicInfoCoreEntity = new BasicInfoCoreEntity();
-                        AssignEntityFromDTO(objBasicInfoCoreEntity, objBasicInfo);
-                        objListBasicInfoCoreEntity.Add(objBasicInfoCoreEntity);
-                        objBasicInfoCoreEntity = null;
+                        using (objBasicInfo as IDisposable)
+                        {
+                            BasicInfoCoreEntity objBasicInfoCoreEntity = new BasicInfoCoreEntity();
+                            AssignEntityFromDTO(objBasicInfoCoreEntity, objBasicInfo);
+                            objListBasicInfoCoreEntity.Add(objBasicInfoCoreEntity);
+                            objBasicInfoCoreEntity = null;
+                        }
                     }
                 }
+            }
+            catch (Exception objEx)
+            {
+                Helpers.LogExceptionInFlatFile(objEx);
             }
             return objListBasicInfoCoreEntity;
         }
 
         private int AssignDTOFromEntity(ref Mugurtham.DTO.Profile.BasicInfo objBasicInfo, ref Mugurtham.Core.BasicInfo.BasicInfoCoreEntity objBasicInfoCoreEntity)
         {
-            objBasicInfo.ProfileID = objBasicInfoCoreEntity.ProfileID;
-            objBasicInfo.SangamProfileID = objBasicInfoCoreEntity.SangamProfileID;
-            objBasicInfo.AboutMe = objBasicInfoCoreEntity.AboutMe;
-            objBasicInfo.Age = objBasicInfoCoreEntity.Age;
-            objBasicInfo.AnyDosham = objBasicInfoCoreEntity.AnyDhosham;
-            objBasicInfo.BloodGroup = objBasicInfoCoreEntity.BloodGroup;
-            objBasicInfo.BodyType = objBasicInfoCoreEntity.BodyType;
-            objBasicInfo.Caste = objBasicInfoCoreEntity.Caste;
-            objBasicInfo.ChildrenLivingStatus = objBasicInfoCoreEntity.ChildrenLivingStatus;
-            objBasicInfo.Complexion = objBasicInfoCoreEntity.Complexion;
-            objBasicInfo.CreatedBy = objBasicInfoCoreEntity.ProfileCreatedBy;
-            objBasicInfo.CreatedDate = objBasicInfoCoreEntity.CreatedDate;
-            objBasicInfo.DateOfBirth = objBasicInfoCoreEntity.DOB;
-            objBasicInfo.Drinking = objBasicInfoCoreEntity.Drinking;
-            objBasicInfo.Eating = objBasicInfoCoreEntity.Eating;
-            objBasicInfo.ElanUserID = objBasicInfoCoreEntity.ElanUserID; //ElanProfileID
-            objBasicInfo.Gender = objBasicInfoCoreEntity.Gender;
-            objBasicInfo.Gothram = objBasicInfoCoreEntity.Gothram;
-            objBasicInfo.Height = objBasicInfoCoreEntity.Height;
-            objBasicInfo.HoroscopeMatch = objBasicInfoCoreEntity.HoroscopeMatch;
-            objBasicInfo.MaritalStatus = objBasicInfoCoreEntity.MaritalStatus;
-            objBasicInfo.ModifiedBy = objBasicInfoCoreEntity.ModifiedBy;
-            objBasicInfo.ModifiedDate = DateTime.Now;
-            objBasicInfo.MotherTongue = objBasicInfoCoreEntity.MotherTongue;
-            objBasicInfo.Name = objBasicInfoCoreEntity.Name;
-            objBasicInfo.NoOfChildren = objBasicInfoCoreEntity.NoOfChildren;
-            objBasicInfo.PartnerExpectations = objBasicInfoCoreEntity.PartnerExpectation;
-            objBasicInfo.PhysicalStatus = objBasicInfoCoreEntity.PhysicalStatus;
-            objBasicInfo.PlaceOfBirth = objBasicInfoCoreEntity.PlaceOfBirth;
-            objBasicInfo.ProfileCreatedBy = objBasicInfoCoreEntity.ProfileCreatedBy;
-            objBasicInfo.Raasi = objBasicInfoCoreEntity.Raasi;
-            objBasicInfo.Religion = objBasicInfoCoreEntity.Religion;
-            objBasicInfo.SangamID = objBasicInfoCoreEntity.SangamID;
-            objBasicInfo.Smoking = objBasicInfoCoreEntity.Smoking;
-            objBasicInfo.Star = objBasicInfoCoreEntity.Star;
-            objBasicInfo.SubCaste = objBasicInfoCoreEntity.SubCaste;
-            objBasicInfo.TamilDOB = objBasicInfoCoreEntity.TamilDOB;
-            objBasicInfo.TimeOfBirth = objBasicInfoCoreEntity.TOB;
-            objBasicInfo.Weight = objBasicInfoCoreEntity.Weight;
-            objBasicInfo.Zodiac = objBasicInfoCoreEntity.Zodiac;
-            objBasicInfo.ZodiacDay = objBasicInfoCoreEntity.ZodiacDay;
-            objBasicInfo.ZodiacMonth = objBasicInfoCoreEntity.ZodiacMonth;
-            objBasicInfo.ZodiacDay = objBasicInfoCoreEntity.ZodiacYear;
-            objBasicInfo.PhotoPath = objBasicInfoCoreEntity.PhotoPath;
+            try
+            {
+                objBasicInfo.ProfileID = objBasicInfoCoreEntity.ProfileID;
+                objBasicInfo.SangamProfileID = objBasicInfoCoreEntity.SangamProfileID;
+                objBasicInfo.AboutMe = objBasicInfoCoreEntity.AboutMe;
+                objBasicInfo.Age = objBasicInfoCoreEntity.Age;
+                objBasicInfo.AnyDosham = objBasicInfoCoreEntity.AnyDhosham;
+                objBasicInfo.BloodGroup = objBasicInfoCoreEntity.BloodGroup;
+                objBasicInfo.BodyType = objBasicInfoCoreEntity.BodyType;
+                objBasicInfo.Caste = objBasicInfoCoreEntity.Caste;
+                objBasicInfo.ChildrenLivingStatus = objBasicInfoCoreEntity.ChildrenLivingStatus;
+                objBasicInfo.Complexion = objBasicInfoCoreEntity.Complexion;
+                objBasicInfo.CreatedBy = objBasicInfoCoreEntity.ProfileCreatedBy;
+                objBasicInfo.CreatedDate = objBasicInfoCoreEntity.CreatedDate;
+                objBasicInfo.DateOfBirth = objBasicInfoCoreEntity.DOB;
+                objBasicInfo.Drinking = objBasicInfoCoreEntity.Drinking;
+                objBasicInfo.Eating = objBasicInfoCoreEntity.Eating;
+                objBasicInfo.ElanUserID = objBasicInfoCoreEntity.ElanUserID; //ElanProfileID
+                objBasicInfo.Gender = objBasicInfoCoreEntity.Gender;
+                objBasicInfo.Gothram = objBasicInfoCoreEntity.Gothram;
+                objBasicInfo.Height = objBasicInfoCoreEntity.Height;
+                objBasicInfo.HoroscopeMatch = objBasicInfoCoreEntity.HoroscopeMatch;
+                objBasicInfo.MaritalStatus = objBasicInfoCoreEntity.MaritalStatus;
+                objBasicInfo.ModifiedBy = objBasicInfoCoreEntity.ModifiedBy;
+                objBasicInfo.ModifiedDate = DateTime.Now;
+                objBasicInfo.MotherTongue = objBasicInfoCoreEntity.MotherTongue;
+                objBasicInfo.Name = objBasicInfoCoreEntity.Name;
+                objBasicInfo.NoOfChildren = objBasicInfoCoreEntity.NoOfChildren;
+                objBasicInfo.PartnerExpectations = objBasicInfoCoreEntity.PartnerExpectation;
+                objBasicInfo.PhysicalStatus = objBasicInfoCoreEntity.PhysicalStatus;
+                objBasicInfo.PlaceOfBirth = objBasicInfoCoreEntity.PlaceOfBirth;
+                objBasicInfo.ProfileCreatedBy = objBasicInfoCoreEntity.ProfileCreatedBy;
+                objBasicInfo.Raasi = objBasicInfoCoreEntity.Raasi;
+                objBasicInfo.Religion = objBasicInfoCoreEntity.Religion;
+                objBasicInfo.SangamID = objBasicInfoCoreEntity.SangamID;
+                objBasicInfo.Smoking = objBasicInfoCoreEntity.Smoking;
+                objBasicInfo.Star = objBasicInfoCoreEntity.Star;
+                objBasicInfo.SubCaste = objBasicInfoCoreEntity.SubCaste;
+                objBasicInfo.TamilDOB = objBasicInfoCoreEntity.TamilDOB;
+                objBasicInfo.TimeOfBirth = objBasicInfoCoreEntity.TOB;
+                objBasicInfo.Weight = objBasicInfoCoreEntity.Weight;
+                objBasicInfo.Zodiac = objBasicInfoCoreEntity.Zodiac;
+                objBasicInfo.ZodiacDay = objBasicInfoCoreEntity.ZodiacDay;
+                objBasicInfo.ZodiacMonth = objBasicInfoCoreEntity.ZodiacMonth;
+                objBasicInfo.ZodiacDay = objBasicInfoCoreEntity.ZodiacYear;
+                objBasicInfo.PhotoPath = objBasicInfoCoreEntity.PhotoPath;
+            }
+            catch (Exception objEx)
+            {
+                Helpers.LogExceptionInFlatFile(objEx);
+            }
             return 0;
         }
 
@@ -235,7 +285,7 @@ namespace Mugurtham.Core.BasicInfo
             }
             catch (Exception objEx)
             {
-
+                Helpers.LogExceptionInFlatFile(objEx);
             }
             return 0;
         }

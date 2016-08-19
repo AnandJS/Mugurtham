@@ -12,66 +12,102 @@ namespace Mugurtham.Core.Profile.Photo
     {
         public int Add(ref Mugurtham.Core.Profile.Photo.PhotoCoreEntity objPhotoCoreEntity)
         {
-            IUnitOfWork objIUnitOfWork = new UnitOfWork();
-            using (objIUnitOfWork as IDisposable)
+            try
             {
-                Mugurtham.DTO.Profile.Photo objDTOPhoto = new DTO.Profile.Photo();
-                using (objDTOPhoto as IDisposable)
+                IUnitOfWork objIUnitOfWork = new UnitOfWork();
+                using (objIUnitOfWork as IDisposable)
                 {
-                    objDTOPhoto.ID = Helpers.primaryKey();
-                    AssignDTOFromEntity(ref objDTOPhoto, ref objPhotoCoreEntity);
+                    Mugurtham.DTO.Profile.Photo objDTOPhoto = new DTO.Profile.Photo();
+                    using (objDTOPhoto as IDisposable)
+                    {
+                        objDTOPhoto.ID = Helpers.primaryKey();
+                        AssignDTOFromEntity(ref objDTOPhoto, ref objPhotoCoreEntity);
+                    }
+                    objIUnitOfWork.RepositoryPhoto.Add(objDTOPhoto);
+                    objDTOPhoto = null;
                 }
-                objIUnitOfWork.RepositoryPhoto.Add(objDTOPhoto);
-                objDTOPhoto = null;
+                objIUnitOfWork.commit();
+                objIUnitOfWork = null;
             }
-            objIUnitOfWork.commit();
-            objIUnitOfWork = null;
+            catch (Exception objEx)
+            {
+                Helpers.LogExceptionInFlatFile(objEx);
+            }
             return 0;
         }
         public int getProfilePhotos(string strProfileID, out IQueryable<DTO.Profile.Photo> objDTOPhotoList)
         {
-            IUnitOfWork objIUnitOfWork = new UnitOfWork();
-            using (objIUnitOfWork as IDisposable)
-                objDTOPhotoList = objIUnitOfWork.RepositoryPhoto.getProfilePhotos(strProfileID);
-            objIUnitOfWork.commit();
-            objIUnitOfWork = null;
+            objDTOPhotoList = null;
+            try
+            {
+                IUnitOfWork objIUnitOfWork = new UnitOfWork();
+                using (objIUnitOfWork as IDisposable)
+                    objDTOPhotoList = objIUnitOfWork.RepositoryPhoto.getProfilePhotos(strProfileID);
+                objIUnitOfWork.commit();
+                objIUnitOfWork = null;
+            }
+            catch (Exception objEx)
+            {
+                Helpers.LogExceptionInFlatFile(objEx);
+            }
             return 0;
         }
         private int AssignDTOFromEntity(ref Mugurtham.DTO.Profile.Photo objPhoto, ref Mugurtham.Core.Profile.Photo.PhotoCoreEntity objPhotoCoreEntity)
         {
-            objPhoto.ProfileID = objPhotoCoreEntity.ProfileID;
-            objPhoto.PhotoPath = objPhotoCoreEntity.PhotoPath;
-            objPhoto.IsProfilePic = objPhotoCoreEntity.IsProfilePic;
+            try
+            {
+                objPhoto.ProfileID = objPhotoCoreEntity.ProfileID;
+                objPhoto.PhotoPath = objPhotoCoreEntity.PhotoPath;
+                objPhoto.IsProfilePic = objPhotoCoreEntity.IsProfilePic;
+            }
+            catch (Exception objEx)
+            {
+                Helpers.LogExceptionInFlatFile(objEx);
+            }
             return 0;
         }
 
         private int AssignEntityFromDTO(ref PhotoCoreEntity objPhotoCoreEntity, Mugurtham.DTO.Profile.Photo objPhoto)
         {
-            objPhotoCoreEntity.ProfileID = objPhoto.ProfileID;
-            objPhotoCoreEntity.PhotoPath = objPhoto.PhotoPath;
-            objPhotoCoreEntity.IsProfilePic = objPhoto.IsProfilePic;
+            try
+            {
+                objPhotoCoreEntity.ProfileID = objPhoto.ProfileID;
+                objPhotoCoreEntity.PhotoPath = objPhoto.PhotoPath;
+                objPhotoCoreEntity.IsProfilePic = objPhoto.IsProfilePic;
+            }
+            catch (Exception objEx)
+            {
+                Helpers.LogExceptionInFlatFile(objEx);
+            }
             return 0;
         }
         public int Delete(string strID)
         {
-            IUnitOfWork objIUnitOfWork = new UnitOfWork();
-            using (objIUnitOfWork as IDisposable)
+            try
             {
-                Mugurtham.DTO.Profile.Photo objPhoto = new DTO.Profile.Photo();
-                using (objPhoto as IDisposable)
-                    objPhoto = objIUnitOfWork.RepositoryPhoto.GetAll().ToList().Where(p => p.ID == strID).FirstOrDefault();
-                if (objPhoto != null)
+                IUnitOfWork objIUnitOfWork = new UnitOfWork();
+                using (objIUnitOfWork as IDisposable)
                 {
-                    IUnitOfWork objIUnitOfWorkDeletePic = new UnitOfWork();
-                    using (objIUnitOfWorkDeletePic as IDisposable)
+                    Mugurtham.DTO.Profile.Photo objPhoto = new DTO.Profile.Photo();
+                    using (objPhoto as IDisposable)
+                        objPhoto = objIUnitOfWork.RepositoryPhoto.GetAll().ToList().Where(p => p.ID == strID).FirstOrDefault();
+                    if (objPhoto != null)
                     {
-                        objIUnitOfWorkDeletePic.RepositoryPhoto.Delete(objPhoto);
-                        objIUnitOfWorkDeletePic.commit();
+                        IUnitOfWork objIUnitOfWorkDeletePic = new UnitOfWork();
+                        using (objIUnitOfWorkDeletePic as IDisposable)
+                        {
+                            objIUnitOfWorkDeletePic.RepositoryPhoto.Delete(objPhoto);
+                            objIUnitOfWorkDeletePic.commit();
+                        }
+                        objIUnitOfWorkDeletePic = null;
                     }
-                    objIUnitOfWorkDeletePic = null;
                 }
+                objIUnitOfWork = null;
             }
-            objIUnitOfWork = null;
+            catch (Exception objEx)
+            {
+                Helpers.LogExceptionInFlatFile(objEx);
+            }
             return 0;
         }
 

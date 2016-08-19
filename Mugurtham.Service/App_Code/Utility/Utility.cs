@@ -14,5 +14,12 @@ namespace Mugurtham.Service.App_Code.Utility
             strConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["MugurthamConnectionString"].ConnectionString;
             return strConnectionString;
         }
+
+        public static string logFilePath()
+        {
+            string strLogFilePath = string.Empty;
+            strLogFilePath = System.Configuration.ConfigurationManager.AppSettings["readLogFilePath"];
+            return strLogFilePath;
+        }
     }
 }

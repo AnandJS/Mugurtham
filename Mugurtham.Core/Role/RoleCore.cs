@@ -13,105 +13,147 @@ namespace Mugurtham.Core.Role
         public int Add(ref Mugurtham.Core.Role.RoleCoreEntity objRoleCoreEntity, out string strRoleID)
         {
             strRoleID = Helpers.primaryKey();
-            IUnitOfWork objIUnitOfWork = new UnitOfWork();
-            using (objIUnitOfWork as IDisposable)
+            try
             {
-                Mugurtham.DTO.Role.Role objDTORole = new DTO.Role.Role();
-                using (objDTORole as IDisposable)
+                IUnitOfWork objIUnitOfWork = new UnitOfWork();
+                using (objIUnitOfWork as IDisposable)
                 {
-                    objRoleCoreEntity.ID = strRoleID;
-                    AssignDTOFromEntity(ref objDTORole, ref objRoleCoreEntity);
+                    Mugurtham.DTO.Role.Role objDTORole = new DTO.Role.Role();
+                    using (objDTORole as IDisposable)
+                    {
+                        objRoleCoreEntity.ID = strRoleID;
+                        AssignDTOFromEntity(ref objDTORole, ref objRoleCoreEntity);
+                    }
+                    objIUnitOfWork.RepositoryRole.Add(objDTORole);
+                    objDTORole = null;
                 }
-                objIUnitOfWork.RepositoryRole.Add(objDTORole);
-                objDTORole = null;
+                objIUnitOfWork.commit();
+                objIUnitOfWork = null;
             }
-            objIUnitOfWork.commit();
-            objIUnitOfWork = null;
+            catch (Exception objEx)
+            {
+                Helpers.LogExceptionInFlatFile(objEx);
+            }
             return 0;
         }
 
         public int Edit(ref Mugurtham.Core.Role.RoleCoreEntity objRoleCoreEntity)
         {
-            IUnitOfWork objIUnitOfWork = new UnitOfWork();
-            using (objIUnitOfWork as IDisposable)
+            try
             {
-                Mugurtham.DTO.Role.Role objDTORole = new DTO.Role.Role();
-                using (objDTORole as IDisposable)
+                IUnitOfWork objIUnitOfWork = new UnitOfWork();
+                using (objIUnitOfWork as IDisposable)
                 {
-                    AssignDTOFromEntity(ref objDTORole, ref objRoleCoreEntity);
+                    Mugurtham.DTO.Role.Role objDTORole = new DTO.Role.Role();
+                    using (objDTORole as IDisposable)
+                    {
+                        AssignDTOFromEntity(ref objDTORole, ref objRoleCoreEntity);
+                    }
+                    objIUnitOfWork.RepositoryRole.Edit(objDTORole);
+                    objDTORole = null;
                 }
-                objIUnitOfWork.RepositoryRole.Edit(objDTORole);
-                objDTORole = null;
+                objIUnitOfWork.commit();
+                objIUnitOfWork = null;
             }
-            objIUnitOfWork.commit();
-            objIUnitOfWork = null;
+            catch (Exception objEx)
+            {
+                Helpers.LogExceptionInFlatFile(objEx);
+            }
             return 0;
         }
 
         public RoleCoreEntity GetByID(string strID)
         {
             RoleCoreEntity objRoleCoreEntity = new RoleCoreEntity();
-            Mugurtham.DTO.Role.Role objSangam = new Mugurtham.DTO.Role.Role();
-            IUnitOfWork objUOW = new UnitOfWork();
-            using (objUOW as IDisposable)
-                objSangam = objUOW.RepositoryRole.GetAll().ToList().Where(p => p.ID.Trim().ToLower() == strID.Trim().ToLower()).FirstOrDefault();
-            objUOW = null;
-            if (objSangam != null)
+            try
             {
-                using (objSangam as IDisposable)
+                Mugurtham.DTO.Role.Role objSangam = new Mugurtham.DTO.Role.Role();
+                IUnitOfWork objUOW = new UnitOfWork();
+                using (objUOW as IDisposable)
+                    objSangam = objUOW.RepositoryRole.GetAll().ToList().Where(p => p.ID.Trim().ToLower() == strID.Trim().ToLower()).FirstOrDefault();
+                objUOW = null;
+                if (objSangam != null)
                 {
-                    AssignEntityFromDTO(ref objSangam, ref objRoleCoreEntity);
+                    using (objSangam as IDisposable)
+                    {
+                        AssignEntityFromDTO(ref objSangam, ref objRoleCoreEntity);
+                    }
                 }
+                objSangam = null;
             }
-            objSangam = null;
+            catch (Exception objEx)
+            {
+                Helpers.LogExceptionInFlatFile(objEx);
+            }
             return objRoleCoreEntity;
         }
 
         public int GetAll(ref List<RoleCoreEntity> objSangamCoreEntityList)
         {
-            IUnitOfWork objIUnitOfWork = new UnitOfWork();
-            using (objIUnitOfWork as IDisposable)
+            try
             {
-                foreach (Mugurtham.DTO.Role.Role objSangam in objIUnitOfWork.RepositoryRole.GetAll().ToList())
+                IUnitOfWork objIUnitOfWork = new UnitOfWork();
+                using (objIUnitOfWork as IDisposable)
                 {
-                    Mugurtham.DTO.Role.Role _objSangam = objSangam;
-                    using (_objSangam as IDisposable)
+                    foreach (Mugurtham.DTO.Role.Role objSangam in objIUnitOfWork.RepositoryRole.GetAll().ToList())
                     {
-                        RoleCoreEntity objRoleCoreEntity = new RoleCoreEntity();
-                        using (objRoleCoreEntity as IDisposable)
+                        Mugurtham.DTO.Role.Role _objSangam = objSangam;
+                        using (_objSangam as IDisposable)
                         {
-                            AssignEntityFromDTO(ref _objSangam, ref objRoleCoreEntity);
-                            objSangamCoreEntityList.Add(objRoleCoreEntity);
+                            RoleCoreEntity objRoleCoreEntity = new RoleCoreEntity();
+                            using (objRoleCoreEntity as IDisposable)
+                            {
+                                AssignEntityFromDTO(ref _objSangam, ref objRoleCoreEntity);
+                                objSangamCoreEntityList.Add(objRoleCoreEntity);
+                            }
+                            objRoleCoreEntity = null;
                         }
-                        objRoleCoreEntity = null;
+                        _objSangam = null;
                     }
-                    _objSangam = null;
                 }
+            }
+            catch (Exception objEx)
+            {
+                Helpers.LogExceptionInFlatFile(objEx);
             }
             return 0;
         }
 
         private int AssignDTOFromEntity(ref Mugurtham.DTO.Role.Role objDTORole, ref Mugurtham.Core.Role.RoleCoreEntity objRoleCoreEntity)
         {
-            objDTORole.CreatedBy = objRoleCoreEntity.CreatedBy;
-            objDTORole.CreatedDate = DateTime.Now;
-            objDTORole.Description = objRoleCoreEntity.Description;
-            objDTORole.ID = objRoleCoreEntity.ID;
-            objDTORole.ModifiedBy = objRoleCoreEntity.ModifiedBy;
-            objDTORole.ModifiedDate = DateTime.Now;
-            objDTORole.Name = objRoleCoreEntity.Name;
+            try
+            {
+                objDTORole.CreatedBy = objRoleCoreEntity.CreatedBy;
+                objDTORole.CreatedDate = DateTime.Now;
+                objDTORole.Description = objRoleCoreEntity.Description;
+                objDTORole.ID = objRoleCoreEntity.ID;
+                objDTORole.ModifiedBy = objRoleCoreEntity.ModifiedBy;
+                objDTORole.ModifiedDate = DateTime.Now;
+                objDTORole.Name = objRoleCoreEntity.Name;
+            }
+            catch (Exception objEx)
+            {
+                Helpers.LogExceptionInFlatFile(objEx);
+            }
             return 0;
         }
 
         private int AssignEntityFromDTO(ref Mugurtham.DTO.Role.Role objDTORole, ref Mugurtham.Core.Role.RoleCoreEntity objRoleCoreEntity)
         {
-            objRoleCoreEntity.CreatedBy = objDTORole.CreatedBy;
-            objRoleCoreEntity.CreatedDate = DateTime.Now;
-            objRoleCoreEntity.Description = objDTORole.Description;
-            objRoleCoreEntity.ID = objDTORole.ID;
-            objRoleCoreEntity.ModifiedBy = objDTORole.ModifiedBy;
-            objRoleCoreEntity.ModifiedDate = DateTime.Now;
-            objRoleCoreEntity.Name = objDTORole.Name;
+            try
+            {
+                objRoleCoreEntity.CreatedBy = objDTORole.CreatedBy;
+                objRoleCoreEntity.CreatedDate = DateTime.Now;
+                objRoleCoreEntity.Description = objDTORole.Description;
+                objRoleCoreEntity.ID = objDTORole.ID;
+                objRoleCoreEntity.ModifiedBy = objDTORole.ModifiedBy;
+                objRoleCoreEntity.ModifiedDate = DateTime.Now;
+                objRoleCoreEntity.Name = objDTORole.Name;
+            }
+            catch (Exception objEx)
+            {
+                Helpers.LogExceptionInFlatFile(objEx);
+            }
             return 0;
         }
     }

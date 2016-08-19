@@ -33,7 +33,7 @@ namespace Mugurtham.Service.Areas.Profile.Controllers.API
             return Request.CreateResponse(HttpStatusCode.OK, new CareerCore().GetByProfileID(ID), Configuration.Formatters.JsonFormatter);
         }
 
-        [HttpPut]
+        [HttpPut]        
         public void Put([FromBody]CareerCoreEntity objCareerCoreEntity)
         {
             CareerCore objCareerCore = new CareerCore();

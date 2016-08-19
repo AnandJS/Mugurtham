@@ -18,15 +18,11 @@ namespace Mugurtham.Common.Utilities
         {
             try
             {
-                Helpers.LogMessage("************************************************************");
 
-                throw new DivideByZeroException();
             }
-            catch (Exception objex)
+            catch (Exception objEx)
             {
-                Helpers.LogMessage("************************************************************");
-                Helpers.LogMessage(objex.InnerException.Message);
-
+                Helpers.LogExceptionInFlatFile(objEx);
             }
         }
 
@@ -93,9 +89,9 @@ namespace Mugurtham.Common.Utilities
 
 
             }
-            catch (Exception ex)
+            catch (Exception objEx)
             {
-                //MessageBox.Show("Can not open connection ! ");
+                Helpers.LogExceptionInFlatFile(objEx);
             }
         }
 
@@ -115,10 +111,11 @@ namespace Mugurtham.Common.Utilities
                 adapter.UpdateCommand.CommandText = sql;
                 adapter.UpdateCommand.ExecuteNonQuery();
                 //MessageBox.Show("Row updated !! ");
+
             }
-            catch (Exception ex)
+            catch (Exception objEx)
             {
-                // MessageBox.Show(ex.ToString());
+                Helpers.LogExceptionInFlatFile(objEx);
             }
         }
     }

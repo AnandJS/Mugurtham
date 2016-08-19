@@ -78,13 +78,13 @@ namespace Mugurtham.Service.Areas.MugurthamAdmin.Controllers.API
         [HttpPut]
         public void Put([FromBody]UserCoreEntity objUserCoreEntity)
         {
-            UserCore objUserCore = new UserCore();
-            using (objUserCore as IDisposable)
-            {
-                objUserCore.Edit(ref objUserCoreEntity);
-            }
-            objUserCore = null;
-        }   
+                UserCore objUserCore = new UserCore();
+                using (objUserCore as IDisposable)
+                {
+                    objUserCore.Edit(ref objUserCoreEntity);
+                }
+                objUserCore = null;
+        }
 
     }
 }

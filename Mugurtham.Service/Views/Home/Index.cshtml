@@ -1,16 +1,14 @@
 ﻿@{
-    Layout = null;
+    Layout = null;    
 }
 <html>
 <head>
     @Scripts.Render("~/bundles/MugurthamJQuery")
 </head>
 <body>
-   
        <script>
            $(document).ready(function () {
-               alert('@{HttpContext.Current.Response.Write(Server.MapPath("~/Log/SomeFile.ext"));}');
-           // window.location.href = "/Areas/HomePage/index.html";
+            window.location.href = "/Areas/HomePage/index.html";
         });
     </script>
 </body>

@@ -28,12 +28,11 @@ namespace Mugurtham.Common.Utilities
         public static void LogMessage(string strText)
         {
             AsyncLogger.Info(strText);
-
         }
 
         public static void LogMessageInFlatFile(string strText)
         {
-            string strFilePath = "D:\\Mugurtham\\GIT\\Mugurtham\\Mugurtham.Service\\Log\\" + DateTime.Today.Date.ToShortDateString().Replace(@"/", "-") + ".txt";
+            string strFilePath = "D:\\Mugurtham\\GIT\\Mugurtham\\Mugurtham.Service\\Log\\Log_" + DateTime.Today.Date.ToShortDateString().Replace(@"/", "-") + ".log";
             StringBuilder objSB = new StringBuilder();
             objSB.Append("==============================================================================" + "\r\n");
             objSB.Append(DateTime.Now.ToLongDateString() + " " + DateTime.Now.ToShortTimeString() + "\r\n");
@@ -84,6 +83,34 @@ namespace Mugurtham.Common.Utilities
             return strBuilder.ToString();
         }
 
+        public static string readLogFile(string strLogFilePath)
+        {
+            string strText = string.Empty;
+            //var fileStream = new FileStream(@"C:\\Inetpub\\vhosts\\mugurtham.com\\test\\Log\\MugurthamLog.log", FileMode.Open, FileAccess.Read);
+            //var fileStream = new FileStream(@"D:\\Mugurtham\\GIT\\Mugurtham\\Mugurtham.Service\\Log\\MugurthamLog.log", FileMode.Open, FileAccess.Read);
+            var fileStream = new FileStream(strLogFilePath, FileMode.Open, FileAccess.Read);
+            using (var streamReader = new StreamReader(fileStream, Encoding.UTF8))
+            {
+                strText = streamReader.ReadToEnd();
+            }
+            return strText;
+        }
 
+        public static void LogExceptionInFlatFile(Exception objEx)
+        {
+            string strFilePath = "D:\\Mugurtham\\GIT\\Mugurtham\\Mugurtham.Service\\Log\\Log_" + DateTime.Today.Date.ToShortDateString().Replace(@"/", "-") + ".log";
+            StringBuilder objSB = new StringBuilder();
+            objSB.Append("==============================================================================" + "\r\n");
+            objSB.Append(DateTime.Now.ToLongDateString() + " " + DateTime.Now.ToShortTimeString() + "\r\n");
+            objSB.Append(objEx.Message + "\r\n");
+            objSB.Append(objEx.InnerException + "\r\n");
+            objSB.Append(objEx.StackTrace + "\r\n");
+            objSB.Append("==============================================================================" + "\r\n");
+            // flush every 20 seconds as you do it
+            File.AppendAllText(strFilePath, objSB.ToString());
+            objSB.Remove(0, objSB.Length);
+            objSB.Clear();
+            objSB = null;
+        }
     }
 }

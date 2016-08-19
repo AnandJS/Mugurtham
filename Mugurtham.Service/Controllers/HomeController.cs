@@ -9,6 +9,7 @@ using Mugurtham.Core.Login;
 using System.IO;
 using Mugurtham.Core.Profile.API;
 using Mugurtham.Core.Dashboard.Sangam;
+using System.Text;
 
 namespace Mugurtham.Service.Controllers
 {
@@ -21,6 +22,7 @@ namespace Mugurtham.Service.Controllers
         {
             return View();
         }
+
         public ActionResult Logout()
         {
             Session.Abandon();
@@ -31,6 +33,33 @@ namespace Mugurtham.Service.Controllers
         public ActionResult UploadFile()
         {
             return View();
+        }
+
+        public ViewResult HttpError404()
+        {
+            return View();
+        }
+
+        public ActionResult HttpError500()
+        {
+            return View();
+        }
+
+        public ActionResult General()
+        {
+            return View();
+        }
+
+        public void downloadLogFile()
+        {
+            string strLogText = Helpers.readLogFile(Mugurtham.Service.App_Code.Utility.Utility.logFilePath());
+            Response.Clear();
+            Response.ClearHeaders();
+            Response.AddHeader("Content-Length", strLogText.Length.ToString());
+            Response.ContentType = "text/plain";
+            Response.AppendHeader("content-disposition", "attachment;filename=\"MugurthamLog.log\"");
+            Response.Write(strLogText);
+            Response.End();
         }
 
         [HttpPost]
@@ -59,27 +88,17 @@ namespace Mugurtham.Service.Controllers
         {
             int inLoginStatus = 0;
             bool boolLogin = false;
-            try
+
+            Mugurtham.Core.User.UserCore objUserCore = new Mugurtham.Core.User.UserCore();
+            using (objUserCore as IDisposable)
             {
-                Mugurtham.Core.User.UserCore objUserCore = new Mugurtham.Core.User.UserCore();
-                using (objUserCore as IDisposable)
-                {
-                    inLoginStatus = objUserCore.validateLogin(ref objUserCoreEntity, out boolLogin);
-                }
-                objUserCore = null;
-                if (inLoginStatus == 1)
-                {                    
-                    FormsAuthentication.SetAuthCookie(objUserCoreEntity.LoginID, false);
-                    Session.Timeout = 60;
-                }
-                
+                inLoginStatus = objUserCore.validateLogin(ref objUserCoreEntity, out boolLogin);
             }
-            catch(Exception objEx)
+            objUserCore = null;
+            if (inLoginStatus == 1)
             {
-                throw;
-                string str = string.Empty;
-                str = objEx.Message;
-                str = objEx.InnerException.Source;
+                FormsAuthentication.SetAuthCookie(objUserCoreEntity.LoginID, false);
+                Session.Timeout = 60;
             }
             LoggedInUser objLoggedIn = new LoggedInUser(objUserCoreEntity.LoginID);
             Session["LoggedInUser"] = objLoggedIn;

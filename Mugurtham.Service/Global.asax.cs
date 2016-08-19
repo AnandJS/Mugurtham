@@ -21,7 +21,7 @@ namespace Mugurtham.Service
             GlobalFilters.Filters.Add(new System.Web.Mvc.AuthorizeAttribute());
             //Error Handling
             //RegisterGlobalFilters(GlobalFilters.Filters);
-            
+
             AreaRegistration.RegisterAllAreas();
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
@@ -37,23 +37,51 @@ namespace Mugurtham.Service
             //HttpContext.Current.Response.Write(exception.StackTrace);
             Server.ClearError();
             //Response.Redirect("/Home/Error");
+            Response.Clear();
+
+            HttpException objhttpException = exception as HttpException;
+
+            if (objhttpException != null)
+            {
+                string action;
+
+                switch (objhttpException.GetHttpCode())
+                {
+                    case 404:
+                        // page not found
+                        action = "HttpError404";
+                        break;
+                    case 500:
+                        // server error
+                        action = "HttpError500";
+                        break;
+                    default:
+                        action = "General";
+                        break;
+                }
+                // clear error on server
+                Server.ClearError();
+                //Response.Redirect(String.Format("/Home/{0}/?message={1}", action, exception.Message));
+                Response.Redirect(String.Format("/Home/{0}", action, exception.Message));
+            }
         }
 
-        /*public static void RegisterGlobalFilters(GlobalFilterCollection objFilters)
-        {
-            // Default Handler
-            objFilters.Add(new HandleErrorAttribute());
 
-            //SQL Exception Handler
-            objFilters.Add(new HandleErrorAttribute
+            /*public static void RegisterGlobalFilters(GlobalFilterCollection objFilters)
             {
-                ExceptionType = typeof(SqlException),
-                View = "",
-                Order = 1
-            }
-            );
+                // Default Handler
+                objFilters.Add(new HandleErrorAttribute());
+
+                //SQL Exception Handler
+                objFilters.Add(new HandleErrorAttribute
+                {
+                    ExceptionType = typeof(SqlException),
+                    View = "",
+                    Order = 1
+                }
+                );
 
 
-        }*/
+            }*/
+        }
     }
-}
