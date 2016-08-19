@@ -35,7 +35,7 @@ namespace Mugurtham.Service.Controllers
             return View();
         }
 
-        public ViewResult HttpError404()
+        public ActionResult HttpError404()
         {
             return View();
         }
