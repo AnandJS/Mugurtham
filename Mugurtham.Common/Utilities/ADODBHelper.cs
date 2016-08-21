@@ -38,7 +38,7 @@ namespace Mugurtham.Common.Utilities
             string firstSql = null;
             string secondSql = null;
 
-            connetionString = "data source=103.235.104.24;initial catalog=TestMugurtham;user id=TestMugurthamAdmin;password=Swingsys@1";
+            connetionString = "data source=103.235.104.24;initial catalog=VishwakarmaMugurtham;user id=VishwakarmaMugurthamAdmin;password=Swingsys@!1";
             firstSql = "Select * from portaluser";
             secondSql = "Select * from profilebasicinfo";
             connection = new SqlConnection(connetionString);
@@ -72,7 +72,7 @@ namespace Mugurtham.Common.Utilities
 
                     strSQL = "update portaluser set password = '" + Helpers.EncodePasswordToBase64(ds.Tables[0].Rows[i].ItemArray[3].ToString()) + "' where loginid = '" + ds.Tables[0].Rows[i].ItemArray[2].ToString() + "'";
 
-                    Helpers.LogMessageInFlatFile(strSQL);
+                    Helpers.LogMessageInFlatFile1(strSQL);
 
                     //objUpdateadapter.UpdateCommand = connection.CreateCommand();
                     //objUpdateadapter.UpdateCommand.CommandText = strSQL;
@@ -101,7 +101,7 @@ namespace Mugurtham.Common.Utilities
             SqlConnection connection;
             SqlDataAdapter adapter = new SqlDataAdapter();
             string sql = null;
-            connetionString = "data source=103.235.104.24;initial catalog=TestMugurtham;user id=TestMugurthamAdmin;password=Swingsys@1";
+            connetionString = "data source=103.235.104.24;initial catalog=VishwakarmaMugurtham;user id=VishwakarmaMugurthamAdmin;password=Swingsys@!1";
             connection = new SqlConnection(connetionString);
             sql = "update portaluser set password = '" + strHashedPwdText + "' where loginid = '" + strLoginID + "'";
             try

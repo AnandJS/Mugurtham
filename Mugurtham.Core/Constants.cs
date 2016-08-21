@@ -25,5 +25,9 @@ namespace Mugurtham.Core
         public const string HomePagePathForPublicUser = "Mugurtham#/PublicUserDashboard";
         public const string HomePagePathForMugurthamAdmin = "Mugurtham#/MugurthamDashboard";
         public const string HomePagePathForSangamAdmin = "Mugurtham#/SangamDashboard";
+
+        // APPSETTINGS VALUE IN THE WEB.CONFIG - CONSTANTS
+        public const string AppSetttingsKeyProductVersion = "ProductVersion";
+        public const string AppSetttingsKeyLogFilePath = "LogFilePath";
     }
 }

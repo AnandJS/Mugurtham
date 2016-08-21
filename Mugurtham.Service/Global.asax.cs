@@ -66,22 +66,34 @@ namespace Mugurtham.Service
             }
         }
 
-
-            /*public static void RegisterGlobalFilters(GlobalFilterCollection objFilters)
-            {
-                // Default Handler
-                objFilters.Add(new HandleErrorAttribute());
-
-                //SQL Exception Handler
-                objFilters.Add(new HandleErrorAttribute
-                {
-                    ExceptionType = typeof(SqlException),
-                    View = "",
-                    Order = 1
-                }
-                );
-
-
-            }*/
+        protected void Session_Start(object sender, EventArgs e)
+        {
+            ///Mugurtham.Common.Utilities.Helpers.LogMessageInFlatFile(Mugurtham.Common.Utilities.Helpers.getLogFilePath +  "Session Start now " + DateTime.Now.ToShortDateString());
+            //  Session["EhapUser"] = UserServiceManager.GetEHAPUser(HttpContext.Current.User.Identity.Name.Remove(0, 5));
         }
+
+        protected void Session_End(object sender, EventArgs e)
+        {
+            //  Session["EhapUser"] = UserServiceManager.GetEHAPUser(HttpContext.Current.User.Identity.Name.Remove(0, 5));
+            //Mugurtham.Common.Utilities.Helpers.LogMessageInFlatFile(Mugurtham.Common.Utilities.Helpers.getLogFilePath +  "Session End now " + DateTime.Now.ToShortDateString());
+        }
+
+
+        /*public static void RegisterGlobalFilters(GlobalFilterCollection objFilters)
+        {
+            // Default Handler
+            objFilters.Add(new HandleErrorAttribute());
+
+            //SQL Exception Handler
+            objFilters.Add(new HandleErrorAttribute
+            {
+                ExceptionType = typeof(SqlException),
+                View = "",
+                Order = 1
+            }
+            );
+
+
+        }*/
+    }
     }

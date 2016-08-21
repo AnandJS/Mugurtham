@@ -20,7 +20,7 @@ namespace Mugurtham.Core.Profile.View
             ref Mugurtham.Core.Login.LoggedInUser objLoggedIn)
         {
             try
-            {
+            {                
                 List<PhotoCoreEntity> objPhotoCoreEntityList = new List<PhotoCoreEntity>();
                 List<ProfileBasicInfoViewCoreEntity> objProfileBasicInfoViewCoreEntityList = new List<ProfileBasicInfoViewCoreEntity>();
                 if (objLoggedIn.roleID == "F62DDFBE55448E3A3") // User Profiles 

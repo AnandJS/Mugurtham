@@ -69,6 +69,7 @@
     <Content Include="StoredProcedures\uspGetInterestedProfiles.sql" />
     <Content Include="StoredProcedures\uspGetProfileBadgeCount.sql" />
     <Content Include="StoredProcedures\uspGetProfileBasicInfoView.sql" />
+    <Content Include="StoredProcedures\uspGetProfilesBySangam.sql" />
     <Content Include="StoredProcedures\UspGetProfilesJoinedRecently.sql" />
     <Content Include="StoredProcedures\uspGetProfilesJoinedThisWeek.sql" />
     <Content Include="StoredProcedures\uspGetViewedProfiles.sql" />

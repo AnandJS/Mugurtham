@@ -5,12 +5,22 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Security.Cryptography;
 using System.IO;
+using System.Configuration;
 
 namespace Mugurtham.Common.Utilities
 {
     [MugurthamBaseAPIController]
     public static class Helpers
     {
+        static readonly string strLogilePath = ConfigurationManager.AppSettings["LogFilePath"] + "Log_" + DateTime.Now.ToShortDateString().Replace('/', '-') + ".log";
+        
+        public static string getLogFilePath
+        {
+            get
+            {
+                return strLogilePath;
+            }
+        }
 
         public static string primaryKey()
         {
@@ -30,19 +40,43 @@ namespace Mugurtham.Common.Utilities
             AsyncLogger.Info(strText);
         }
 
+        public static void LogMessageInFlatFile1(string strText)
+        {
+            try
+            {
+                StringBuilder objSB = new StringBuilder();
+                objSB.Append(strText + "\r\n");
+                // flush every 20 seconds as you do it
+                File.AppendAllText(strLogilePath, objSB.ToString());
+                objSB.Remove(0, objSB.Length);
+                objSB.Clear();
+                objSB = null;
+            }
+            catch (Exception objEx)
+            {
+                Helpers.LogMessage(objEx.Message + objEx.StackTrace);
+            }
+        }
+
         public static void LogMessageInFlatFile(string strText)
         {
-            string strFilePath = "D:\\Mugurtham\\GIT\\Mugurtham\\Mugurtham.Service\\Log\\Log_" + DateTime.Today.Date.ToShortDateString().Replace(@"/", "-") + ".log";
-            StringBuilder objSB = new StringBuilder();
-            objSB.Append("==============================================================================" + "\r\n");
-            objSB.Append(DateTime.Now.ToLongDateString() + " " + DateTime.Now.ToShortTimeString() + "\r\n");
-            objSB.Append(strText + "\r\n");
-            objSB.Append("==============================================================================" + "\r\n");
-            // flush every 20 seconds as you do it
-            File.AppendAllText(strFilePath, objSB.ToString());
-            objSB.Remove(0, objSB.Length);
-            objSB.Clear();
-            objSB = null;
+            try
+            {
+                StringBuilder objSB = new StringBuilder();
+                objSB.Append("==============================================================================" + "\r\n");
+                objSB.Append(DateTime.Now.ToLongDateString() + " " + DateTime.Now.ToShortTimeString() + "\r\n");
+                objSB.Append(strText + "\r\n");
+                objSB.Append("==============================================================================" + "\r\n");
+                // flush every 20 seconds as you do it
+                File.AppendAllText(strLogilePath, objSB.ToString());
+                objSB.Remove(0, objSB.Length);
+                objSB.Clear();
+                objSB = null;
+            }
+            catch (Exception objEx)
+            {
+                Helpers.LogMessage(objEx.Message + objEx.StackTrace);
+            }
         }
 
         /// <summary>
@@ -98,7 +132,6 @@ namespace Mugurtham.Common.Utilities
 
         public static void LogExceptionInFlatFile(Exception objEx)
         {
-            string strFilePath = "D:\\Mugurtham\\GIT\\Mugurtham\\Mugurtham.Service\\Log\\Log_" + DateTime.Today.Date.ToShortDateString().Replace(@"/", "-") + ".log";
             StringBuilder objSB = new StringBuilder();
             objSB.Append("==============================================================================" + "\r\n");
             objSB.Append(DateTime.Now.ToLongDateString() + " " + DateTime.Now.ToShortTimeString() + "\r\n");
@@ -107,7 +140,7 @@ namespace Mugurtham.Common.Utilities
             objSB.Append(objEx.StackTrace + "\r\n");
             objSB.Append("==============================================================================" + "\r\n");
             // flush every 20 seconds as you do it
-            File.AppendAllText(strFilePath, objSB.ToString());
+            File.AppendAllText(strLogilePath, objSB.ToString());
             objSB.Remove(0, objSB.Length);
             objSB.Clear();
             objSB = null;
