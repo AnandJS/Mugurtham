@@ -21,7 +21,7 @@ var ControllerHighlightedProfiles = angular.module('MugurthamApp').controller('C
                 $("#divContainer").unmask();
                 $scope.AllProfiles = data;
                 $scope.currentPage = 1;
-                $scope.pageSize = 5;
+                $scope.pageSize = 15;
                 $scope.SearchedProfiles = data.ProfileBasicInfoViewCoreEntityList;
                 $scope.profilePhotos = data.PhotoCoreEntityList;
                 $scope.pageChangeHandler = function (num) {

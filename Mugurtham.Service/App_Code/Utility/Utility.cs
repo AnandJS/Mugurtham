@@ -18,7 +18,7 @@ namespace Mugurtham.Service.App_Code.Utility
         public static string logFilePath()
         {
             string strLogFilePath = string.Empty;
-            strLogFilePath = System.Configuration.ConfigurationManager.AppSettings["readLogFilePath"];
+            strLogFilePath = System.Configuration.ConfigurationManager.AppSettings["Net4LogFilePath"];
             return strLogFilePath;
         }
     }

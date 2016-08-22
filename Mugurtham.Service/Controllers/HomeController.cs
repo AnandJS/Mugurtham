@@ -51,7 +51,7 @@ namespace Mugurtham.Service.Controllers
         }
 
         public void downloadLogFile()
-        {
+        {           
             string strLogText = Helpers.readLogFile(Mugurtham.Service.App_Code.Utility.Utility.logFilePath());
             Response.Clear();
             Response.ClearHeaders();
@@ -97,6 +97,7 @@ namespace Mugurtham.Service.Controllers
             objUserCore = null;
             if (inLoginStatus == 1)
             {
+
                 FormsAuthentication.SetAuthCookie(objUserCoreEntity.LoginID, false);
                 Session.Timeout = 60;
             }

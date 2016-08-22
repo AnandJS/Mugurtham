@@ -9,8 +9,9 @@ using Mugurtham.Repository;
 
 namespace Mugurtham.UOW
 {
-    public class UnitOfWork : IUnitOfWork
+    public class UnitOfWork : IUnitOfWork, IDisposable
     {
+        private bool boolDisposeClosed = false;
         private MugurthamDBContext _DbContext { get; set; }
 
         private Mugurtham.Repository.Profile.BasicInfo.IBasicInfo _IBasicInfo;
@@ -230,5 +231,59 @@ namespace Mugurtham.UOW
                 return _IPhoto;
             }
         }
+
+
+        // ...
+        #region IDisposable Members
+
+        ~UnitOfWork()
+        {
+            this.Dispose(false);
+        }
+
+        public void Dispose()
+        {
+            if (!this.boolDisposeClosed)
+            {
+                this.Dispose(true);
+                GC.SuppressFinalize(this);
+                this.boolDisposeClosed = true;
+            }
+            
+            // If this function is being called the user wants to release the
+            // resources. lets call the Dispose which will do this for us.
+            Dispose(true);
+
+            // Now since we have done the cleanup already there is nothing left
+            // for the Finalizer to do. So lets tell the GC not to call it later.
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing == true)
+            {
+                //someone want the deterministic release of all resources
+                //Let us release all the managed resources
+
+                // clean up managed resources
+            }
+            else
+            {
+                // Do nothing, no one asked a dispose, the object went out of
+                // scope and finalized is called so lets next round of GC 
+                // release these resources
+
+                // clean up unmanaged resources
+            }
+            _DbContext.Dispose();
+            // Release the unmanaged resource in any case as they will not be 
+            // released by GC
+
+        }
+
+        #endregion
+
+        
     }
 }

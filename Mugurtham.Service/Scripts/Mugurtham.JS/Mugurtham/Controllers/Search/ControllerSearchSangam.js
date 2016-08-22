@@ -38,7 +38,7 @@ var ControllerSearchSangam = angular.module('MugurthamApp').controller('Controll
                 $("#divContainer").unmask();
                 $scope.AllProfiles = data;
                 $scope.currentPage = 1;
-                $scope.pageSize = 5;
+                $scope.pageSize = 15;
                 $scope.SearchedProfiles = data.ProfileBasicInfoViewCoreEntityList;
                 $scope.pageChangeHandler = function (num) {
                     setTimeout(displayThumbnailSlider, 1000);

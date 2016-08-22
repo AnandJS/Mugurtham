@@ -53,7 +53,9 @@ namespace Mugurtham.Service
                    "~/Scripts/Mugurtham.JS/Mugurtham/Controllers/View/*.js"));
             bundles.Add(new ScriptBundle("~/bundles/MugurthamControllerMugurthamAdmin").Include(
                    "~/Scripts/Mugurtham.JS/Mugurtham/Controllers/MugurthamAdmin/*.js"));
-           
+            bundles.Add(new ScriptBundle("~/bundles/MugurthamValidation").Include(
+                   "~/Scripts/Mugurtham.JS/Mugurtham/Utility/*.js"));
+
 
             /*===============================================================================================*/
             /*MUGURTHAM STYLE BUNDLE STARTS*/

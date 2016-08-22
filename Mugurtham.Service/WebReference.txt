@@ -1,4 +1,7 @@
-﻿Test
+﻿
+JQuery & JS BestPractices
+==========================
+https://www.smashingmagazine.com/2008/09/jquery-examples-and-best-practices/
 
 MVC 3 ,4 ,5 & vNext comaprison
 ================================

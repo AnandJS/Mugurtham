@@ -1,2 +1,1 @@
-This file is used for deployment purpose. Dont delete it.
-If this file is not there Images folder will not get deployed.
+Please do not delete this file
