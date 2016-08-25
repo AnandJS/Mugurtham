@@ -1,4 +1,8 @@
 ﻿
+JSON Stringify
+==============
+http://stackoverflow.com/questions/23446916/getjson-and-return-the-value-string
+
 JQuery & JS BestPractices
 ==========================
 https://www.smashingmagazine.com/2008/09/jquery-examples-and-best-practices/

@@ -10,8 +10,27 @@ var ControllerUserChamber = angular.module('MugurthamApp').controller('Controlle
             //AJAX GET REQUEST - GETTING ALL PROFILES
             //===================================================
             $scope.geUserChamberBadgeCount = function () {
-                var strGetURL = "User/User/getUserBadgeCount";
-                $("#divContainer").mask("Getting Badge count please wait...");
+                if (typeof (Storage) !== "undefined") {
+                    if ((!sessionStorage.getItem('UserBadgeCount'))) {
+                        $scope.geUserChamberBadgeCountfromAPI();
+                    }
+                    else {
+                        $scope.geUserChamberBadgeCountfromSession();
+                    }
+                }
+                else {
+                    $scope.geUserChamberBadgeCountfromAPI();
+                }
+            }
+
+            $scope.geUserChamberBadgeCountfromSession = function () {
+                if ((sessionStorage.getItem('UserBadgeCount'))) {
+                    setBadgeValue(JSON.parse(sessionStorage.getItem('UserBadgeCount')));
+                }
+            }
+            $scope.geUserChamberBadgeCountfromAPI = function () {
+                var strGetURL = "Search/Search/getAllProfiles";
+                $("#divContainer").mask("Searching profiles please wait...");
                 $http({
                     method: "GET", url: strGetURL
                 }).
@@ -24,15 +43,14 @@ var ControllerUserChamber = angular.module('MugurthamApp').controller('Controlle
                     NotifyStatus('2');
                 });
             }
-
-
         }])
 
 
 function setBadgeValue(objData) {
+
     $('#badgeInterestedInMeProfiles').text(objData.InterestedProfiles);
     $('#badgeInterestedInMeProfilesInGblNav').text(objData.InterestedProfiles);
-    
+
     $('#badgeInterestedProfiles').text(objData.InterestedInMeProfiles);
     $('#badgeInterestedProfilesInGblNav').text(objData.InterestedInMeProfiles);
 

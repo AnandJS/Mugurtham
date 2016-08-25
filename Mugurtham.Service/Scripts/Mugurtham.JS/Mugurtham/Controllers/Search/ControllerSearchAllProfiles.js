@@ -11,6 +11,25 @@ var ControllerSearchAllProfiles = angular.module('MugurthamApp').controller('Con
             //AJAX GET REQUEST - GETTING ALL PROFILES
             //===================================================
             $scope.getAllProfiles = function () {
+                if (typeof (Storage) !== "undefined") {
+                    if ((!sessionStorage.getItem('AllProfiles'))) {
+                        $scope.getAllProfilesfromAPI();
+                    }
+                    else {
+                        $scope.getAllProfilesfromSession();
+                    }
+                }
+                else {
+                    $scope.getAllProfilesfromAPI();
+                }
+            }
+
+            $scope.getAllProfilesfromSession = function () {
+                if ((sessionStorage.getItem('AllProfiles'))) {
+                    $scope.initData(JSON.parse(sessionStorage.getItem('AllProfiles')));
+                }
+            }
+            $scope.getAllProfilesfromAPI = function () {
                 var strGetURL = "Search/Search/getAllProfiles";
                 $("#divContainer").mask("Searching profiles please wait...");
                 $http({
@@ -18,15 +37,7 @@ var ControllerSearchAllProfiles = angular.module('MugurthamApp').controller('Con
                 }).
             success(function (data, status, headers, config) {
                 $("#divContainer").unmask();
-                $scope.AllProfiles = data;                                
-                $scope.currentPage = 1;
-                $scope.pageSize = 15;                
-                $scope.SearchedProfiles = data.ProfileBasicInfoViewCoreEntityList;
-                $scope.pageChangeHandler = function (num) {
-                    setTimeout(displayThumbnailSlider, 1000);
-                    console.log('Profiles page changed to ' + num);
-                };                
-                setTimeout(displayThumbnailSlider, 1000);
+                initData(data);
             }).
                 error(function (data, status, headers, config) {
                     $("#divContainer").unmask();
@@ -34,6 +45,18 @@ var ControllerSearchAllProfiles = angular.module('MugurthamApp').controller('Con
                 });
             }
 
+            $scope.initData = function (data) {
+                $scope.AllProfiles = $.parseJSON(sessionStorage.getItem('AllProfiles'));
+                $scope.currentPage = 1;
+                $scope.pageSize = 15;
+                $scope.SearchedProfiles = ($.parseJSON(sessionStorage.getItem('AllProfiles')).ProfileBasicInfoViewCoreEntityList);
+                $scope.profilePhotos = ($.parseJSON(sessionStorage.getItem('AllProfiles')).PhotoCoreEntityList);
+                $scope.pageChangeHandler = function (num) {
+                    setTimeout(displayThumbnailSlider, 1000);
+                    console.log('Profiles page changed to ' + num);
+                };
+                setTimeout(displayThumbnailSlider, 1000);
+            }
             $scope.setProfileIDBySangamAdminForProfilePic = function(ProfileID)
             {
                 localStorage.setItem("ProfileIDBySangamAdminForProfilePic", ProfileID);

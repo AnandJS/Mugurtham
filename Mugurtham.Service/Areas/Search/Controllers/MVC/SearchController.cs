@@ -206,5 +206,11 @@ namespace Mugurtham.Service.Areas.Search.Controllers
             //Response.AddHeader("Content-Encoding", "gzip");
             return this.Json(objProfileBasicViewEntity, JsonRequestBehavior.AllowGet);
         }
+
+        [HttpGet]
+        public ActionResult getTestData()
+        {
+            return this.Json("[{'name':'1','name2':'2'}]", JsonRequestBehavior.AllowGet);
+        }
     }
 }
