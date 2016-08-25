@@ -33,7 +33,7 @@ var ControllerInterestedInMeProfiles = angular.module('MugurthamApp').controller
                 }).
             success(function (data, status, headers, config) {
                 $("#divContainer").unmask();
-                initData(data);
+                $scope.initData(data);
             }).
                 error(function (data, status, headers, config) {
                     $("#divContainer").unmask();

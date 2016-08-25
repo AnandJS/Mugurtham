@@ -33,7 +33,7 @@ var ControllerViewedProfiles = angular.module('MugurthamApp').controller('Contro
                 }).
             success(function (data, status, headers, config) {
                 $("#divContainer").unmask();
-                initData(data);
+                $scope.initData(data);
             }).
                 error(function (data, status, headers, config) {
                     $("#divContainer").unmask();
