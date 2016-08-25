@@ -13,22 +13,18 @@ var ControllerHighlightedProfiles = angular.module('MugurthamApp').controller('C
             //===================================================
             $scope.getHighlightedProfiles = function () {
                 if (typeof (Storage) !== "undefined") {
-                    if ((!sessionStorage.getItem('HiglightedProfiles'))) {
+                    if ((!sessionStorage.getItem('HiglightedProfiles')))
                         $scope.getHighlightedProfilesfromAPI();
-                    }
-                    else {
+                    else
                         $scope.getHighlightedProfilesfromSession();
-                    }
                 }
-                else {
+                else
                     $scope.getHighlightedProfilesfromAPI();
-                }
             }
 
             $scope.getHighlightedProfilesfromSession = function () {
-                if ((sessionStorage.getItem('HiglightedProfiles'))) {
+                if ((sessionStorage.getItem('HiglightedProfiles')))
                     $scope.initData(JSON.parse(sessionStorage.getItem('HiglightedProfiles')));
-                }
             }
             $scope.getHighlightedProfilesfromAPI = function () {
                 var strGetURL = "Search/Search/getAllProfiles";

@@ -11,13 +11,37 @@ var ControllerInterestedInMeProfiles = angular.module('MugurthamApp').controller
             //AJAX GET REQUEST - GETTING ALL PROFILES
             //===================================================
             $scope.getInterestedInMeProfiles = function () {
-                var strGetURL = "User/User/getInterestedInMeProfiles";
+                if (typeof (Storage) !== "undefined") {
+                    if ((!sessionStorage.getItem('InterestedInMeProfiles')))
+                        $scope.getInterestedInMeProfilesfromAPI();
+                    else
+                        $scope.getInterestedInMeProfilesfromSession();
+                }
+                else
+                    $scope.getInterestedInMeProfilesfromAPI();
+            }
+
+            $scope.getInterestedInMeProfilesfromSession = function () {
+                if ((sessionStorage.getItem('InterestedInMeProfiles')))
+                    $scope.initData(JSON.parse(sessionStorage.getItem('InterestedInMeProfiles')));
+            }
+            $scope.getInterestedInMeProfilesfromAPI = function () {
+                var strGetURL = "Search/Search/getAllProfiles";
                 $("#divContainer").mask("Searching profiles please wait...");
                 $http({
                     method: "GET", url: strGetURL
                 }).
             success(function (data, status, headers, config) {
                 $("#divContainer").unmask();
+                initData(data);
+            }).
+                error(function (data, status, headers, config) {
+                    $("#divContainer").unmask();
+                    NotifyStatus('2');
+                });
+            }
+
+            $scope.initData = function (data) {
                 $scope.AllProfiles = data;
                 $scope.currentPage = 1;
                 $scope.pageSize = 15;
@@ -27,11 +51,6 @@ var ControllerInterestedInMeProfiles = angular.module('MugurthamApp').controller
                     console.log('Profiles page changed to ' + num);
                 };
                 setTimeout(displayThumbnailSlider, 1000);
-            }).
-                error(function (data, status, headers, config) {
-                    $("#divContainer").unmask();
-                    NotifyStatus('2');
-                });
             }
         }])
 

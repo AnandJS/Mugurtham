@@ -12,22 +12,18 @@ var ControllerSearchAllProfiles = angular.module('MugurthamApp').controller('Con
             //===================================================
             $scope.getAllProfiles = function () {
                 if (typeof (Storage) !== "undefined") {
-                    if ((!sessionStorage.getItem('AllProfiles'))) {
+                    if ((!sessionStorage.getItem('AllProfiles'))) 
                         $scope.getAllProfilesfromAPI();
-                    }
-                    else {
+                    else 
                         $scope.getAllProfilesfromSession();
-                    }
                 }
-                else {
+                else 
                     $scope.getAllProfilesfromAPI();
-                }
             }
 
             $scope.getAllProfilesfromSession = function () {
-                if ((sessionStorage.getItem('AllProfiles'))) {
+                if ((sessionStorage.getItem('AllProfiles'))) 
                     $scope.initData(JSON.parse(sessionStorage.getItem('AllProfiles')));
-                }
             }
             $scope.getAllProfilesfromAPI = function () {
                 var strGetURL = "Search/Search/getAllProfiles";

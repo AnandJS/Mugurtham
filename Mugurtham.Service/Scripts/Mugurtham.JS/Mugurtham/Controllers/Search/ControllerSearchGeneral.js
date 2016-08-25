@@ -24,13 +24,10 @@ var ControllerSearchGeneral = angular.module('MugurthamApp').controller('Control
                     method: "GET", url: strGetURL
                 }).
             success(function (data, status, headers, config) {
-                getAllProfiles();
+                $scope.getAllGeneralSearchProfiles();
                 $scope.arrSangamID = data.SangamCoreEntity;
                 $scope.arrRoleID = data.RoleCoreEntity;
-                $('#ddlSangam').empty();
-                $.each(data, function (index, value) {
-                    // $('#ddlSangam').append($('<option>').text(value.Name).attr('value', value.ID));
-                })
+                $('#ddlSangam').empty();                
                 getUserByID();
             }).
             error(function (data, status, headers, config) {
@@ -40,7 +37,22 @@ var ControllerSearchGeneral = angular.module('MugurthamApp').controller('Control
             //===================================================
             //AJAX GET REQUEST - GETTING ALL PROFILES
             //===================================================
-            function getAllProfiles() {
+            $scope.getAllGeneralSearchProfiles = function () {
+                if (typeof (Storage) !== "undefined") {
+                    if ((!sessionStorage.getItem('AllProfiles')))
+                        $scope.getAllGeneralSearchProfilesfromAPI();
+                    else
+                        $scope.getAllGeneralSearchProfilesfromSession();
+                }
+                else
+                    $scope.getAllGeneralSearchProfilesfromAPI();
+            }
+
+            $scope.getAllGeneralSearchProfilesfromSession = function () {
+                if ((sessionStorage.getItem('AllProfiles')))
+                    $scope.initData(JSON.parse(sessionStorage.getItem('AllProfiles')));
+            }
+            $scope.getAllGeneralSearchProfilesfromAPI = function () {
                 var strGetURL = "Search/Search/getAllProfiles";
                 $("#divContainer").mask("Searching profiles please wait...");
                 $http({
@@ -48,22 +60,26 @@ var ControllerSearchGeneral = angular.module('MugurthamApp').controller('Control
                 }).
             success(function (data, status, headers, config) {
                 $("#divContainer").unmask();
-                $scope.AllProfiles = data;
-                $scope.currentPage = 1;
-                $scope.pageSize = 15;
-                $scope.SearchedProfiles = data.ProfileBasicInfoViewCoreEntityList;
-                $scope.pageChangeHandler = function (num) {
-                    setTimeout(displayThumbnailSlider, 1000);
-                    console.log('Profiles page changed to ' + num);
-                };
-                setTimeout(displayThumbnailSlider, 1000);
+                initData(data);
             }).
                 error(function (data, status, headers, config) {
                     $("#divContainer").unmask();
                     NotifyStatus('2');
                 });
             }
-          
+
+            $scope.initData = function (data) {
+                $scope.AllProfiles = $.parseJSON(sessionStorage.getItem('AllProfiles'));
+                $scope.currentPage = 1;
+                $scope.pageSize = 15;
+                $scope.SearchedProfiles = ($.parseJSON(sessionStorage.getItem('AllProfiles')).ProfileBasicInfoViewCoreEntityList);
+                $scope.profilePhotos = ($.parseJSON(sessionStorage.getItem('AllProfiles')).PhotoCoreEntityList);
+                $scope.pageChangeHandler = function (num) {
+                    setTimeout(displayThumbnailSlider, 1000);
+                    console.log('Profiles page changed to ' + num);
+                };
+                setTimeout(displayThumbnailSlider, 1000);
+            }
             
         }])
 

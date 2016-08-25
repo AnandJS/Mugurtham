@@ -39,3 +39,11 @@ www.codeproject.com/Articles/420217/DataSet-vs-DataReader
 
 
 
+
+
+Snippets
+=======
+/*
+                $.each(data, function (index, value) {
+                    // $('#ddlSangam').append($('<option>').text(value.Name).attr('value', value.ID));
+                })*/

@@ -14,22 +14,18 @@ var ControllerInterestedProfiles = angular.module('MugurthamApp').controller('Co
 
             $scope.getInterestedProfiles = function () {
                 if (typeof (Storage) !== "undefined") {
-                    if ((!sessionStorage.getItem('InterestedProfiles'))) {
+                    if ((!sessionStorage.getItem('InterestedProfiles'))) 
                         $scope.getInterestedProfilesfromAPI();
-                    }
-                    else {
+                    else 
                         $scope.getInterestedProfilesfromSession();
-                    }
                 }
-                else {
+                else 
                     $scope.getInterestedProfilesfromAPI();
-                }
             }
 
             $scope.getInterestedProfilesfromSession = function () {
-                if ((sessionStorage.getItem('InterestedProfiles'))) {
+                if ((sessionStorage.getItem('InterestedProfiles'))) 
                     $scope.initData(JSON.parse(sessionStorage.getItem('InterestedProfiles')));
-                }
             }
             $scope.getInterestedProfilesfromAPI = function () {
                 var strGetURL = "Search/Search/getAllProfiles";

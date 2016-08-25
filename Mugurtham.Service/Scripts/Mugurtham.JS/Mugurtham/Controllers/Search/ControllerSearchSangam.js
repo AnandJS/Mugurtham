@@ -16,7 +16,7 @@ var ControllerSearchSangam = angular.module('MugurthamApp').controller('Controll
                     method: "GET", url: strGetURL
                 }).
             success(function (data, status, headers, config) {
-                getAllProfiles();
+                $scope.getAllSangamProfiles();
                 $scope.arrSangamID = data.SangamCoreEntity;
                 $scope.arrRoleID = data.RoleCoreEntity;
                 $('#ddlSangam').empty();                
@@ -28,7 +28,22 @@ var ControllerSearchSangam = angular.module('MugurthamApp').controller('Controll
             //===================================================
             //AJAX GET REQUEST - GETTING ALL PROFILES
             //===================================================
-            function getAllProfiles() {
+            $scope.getAllSangamProfiles = function () {
+                if (typeof (Storage) !== "undefined") {
+                    if ((!sessionStorage.getItem('AllProfiles')))
+                        $scope.getAllSangamProfilesfromAPI();
+                    else
+                        $scope.getAllSangamProfilesfromSession();
+                }
+                else
+                    $scope.getAllSangamProfilesfromAPI();
+            }
+
+            $scope.getAllSangamProfilesfromSession = function () {
+                if ((sessionStorage.getItem('AllProfiles')))
+                    $scope.initData(JSON.parse(sessionStorage.getItem('AllProfiles')));
+            }
+            $scope.getAllSangamProfilesfromAPI = function () {
                 var strGetURL = "Search/Search/getAllProfiles";
                 $("#divContainer").mask("Searching profiles please wait...");
                 $http({
@@ -36,20 +51,28 @@ var ControllerSearchSangam = angular.module('MugurthamApp').controller('Controll
                 }).
             success(function (data, status, headers, config) {
                 $("#divContainer").unmask();
-                $scope.AllProfiles = data;
-                $scope.currentPage = 1;
-                $scope.pageSize = 15;
-                $scope.SearchedProfiles = data.ProfileBasicInfoViewCoreEntityList;
-                $scope.pageChangeHandler = function (num) {
-                    setTimeout(displayThumbnailSlider, 1000);
-                    console.log('Profiles page changed to ' + num);
-                };
-                setTimeout(displayThumbnailSlider, 1000);
+                initData(data);
             }).
                 error(function (data, status, headers, config) {
                     $("#divContainer").unmask();
                     NotifyStatus('2');
                 });
+            }
+
+            $scope.initData = function (data) {
+                $scope.AllProfiles = $.parseJSON(sessionStorage.getItem('AllProfiles'));
+                $scope.currentPage = 1;
+                $scope.pageSize = 15;
+                $scope.SearchedProfiles = ($.parseJSON(sessionStorage.getItem('AllProfiles')).ProfileBasicInfoViewCoreEntityList);
+                $scope.profilePhotos = ($.parseJSON(sessionStorage.getItem('AllProfiles')).PhotoCoreEntityList);
+                $scope.pageChangeHandler = function (num) {
+                    setTimeout(displayThumbnailSlider, 1000);
+                    console.log('Profiles page changed to ' + num);
+                };
+                setTimeout(displayThumbnailSlider, 1000);
+            }
+            $scope.setProfileIDBySangamAdminForProfilePic = function (ProfileID) {
+                localStorage.setItem("ProfileIDBySangamAdminForProfilePic", ProfileID);
             }
         }])
 

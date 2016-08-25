@@ -11,22 +11,18 @@ var ControllerUserChamber = angular.module('MugurthamApp').controller('Controlle
             //===================================================
             $scope.geUserChamberBadgeCount = function () {
                 if (typeof (Storage) !== "undefined") {
-                    if ((!sessionStorage.getItem('UserBadgeCount'))) {
+                    if ((!sessionStorage.getItem('UserBadgeCount')))
                         $scope.geUserChamberBadgeCountfromAPI();
-                    }
-                    else {
+                    else
                         $scope.geUserChamberBadgeCountfromSession();
-                    }
                 }
-                else {
+                else
                     $scope.geUserChamberBadgeCountfromAPI();
-                }
             }
 
             $scope.geUserChamberBadgeCountfromSession = function () {
-                if ((sessionStorage.getItem('UserBadgeCount'))) {
+                if ((sessionStorage.getItem('UserBadgeCount')))
                     setBadgeValue(JSON.parse(sessionStorage.getItem('UserBadgeCount')));
-                }
             }
             $scope.geUserChamberBadgeCountfromAPI = function () {
                 var strGetURL = "Search/Search/getAllProfiles";
