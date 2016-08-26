@@ -25,7 +25,7 @@ var ControllerUserChamber = angular.module('MugurthamApp').controller('Controlle
                     setBadgeValue(JSON.parse(sessionStorage.getItem('UserBadgeCount')));
             }
             $scope.geUserChamberBadgeCountfromAPI = function () {
-                var strGetURL = "Search/Search/getAllProfiles";
+                var strGetURL = "User/User/getUserBadgeCount";
                 $("#divContainer").mask("Searching profiles please wait...");
                 $http({
                     method: "GET", url: strGetURL

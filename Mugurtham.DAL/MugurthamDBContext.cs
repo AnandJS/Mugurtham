@@ -18,9 +18,9 @@ namespace Mugurtham.DAL
         /*
          Development Server: data source=(local);initial catalog=Mugurtham;user id=sa;password=Welcome@07
          Demo Server: data source=103.235.104.24;initial catalog=DemoMugurtham;user id=DemoMugurthamAdmin;password=Swingsys@1
-         Test Server: data source=103.235.104.24;initial catalog=TestMugurtham;user id=TestMugurthamAdmin;password=Swingsys@1
+         Test Server: data source=(local);initial catalog=TestMugurtham;user id=TestMugurthamAdmin;password=Swingsys@1
          Production Server: data source=103.235.104.24;initial catalog=ViswakarmaMugurtham;user id=ViswakarmaMugurthamAdmin;password=Swingsys@1
-         Production Server: data source=103.235.104.24;initial catalog=VishwakarmaMugurtham;user id=VishwakarmaMugurthamAdmin;password=Swingsys@!1
+         Production Server: data source=(local);initial catalog=VishwakarmaMugurtham;user id=VishwakarmaMugurthamAdmin;password=Swingsys@!1
          */
 
         public MugurthamDBContext()
