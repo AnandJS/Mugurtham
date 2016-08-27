@@ -1,4 +1,4 @@
-﻿
+﻿C:\workarea\Runtime-MonUp\Source\ST.MomentumonUp\Logs\MOU.STAdmin.Web.%date{yyyyMMdd}.log
 JSON Stringify
 ==============
 http://stackoverflow.com/questions/23446916/getjson-and-return-the-value-string
