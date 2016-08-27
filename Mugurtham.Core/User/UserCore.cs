@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Mugurtham.UOW;
 using Mugurtham.Common.Utilities;
+using System.Data.SqlClient;
+using System.Data;
 
 namespace Mugurtham.Core.User
 {
@@ -12,7 +14,7 @@ namespace Mugurtham.Core.User
     {
         public int Add(ref Mugurtham.Core.User.UserCoreEntity objUserCoreEntity, out string strUserID)
         {
-            strUserID = Helpers.primaryKey();
+            strUserID = Helpers.primaryKey;
             try
             {
                 IUnitOfWork objIUnitOfWork = new UnitOfWork();
@@ -333,6 +335,56 @@ namespace Mugurtham.Core.User
                     objUserCoreEntity.HomePagePath = Constants.HomePagePathForProfileUser;
                 else if (objUserCoreEntity.RoleID == Constants.RoleIDForUserPublic)
                     objUserCoreEntity.HomePagePath = Constants.HomePagePathForPublicUser;
+            }
+            catch (Exception objEx)
+            {
+                Helpers.LogExceptionInFlatFile(objEx);
+            }
+            return 0;
+        }
+
+        /// <summary>
+        /// Creates a new session when logged in
+        /// This implementation has to be swapped to EF logic and not in ADO.Net 
+        /// Changes it asap.
+        /// </summary>
+        /// <returns></returns>
+        public int createSession(
+                                    string SessionID,
+                                    string UserID,
+                                    string LoggedInClientIP
+                                )
+        {
+            try
+            {
+                // Need to call through the ADO wrapper or UOW pattern class. Please replace asap.
+                string strSql = string.Empty;
+                SqlConnection objConnection = new SqlConnection(Helpers.ConnectionString);
+                using (objConnection as IDisposable)
+                {
+                    objConnection.Open();
+                    SqlCommand objCommand = new SqlCommand();
+                    using (objCommand as IDisposable)
+                    {
+                        objCommand.Connection = objConnection;
+                        objCommand.Parameters.AddWithValue("@SessionID", SessionID);
+                        objCommand.Parameters.AddWithValue("@UserID", UserID);
+                        objCommand.Parameters.AddWithValue("@LoggedInClientIP", LoggedInClientIP);
+                        objCommand.CommandText = "INSERT INTO Portalsession (SessionID,UserID,LoggedInClientIP) "+
+                                                 " VALUES ('"+ 
+                                                 objCommand.Parameters["@SessionID"].Value.ToString() + "','"+
+                                                 objCommand.Parameters["@UserID"].Value.ToString() + "','"+
+                                                 objCommand.Parameters["@LoggedInClientIP"].Value.ToString() +
+                                                 "')";
+                        objCommand.ExecuteNonQuery();
+                    }
+                    objCommand.Dispose();
+                    objCommand = null;
+                    objConnection.Close();
+                }
+                objConnection.Dispose();
+                objConnection = null;
+
             }
             catch (Exception objEx)
             {

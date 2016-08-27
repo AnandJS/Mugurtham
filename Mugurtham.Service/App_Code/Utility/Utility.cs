@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Mugurtham.Common.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,14 +12,14 @@ namespace Mugurtham.Service.App_Code.Utility
         {
             /*www.codeproject.com/Articles/420217/DataSet-vs-DataReader*/
             string strConnectionString = string.Empty;
-            strConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["MugurthamConnectionString"].ConnectionString;
+            strConnectionString = Helpers.ConnectionString;
             return strConnectionString;
         }
 
         public static string logFilePath()
         {
             string strLogFilePath = string.Empty;
-            strLogFilePath = System.Configuration.ConfigurationManager.AppSettings["Net4LogFilePath"];
+            strLogFilePath = Helpers.LogFilePath;
             return strLogFilePath;
         }
     }

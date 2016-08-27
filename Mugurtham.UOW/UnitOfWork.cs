@@ -276,7 +276,8 @@ namespace Mugurtham.UOW
 
                 // clean up unmanaged resources
             }
-            _DbContext.Dispose();
+            //never dispose data not getting saved - else analyze and fix to dispose objects
+           // _DbContext.Dispose();
             // Release the unmanaged resource in any case as they will not be 
             // released by GC
 

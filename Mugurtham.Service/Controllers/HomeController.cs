@@ -51,7 +51,7 @@ namespace Mugurtham.Service.Controllers
         }
 
         public void downloadLogFile()
-        {           
+        {
             string strLogText = Helpers.readLogFile(Mugurtham.Service.App_Code.Utility.Utility.logFilePath());
             Response.Clear();
             Response.ClearHeaders();
@@ -93,15 +93,15 @@ namespace Mugurtham.Service.Controllers
             using (objUserCore as IDisposable)
             {
                 inLoginStatus = objUserCore.validateLogin(ref objUserCoreEntity, out boolLogin);
+                if (inLoginStatus == 1)
+                {
+                    objUserCore.createSession(Helpers.primaryKey, objUserCoreEntity.LoginID,
+                                              Request.ServerVariables["REMOTE_ADDR"].ToString());
+                    FormsAuthentication.SetAuthCookie(objUserCoreEntity.LoginID, false);
+                    Session.Timeout = 60;
+                }
             }
-            objUserCore = null;
-            if (inLoginStatus == 1)
-            {
-
-                FormsAuthentication.SetAuthCookie(objUserCoreEntity.LoginID, false);
-                Session.Timeout = 60;
-            }
-            LoggedInUser objLoggedIn = new LoggedInUser(objUserCoreEntity.LoginID);
+            objUserCore = null; LoggedInUser objLoggedIn = new LoggedInUser(objUserCoreEntity.LoginID);
             Session["LoggedInUser"] = objLoggedIn;
             return this.Json(objUserCoreEntity);
         }

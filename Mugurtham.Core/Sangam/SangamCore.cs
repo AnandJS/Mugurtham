@@ -12,7 +12,7 @@ namespace Mugurtham.Core.Sangam
     {
         public int Add(ref Mugurtham.Core.Sangam.SangamCoreEntity objSangamCoreEntity, out string strSangamID)
         {
-            strSangamID = Helpers.primaryKey();
+            strSangamID = Helpers.primaryKey;
             try
             {
                 IUnitOfWork objIUnitOfWork = new UnitOfWork();

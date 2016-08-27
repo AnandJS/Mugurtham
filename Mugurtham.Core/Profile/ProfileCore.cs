@@ -91,7 +91,7 @@ namespace Mugurtham.Core.Profile.API
                     User.UserCoreEntity objUserCoreEntity = new User.UserCoreEntity();
                     using (objUserCoreEntity as IDisposable)
                     {
-                        objUserCoreEntity.ID = Helpers.primaryKey();
+                        objUserCoreEntity.ID = Helpers.primaryKey;
                         objUserCoreEntity.Name = objBasicInfoCoreEntity.Name;
                         objUserCoreEntity.LoginID = strProfileID;
                         objUserCoreEntity.Password = strProfileID; // Helpers.passwordGenerator();

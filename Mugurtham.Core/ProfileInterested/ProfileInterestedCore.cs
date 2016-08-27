@@ -29,7 +29,7 @@ namespace Mugurtham.Core.ProfileInterested
                     Mugurtham.DTO.ProfileInterested.ProfileInterested objDTOProfileInterested = new DTO.ProfileInterested.ProfileInterested();
                     using (objDTOProfileInterested as IDisposable)
                     {
-                        objDTOProfileInterested.ID = Helpers.primaryKey();
+                        objDTOProfileInterested.ID = Helpers.primaryKey;
                         AssignDTOFromEntity(ref objDTOProfileInterested, ref objProfileInterestedCoreEntity);
                     }
                     List<Mugurtham.DTO.ProfileInterested.ProfileInterested> objProfileInterested = new List<DTO.ProfileInterested.ProfileInterested>();

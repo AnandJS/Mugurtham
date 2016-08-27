@@ -12,20 +12,38 @@ namespace Mugurtham.Common.Utilities
     [MugurthamBaseAPIController]
     public static class Helpers
     {
-        static readonly string strLogilePath = ConfigurationManager.AppSettings["LogFilePath"] + "Log_" + DateTime.Now.ToShortDateString().Replace('/', '-') + ".log";
-        
-        public static string getLogFilePath
+        private static readonly string AppKeyLogFilePath = "LogFilePath";
+        private static readonly string AppKeyConnectionstring = "MugurthamConnectionString";
+
+        private static readonly string strLogilePath = ConfigurationManager.AppSettings[AppKeyLogFilePath] + "Log_" + DateTime.Now.ToShortDateString().Replace('/', '-') + ".log";
+        private static readonly string strConnectionstring = System.Configuration.ConfigurationManager.ConnectionStrings[AppKeyConnectionstring].ConnectionString;
+
+        public static string LogFilePath
         {
             get
             {
                 return strLogilePath;
             }
         }
-
-        public static string primaryKey()
+        /// <summary>
+        /// Gets the ConnectionString of the Mugurtham Database
+        /// </summary>
+        public static string ConnectionString
         {
-            return Guid.NewGuid().ToString().Substring(1, 20).Replace("-", "").ToUpper();
+            get
+            {
+                return strConnectionstring;
+            }
         }
+
+        public static string primaryKey
+        {
+            get
+            {
+                return Guid.NewGuid().ToString().Substring(1, 20).Replace("-", "").ToUpper();
+            }
+        }
+
         public static string passwordGenerator()
         {
             return Guid.NewGuid().ToString().Substring(1, 5).Replace("-", "").ToUpper();

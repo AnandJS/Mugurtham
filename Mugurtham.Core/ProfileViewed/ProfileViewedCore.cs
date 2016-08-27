@@ -23,7 +23,7 @@ namespace Mugurtham.Core.ProfileViewed
                     Mugurtham.DTO.ProfileViewed.ProfileViewed objDTOProfileViewed = new DTO.ProfileViewed.ProfileViewed();
                     using (objDTOProfileViewed as IDisposable)
                     {
-                        objDTOProfileViewed.ID = Helpers.primaryKey();
+                        objDTOProfileViewed.ID = Helpers.primaryKey;
                         objDTOProfileViewed.ViewerID = objProfileViewedCoreEntity.ViewerID;
                         objDTOProfileViewed.ViewedID = objProfileViewedCoreEntity.ViewedID;
                     }

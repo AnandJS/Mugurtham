@@ -20,7 +20,7 @@ namespace Mugurtham.Core.Profile.Photo
                     Mugurtham.DTO.Profile.Photo objDTOPhoto = new DTO.Profile.Photo();
                     using (objDTOPhoto as IDisposable)
                     {
-                        objDTOPhoto.ID = Helpers.primaryKey();
+                        objDTOPhoto.ID = Helpers.primaryKey;
                         AssignDTOFromEntity(ref objDTOPhoto, ref objPhotoCoreEntity);
                     }
                     objIUnitOfWork.RepositoryPhoto.Add(objDTOPhoto);

@@ -118,7 +118,7 @@ namespace Mugurtham.Service.Areas.Profile.Controllers.MVC
             {
                 if (item != null)
                 {
-                    strFileName = Helpers.primaryKey();
+                    strFileName = Helpers.primaryKey;
                     strProfilePhotoPath = "/Areas/Profile/Images/ProfilePhoto/" + ProfileID + "/" + strFileName + Path.GetExtension(Path.GetFileName(item.FileName));
                 }
                 //if (Array.Exists(model.FilesToBeUploaded.Split(','), s => s.Equals(item.FileName)))                

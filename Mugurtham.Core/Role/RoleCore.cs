@@ -12,7 +12,7 @@ namespace Mugurtham.Core.Role
     {
         public int Add(ref Mugurtham.Core.Role.RoleCoreEntity objRoleCoreEntity, out string strRoleID)
         {
-            strRoleID = Helpers.primaryKey();
+            strRoleID = Helpers.primaryKey;
             try
             {
                 IUnitOfWork objIUnitOfWork = new UnitOfWork();
