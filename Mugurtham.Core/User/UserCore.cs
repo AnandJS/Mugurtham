@@ -340,5 +340,37 @@ namespace Mugurtham.Core.User
             }
             return 0;
         }
+
+        public int createSession()
+        {
+            try
+            {
+                // Need to call through the ADO wrapper or UOW pattern class. Please replace asap.
+                string strSql = string.Empty;
+                SqlConnection objConnection = new SqlConnection(Helpers.connectionString);
+                using (objConnection as IDisposable)
+                {
+                    SqlCommand objCommand = new SqlCommand();
+                    using (objCommand as IDisposable)
+                    {
+                        objCommand.Parameters.Add("@ID", SqlDbType.Int);
+                        objCommand.Parameters.Add("@Name", SqlDbType.VarChar);
+                        objCommand.CommandText = "INSERT INTO dbo.Test(id, name) VALUES(@ID, @Name)";
+                        objCommand.ExecuteNonQuery();
+                    }
+                    objCommand.Dispose();
+                    objCommand = null;
+                    objConnection.Close();
+                }
+                objConnection.Dispose();
+                objConnection = null;
+
+            }
+            catch (Exception objEx)
+            {
+                Helpers.LogExceptionInFlatFile(objEx);
+            }
+            return 0;
+        }
     }
 }
