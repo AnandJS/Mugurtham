@@ -1,5 +1,15 @@
-﻿$(document).ready(function () {
+﻿
+$(document).ready(function () {
+     
+    //setSessionData();
 
+});
+
+
+
+
+function setSessionData() {
+    alert('setSessionData method called');
     if (typeof (Storage) !== "undefined") {
 
         // Global check to avoid API service roundtrip call each time during page load
@@ -73,16 +83,16 @@
             alert((sessionStorage.getItem('InterestedInMeProfiles')) + 'From Session Storage3');*/
         }
     }// Check for session storage support in browser
-});
+};
 
 
 function removeSessionData() {
-        sessionStorage.removeItem('IsSessionStorageSet');
-        sessionStorage.removeItem('AllProfiles');
-        sessionStorage.removeItem('HiglightedProfiles');
-        sessionStorage.removeItem('InterestedProfiles');
-        sessionStorage.removeItem('InterestedInMeProfiles');
-        sessionStorage.removeItem('RecentlyJoinedProfiles');
-        sessionStorage.removeItem('UserBadgeCount');
-        sessionStorage.removeItem('ViewedProfiles');
+    sessionStorage.removeItem('IsSessionStorageSet');
+    sessionStorage.removeItem('AllProfiles');
+    sessionStorage.removeItem('HiglightedProfiles');
+    sessionStorage.removeItem('InterestedProfiles');
+    sessionStorage.removeItem('InterestedInMeProfiles');
+    sessionStorage.removeItem('RecentlyJoinedProfiles');
+    sessionStorage.removeItem('UserBadgeCount');
+    sessionStorage.removeItem('ViewedProfiles');
 };

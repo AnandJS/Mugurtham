@@ -1,4 +1,8 @@
 ﻿
+Log4Net - File & Database configuration
+=======================================
+https://logging.apache.org/log4net/release/config-examples.html
+
 JSON Stringify
 ==============
 http://stackoverflow.com/questions/23446916/getjson-and-return-the-value-string
