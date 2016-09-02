@@ -15,9 +15,7 @@ namespace Mugurtham.Common.Utilities
         {
             if (objLog.IsDebugEnabled)
             {
-                objLog.Info("===============================================================================" + "\r\n");
                 Task.Run(() => objLog.Debug(strDebug));
-                objLog.Info("*********************************************************************************" + "\r\n");
             }
             return 0;
         }
@@ -26,9 +24,7 @@ namespace Mugurtham.Common.Utilities
         {
             if (objLog.IsDebugEnabled)
             {
-                objLog.Info("===============================================================================" + "\r\n");
                 Task.Run(() => objLog.Info(strInformation));
-                objLog.Info("*********************************************************************************" + "\r\n");
             }
             return 0;
         }
@@ -37,9 +33,7 @@ namespace Mugurtham.Common.Utilities
         {
             if (objLog.IsDebugEnabled)
             {
-                objLog.Info("===============================================================================" + "\r\n");
                 Task.Run(() => objLog.Error(strError));
-                objLog.Info("*********************************************************************************" + "\r\n");
             }
             return 0;
         }
@@ -48,9 +42,7 @@ namespace Mugurtham.Common.Utilities
         {
             if (objLog.IsDebugEnabled)
             {
-                objLog.Info("===============================================================================" + "\r\n");
                 Task.Run(() => objLog.Fatal(strFatal));
-                objLog.Info("*********************************************************************************" + "\r\n");
             }
             return 0;
         }

@@ -1,6 +1,6 @@
 ﻿
+
 $(document).ready(function () {
-     
     //setSessionData();
 
 });
@@ -9,7 +9,6 @@ $(document).ready(function () {
 
 
 function setSessionData() {
-    alert('setSessionData method called');
     if (typeof (Storage) !== "undefined") {
 
         // Global check to avoid API service roundtrip call each time during page load
