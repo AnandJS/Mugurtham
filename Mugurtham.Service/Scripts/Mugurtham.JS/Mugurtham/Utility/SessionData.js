@@ -1,7 +1,7 @@
 ﻿
 
 $(document).ready(function () {
-    //setSessionData();
+    setSessionData();
 
 });
 

@@ -33,7 +33,8 @@ namespace Mugurtham.Service
         protected void Application_Error(object sender, EventArgs e)
         {
             Exception exception = Server.GetLastError();
-            Mugurtham.Common.Utilities.Helpers.LogMessage(exception.StackTrace);
+            Common.Utilities.AsyncLogger.Error(exception.Message);
+            Common.Utilities.AsyncLogger.Error(exception.StackTrace);            
             //HttpContext.Current.Response.Write(exception.StackTrace);
             Server.ClearError();
             //Response.Redirect("/Home/Error");
