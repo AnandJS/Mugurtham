@@ -402,8 +402,9 @@
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\Controllers\UserChamber\ControllerInterestedProfiles.js" />
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\Controllers\View\ControllerFullView.js" />
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\Login\Login.js" />
+    <Content Include="Scripts\Mugurtham.JS\Mugurtham\Utility\Helper.js" />
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\Utility\SessionData.js" />
-    <Content Include="Scripts\Mugurtham.JS\Mugurtham\Utility\UserValidation.js" />
+    <Content Include="Scripts\Mugurtham.JS\Mugurtham\Utility\Validation.js" />
     <Content Include="Scripts\Mugurtham.JS\Paging\angular-table.min.js" />
     <Content Include="Scripts\Mugurtham.JS\Paging\dirPagination.js" />
     <Content Include="Scripts\Mugurtham.JS\Paging\dirPagination.tpl.html" />
