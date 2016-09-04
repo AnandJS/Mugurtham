@@ -94,6 +94,4 @@ function removeSessionData() {
     sessionStorage.removeItem('RecentlyJoinedProfiles');
     sessionStorage.removeItem('UserBadgeCount');
     sessionStorage.removeItem('ViewedProfiles');
-    toastr.success('Session killed');
-
 };

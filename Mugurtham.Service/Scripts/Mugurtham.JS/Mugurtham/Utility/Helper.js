@@ -16,7 +16,6 @@ window.onbeforeunload = function (event) {
 // This function is for global scope
 $(function () {
     $("#tabLogout").click(function () {
-        if (confirm('Are you sure to logout?'))
             removeSessionData();
     });
 
