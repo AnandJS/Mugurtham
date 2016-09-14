@@ -4,32 +4,62 @@ THIS CONTROLLER IS SPECIFICALLY FOR ALL-PROFILES PAGE ON SEARCH MODULE
 ==========================================================================================
 */
 var ControllerSearchProfileID = angular.module('MugurthamApp').controller('ControllerSearchProfileID',
-        ['$http', '$scope', function ($http, $scope) {
+        ['$http', '$scope', '$filter', function ($http, $scope, $filter) {
 
-            $scope.ControllerName = 'ControllerSearchProfileID';           
+            $scope.ControllerName = 'ControllerSearchProfileID';
             //===================================================
             //AJAX GET REQUEST - GET PROFILE BY PROFILEID
             //===================================================
             $scope.getByProfileID = function () {
+                if (typeof (Storage) !== "undefined") {
+                    if ((!sessionStorage.getItem('AllProfiles')))
+                        $scope.getAllProfilesfromAPI();
+                    else
+                        $scope.getAllProfilesfromSession();
+                }
+                else
+                    $scope.getAllProfilesfromAPI();
+            }
 
+            $scope.getAllProfilesfromSession = function () {
+                if ((sessionStorage.getItem('AllProfiles')))
+                    $scope.initData(JSON.parse(sessionStorage.getItem('AllProfiles')));
+            }
+            $scope.getAllProfilesfromAPI = function () {
+                var strGetURL = "Search/Search/getAllProfiles";
+                $("#divContainer").mask("Searching profiles please wait...");
                 $http({
-                    method: "GET", url: '/SearchAPI/AllProfilesAPI/getByProfileID/' + $scope.frmData[0].ProfileID
+                    method: "GET", url: strGetURL
                 }).
             success(function (data, status, headers, config) {
-                if (data.BasicInfoCoreEntity.ProfileID != null) {                    
-                    $('#divProfileBasicView').show();
-                    $scope.AllProfiles = data;
-                }
-                else {
-                    $('#divProfileBasicView').hide();
-                }
-                setTimeout(displayThumbnailSlider, 1000);
+                $("#divContainer").unmask();
+                initData(data);
             }).
                 error(function (data, status, headers, config) {
+                    $("#divContainer").unmask();
                     NotifyStatus('2');
                 });
             }
 
+            $scope.initData = function (data) {
+                $scope.MyAllProfiles = data;
+                $scope.AllProfilesSearch = data.ProfileBasicInfoViewCoreEntityList;
+                $scope.AllProfiles = [];
+                //angular.forEach($scope.AllProfiles, function (item) {
+                //});
+                if ($scope.frmData[0].ProfileID.length) {
+                    $.each($scope.AllProfilesSearch, function (index, element) {
+                        if ($scope.AllProfilesSearch[index].MugurthamProfileID.toLowerCase() === $scope.frmData[0].ProfileID.toLowerCase()) {
+                            $scope.AllProfiles.push(element);
+                            return false;
+                        }
+                    });
+                }
+                else {
+                    return false;
+                }
+                setTimeout(displayThumbnailSlider, 1000);
+            }
             $scope.hideDiv = function () {
                 $('#divProfileBasicView').hide();
             }
