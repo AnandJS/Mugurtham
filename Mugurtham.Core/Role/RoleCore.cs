@@ -95,7 +95,7 @@ namespace Mugurtham.Core.Role
                 IUnitOfWork objIUnitOfWork = new UnitOfWork();
                 using (objIUnitOfWork as IDisposable)
                 {
-                    foreach (Mugurtham.DTO.Role.Role objSangam in objIUnitOfWork.RepositoryRole.GetAll().ToList())
+                    foreach (Mugurtham.DTO.Role.Role objSangam in objIUnitOfWork.RepositoryRole.GetAll().ToList().OrderBy(x => x.Name))
                     {
                         Mugurtham.DTO.Role.Role _objSangam = objSangam;
                         using (_objSangam as IDisposable)

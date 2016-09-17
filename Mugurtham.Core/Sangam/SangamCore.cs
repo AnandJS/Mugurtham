@@ -97,7 +97,7 @@ namespace Mugurtham.Core.Sangam
                 IUnitOfWork objIUnitOfWork = new UnitOfWork();
                 using (objIUnitOfWork as IDisposable)
                 {
-                    foreach (Mugurtham.DTO.Sangam.Sangam objSangam in objIUnitOfWork.RepositorySangam.GetAll().Where(p => p.IsActivated == "1").ToList())
+                    foreach (Mugurtham.DTO.Sangam.Sangam objSangam in objIUnitOfWork.RepositorySangam.GetAll().Where(p => p.IsActivated == "1").ToList().OrderBy(x => x.Name))
                     {
                         Mugurtham.DTO.Sangam.Sangam _objSangam = objSangam;
                         using (_objSangam as IDisposable)
