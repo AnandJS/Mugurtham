@@ -61,9 +61,13 @@ namespace Mugurtham.Service.Areas.MugurthamAdmin.Controllers.API
         [HttpPut]
         public void Put([FromBody]SangamCoreEntity objSangamCoreEntity)
         {
+            decimal? lastProfileIDNo = 0;
             SangamCore objSangamCore = new SangamCore();
             using (objSangamCore as IDisposable)
             {
+                if (!string.IsNullOrWhiteSpace(objSangamCore.GetByID(objSangamCoreEntity.ID).LastProfileIDNo.ToString()))
+                    lastProfileIDNo = objSangamCore.GetByID(objSangamCoreEntity.ID).LastProfileIDNo;
+                objSangamCoreEntity.LastProfileIDNo = lastProfileIDNo;
                 objSangamCore.Edit(ref objSangamCoreEntity);
             }
             objSangamCore = null;
