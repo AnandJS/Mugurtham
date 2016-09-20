@@ -1,4 +1,8 @@
 ﻿
+To Open from FB link after login directly to the full view page
+======================================================================
+http://stackoverflow.com/questions/19518846/mvc-session-expires-continue-where-left
+
 Log4Net - File & Database configuration
 =======================================
 https://logging.apache.org/log4net/release/config-examples.html
