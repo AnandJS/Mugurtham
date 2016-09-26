@@ -49,10 +49,12 @@ var ControllerInterestedProfiles = angular.module('MugurthamApp').controller('Co
                 $scope.pageSize = 15;
                 $scope.SearchedProfiles = data.ProfileBasicInfoViewCoreEntityList;
                 $scope.pageChangeHandler = function (num) {
+                    $("html, body").animate({ scrollTop: 220 }, "slow");
                     setTimeout(displayThumbnailSlider, 1000);
                     console.log('Profiles page changed to ' + num);
                 };
                 setTimeout(displayThumbnailSlider, 1000);
+                toastr.success('Interested Profiles loaded Successfully');
             }
 
             /*
@@ -69,6 +71,7 @@ var ControllerInterestedProfiles = angular.module('MugurthamApp').controller('Co
                 $scope.pageSize = 15;
                 $scope.SearchedProfiles = data.ProfileBasicInfoViewCoreEntityList;
                 $scope.pageChangeHandler = function (num) {
+                    $("html, body").animate({ scrollTop: 220 }, "slow");                    
                     setTimeout(displayThumbnailSlider, 1000);
                     console.log('Profiles page changed to ' + num);
                 };

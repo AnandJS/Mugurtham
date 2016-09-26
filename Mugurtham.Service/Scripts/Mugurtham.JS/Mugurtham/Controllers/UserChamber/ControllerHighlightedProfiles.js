@@ -50,10 +50,12 @@ var ControllerHighlightedProfiles = angular.module('MugurthamApp').controller('C
                 $scope.SearchedProfiles = data.ProfileBasicInfoViewCoreEntityList;
                 $scope.profilePhotos = data.PhotoCoreEntityList;
                 $scope.pageChangeHandler = function (num) {
+                    $("html, body").animate({ scrollTop: 220 }, "slow");
                     setTimeout(displayThumbnailSlider, 1000);
                     console.log('Profiles page changed to ' + num);
                 };
                 setTimeout(displayThumbnailSlider, 1000);
+                toastr.success('Highlighted Profiles loaded Successfully');
             }
 
         }])

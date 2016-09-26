@@ -66,6 +66,7 @@ var ControllerSearchSangam = angular.module('MugurthamApp').controller('Controll
                 $scope.SearchedProfiles = ($.parseJSON(sessionStorage.getItem('AllProfiles')).ProfileBasicInfoViewCoreEntityList);
                 $scope.profilePhotos = ($.parseJSON(sessionStorage.getItem('AllProfiles')).PhotoCoreEntityList);
                 $scope.pageChangeHandler = function (num) {
+                    $("html, body").animate({ scrollTop: 220 }, "slow");
                     setTimeout(displayThumbnailSlider, 1000);
                     console.log('Profiles page changed to ' + num);
                 };

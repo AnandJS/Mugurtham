@@ -20,7 +20,6 @@ namespace Mugurtham.Service.Areas.Search.Controllers.API
 
         public HttpResponseMessage getByProfileID(string ID)
         {
-            raiseErrorForSample();
             ProfileCore objProfCore = null;
             if (!string.IsNullOrWhiteSpace(ID))
             {
@@ -33,6 +32,9 @@ namespace Mugurtham.Service.Areas.Search.Controllers.API
               Configuration.Formatters.JsonFormatter);
         }
 
+        /// <summary>
+        /// This method is created for sending the errorID to the enduser
+        /// </summary>
         public void raiseErrorForSample()
         {
             var resp = new HttpResponseMessage(HttpStatusCode.NotFound)
