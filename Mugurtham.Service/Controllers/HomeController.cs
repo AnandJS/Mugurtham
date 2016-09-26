@@ -25,6 +25,10 @@ namespace Mugurtham.Service.Controllers
 
         public ActionResult Logout()
         {
+            // facebook - link click - 
+            // give the URL like this -- localhost:1072/View/FullView/FullView/PVS1066
+            // then we are getting the reurnurl  - public ActionResult Logout(string returnURL)
+            //the issue is => # -> breaking the rest of the URL
             Session.Abandon();
             FormsAuthentication.SignOut();
             return RedirectToAction("Index");
