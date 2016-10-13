@@ -191,7 +191,6 @@ namespace Mugurtham.Service.Areas.Profile.Controllers.MVC
         [HttpPost]
         public ActionResult SaveHoroscopeImage(HttpPostedFileBase file, string ProfileID)
         {
-            //string ProfileID = "TRY1006";
             Mugurtham.Core.Login.LoggedInUser objLoggedIn = (Mugurtham.Core.Login.LoggedInUser)Session["LoggedInUser"];
             if (file != null && file.ContentLength > 0)
                 try
@@ -211,30 +210,31 @@ namespace Mugurtham.Service.Areas.Profile.Controllers.MVC
                     {
                         objDir.Delete(true);
                     }
-
                     string path = Path.Combine(Server.MapPath("~/Areas/Profile/Images/ProfilePhoto/" + ProfileID + "/Horoscope/" + ProfileID + Path.GetExtension(Path.GetFileName(file.FileName))));
-                    file.SaveAs(path);
                     string strProfileHoroPath = "/Areas/Profile/Images/ProfilePhoto/" + ProfileID + "/Horoscope/" + ProfileID + Path.GetExtension(Path.GetFileName(file.FileName));
-                    Mugurtham.Core.Profile.Horoscope.HoroscopeCore objHoroscopeCore = new Core.Profile.Horoscope.HoroscopeCore();
-                    using (objHoroscopeCore as IDisposable)
+                    if (
+                    Path.GetExtension(Path.GetFileName(file.FileName)).ToString().ToLower() == ".jpg".ToString().ToLower() ||
+                    Path.GetExtension(Path.GetFileName(file.FileName)).ToString().ToLower() == ".jpeg".ToString().ToLower() ||
+                    Path.GetExtension(Path.GetFileName(file.FileName)).ToString().ToLower() == ".gif".ToString().ToLower() ||
+                    Path.GetExtension(Path.GetFileName(file.FileName)).ToString().ToLower() == ".png".ToString().ToLower()
+                    )
                     {
-                        Mugurtham.Core.Profile.Horoscope.HoroscopeCoreEntity objHoroscopeCoreEntity = new Core.Profile.Horoscope.HoroscopeCoreEntity();
-                        using (objHoroscopeCoreEntity as IDisposable)
+                        file.SaveAs(path);
+                        Mugurtham.Core.Profile.Horoscope.HoroscopeCore objHoroscopeCore = new Core.Profile.Horoscope.HoroscopeCore();
+                        using (objHoroscopeCore as IDisposable)
                         {
-                            objHoroscopeCoreEntity = objHoroscopeCore.GetByProfileID(ProfileID);
-                            objHoroscopeCoreEntity.Path = strProfileHoroPath;
-                            if (!string.IsNullOrEmpty(strProfileHoroPath))
-                                objHoroscopeCore.updateHoroscope(ref objHoroscopeCoreEntity);
+                            Mugurtham.Core.Profile.Horoscope.HoroscopeCoreEntity objHoroscopeCoreEntity = new Core.Profile.Horoscope.HoroscopeCoreEntity();
+                            using (objHoroscopeCoreEntity as IDisposable)
+                            {
+                                objHoroscopeCoreEntity = objHoroscopeCore.GetByProfileID(ProfileID);
+                                objHoroscopeCoreEntity.Path = strProfileHoroPath;
+                                if (!string.IsNullOrEmpty(strProfileHoroPath))
+                                    objHoroscopeCore.updateHoroscope(ref objHoroscopeCoreEntity);
+                            }
+                            objHoroscopeCoreEntity = null;
                         }
-                        objHoroscopeCoreEntity = null;
+                        objHoroscopeCore = null;
                     }
-                    objHoroscopeCore = null;
-                    /*if (
-                    Path.GetExtension(Path.GetFileName(item.FileName)).ToString().ToLower() == ".jpg".ToString().ToLower() ||
-                    Path.GetExtension(Path.GetFileName(item.FileName)).ToString().ToLower() == ".jpeg".ToString().ToLower() ||
-                    Path.GetExtension(Path.GetFileName(item.FileName)).ToString().ToLower() == ".gif".ToString().ToLower() ||
-                    Path.GetExtension(Path.GetFileName(item.FileName)).ToString().ToLower() == ".png".ToString().ToLower()
-                    )*/
                 }
                 catch (Exception ex)
                 {
@@ -246,7 +246,5 @@ namespace Mugurtham.Service.Areas.Profile.Controllers.MVC
             }
             return Redirect("/Mugurtham#/Horoscope");
         }
-
-
     }
 }
