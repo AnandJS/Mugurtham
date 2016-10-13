@@ -29,6 +29,7 @@ namespace Mugurtham.UOW
         private Mugurtham.Repository.ProfileViewed.IProfileViewed _IProfileViewed;
         private Mugurtham.Repository.ProfileInterested.IProfileInterested _IProfileInterested;
         private Mugurtham.Repository.Profile.Photo.IPhoto _IPhoto;
+        private Mugurtham.Repository.Profile.Horoscope.IHoroscope _IHoroscope;
 
         public UnitOfWork()
         {
@@ -229,6 +230,18 @@ namespace Mugurtham.UOW
                     _IPhoto = new Mugurtham.Repository.Profile.Photo.Photo(_DbContext);
                 }
                 return _IPhoto;
+            }
+        }
+
+        public Mugurtham.Repository.Profile.Horoscope.IHoroscope RepositoryHoroscope
+        {
+            get
+            {
+                if (_IHoroscope == null)
+                {
+                    _IHoroscope = new Mugurtham.Repository.Profile.Horoscope.Horoscope(_DbContext);
+                }
+                return _IHoroscope;
             }
         }
 

@@ -11,8 +11,8 @@ using Mugurtham.Core.Profile.Photo;
 
 namespace Mugurtham.Service.Areas.Profile.Controllers.MVC
 {
-    [MugurthamAuthorizeAttribute(Mugurtham.Core.Constants.RoleIDForSangamAdmin, 
-                                 Mugurtham.Core.Constants.RoleIDForUserProfile, 
+    [MugurthamAuthorizeAttribute(Mugurtham.Core.Constants.RoleIDForSangamAdmin,
+                                 Mugurtham.Core.Constants.RoleIDForUserProfile,
                                  Mugurtham.Core.Constants.RoleIDForMugurthamAdmin)]
     public class ProfileController : MugurthamBaseController
     {
@@ -62,7 +62,7 @@ namespace Mugurtham.Service.Areas.Profile.Controllers.MVC
             if (file != null && file.ContentLength > 0)
                 try
                 {
-                    Mugurtham.Core.Login.LoggedInUser objLoggedIn = (Mugurtham.Core.Login.LoggedInUser)Session["LoggedInUser"];                    
+                    Mugurtham.Core.Login.LoggedInUser objLoggedIn = (Mugurtham.Core.Login.LoggedInUser)Session["LoggedInUser"];
                     Mugurtham.Core.BasicInfo.BasicInfoCore objBasicInfoCore = new Core.BasicInfo.BasicInfoCore();
                     using (objBasicInfoCore as IDisposable)
                     {
@@ -185,9 +185,68 @@ namespace Mugurtham.Service.Areas.Profile.Controllers.MVC
             PhotoCore objPhotoCore = new PhotoCore();
             using (objPhotoCore as IDisposable)
                 objPhotoCore.Delete(ID);
-            objPhotoCore = null;           
+            objPhotoCore = null;
             return this.Json("Success", JsonRequestBehavior.AllowGet);
         }
+        [HttpPost]
+        public ActionResult SaveHoroscopeImage(HttpPostedFileBase file, string ProfileID)
+        {
+            //string ProfileID = "TRY1006";
+            Mugurtham.Core.Login.LoggedInUser objLoggedIn = (Mugurtham.Core.Login.LoggedInUser)Session["LoggedInUser"];
+            if (file != null && file.ContentLength > 0)
+                try
+                {
+                    string strProfileHoroFolderPath = Path.Combine(Server.MapPath("~/Areas/Profile/Images/ProfilePhoto/" + ProfileID + "/Horoscope"));
+
+                    if (!Directory.Exists(strProfileHoroFolderPath))
+                        Directory.CreateDirectory(strProfileHoroFolderPath);
+
+                    System.IO.DirectoryInfo objDirectoryInfo = new DirectoryInfo(strProfileHoroFolderPath);
+
+                    foreach (FileInfo objFile in objDirectoryInfo.GetFiles())
+                    {
+                        objFile.Delete();
+                    }
+                    foreach (DirectoryInfo objDir in objDirectoryInfo.GetDirectories())
+                    {
+                        objDir.Delete(true);
+                    }
+
+                    string path = Path.Combine(Server.MapPath("~/Areas/Profile/Images/ProfilePhoto/" + ProfileID + "/Horoscope/" + ProfileID + Path.GetExtension(Path.GetFileName(file.FileName))));
+                    file.SaveAs(path);
+                    string strProfileHoroPath = "/Areas/Profile/Images/ProfilePhoto/" + ProfileID + "/Horoscope/" + ProfileID + Path.GetExtension(Path.GetFileName(file.FileName));
+                    Mugurtham.Core.Profile.Horoscope.HoroscopeCore objHoroscopeCore = new Core.Profile.Horoscope.HoroscopeCore();
+                    using (objHoroscopeCore as IDisposable)
+                    {
+                        Mugurtham.Core.Profile.Horoscope.HoroscopeCoreEntity objHoroscopeCoreEntity = new Core.Profile.Horoscope.HoroscopeCoreEntity();
+                        using (objHoroscopeCoreEntity as IDisposable)
+                        {
+                            objHoroscopeCoreEntity = objHoroscopeCore.GetByProfileID(ProfileID);
+                            objHoroscopeCoreEntity.Path = strProfileHoroPath;
+                            if (!string.IsNullOrEmpty(strProfileHoroPath))
+                                objHoroscopeCore.updateHoroscope(ref objHoroscopeCoreEntity);
+                        }
+                        objHoroscopeCoreEntity = null;
+                    }
+                    objHoroscopeCore = null;
+                    /*if (
+                    Path.GetExtension(Path.GetFileName(item.FileName)).ToString().ToLower() == ".jpg".ToString().ToLower() ||
+                    Path.GetExtension(Path.GetFileName(item.FileName)).ToString().ToLower() == ".jpeg".ToString().ToLower() ||
+                    Path.GetExtension(Path.GetFileName(item.FileName)).ToString().ToLower() == ".gif".ToString().ToLower() ||
+                    Path.GetExtension(Path.GetFileName(item.FileName)).ToString().ToLower() == ".png".ToString().ToLower()
+                    )*/
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.Message = "ERROR:" + ex.Message.ToString();
+                }
+            else
+            {
+                ViewBag.Message = "You have not specified a file.";
+            }
+            return Redirect("/Mugurtham#/Horoscope");
+        }
+
 
     }
 }

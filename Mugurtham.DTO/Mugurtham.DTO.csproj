@@ -52,6 +52,7 @@
     <Compile Include="Profile\Career.cs" />
     <Compile Include="Profile\Contact.cs" />
     <Compile Include="Profile\Family.cs" />
+    <Compile Include="Profile\Horoscope.cs" />
     <Compile Include="Profile\Location.cs" />
     <Compile Include="Profile\Photo.cs" />
     <Compile Include="Profile\Raasi.cs" />

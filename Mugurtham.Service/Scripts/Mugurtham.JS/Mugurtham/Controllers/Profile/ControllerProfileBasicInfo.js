@@ -48,6 +48,7 @@ var ControllerProfileBasicInfo = angular.module('MugurthamApp').controller('Cont
             $scope.arrProfileCreatedBy = ['Self', 'Parents', 'Gaurdian', 'Relative', 'Friend'];
             $scope.arrSubCaste = ['Kamalar', 'Achari'];
             $scope.arrStar = ['Anusham', 'Aswini', 'Avittam', 'Aayilyam', 'Bharani', 'Chithirai', 'Hastham', 'Karthigai', 'Kettai', 'Makam', 'Moolam', 'Mrigasheersham', 'Pooraadam', 'Pooram', 'Poorattathi', 'Poosam', 'Punarpoosam', 'Revathi', 'Rohini', 'Sadayam', 'Swaathi', 'Thiruvaathirai', 'Thiruvonam', 'Uthiraadam', 'Uthiram', 'Uthirattathi', 'Visaakam'];
+            $scope.arrPaadham = ['1', '2', '3', '4'];
 
             if ($rootScope.globalProfileID != 'New')
                 getBasicInfoByProfileID();
@@ -85,6 +86,8 @@ var ControllerProfileBasicInfo = angular.module('MugurthamApp').controller('Cont
             $scope.ElanUserID = '';
             $scope.PhotoPath = '';
             $scope.ProfileCreatedDate = '';
+            $scope.PlaceOfBirth = '';
+            $scope.Paadham = '';
 
             //========================================
             //GLOBAL EVENT HANDLER FOR THIS CONTROLLER
@@ -133,7 +136,8 @@ var ControllerProfileBasicInfo = angular.module('MugurthamApp').controller('Cont
                 $scope.PartnerExpectation = $scope.frmData[0].PartnerExpectation;
                 $scope.PhotoPath = $scope.frmData[0].PhotoPath;
                 $scope.ProfileCreatedDate = $scope.frmData[0].ProfileCreatedDate;
-
+                $scope.PlaceOfBirth = $scope.frmData[0].PlaceOfBirth;
+                $scope.Paadham = $scope.frmData[0].Paadham;
             }
 
             //=========================================
@@ -174,8 +178,10 @@ var ControllerProfileBasicInfo = angular.module('MugurthamApp').controller('Cont
                         Drinking: $scope.Drinking,
                         AboutMe: $scope.AboutMe,
                         PartnerExpectation: $scope.PartnerExpectation,
-                        PhotoPath: $scope.PhotoPath
-                    }),
+                        PhotoPath: $scope.PhotoPath,
+                        PlaceOfBirth: $scope.PlaceOfBirth,
+                        Paadham: $scope.Paadham
+            }),
                     headers: { 'content-Type': 'application/x-www-form-urlencoded' }
                 }).
             success(function (data, status, headers, config) {
@@ -234,8 +240,10 @@ var ControllerProfileBasicInfo = angular.module('MugurthamApp').controller('Cont
                         PartnerExpectation: $scope.PartnerExpectation,
                         ElanUserID: $scope.ElanUserID,
                         PhotoPath: $scope.PhotoPath,
-                        CreatedDate: $scope.frmData[0].ProfileCreatedDate
-                    }),
+                        CreatedDate: $scope.frmData[0].ProfileCreatedDate,
+                        PlaceOfBirth: $scope.frmData[0].PlaceOfBirth,
+                        Paadham: $scope.Paadham
+            }),
                     headers: { 'content-Type': 'application/x-www-form-urlencoded' }
                 }).
             success(function (data, status, headers, config) {
@@ -293,8 +301,10 @@ var ControllerProfileBasicInfo = angular.module('MugurthamApp').controller('Cont
                     Drinking: data.Drinking,
                     AboutMe: data.AboutMe,
                     PartnerExpectation: data.PartnerExpectation,
-                    PhotoPath: data.PhotoPath
-                });
+                    PhotoPath: data.PhotoPath,
+                    PlaceOfBirth: data.PlaceOfBirth,
+                    Paadham: data.Paadham
+            });
 
                 /*Logic to add 1 day to JQuery Formatting*/
                 //<!--http://www.miuaiga.com/index.cfm/2009/11/11/Javascript-How-To-Add-a-Number-of-Days-to-a-Date-->

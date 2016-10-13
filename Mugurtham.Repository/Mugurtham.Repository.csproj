@@ -62,6 +62,8 @@
     <Compile Include="Dashboard\Sangam\IDashboard.cs" />
     <Compile Include="Profile\Family\Family.cs" />
     <Compile Include="Profile\Family\IFamily.cs" />
+    <Compile Include="Profile\Horoscope\Horoscope.cs" />
+    <Compile Include="Profile\Horoscope\IHoroscope.cs" />
     <Compile Include="Profile\Location\ILocation.cs" />
     <Compile Include="Profile\Location\Location.cs" />
     <Compile Include="Profile\Photo\IPhoto.cs" />

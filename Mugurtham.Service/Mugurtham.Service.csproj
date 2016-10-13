@@ -231,6 +231,7 @@
     <Content Include="App_Themes\MugurthamTheme\css\Mugurtham\Toastr\toaster.min.css" />
     <Content Include="App_Themes\MugurthamTheme\css\Mugurtham\Toastr\toastr.min.css" />
     <Content Include="Areas\HomePage\asset\css\bootstrap.min.css" />
+    <Content Include="Areas\HomePage\asset\html\Blog.html" />
     <Content Include="Areas\HomePage\asset\js\bootstrap.min.js" />
     <Content Include="Areas\HomePage\css\animate.css" />
     <Content Include="Areas\HomePage\css\colors\cyan.css" />

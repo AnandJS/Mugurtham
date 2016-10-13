@@ -138,6 +138,12 @@ function landingPageCounter() {
         } else {
             localStorage.landingFirstTimeCount = 0;
         }
+
+        //Temporariryly writen to show the popup all time for fb notification
+        // Need to remove asap
+        localStorage.landingFirstTimeCount = 0;
+
+
         if (Number(localStorage.landingFirstTimeCount) < 2) {
             $('#squarespaceModal').modal('show');
         }

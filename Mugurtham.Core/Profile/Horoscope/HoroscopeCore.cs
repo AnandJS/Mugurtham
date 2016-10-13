@@ -77,9 +77,14 @@ namespace Mugurtham.Core.Profile.Horoscope
                         objDTOAmsam = null;
                     }
                     objAmsamCoreEntity = null;
+                    objHoroscopeCoreEntity.Path = GetByProfileID(objHoroscopeCoreEntity.ProfileID).Path;
+                    updateHoroscope(ref objHoroscopeCoreEntity);
+                    objIUnitOfWork.commit();
+                    objIUnitOfWork = null;
+
                 }
-                objIUnitOfWork.commit();
-                objIUnitOfWork = null;
+                objHoroscopeCoreEntity = null;
+
             }
             catch (Exception objEx)
             {
@@ -87,18 +92,81 @@ namespace Mugurtham.Core.Profile.Horoscope
             }
             return 0;
         }
+        public int Add(string ProfileID)
+        {
+            int status = -1;
+            try
+            {
+                IUnitOfWork objIUnitOfWork = new UnitOfWork();
+                using (objIUnitOfWork as IDisposable)
+                {
+                    Mugurtham.DTO.Profile.Horoscope objDTOHoroscope = new DTO.Profile.Horoscope();
+                    using (objDTOHoroscope as IDisposable)
+                    {
+                        objDTOHoroscope.ProfileID = ProfileID;
+                    }
+                    objIUnitOfWork.RepositoryHoroscope.Add(objDTOHoroscope);
+                    objIUnitOfWork.commit();
+                    objDTOHoroscope = null;
+                }
+                objIUnitOfWork = null;
+                status = 0;
+            }
+            catch (Exception objEx)
+            {
+                Helpers.LogExceptionInFlatFile(objEx);
+                status = -1;
+            }
+            return status;
+        }
+        public int updateHoroscope(ref HoroscopeCoreEntity objHoroscopeCoreEntity)
+        {
+            int status = -1;
+            try
+            {
+                Mugurtham.DTO.Profile.Horoscope objDTOHoroscope = new DTO.Profile.Horoscope();
+                using (objDTOHoroscope as IDisposable)
+                {
+                    IUnitOfWork objIUnitOfWork = new UnitOfWork();
+                    using (objIUnitOfWork as IDisposable)
+                    {
+                        objDTOHoroscope.ProfileID = objHoroscopeCoreEntity.ProfileID;
+                        objDTOHoroscope.Path = objHoroscopeCoreEntity.Path;
+                        objDTOHoroscope.DasaBalance = objHoroscopeCoreEntity.DasaBalance;
+                        objDTOHoroscope.Year = objHoroscopeCoreEntity.Year;
+                        objDTOHoroscope.Month = objHoroscopeCoreEntity.Month;
+                        objDTOHoroscope.Day = objHoroscopeCoreEntity.Day;
+                        objDTOHoroscope.ModifiedBy = ""; // Fill the modifier
+                        objIUnitOfWork.RepositoryHoroscope.Edit(objDTOHoroscope);
+                        objIUnitOfWork.commit();
+                        objIUnitOfWork = null;
+                    }
+                    objDTOHoroscope = null;
+                    status = 0;
+                }
+            }
+            catch (Exception objEx)
+            {
+                Helpers.LogExceptionInFlatFile(objEx);
+                status = -1;
+            }
+            return status;
+        }
         public HoroscopeCoreEntity GetByProfileID(string strProfileID)
         {
             HoroscopeCoreEntity objHoroscopeCoreEntity = new HoroscopeCoreEntity();
+            Mugurtham.DTO.Profile.Raasi objRaasi = new Mugurtham.DTO.Profile.Raasi();
+            Mugurtham.DTO.Profile.Amsam objAmsam = new Mugurtham.DTO.Profile.Amsam();
+            Mugurtham.DTO.Profile.Horoscope objHoroscope = new Mugurtham.DTO.Profile.Horoscope();
             try
             {
-                Mugurtham.DTO.Profile.Raasi objRaasi = new Mugurtham.DTO.Profile.Raasi();
-                Mugurtham.DTO.Profile.Amsam objAmsam = new Mugurtham.DTO.Profile.Amsam();
+
                 IUnitOfWork objUOW = new UnitOfWork();
                 using (objUOW as IDisposable)
                 {
                     objRaasi = objUOW.RepositoryRaasi.GetAll().ToList().Where(p => p.ProfileID.Trim().ToLower() == strProfileID.Trim().ToLower()).FirstOrDefault();
                     objAmsam = objUOW.RepositoryAmsam.GetAll().ToList().Where(p => p.ProfileID.Trim().ToLower() == strProfileID.Trim().ToLower()).FirstOrDefault();
+                    objHoroscope = objUOW.RepositoryHoroscope.GetAll().ToList().Where(p => p.ProfileID.Trim().ToLower() == strProfileID.Trim().ToLower()).FirstOrDefault();
                 }
                 objUOW = null;
                 //Getting Raasi Data
@@ -161,10 +229,24 @@ namespace Mugurtham.Core.Profile.Horoscope
                     }
                 }
                 objAmsam = null;
+
+                objHoroscopeCoreEntity.DasaBalance = objHoroscope.DasaBalance;
+                objHoroscopeCoreEntity.Year = objHoroscope.Year;
+                objHoroscopeCoreEntity.Month = objHoroscope.Month;
+                objHoroscopeCoreEntity.Day = objHoroscope.Day;
+                objHoroscopeCoreEntity.Path = objHoroscope.Path;
+
             }
             catch (Exception objEx)
             {
                 Helpers.LogExceptionInFlatFile(objEx);
+            }
+            finally
+            {
+                /*objHoroscopeCoreEntity = null;
+                objRaasi = null;
+                objAmsam = null;
+                objHoroscope = null;*/
             }
             return objHoroscopeCoreEntity;
         }

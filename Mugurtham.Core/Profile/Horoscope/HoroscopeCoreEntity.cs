@@ -8,6 +8,10 @@ namespace Mugurtham.Core.Profile.Horoscope
 {
     public class HoroscopeCoreEntity
     {
+        public Decimal? Year { get; set; }
+        public Decimal? Month { get; set; }
+        public Decimal? Day { get; set; }
+
         public string ProfileID { get; set; }
         public string RaasiKattam1 { get; set; }
         public string RaasiKattam2 { get; set; }
@@ -33,5 +37,10 @@ namespace Mugurtham.Core.Profile.Horoscope
         public string AmsamKattam10 { get; set; }
         public string AmsamKattam11 { get; set; }
         public string AmsamKattam12 { get; set; }
+        public string HoroscopeID { get; set; }
+        public string DasaBalance { get; set; }
+        public string FamilyType { get; set; }                
+        public string Path { get; set; }
+        public string ModifiedBy { get; set; }
     }
 }

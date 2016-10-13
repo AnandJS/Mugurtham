@@ -43,6 +43,7 @@ namespace Mugurtham.DAL
         public DbSet<ProfileViewed> ProfileViewed { get; set; }
         public DbSet<ProfileInterested> ProfileInterested { get; set; }
         public DbSet<Photo> Photo { get; set; }
+        public DbSet<Horoscope> Horoscope { get; set; }
         
 
     }

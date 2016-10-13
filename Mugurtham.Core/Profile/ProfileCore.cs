@@ -20,6 +20,7 @@ using Mugurtham.Core.Profile.View;
 using Mugurtham.Core.Profile.Photo;
 using System.Data.SqlClient;
 using System.Data;
+using Mugurtham.Core.Profile.Horoscope;
 
 namespace Mugurtham.Core.Profile.API
 {
@@ -37,6 +38,8 @@ namespace Mugurtham.Core.Profile.API
         public SangamCoreEntity SangamCoreEntity { get; set; }
         public RaasiCoreEntity RaasiCoreEntity { get; set; }
         public AmsamCoreEntity AmsamCoreEntity { get; set; }
+        public HoroscopeCoreEntity HoroscopeCoreEntity { get; set; }
+
         //The below properties are used onnly for filtering angularjs array properries
         // Filters for the General Search
         public string SangamID { get; set; }
@@ -312,7 +315,10 @@ namespace Mugurtham.Core.Profile.API
                     using (objAmsamCore as IDisposable)
                         objProfileCore.AmsamCoreEntity = objAmsamCore.GetByProfileID(strProfileID);
                     objRaasiCore = null;
-
+                    HoroscopeCore objHoroscopeCore = new HoroscopeCore();
+                    using (objHoroscopeCore as IDisposable)
+                        objProfileCore.HoroscopeCoreEntity = objHoroscopeCore.GetByProfileID(strProfileID);
+                        objHoroscopeCore = null;
                     validateUserAccessToThisProfile(objProfileCore.BasicInfoCoreEntity.ProfileID, ref objProfileCore, objLoggedIn);
                 }
             }

@@ -12,6 +12,10 @@ var ControllerProfileHoroscope = angular.module('MugurthamApp').controller('Cont
             $scope.frmData = []; // To store the values of the controls in form                        
             $scope.globalProfileID = $rootScope.globalProfileID;
             getHoroscopeByProfileID();
+            $scope.arrDasaBalance = ['1', '2', '3', '4'];
+            $scope.arrYear = ['1', '2', '3', '4'];
+            $scope.arrMonth = ['1', '2', '3', '4'];
+            $scope.arrDays = ['1', '2', '3', '4'];
             // Storing Raasi varaibales
             $scope.RaasiKattam1 = '';
             $scope.RaasiKattam2 = '';
@@ -38,6 +42,13 @@ var ControllerProfileHoroscope = angular.module('MugurthamApp').controller('Cont
             $scope.AmsamKattam10 = '';
             $scope.AmsamKattam11 = '';
             $scope.AmsamKattam12 = '';
+            //Dasabukthi
+            $scope.DasaBalance = '';
+            $scope.Year = '';
+            $scope.Month = '';
+            $scope.Day = '';
+            $scope.Path = '';
+            $scope.ModifiedBy = '';
             //========================================
             //GLOBAL EVENT HANDLER FOR THIS CONTROLLER
             //=========================================
@@ -79,6 +90,11 @@ var ControllerProfileHoroscope = angular.module('MugurthamApp').controller('Cont
                 $scope.AmsamKattam10 = getKattamValues('ckAmsamKattam10_');
                 $scope.AmsamKattam11 = getKattamValues('ckAmsamKattam11_');
                 $scope.AmsamKattam12 = getKattamValues('ckAmsamKattam12_');
+                //Dasabukthi
+                $scope.DasaBalance = $scope.frmData[0].DasaBalance;
+                $scope.Year = $scope.frmData[0].Year;
+                $scope.Month = $scope.frmData[0].Month;
+                $scope.Day = $scope.frmData[0].Day;
             }
             function getKattamValues(strKattamIndex) {
                 var selectedItems = '';
@@ -102,11 +118,28 @@ var ControllerProfileHoroscope = angular.module('MugurthamApp').controller('Cont
             //AJAX GET REQUEST - GETTING HOROSCOPE BY ID
             //===================================================
             function getHoroscopeByProfileID() {
-                var strGetURL = '/mugurthamapi/HoroscopeAPI/' + $scope.globalProfileID;
+
+                if ($rootScope.globalProfileID == '') { //Uploading
+                }
+                else { // Viewing
+                    localStorage.setItem("ProfileID", $rootScope.globalProfileID);
+                }
+                $rootScope.globalProfileID = localStorage.getItem("ProfileID");                
+                $('#ProfileID').val($rootScope.globalProfileID);                
+                var strGetURL = '/mugurthamapi/HoroscopeAPI/' + $rootScope.globalProfileID;
                 $http({
                     method: "GET", url: strGetURL
                 }).
             success(function (data, status, headers, config) {
+                $scope.frmData.push({
+                    //Dasabukthi
+                    DasaBalance: data.DasaBalance,
+                    Year: data.Year,
+                    Month: data.Month,
+                    Day: data.Day,
+                    Path: data.Path
+                });
+                
                 // Maintainstate for Raasi checkbox
                 setKattamValues('ckKattam1_', data.RaasiKattam1);
                 setKattamValues('ckKattam2_', data.RaasiKattam2);
@@ -133,6 +166,7 @@ var ControllerProfileHoroscope = angular.module('MugurthamApp').controller('Cont
                 setKattamValues('ckAmsamKattam10_', data.AmsamKattam10);
                 setKattamValues('ckAmsamKattam11_', data.AmsamKattam11);
                 setKattamValues('ckAmsamKattam12_', data.AmsamKattam12);
+
             }).
             error(function (data, status, headers, config) {
                 NotifyErrorStatus(data, status);
@@ -168,8 +202,13 @@ var ControllerProfileHoroscope = angular.module('MugurthamApp').controller('Cont
                         AmsamKattam9: $scope.AmsamKattam9,
                         AmsamKattam10: $scope.AmsamKattam10,
                         AmsamKattam11: $scope.AmsamKattam11,
-                        AmsamKattam12: $scope.AmsamKattam12
-                    }),
+                        AmsamKattam12: $scope.AmsamKattam12,
+                        //Dasabukthi
+                        DasaBalance: $scope.frmData[0].DasaBalance,
+                        Year: $scope.frmData[0].Year,
+                        Month: $scope.frmData[0].Month,
+                        Day: $scope.frmData[0].Day
+                    }),                    
                     headers: { 'content-Type': 'application/x-www-form-urlencoded' }
                 }).
             success(function (data, status, headers, config) {

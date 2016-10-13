@@ -36,5 +36,7 @@ namespace Mugurtham.UOW
         Mugurtham.Repository.ProfileInterested.IProfileInterested RepositoryProfileInterested { get; }
         // To get Photos
         Mugurtham.Repository.Profile.Photo.IPhoto RepositoryPhoto { get; }
+        // To get Horoscope Details
+        Mugurtham.Repository.Profile.Horoscope.IHoroscope RepositoryHoroscope { get; }
     }
 }

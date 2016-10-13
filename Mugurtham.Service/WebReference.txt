@@ -1,4 +1,13 @@
-﻿locale IDs
+﻿
+Angular JS Tutorial - (A better one)
+====================================
+http://tutorials.jenkov.com/angularjs/custom-directives.html
+
+Send WhatsApp messages from C#
+================================
+https://whatsmate.github.io/2016-02-24-send-whatsapp-message-csharp/
+
+locale IDs
 ============
 https://msdn.microsoft.com/en-us/goglobal/bb964664.aspx
 
