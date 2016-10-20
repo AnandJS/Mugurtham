@@ -12,10 +12,10 @@ var ControllerProfileHoroscope = angular.module('MugurthamApp').controller('Cont
             $scope.frmData = []; // To store the values of the controls in form                        
             $scope.globalProfileID = $rootScope.globalProfileID;
             getHoroscopeByProfileID();
-            $scope.arrDasaBalance = ['1', '2', '3', '4'];
-            $scope.arrYear = ['1', '2', '3', '4'];
-            $scope.arrMonth = ['1', '2', '3', '4'];
-            $scope.arrDays = ['1', '2', '3', '4'];
+            $scope.arrDasaBalance = ['Surya', ' Chandra', ' Chevva', ' Budha', ' Guru', ' Sukra', ' Sani', ' Rahu', ' Ketu'];
+            $scope.arrYear = ['1', '2', '3', '4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20'];
+            $scope.arrMonth = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
+            $scope.arrDays = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20','21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'];
             // Storing Raasi varaibales
             $scope.RaasiKattam1 = '';
             $scope.RaasiKattam2 = '';

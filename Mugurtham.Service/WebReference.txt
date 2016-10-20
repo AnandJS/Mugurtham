@@ -1,4 +1,11 @@
-﻿
+﻿Get host name using JQuwery
+==========================================
+http://stackoverflow.com/questions/4815559/how-to-get-domain-name-from-url-using-jquery
+
+Check null values in SQLReader Object
+==========================================
+http://stackoverflow.com/questions/1772025/sql-data-reader-handling-null-column-values
+
 Angular JS Tutorial - (A better one)
 ====================================
 http://tutorials.jenkov.com/angularjs/custom-directives.html

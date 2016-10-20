@@ -205,7 +205,7 @@
 
                                 </ul>
                             </li>
-                            <li><a onclick="localStorage.landingFirstTimeCount=0; window.location = '/Home/Logout';" id="tabLogout" data-toggle="tab" style="cursor: pointer">Logout</a></li>
+                            <li><a onclick="window.location = '/Home/Logout';" id="tabLogout" data-toggle="tab" style="cursor: pointer">Logout</a></li>
                         </ul>
                     </div>
                     <!-- /.navbar-collapse -->
@@ -284,10 +284,10 @@
             <img src="/Images/Mugurtham/Flag.jpg" height="19" width="35" />
             Powered by <img src="/favicon.ico" height="25" width="40" />  Mugurtham &#174
             &nbsp; @strProductVersion
-            <br /> Reach Mugurtham at &nbsp;&nbsp;<i class="fa fa-phone-square">&nbsp;&nbsp;+91 96770 94206</i> <i class="fa fa-envelope">&nbsp;&nbsp;info@mugurtham.com</i>
+            <br /> Reach Mugurtham at &nbsp;&nbsp;<i class="fa fa-phone-square">&nbsp;&nbsp;+91 8608073820</i> <i class="fa fa-envelope">&nbsp;&nbsp;info@mugurtham.com</i>
         </div>
     </div>
-    <div class="modal fade alert" id="squarespaceModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal fade alert" id="squarespaceModal" >
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -337,9 +337,9 @@
     @Scripts.Render("~/bundles/MugurthamValidation")
 
     <script type="text/javascript">
-        $(document).ready(function () {
+        $(document).ready(function () {           
             landingPageCounter();
-            setUserStyleLocale('@objLoggedIn.themeID');
+            setTimeout(setUserStyleLocale, 1000, '@objLoggedIn.themeID');
         });
     </script>
 

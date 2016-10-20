@@ -15,6 +15,7 @@ namespace Mugurtham.DTO.Profile
         public DateTime ModifiedDate { get; set; }
         [Key]
         public string ProfileID { get; set; }
+        public string Name { get; set; }
         public string EMail { get; set; }
         public string MobileNumber { get; set; }
         public string LandLineNumber { get; set; }

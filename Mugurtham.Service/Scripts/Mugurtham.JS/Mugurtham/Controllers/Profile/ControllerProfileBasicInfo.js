@@ -49,6 +49,7 @@ var ControllerProfileBasicInfo = angular.module('MugurthamApp').controller('Cont
             $scope.arrSubCaste = ['Kamalar', 'Achari'];
             $scope.arrStar = ['Anusham', 'Aswini', 'Avittam', 'Aayilyam', 'Bharani', 'Chithirai', 'Hastham', 'Karthigai', 'Kettai', 'Makam', 'Moolam', 'Mrigasheersham', 'Pooraadam', 'Pooram', 'Poorattathi', 'Poosam', 'Punarpoosam', 'Revathi', 'Rohini', 'Sadayam', 'Swaathi', 'Thiruvaathirai', 'Thiruvonam', 'Uthiraadam', 'Uthiram', 'Uthirattathi', 'Visaakam'];
             $scope.arrPaadham = ['1', '2', '3', '4'];
+            $scope.arrGothram = ['Aamat','Aatreya','Agastya','Ainakula','Akshinthala','Angirasa','Atri','Audala','Bharadwaj','Bhargava','Bhrigu','Brihadbala','Chandratre','Dhananjaya','Dubey','Garg','Gaur','Gautam','Harinama','Haritasya','Haritha','Jamadagni','Jilakara','Kadam','Kaplansh','Kashyapa','Kaundinya','Kaushal','Kaushika','Khiaivar','Kutsa','Manu','Marichi','Mouthkalya','Nageswar','Nanda','Nandhi','Neithrubha Kashyapa','Pachori','Parashar','Sabarniya','Sandilya','Sankruthi','Shadamarshana','Shringi','Srivatsa','Upamanyu','Upreti','Uttam','Vashista','Vathul','Vishnu','Vishrava','Vishvamitra'];
 
             if ($rootScope.globalProfileID != 'New')
                 getBasicInfoByProfileID();

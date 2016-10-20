@@ -29,7 +29,29 @@ function (data, status) {
     $("#container").unmask();
     if (data.LoginStatus == '1') {
         location.reload();
-        window.location = '/' + data.HomePagePath;
+
+        //Setting the global popup for advertisenment
+        if (typeof (Storage) !== "undefined") {
+            localStorage.setItem("landingFirstTimeCount", "0");
+        }
+        else {
+            toastr.error("Sorry, your browser does not support web storage...");
+        }
+        var homePagePath = '/' + data.HomePagePath;
+        if (window.location.href.indexOf('FullView') !== -1)
+            homePagePath = '/Mugurtham#' + window.location.href.split('/Mugurtham/')[1];
+        else if (window.location.href.indexOf('Dashboard') !== -1)
+            homePagePath = '/' + data.HomePagePath;
+        else if (window.location.href.indexOf('ProfileID') !== -1)
+            homePagePath = '/' + data.HomePagePath;
+        else if (window.location.href.indexOf('undefined') !== -1)
+            homePagePath = '/' + data.HomePagePath;
+        else if (window.location.href.indexOf('Home') !== -1)
+            homePagePath = '/' + data.HomePagePath;
+        else
+            homePagePath = '/Mugurtham#' + window.location.href.split('/Mugurtham/')[1];
+
+        window.location = homePagePath;
     }
     else if (data.LoginStatus == '2') {
         alert('In valid User');

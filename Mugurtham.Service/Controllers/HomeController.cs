@@ -18,20 +18,24 @@ namespace Mugurtham.Service.Controllers
     {
         //
         // GET: /Home/
-        public ActionResult Index()
+        public ActionResult Index(string returnURL)
         {
             return View();
         }
 
-        public ActionResult Logout()
+        public ActionResult Logout(string returnURL)
         {
-            // facebook - link click - 
-            // give the URL like this -- localhost:1072/View/FullView/FullView/PVS1066
-            // then we are getting the reurnurl  - public ActionResult Logout(string returnURL)
-            //the issue is => # -> breaking the rest of the URL
+            string _returnURL = string.Empty;
             Session.Abandon();
             FormsAuthentication.SignOut();
-            return RedirectToAction("Index");
+            if (!string.IsNullOrEmpty(returnURL))
+                _returnURL = returnURL;
+            else
+                _returnURL = "Home";
+            return RedirectToAction("Index", new
+            {
+                returnURL = _returnURL
+            });
         }
 
         public ActionResult UploadFile()

@@ -15,5 +15,6 @@ namespace Mugurtham.Core.Contact
         public string ResidentialAddress { get; set; }
         public string Relationship { get; set; }
         public string TimeToCall { get; set; }
+        public string Name { get; set; }
     }
 }

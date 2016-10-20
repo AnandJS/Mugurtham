@@ -21,6 +21,7 @@ var ControllerProfileContact = angular.module('MugurthamApp').controller('Contro
             $scope.ResidentAddress = '';
             $scope.Relationship = '';
             $scope.TimeToCall = '';
+            $scope.Name = '';
 
             //========================================
             //GLOBAL EVENT HANDLER FOR THIS CONTROLLER
@@ -44,6 +45,7 @@ var ControllerProfileContact = angular.module('MugurthamApp').controller('Contro
                 $scope.ResidentAddress = $scope.frmData[0].ResidentAddress;
                 $scope.Relationship = $scope.frmData[0].Relationship;
                 $scope.TimeToCall = $scope.frmData[0].TimeToCall;
+                $scope.Name = $scope.frmData[0].Name;
             }
 
             //===================================================
@@ -58,7 +60,8 @@ var ControllerProfileContact = angular.module('MugurthamApp').controller('Contro
                         LandlineNumber: $scope.LandlineNumber,
                         ResidentialAddress: $scope.ResidentAddress,
                         Relationship: $scope.Relationship,
-                        TimeToCall: $scope.TimeToCall
+                        TimeToCall: $scope.TimeToCall,
+                        Name: $scope.Name
                     }),
                     headers: { 'content-Type': 'application/x-www-form-urlencoded' }
                 }).
@@ -82,7 +85,8 @@ var ControllerProfileContact = angular.module('MugurthamApp').controller('Contro
                         LandlineNumber: $scope.LandlineNumber,
                         ResidentialAddress: $scope.ResidentAddress,
                         Relationship: $scope.Relationship,
-                        TimeToCall: $scope.TimeToCall
+                        TimeToCall: $scope.TimeToCall,
+                        Name: $scope.Name
                     }),
                     headers: { 'content-Type': 'application/x-www-form-urlencoded' }
                 }).
@@ -111,7 +115,8 @@ var ControllerProfileContact = angular.module('MugurthamApp').controller('Contro
                     LandlineNumber: data.LandlineNumber,
                     ResidentAddress: data.ResidentialAddress,
                     Relationship: data.Relationship,
-                    TimeToCall: data.TimeToCall
+                    TimeToCall: data.TimeToCall,
+                    Name: data.Name
                 });
             }).
             error(function (data, status, headers, config) {

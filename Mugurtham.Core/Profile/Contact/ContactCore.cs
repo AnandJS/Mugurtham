@@ -90,6 +90,7 @@ namespace Mugurtham.Core.Contact
         {
             try
             {
+                objDTOContact.Name = objContactCoreEntity.Name;
                 objDTOContact.Address = objContactCoreEntity.ResidentialAddress;
                 objDTOContact.ConvinientTimeToCall = objContactCoreEntity.TimeToCall;
                 objDTOContact.EMail = objContactCoreEntity.Email;
@@ -111,6 +112,7 @@ namespace Mugurtham.Core.Contact
         {
             try
             {
+                objContactCoreEntity.Name = objDTOContact.Name;
                 objContactCoreEntity.ResidentialAddress = objDTOContact.Address;
                 objContactCoreEntity.TimeToCall = objDTOContact.ConvinientTimeToCall;
                 objContactCoreEntity.Email = objDTOContact.EMail;

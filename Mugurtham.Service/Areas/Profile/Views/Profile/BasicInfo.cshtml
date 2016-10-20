@@ -185,8 +185,11 @@
                         <hr />
                         <div class="form-group">
                             <label for="Gothra(m)" class="col-lg-3 control-label">{{'BIGOTHRM'  | translate}}</label>
-                            <div class="col-lg-9">
-                                <input class="form-control" type="text" id="txtProfileGothram" name="txtProfileGothram" ng-model="frmData[0].Gothram">
+                            <div class="col-lg-9">                                
+                                <select class="form-control" id="ddlGothram" ng-model="frmData[0].Gothram">
+                                    <option value="0">--Select--</option>
+                                    <option ng-repeat="arrGothram in arrGothram" value="{{arrGothram}}">{{arrGothram}}</option>
+                                </select>
                             </div>
                         </div>
                         <div class="form-group">

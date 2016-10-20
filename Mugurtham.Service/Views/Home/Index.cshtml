@@ -9,7 +9,7 @@
     @*HttpContext.Current.Server.MapPath("Index.cshml")*@
     <script>
         $(document).ready(function () {
-            window.location.href = "/Areas/HomePage/index.html";
+            window.location.href = "/Areas/HomePage/index.html?" + window.location.href.replace("%2FMugurtham#", "/Mugurtham").split('?')[1];
         });
     </script>
 </body>

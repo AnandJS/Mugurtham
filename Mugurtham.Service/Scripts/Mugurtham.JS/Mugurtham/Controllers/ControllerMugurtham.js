@@ -133,19 +133,12 @@ function NotifyErrorStatus(data, status) {
 //This method listens to open the Modal window only when loggedin first time
 function landingPageCounter() {
     if (typeof (Storage) !== "undefined") {
-        if (localStorage.landingFirstTimeCount) {
-            localStorage.landingFirstTimeCount = Number(localStorage.landingFirstTimeCount) + 1;
-        } else {
-            localStorage.landingFirstTimeCount = 0;
-        }
-
-        //Temporariryly writen to show the popup all time for fb notification
-        // Need to remove asap
-        localStorage.landingFirstTimeCount = 0;
-
-
-        if (Number(localStorage.landingFirstTimeCount) < 2) {
-            $('#squarespaceModal').modal('show');
+        if (localStorage.getItem("landingFirstTimeCount"))
+        {
+            if (Number(localStorage.getItem("landingFirstTimeCount")) == 0) {
+                $('#squarespaceModal').modal('show');
+                localStorage.setItem("landingFirstTimeCount", "1");
+            }
         }
     } else {
         toastr.error("Sorry, your browser does not support web storage...");

@@ -163,5 +163,13 @@ namespace Mugurtham.Common.Utilities
             objSB.Clear();
             objSB = null;
         }
+
+        public static string validateNullString(System.Data.SqlClient.SqlDataReader objSqlDataReader, string parameter)
+        {
+            string data = string.Empty;
+            if (objSqlDataReader[parameter] != null)
+                data = objSqlDataReader[parameter].ToString();
+            return data;
+        }
     }
 }

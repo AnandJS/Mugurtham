@@ -318,7 +318,7 @@ namespace Mugurtham.Core.Profile.API
                     HoroscopeCore objHoroscopeCore = new HoroscopeCore();
                     using (objHoroscopeCore as IDisposable)
                         objProfileCore.HoroscopeCoreEntity = objHoroscopeCore.GetByProfileID(strProfileID);
-                        objHoroscopeCore = null;
+                    objHoroscopeCore = null;
                     validateUserAccessToThisProfile(objProfileCore.BasicInfoCoreEntity.ProfileID, ref objProfileCore, objLoggedIn);
                 }
             }
@@ -521,7 +521,7 @@ namespace Mugurtham.Core.Profile.API
                         while (objSqlDataReader.Read())
                         {
                             ProfileBasicInfoViewCoreEntity objProfileBasicInfoViewCoreEntity = new ProfileBasicInfoViewCoreEntity();
-                            objProfileBasicInfoViewCoreEntity.SangamProfileID = objSqlDataReader["SangamProfileID"].ToString();
+                            objProfileBasicInfoViewCoreEntity.SangamProfileID = Helpers.validateNullString(objSqlDataReader, "SangamProfileID");
                             objProfileBasicInfoViewCoreEntity.MugurthamProfileID = objSqlDataReader["MugurthamProfileID"].ToString();
                             objProfileBasicInfoViewCoreEntity.Name = objSqlDataReader["Name"].ToString();
                             objProfileBasicInfoViewCoreEntity.Gender = objSqlDataReader["Gender"].ToString();
