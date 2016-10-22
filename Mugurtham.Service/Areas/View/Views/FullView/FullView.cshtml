@@ -36,19 +36,19 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td class="col-lg-2">{{ 'BINAME' | translate }}</td>
+                                <td class="col-lg-2"><b>{{ 'BINAME' | translate }}</b></td>
                                 <td>{{AllProfiles.SangamCoreEntity.Name }}</td>
                             </tr>
                             <tr>
-                                <td class="col-lg-2">{{ 'REFCONTNUM' | translate }}</td>
+                                <td class="col-lg-2"><b>{{ 'REFCONTNUM' | translate }}</b></td>
                                 <td>{{AllProfiles.SangamCoreEntity.ContactNumber }}</td>
                             </tr>
                             <tr>
-                                <td class="col-lg-2">{{ 'VWCTADRS' | translate }}</td>
+                                <td class="col-lg-2"><b>{{ 'VWCTADRS' | translate }}</b></td>
                                 <td>{{AllProfiles.SangamCoreEntity.Address }}</td>
                             </tr>
                             <tr>
-                                <td class="col-lg-2">{{ 'VWABTSGM' | translate }}</td>
+                                <td class="col-lg-2"><b>{{ 'VWABTSGM' | translate }}</b></td>
                                 <td>{{AllProfiles.SangamCoreEntity.AboutSangam }}</td>
                             </tr>
                         </table>
@@ -69,53 +69,46 @@
                 ====================================================
                 -->
             <div class="col-lg-1"></div>
-            <div class="col-lg-10">
+            <div class="col-lg-10 table-responsive">
+
                 <div class="panel panel-primary bgImage FormShadow">
                     <div class="panel-heading">
                         <h3 class="panel-title text-center">
                             {{ 'GENABOUT' | translate }} - {{AllProfiles.BasicInfoCoreEntity.Name}}
                         </h3>
                     </div>
-                    <div class="panel-body" class="col-lg-12">
-                        <table width="100%">
-                            <tr>
-                                <td width="5%">
-                                    <img class="FormShadow" src="{{AllProfiles.BasicInfoCoreEntity.PhotoPath}}" width="180" height="190" />
-                                    <!--
-                                    <a class="example-image-link" href="{{AllProfiles.BasicInfoCoreEntity.PhotoPath}}" data-lightbox="example-set" data-title="Click the right half of the image to move forward.">
-                                        <img class="FormShadow" src="{{AllProfiles.BasicInfoCoreEntity.PhotoPath}}" width="180" height="190" />
-                                    </a>
-                                    <span style="visibility:hidden" ng-repeat="objProfilePhoto in AllProfiles.PhotoCoreEntityList">
-                                        <a class="example-image-link" href="{{objProfilePhoto.PhotoPath}}" data-lightbox="example-set" data-title="Click the right half of the image to move forward."></a>
-                                    </span>
-                                        -->
-                                </td>
-                                <td>
-                                    <table width="100%">
-                                        <tr>
-                                            <td class="text-justify">
-                                                <blockquote>
-                                                    {{ 'BIABTME' | translate }}:<br />
-                                                    <p>{{AllProfiles.BasicInfoCoreEntity.AboutMe}}</p>
-                                                </blockquote>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-justify">
-                                                <blockquote>
-                                                    {{ 'BIPRTNTEXPTN' | translate }}:<br />
-                                                    <p>{{AllProfiles.BasicInfoCoreEntity.PartnerExpectation}}</p>
-                                                </blockquote>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                            </tr>
-                        </table>
+                    <div class="panel-body table-responsive text-center">
+                        <div class="col-lg-3">
+                            <img class="FormShadow" src="{{AllProfiles.BasicInfoCoreEntity.PhotoPath}}" width="180" height="190" />
+                        </div>
+                        <div class="col-lg-9 table-responsive">
+                            <table>
+                                <tr>
+                                    <td class="text-justify">
+                                        <blockquote>
+                                            <b>
+                                                {{ 'BIABTME' | translate }}
+                                            </b>
+                                            :<br />
+                                            <p>{{AllProfiles.BasicInfoCoreEntity.AboutMe}}</p>
+                                        </blockquote>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-justify">
+                                        <blockquote>
+                                            <b>
+                                                {{ 'BIPRTNTEXPTN' | translate }}
+                                            </b>
+                                            :<br />
+                                            <p>{{AllProfiles.BasicInfoCoreEntity.PartnerExpectation}}</p>
+                                        </blockquote>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
                     </div>
                 </div>
-                <div class="col-lg-1"></div>
-                <div class="col-lg-12"></div>
                 <!--
                 ====================================================
                 Image and About Me End
@@ -134,93 +127,93 @@
                             </h3>
                         </div>
                         <div class="panel-body">
-                            <div class="row">
-                                <table class="mugurthamTable">
+                            <div class="table-responsive">
+                                <table class="table-responsive">
                                     <tr>
                                         <td width="30%">
                                             <table class="mugurthamTable table-striped table-bordered table-hover FormShadow ">
                                                 <tr>
-                                                    <td class="col-lg-2">{{ 'GENPROFID' | translate }}</td>
+                                                    <td class="col-lg-2"><b>{{ 'GENPROFID' | translate }}</b></td>
                                                     <td class="col-lg-2">{{AllProfiles.BasicInfoCoreEntity.ProfileID}}</td>
-                                                    <td class="col-lg-2">{{ 'GENSANGAM' | translate }}</td>
-                                                    <td class="col-lg-2">{{AllProfiles.SangamCoreEntity.Name}}</td>
-                                                    <td class="col-lg-2">{{ 'BIAGE' | translate }}</td>
+                                                    <td class="col-lg-2"><b>{{ 'GENSANGAMPROFID' | translate }}</b></td>
+                                                    <td class="col-lg-2">{{AllProfiles.BasicInfoCoreEntity.SangamProfileID}}</td>
+                                                    <td class="col-lg-2"><b>{{ 'BIAGE' | translate }}</b></td>
                                                     <td class="col-lg-2">{{AllProfiles.BasicInfoCoreEntity.Age}}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>{{ 'BIDOB' | translate }}</td>
+                                                    <td><b>{{ 'BIDOB' | translate }}</b></td>
                                                     <td><span id="dtDOB"></span></td>
-                                                    <td>{{ 'BITOB' | translate }} </td>
+                                                    <td><b>{{ 'BITOB' | translate }}</b> </td>
                                                     <td>{{AllProfiles.BasicInfoCoreEntity.TamilDOB }}</td>
-                                                    <td>{{ 'BIPOB' | translate }} </td>
+                                                    <td><b>{{ 'BIPOB' | translate }}</b> </td>
                                                     <td>{{AllProfiles.BasicInfoCoreEntity.PlaceOfBirth }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>{{ 'BICST' | translate }}</td>
+                                                    <td><b>{{ 'BICST' | translate }}</b></td>
                                                     <td>{{AllProfiles.BasicInfoCoreEntity.Caste }}</td>
-                                                    <td>{{ 'BISUBCST' | translate }} </td>
+                                                    <td><b>{{ 'BISUBCST' | translate }} </b></td>
                                                     <td>{{AllProfiles.BasicInfoCoreEntity.SubCaste }}</td>
-                                                    <td>{{ 'BIGOTHRM' | translate }} </td>
+                                                    <td><b>{{ 'BIGOTHRM' | translate }} </b></td>
                                                     <td>{{AllProfiles.BasicInfoCoreEntity.Gothram }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>{{ 'BISTR' | translate }}</td>
+                                                    <td><b>{{ 'BISTR' | translate }}</b></td>
                                                     <td>{{AllProfiles.BasicInfoCoreEntity.Star }}</td>
-                                                    <td>{{ 'BIPAADHAM' | translate }}</td>
+                                                    <td><b>{{ 'BIPAADHAM' | translate }}</b></td>
                                                     <td>{{AllProfiles.BasicInfoCoreEntity.Paadham }}</td>
-                                                    <td>{{ 'BIRAASI' | translate }}</td>
+                                                    <td><b>{{ 'BIRAASI' | translate }}</b></td>
                                                     <td>{{AllProfiles.BasicInfoCoreEntity.Raasi }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>{{ 'BIHORMTCH' | translate }}</td>
+                                                    <td><b>{{ 'BIHORMTCH' | translate }}</b></td>
                                                     <td>{{AllProfiles.BasicInfoCoreEntity.HoroscopeMatch }}</td>
 
-                                                    <td>{{ 'BIANYDHSM' | translate }}</td>
+                                                    <td><b>{{ 'BIANYDHSM' | translate }}</b></td>
                                                     <td>{{AllProfiles.BasicInfoCoreEntity.AnyDhosham }}</td>
 
-                                                    <td>{{ 'BIMOTONG' | translate }}</td>
+                                                    <td><b>{{ 'BIMOTONG' | translate }}</b></td>
                                                     <td>{{AllProfiles.BasicInfoCoreEntity.MotherTongue }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>{{ 'BIHEIGHT' | translate }}</td>
+                                                    <td><b>{{ 'BIHEIGHT' | translate }}</b></td>
                                                     <td>{{AllProfiles.BasicInfoCoreEntity.Height }}</td>
-                                                    <td>{{ 'BIWEIGHT' | translate }}</td>
+                                                    <td><b>{{ 'BIWEIGHT' | translate }}</b></td>
                                                     <td>{{AllProfiles.BasicInfoCoreEntity.Weight }}</td>
-                                                    <td>{{ 'BICOMPLEXION' | translate }}</td>
+                                                    <td><b>{{ 'BICOMPLEXION' | translate }}</b></td>
                                                     <td>{{AllProfiles.BasicInfoCoreEntity.Complexion }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>{{ 'BIPHYSTA' | translate }}</td>
+                                                    <td><b>{{ 'BIPHYSTA' | translate }}</b></td>
                                                     <td>{{AllProfiles.BasicInfoCoreEntity.PhysicalStatus }}</td>
-                                                    <td>{{ 'BIBDYTPE' | translate }}</td>
+                                                    <td><b>{{ 'BIBDYTPE' | translate }}</b></td>
                                                     <td>{{AllProfiles.BasicInfoCoreEntity.BodyType }}</td>
-                                                    <td>{{ 'BIBLGRP' | translate }}</td>
+                                                    <td><b>{{ 'BIBLGRP' | translate }}</b></td>
                                                     <td>{{AllProfiles.BasicInfoCoreEntity.BloodGroup }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>{{ 'BIMARSTATUS' | translate }}</td>
+                                                    <td><b>{{ 'BIMARSTATUS' | translate }}</b></td>
                                                     <td>{{AllProfiles.BasicInfoCoreEntity.MaritalStatus }}</td>
-                                                    <td>{{ 'BINOOFCHIL' | translate }}</td>
+                                                    <td><b>{{ 'BINOOFCHIL' | translate }}</b></td>
                                                     <td>{{AllProfiles.BasicInfoCoreEntity.NoOfChildren }}</td>
-                                                    <td>{{ 'BICHILLVNGST' | translate }}</td>
+                                                    <td><b>{{ 'BICHILLVNGST' | translate }}</b></td>
                                                     <td>{{AllProfiles.BasicInfoCoreEntity.ChildrenLivingStatus }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>{{ 'BIETNG' | translate }}</td>
+                                                    <td><b>{{ 'BIETNG' | translate }}</b></td>
                                                     <td>{{AllProfiles.BasicInfoCoreEntity.Eating }}</td>
 
-                                                    <td>{{ 'BIDRNKNG' | translate }}</td>
+                                                    <td><b>{{ 'BIDRNKNG' | translate }}</b></td>
                                                     <td>{{AllProfiles.BasicInfoCoreEntity.Drinking }}</td>
 
-                                                    <td>{{ 'BISMKNG' | translate }}</td>
+                                                    <td><b>{{ 'BISMKNG' | translate }}</b></td>
                                                     <td>{{AllProfiles.BasicInfoCoreEntity.Smoking }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>{{ 'BIMOTONG' | translate }}</td>
+                                                    <td><b>{{ 'BIMOTONG' | translate }}</b></td>
                                                     <td>{{AllProfiles.BasicInfoCoreEntity.MotherTongue }}</td>
-                                                    <td>{{ 'BIGEN' | translate }}</td>
+                                                    <td><b>{{ 'BIGEN' | translate }}</b></td>
                                                     <td>{{AllProfiles.BasicInfoCoreEntity.Gender }}</td>
-                                                    <td>{{ 'BIPROFCRBY' | translate }}</td>
+                                                    <td><b>{{ 'BIPROFCRBY' | translate }}</b></td>
                                                     <td>{{AllProfiles.BasicInfoCoreEntity.ProfileCreatedBy }}</td>
                                                 </tr>
                                             </table>
@@ -259,19 +252,19 @@
                                 </h3>
                             </div>
                             <div class="panel-body">
-                                <div class="row">
+                                <div class="table-responsive">
                                     <table class="mugurthamTable">
                                         <tr>
                                             <td width="30%">
                                                 <table class="mugurthamTable table-striped table-bordered table-hover FormShadow ">
                                                     <tr>
-                                                        <td class="col-lg-2">DasaBalance</td>
+                                                        <td class="col-lg-2"><b>DasaBalance</b></td>
                                                         <td class="col-lg-2">{{AllProfiles.HoroscopeCoreEntity.DasaBalance}}</td>
-                                                        <td class="col-lg-2">Year</td>
+                                                        <td class="col-lg-2"><b>Year</b></td>
                                                         <td class="col-lg-2">{{AllProfiles.HoroscopeCoreEntity.Year}}</td>
-                                                        <td class="col-lg-2">Month</td>
+                                                        <td class="col-lg-2"><b>Month</b></td>
                                                         <td class="col-lg-2">{{AllProfiles.HoroscopeCoreEntity.Month}}</td>
-                                                        <td class="col-lg-2">Day</td>
+                                                        <td class="col-lg-2"><b>Day</b></td>
                                                         <td class="col-lg-2">{{AllProfiles.HoroscopeCoreEntity.Day}}</td>
                                                     </tr>
                                                 </table>
@@ -296,17 +289,11 @@
                                 </h3>
                             </div>
                             <div class="panel-body">
-                                <div class="row">
-                                    <table class="mugurthamTable">
+                                <div class="table-responsive">
+                                    <table class="mugurthamTable table-striped table-bordered table-hover FormShadow ">
                                         <tr>
-                                            <td width="30%">
-                                                <table class="mugurthamTable table-striped table-bordered table-hover FormShadow ">
-                                                    <tr>
-                                                        <td align="center">
-                                                            <img id="imgProfileHoro" src="{{AllProfiles.HoroscopeCoreEntity.Path }}" width="620" height="420" />
-                                                        </td>
-                                                    </tr>
-                                                </table>
+                                            <td align="center">
+                                                <img id="imgProfileHoro" src="{{AllProfiles.HoroscopeCoreEntity.Path }}" width="620" height="420" />
                                             </td>
                                         </tr>
                                     </table>
@@ -410,29 +397,23 @@
                                 </h3>
                             </div>
                             <div class="panel-body">
-                                <div class="row">
-                                    <table class="mugurthamTable">
+                                <div class="table-responsive">
+                                    <table class="mugurthamTable table-striped table-bordered table-hover FormShadow ">
                                         <tr>
-                                            <td width="30%">
-                                                <table class="mugurthamTable table-striped table-bordered table-hover FormShadow ">
-                                                    <tr>
-                                                        <td class="col-lg-2">{{ 'CREDUC' | translate }}</td>
-                                                        <td class="col-lg-2">{{AllProfiles.CareerCoreEntity.Education}}</td>
-                                                        <td class="col-lg-2">{{ 'CREDUCDT' | translate }}</td>
-                                                        <td class="col-lg-2">{{AllProfiles.CareerCoreEntity.EducationInDetail}}</td>
-                                                        <td class="col-lg-2">{{ 'CREMPIN' | translate }}</td>
-                                                        <td class="col-lg-2">{{AllProfiles.CareerCoreEntity.EmployedIn}}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>{{ 'CROCCPTN' | translate }}</td>
-                                                        <td>{{AllProfiles.CareerCoreEntity.Occupation }}</td>
-                                                        <td>{{ 'CROCCPTNDTL' | translate }}</td>
-                                                        <td>{{AllProfiles.CareerCoreEntity.OccupationInDetail }}</td>
-                                                        <td>{{ 'CRANINC' | translate }}</td>
-                                                        <td>{{AllProfiles.CareerCoreEntity.AnnualIncome }}</td>
-                                                    </tr>
-                                                </table>
-                                            </td>
+                                            <td class="col-lg-2"><b>{{ 'CREDUC' | translate }}</b></td>
+                                            <td class="col-lg-2">{{AllProfiles.CareerCoreEntity.Education}}</td>
+                                            <td class="col-lg-2"><b>{{ 'CREDUCDT' | translate }}</b></td>
+                                            <td class="col-lg-2">{{AllProfiles.CareerCoreEntity.EducationInDetail}}</td>
+                                            <td class="col-lg-2"><b>{{ 'CREMPIN' | translate }}</b></td>
+                                            <td class="col-lg-2">{{AllProfiles.CareerCoreEntity.EmployedIn}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>{{ 'CROCCPTN' | translate }}</b></td>
+                                            <td>{{AllProfiles.CareerCoreEntity.Occupation }}</td>
+                                            <td><b>{{ 'CROCCPTNDTL' | translate }}</b></td>
+                                            <td>{{AllProfiles.CareerCoreEntity.OccupationInDetail }}</td>
+                                            <td><b>{{ 'CRANINC' | translate }}</b></td>
+                                            <td>{{AllProfiles.CareerCoreEntity.AnnualIncome }}</td>
                                         </tr>
                                     </table>
                                 </div>
@@ -459,53 +440,47 @@
                                 </h3>
                             </div>
                             <div class="panel-body">
-                                <div class="row">
-                                    <table class="mugurthamTable">
+                                <div class="table-responsive">
+                                    <table class="mugurthamTable table-striped table-bordered table-hover FormShadow ">
                                         <tr>
-                                            <td width="30%">
-                                                <table class="mugurthamTable table-striped table-bordered table-hover FormShadow ">
-                                                    <tr>
-                                                        <td class="col-lg-2">{{ 'FAMVAL' | translate }} </td>
-                                                        <td class="col-lg-2">{{AllProfiles.FamilyCoreEntity.FamilyValue}}</td>
-                                                        <td class="col-lg-2">{{ 'FAMTYP' | translate }} </td>
-                                                        <td class="col-lg-2">{{AllProfiles.FamilyCoreEntity.FamilType}}</td>
-                                                        <td class="col-lg-2">{{ 'FAMSTA' | translate }} </td>
-                                                        <td class="col-lg-2">{{AllProfiles.FamilyCoreEntity.FamilyStatus}}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>{{ 'FAMPARENTSALIVE' | translate }} </td>
-                                                        <td>{{AllProfiles.FamilyCoreEntity.ParentsAlive }}</td>
-                                                        <td>{{ 'FAMFATNAM' | translate }} </td>
-                                                        <td>{{AllProfiles.FamilyCoreEntity.FathersName }}</td>
-                                                        <td>{{ 'FAMFATOCC' | translate }}</td>
-                                                        <td>{{AllProfiles.FamilyCoreEntity.FathersOccupation }}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>{{ 'FAMMOTNAM' | translate }}</td>
-                                                        <td>{{AllProfiles.FamilyCoreEntity.Mothersname }}</td>
-                                                        <td>{{ 'FAMMOTSUBSEC' | translate }}</td>
-                                                        <td>{{AllProfiles.FamilyCoreEntity.MothersSubSect }}</td>
-                                                        <td>{{ 'FAMMOTOCC' | translate }}</td>
-                                                        <td>{{AllProfiles.FamilyCoreEntity.MothersOccupation }}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>{{ 'FAMANSFAMORG' | translate }}</td>
-                                                        <td>{{AllProfiles.FamilyCoreEntity.FamilyOrigin }}</td>
-                                                        <td>{{ 'FAMNOOFBRO' | translate }} </td>
-                                                        <td>{{AllProfiles.FamilyCoreEntity.NoOfBrothers }}</td>
-                                                        <td>{{ 'FAMMARDBRO' | translate }} </td>
-                                                        <td>{{AllProfiles.FamilyCoreEntity.MarriedBrothers }}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>{{ 'FAMABTFAM' | translate }} </td>
-                                                        <td>{{AllProfiles.FamilyCoreEntity.AboutFamily }}</td>
-                                                        <td>{{ 'FAMNOOFSIS' | translate }} </td>
-                                                        <td>{{AllProfiles.FamilyCoreEntity.NoOfSisters }}</td>
-                                                        <td>{{ 'FAMMARDSIS' | translate }} </td>
-                                                        <td>{{AllProfiles.FamilyCoreEntity.MarriedSisters }}</td>
-                                                    </tr>
-                                                </table>
-                                            </td>
+                                            <td class="col-lg-2"><b>{{ 'FAMVAL' | translate }} </b></td>
+                                            <td class="col-lg-2">{{AllProfiles.FamilyCoreEntity.FamilyValue}}</td>
+                                            <td class="col-lg-2"><b>{{ 'FAMTYP' | translate }} </b></td>
+                                            <td class="col-lg-2">{{AllProfiles.FamilyCoreEntity.FamilType}}</td>
+                                            <td class="col-lg-2"><b>{{ 'FAMSTA' | translate }} </b></td>
+                                            <td class="col-lg-2">{{AllProfiles.FamilyCoreEntity.FamilyStatus}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>{{ 'FAMPARENTSALIVE' | translate }} </b></td>
+                                            <td>{{AllProfiles.FamilyCoreEntity.ParentsAlive }}</td>
+                                            <td><b>{{ 'FAMFATNAM' | translate }} </b></td>
+                                            <td>{{AllProfiles.FamilyCoreEntity.FathersName }}</td>
+                                            <td><b>{{ 'FAMFATOCC' | translate }}</b></td>
+                                            <td>{{AllProfiles.FamilyCoreEntity.FathersOccupation }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>{{ 'FAMMOTNAM' | translate }}</b></td>
+                                            <td>{{AllProfiles.FamilyCoreEntity.Mothersname }}</td>
+                                            <td><b>{{ 'FAMMOTSUBSEC' | translate }}</b></td>
+                                            <td>{{AllProfiles.FamilyCoreEntity.MothersSubSect }}</td>
+                                            <td><b>{{ 'FAMMOTOCC' | translate }}</b></td>
+                                            <td>{{AllProfiles.FamilyCoreEntity.MothersOccupation }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>{{ 'FAMANSFAMORG' | translate }}</b></td>
+                                            <td>{{AllProfiles.FamilyCoreEntity.FamilyOrigin }}</td>
+                                            <td><b>{{ 'FAMNOOFBRO' | translate }} </b></td>
+                                            <td>{{AllProfiles.FamilyCoreEntity.NoOfBrothers }}</td>
+                                            <td><b>{{ 'FAMMARDBRO' | translate }}</b> </td>
+                                            <td>{{AllProfiles.FamilyCoreEntity.MarriedBrothers }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>{{ 'FAMABTFAM' | translate }} </b></td>
+                                            <td>{{AllProfiles.FamilyCoreEntity.AboutFamily }}</td>
+                                            <td><b>{{ 'FAMNOOFSIS' | translate }} </b></td>
+                                            <td>{{AllProfiles.FamilyCoreEntity.NoOfSisters }}</td>
+                                            <td><b>{{ 'FAMMARDSIS' | translate }} </b></td>
+                                            <td>{{AllProfiles.FamilyCoreEntity.MarriedSisters }}</td>
                                         </tr>
                                     </table>
                                 </div>
@@ -532,33 +507,27 @@
                                 </h3>
                             </div>
                             <div class="panel-body">
-                                <div class="row">
-                                    <table class="mugurthamTable">
+                                <div class="table-responsive">
+                                    <table class="mugurthamTable table-striped table-bordered table-hover FormShadow ">
                                         <tr>
-                                            <td width="30%">
-                                                <table class="mugurthamTable table-striped table-bordered table-hover FormShadow ">
-                                                    <tr>
-                                                        <td class="col-lg-2">{{ 'CONNAME' | translate }}</td>
-                                                        <td class="col-lg-2">{{AllProfiles.ContactCoreEntity.Name }}</td>
-                                                        <td>{{ 'CONREL' | translate }}</td>
-                                                        <td>{{AllProfiles.ContactCoreEntity.Relationship }}</td>
-                                                        <td class="col-lg-2">{{ 'CONMOBNO' | translate }}</td>
-                                                        <td class="col-lg-2">{{AllProfiles.ContactCoreEntity.MobileNumber}}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="col-lg-2">{{ 'CONLNDNO' | translate }}</td>
-                                                        <td class="col-lg-2">{{AllProfiles.ContactCoreEntity.LandlineNumber}}</td>
-                                                        <td>{{ 'CONTMETOCALL' | translate }} </td>
-                                                        <td>{{AllProfiles.ContactCoreEntity.TimeToCall }}</td>
-                                                        <td class="col-lg-2">{{ 'CONEMAIL' | translate }}</td>
-                                                        <td class="col-lg-2">{{AllProfiles.ContactCoreEntity.Email}}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td >{{ 'CONRESADR' | translate }}</td>
-                                                        <td colspan="5">{{AllProfiles.ContactCoreEntity.ResidentialAddress }}</td>
-                                                    </tr>
-                                                </table>
-                                            </td>
+                                            <td><b>{{ 'CONNAME' | translate }}</b></td>
+                                            <td>{{AllProfiles.ContactCoreEntity.Name }}</td>
+                                            <td><b>{{ 'CONREL' | translate }}</b></td>
+                                            <td>{{AllProfiles.ContactCoreEntity.Relationship }}</td>
+                                            <td><b>{{ 'CONMOBNO' | translate }}</b></td>
+                                            <td>{{AllProfiles.ContactCoreEntity.MobileNumber}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>{{ 'CONLNDNO' | translate }}</b></td>
+                                            <td>{{AllProfiles.ContactCoreEntity.LandlineNumber}}</td>
+                                            <td><b>{{ 'CONTMETOCALL' | translate }}</b> </td>
+                                            <td>{{AllProfiles.ContactCoreEntity.TimeToCall }}</td>
+                                            <td><b>{{ 'CONEMAIL' | translate }}</b></td>
+                                            <td>{{AllProfiles.ContactCoreEntity.Email}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>{{ 'CONRESADR' | translate }}</b></td>
+                                            <td colspan="5">{{AllProfiles.ContactCoreEntity.ResidentialAddress }}</td>
                                         </tr>
                                     </table>
                                 </div>
@@ -589,29 +558,23 @@
                             </h3>
                         </div>
                         <div class="panel-body">
-                            <div class="row">
-                                <table class="mugurthamTable">
+                            <div class="table-responsive">
+                                <table class="mugurthamTable table-striped table-bordered table-hover FormShadow ">
                                     <tr>
-                                        <td width="30%">
-                                            <table class="mugurthamTable table-striped table-bordered table-hover FormShadow ">
-                                                <tr>
-                                                    <td class="col-lg-2">{{ 'LOCTRYLVNIN' | translate }}</td>
-                                                    <td class="col-lg-2">{{AllProfiles.LocationCoreEntity.CountryLivingIn}}</td>
-                                                    <td class="col-lg-2">{{ 'LOCTNSHP' | translate }}</td>
-                                                    <td class="col-lg-2">{{AllProfiles.LocationCoreEntity.CitizenShip}}</td>
-                                                    <td class="col-lg-2">{{ 'LOCRESSTS' | translate }}</td>
-                                                    <td class="col-lg-2">{{AllProfiles.LocationCoreEntity.ResidentStatus}}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>{{ 'LOCRESTATE' | translate }}</td>
-                                                    <td>{{AllProfiles.LocationCoreEntity.ResidingState }}</td>
-                                                    <td>{{ 'LOCRESCTY' | translate }}</td>
-                                                    <td>{{AllProfiles.LocationCoreEntity.ResidingCity }}</td>
-                                                    <td></td>
-                                                    <td></td>
-                                                </tr>
-                                            </table>
-                                        </td>
+                                        <td class="col-lg-2"><b>{{ 'LOCTRYLVNIN' | translate }}</b></td>
+                                        <td class="col-lg-2">{{AllProfiles.LocationCoreEntity.CountryLivingIn}}</td>
+                                        <td class="col-lg-2"><b>{{ 'LOCTNSHP' | translate }}</b></td>
+                                        <td class="col-lg-2">{{AllProfiles.LocationCoreEntity.CitizenShip}}</td>
+                                        <td class="col-lg-2"><b>{{ 'LOCRESSTS' | translate }}</b></td>
+                                        <td class="col-lg-2">{{AllProfiles.LocationCoreEntity.ResidentStatus}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>{{ 'LOCRESTATE' | translate }}</b></td>
+                                        <td>{{AllProfiles.LocationCoreEntity.ResidingState }}</td>
+                                        <td><b>{{ 'LOCRESCTY' | translate }}</b></td>
+                                        <td>{{AllProfiles.LocationCoreEntity.ResidingCity }}</td>
+                                        <td></td>
+                                        <td></td>
                                     </tr>
                                 </table>
                             </div>
@@ -638,19 +601,13 @@
                             </h3>
                         </div>
                         <div class="panel-body">
-                            <div class="row">
-                                <table class="mugurthamTable">
+                            <div class="table-responsive">
+                                <table class="mugurthamTable table-striped table-bordered table-hover FormShadow ">
                                     <tr>
-                                        <td width="30%">
-                                            <table class="mugurthamTable table-striped table-bordered table-hover FormShadow ">
-                                                <tr>
-                                                    <td>{{ 'REFNOMNAME' | translate }}</td>
-                                                    <td>{{AllProfiles.ReferenceCoreEntity.NomineeName }}</td>
-                                                    <td>{{ 'REFCONTNUM' | translate }}</td>
-                                                    <td>{{AllProfiles.ReferenceCoreEntity.ContactNo }}</td>
-                                                </tr>
-                                            </table>
-                                        </td>
+                                        <td><b>{{ 'REFNOMNAME' | translate }}</b></td>
+                                        <td>{{AllProfiles.ReferenceCoreEntity.NomineeName }}</td>
+                                        <td><b>{{ 'REFCONTNUM' | translate }}</b></td>
+                                        <td>{{AllProfiles.ReferenceCoreEntity.ContactNo }}</td>
                                     </tr>
                                 </table>
                             </div>
@@ -664,14 +621,6 @@
                 Reference End
                 ====================================================
                 -->
-
-
-
-
-
-
-
-
             </div>
         </div>
         <div class="panel-footer">© {{ 'GENCOPYRT' | translate }} - {{AllProfiles.SangamCoreEntity.Name }}</div>

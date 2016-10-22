@@ -370,7 +370,8 @@
             BIPOB: 'Place of Birth',
             FAMMOTSUBSEC: "Mother's Subsect",
             FAMPARENTSALIVE: 'Parents Alive',
-            CONNAME: 'Contact Name'
+            CONNAME: 'Contact Name',
+            GENSANGAMPROFID: 'Sangam ProfileID'
         });
         $translateProvider.translations('0449', {
             GENHOME: 'முகப்பு பக்கம்',
