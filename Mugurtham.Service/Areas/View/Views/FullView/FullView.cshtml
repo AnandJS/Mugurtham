@@ -232,54 +232,57 @@
                 ====================================================
                 -->
                 <!-- ===================================================
-                Confidential Information Start
-                 ====================================================-->
-                <div id="divconfidentialInfo">
-                    <!-- ===================================================
-                    Horoscope Start
-                     ====================================================
-                     -->
-                    <!-- ===================================================
-                    Dasabalance Start
-                     ====================================================
-                     -->
-                    <div class="col-lg-1"></div>
-                    <div class="col-lg-10">
-                        <div class="panel panel-primary bgImage FormShadow">
-                            <div class="panel-heading">
-                                <h3 class="panel-title text-center">
-                                    Dasabalance
-                                </h3>
-                            </div>
-                            <div class="panel-body">
-                                <div class="table-responsive">
-                                    <table class="mugurthamTable">
-                                        <tr>
-                                            <td width="30%">
-                                                <table class="mugurthamTable table-striped table-bordered table-hover FormShadow ">
-                                                    <tr>
-                                                        <td class="col-lg-2"><b>DasaBalance</b></td>
-                                                        <td class="col-lg-2">{{AllProfiles.HoroscopeCoreEntity.DasaBalance}}</td>
-                                                        <td class="col-lg-2"><b>Year</b></td>
-                                                        <td class="col-lg-2">{{AllProfiles.HoroscopeCoreEntity.Year}}</td>
-                                                        <td class="col-lg-2"><b>Month</b></td>
-                                                        <td class="col-lg-2">{{AllProfiles.HoroscopeCoreEntity.Month}}</td>
-                                                        <td class="col-lg-2"><b>Day</b></td>
-                                                        <td class="col-lg-2">{{AllProfiles.HoroscopeCoreEntity.Day}}</td>
-                                                    </tr>
-                                                </table>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </div>
+                Horoscope Start
+                 ====================================================
+                 -->
+                <!-- ===================================================
+                Dasabalance Start
+                 ====================================================
+                 -->
+                <div class="col-lg-1"></div>
+                <div class="col-lg-10">
+                    <div class="panel panel-primary bgImage FormShadow">
+                        <div class="panel-heading">
+                            <h3 class="panel-title text-center">
+                                Dasabalance
+                            </h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="mugurthamTable">
+                                    <tr>
+                                        <td width="30%">
+                                            <table class="mugurthamTable table-striped table-bordered table-hover FormShadow ">
+                                                <tr>
+                                                    <td class="col-lg-2"><b>DasaBalance</b></td>
+                                                    <td class="col-lg-2">{{AllProfiles.HoroscopeCoreEntity.DasaBalance}}</td>
+                                                    <td class="col-lg-2"><b>Year</b></td>
+                                                    <td class="col-lg-2">{{AllProfiles.HoroscopeCoreEntity.Year}}</td>
+                                                    <td class="col-lg-2"><b>Month</b></td>
+                                                    <td class="col-lg-2">{{AllProfiles.HoroscopeCoreEntity.Month}}</td>
+                                                    <td class="col-lg-2"><b>Day</b></td>
+                                                    <td class="col-lg-2">{{AllProfiles.HoroscopeCoreEntity.Day}}</td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-1"></div>
-                    <div class="col-lg-12"></div>
+                </div>
+                <div class="col-lg-1"></div>
+                <div class="col-lg-12"></div>
 
-
-
+                <!--
+                ====================================================
+                Dasabalance End
+                ====================================================
+                      -->
+                <!-- ===================================================
+                Confidential Information Start
+                 ====================================================-->
+                <div id="divconfidentialInfo">
                     <div class="col-lg-1"></div>
                     <div class="col-lg-10">
                         <div class="panel panel-primary bgImage FormShadow">
@@ -303,11 +306,7 @@
                     </div>
                     <div class="col-lg-1"></div>
                     <div class="col-lg-12"></div>
-                    <!--
-                    ====================================================
-                    Dasabalance End
-                    ====================================================
-                          -->
+
                     <div class="col-lg-1"></div>
                     <div class="col-lg-10">
                         <div class="panel panel-primary bgImage FormShadow">
@@ -384,167 +383,185 @@
                     Horoscope End
                     ====================================================
                     -->
-                    <!-- ===================================================
-                    Career Start
-                     ====================================================
-                     -->
-                    <div class="col-lg-1"></div>
-                    <div class="col-lg-10">
-                        <div class="panel panel-primary bgImage FormShadow">
-                            <div class="panel-heading">
-                                <h3 class="panel-title text-center">
-                                    {{ 'LYTPRFTABCAR' | translate }}
-                                </h3>
-                            </div>
-                            <div class="panel-body">
-                                <div class="table-responsive">
-                                    <table class="mugurthamTable table-striped table-bordered table-hover FormShadow ">
-                                        <tr>
-                                            <td class="col-lg-2"><b>{{ 'CREDUC' | translate }}</b></td>
-                                            <td class="col-lg-2">{{AllProfiles.CareerCoreEntity.Education}}</td>
-                                            <td class="col-lg-2"><b>{{ 'CREDUCDT' | translate }}</b></td>
-                                            <td class="col-lg-2">{{AllProfiles.CareerCoreEntity.EducationInDetail}}</td>
-                                            <td class="col-lg-2"><b>{{ 'CREMPIN' | translate }}</b></td>
-                                            <td class="col-lg-2">{{AllProfiles.CareerCoreEntity.EmployedIn}}</td>
-                                        </tr>
-                                        <tr>
-                                            <td><b>{{ 'CROCCPTN' | translate }}</b></td>
-                                            <td>{{AllProfiles.CareerCoreEntity.Occupation }}</td>
-                                            <td><b>{{ 'CROCCPTNDTL' | translate }}</b></td>
-                                            <td>{{AllProfiles.CareerCoreEntity.OccupationInDetail }}</td>
-                                            <td><b>{{ 'CRANINC' | translate }}</b></td>
-                                            <td>{{AllProfiles.CareerCoreEntity.AnnualIncome }}</td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-1"></div>
-                    <div class="col-lg-12"></div>
-                    <!--
-                    ====================================================
-                    Career End
-                    ====================================================
-                    -->
-                    <!-- ===================================================
-                    Family Start
-                     ====================================================
-                     -->
-                    <div class="col-lg-1"></div>
-                    <div class="col-lg-10">
-                        <div class="panel panel-primary bgImage FormShadow">
-                            <div class="panel-heading">
-                                <h3 class="panel-title text-center">
-                                    {{ 'LYTPRFTABFAM' | translate }}
-                                </h3>
-                            </div>
-                            <div class="panel-body">
-                                <div class="table-responsive">
-                                    <table class="mugurthamTable table-striped table-bordered table-hover FormShadow ">
-                                        <tr>
-                                            <td class="col-lg-2"><b>{{ 'FAMVAL' | translate }} </b></td>
-                                            <td class="col-lg-2">{{AllProfiles.FamilyCoreEntity.FamilyValue}}</td>
-                                            <td class="col-lg-2"><b>{{ 'FAMTYP' | translate }} </b></td>
-                                            <td class="col-lg-2">{{AllProfiles.FamilyCoreEntity.FamilType}}</td>
-                                            <td class="col-lg-2"><b>{{ 'FAMSTA' | translate }} </b></td>
-                                            <td class="col-lg-2">{{AllProfiles.FamilyCoreEntity.FamilyStatus}}</td>
-                                        </tr>
-                                        <tr>
-                                            <td><b>{{ 'FAMPARENTSALIVE' | translate }} </b></td>
-                                            <td>{{AllProfiles.FamilyCoreEntity.ParentsAlive }}</td>
-                                            <td><b>{{ 'FAMFATNAM' | translate }} </b></td>
-                                            <td>{{AllProfiles.FamilyCoreEntity.FathersName }}</td>
-                                            <td><b>{{ 'FAMFATOCC' | translate }}</b></td>
-                                            <td>{{AllProfiles.FamilyCoreEntity.FathersOccupation }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td><b>{{ 'FAMMOTNAM' | translate }}</b></td>
-                                            <td>{{AllProfiles.FamilyCoreEntity.Mothersname }}</td>
-                                            <td><b>{{ 'FAMMOTSUBSEC' | translate }}</b></td>
-                                            <td>{{AllProfiles.FamilyCoreEntity.MothersSubSect }}</td>
-                                            <td><b>{{ 'FAMMOTOCC' | translate }}</b></td>
-                                            <td>{{AllProfiles.FamilyCoreEntity.MothersOccupation }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td><b>{{ 'FAMANSFAMORG' | translate }}</b></td>
-                                            <td>{{AllProfiles.FamilyCoreEntity.FamilyOrigin }}</td>
-                                            <td><b>{{ 'FAMNOOFBRO' | translate }} </b></td>
-                                            <td>{{AllProfiles.FamilyCoreEntity.NoOfBrothers }}</td>
-                                            <td><b>{{ 'FAMMARDBRO' | translate }}</b> </td>
-                                            <td>{{AllProfiles.FamilyCoreEntity.MarriedBrothers }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td><b>{{ 'FAMABTFAM' | translate }} </b></td>
-                                            <td>{{AllProfiles.FamilyCoreEntity.AboutFamily }}</td>
-                                            <td><b>{{ 'FAMNOOFSIS' | translate }} </b></td>
-                                            <td>{{AllProfiles.FamilyCoreEntity.NoOfSisters }}</td>
-                                            <td><b>{{ 'FAMMARDSIS' | translate }} </b></td>
-                                            <td>{{AllProfiles.FamilyCoreEntity.MarriedSisters }}</td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-1"></div>
-                    <div class="col-lg-12"></div>
-                    <!--
-                    ====================================================
-                    Family End
-                    ====================================================
-                    -->
-                    <!-- ===================================================
-                    Contact Start
-                     ====================================================
-                     -->
-                    <div class="col-lg-1"></div>
-                    <div class="col-lg-10">
-                        <div class="panel panel-primary bgImage FormShadow">
-                            <div class="panel-heading">
-                                <h3 class="panel-title text-center">
-                                    {{ 'LYTPRFTABCONT' | translate }}
-                                </h3>
-                            </div>
-                            <div class="panel-body">
-                                <div class="table-responsive">
-                                    <table class="mugurthamTable table-striped table-bordered table-hover FormShadow ">
-                                        <tr>
-                                            <td><b>{{ 'CONNAME' | translate }}</b></td>
-                                            <td>{{AllProfiles.ContactCoreEntity.Name }}</td>
-                                            <td><b>{{ 'CONREL' | translate }}</b></td>
-                                            <td>{{AllProfiles.ContactCoreEntity.Relationship }}</td>
-                                            <td><b>{{ 'CONMOBNO' | translate }}</b></td>
-                                            <td>{{AllProfiles.ContactCoreEntity.MobileNumber}}</td>
-                                        </tr>
-                                        <tr>
-                                            <td><b>{{ 'CONLNDNO' | translate }}</b></td>
-                                            <td>{{AllProfiles.ContactCoreEntity.LandlineNumber}}</td>
-                                            <td><b>{{ 'CONTMETOCALL' | translate }}</b> </td>
-                                            <td>{{AllProfiles.ContactCoreEntity.TimeToCall }}</td>
-                                            <td><b>{{ 'CONEMAIL' | translate }}</b></td>
-                                            <td>{{AllProfiles.ContactCoreEntity.Email}}</td>
-                                        </tr>
-                                        <tr>
-                                            <td><b>{{ 'CONRESADR' | translate }}</b></td>
-                                            <td colspan="5">{{AllProfiles.ContactCoreEntity.ResidentialAddress }}</td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-1"></div>
-                    <div class="col-lg-12"></div>
-                    <!--
-                    ====================================================
-                    Contact End
-                    ====================================================
-                    -->
                 </div>
                 <!-- ===================================================
                 Confidential Information End
                  ====================================================-->
+                <!-- ===================================================
+                Career Start
+                 ====================================================
+                 -->
+                <div class="col-lg-1"></div>
+                <div class="col-lg-10">
+                    <div class="panel panel-primary bgImage FormShadow">
+                        <div class="panel-heading">
+                            <h3 class="panel-title text-center">
+                                {{ 'LYTPRFTABCAR' | translate }}
+                            </h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="mugurthamTable table-striped table-bordered table-hover FormShadow ">
+                                    <tr>
+                                        <td class="col-lg-2"><b>{{ 'CREDUC' | translate }}</b></td>
+                                        <td class="col-lg-2">{{AllProfiles.CareerCoreEntity.Education}}</td>
+                                        <td class="col-lg-2"><b>{{ 'CREDUCDT' | translate }}</b></td>
+                                        <td class="col-lg-2">{{AllProfiles.CareerCoreEntity.EducationInDetail}}</td>
+                                        <td class="col-lg-2"><b>{{ 'CREMPIN' | translate }}</b></td>
+                                        <td class="col-lg-2">{{AllProfiles.CareerCoreEntity.EmployedIn}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>{{ 'CROCCPTN' | translate }}</b></td>
+                                        <td>{{AllProfiles.CareerCoreEntity.Occupation }}</td>
+                                        <td><b>{{ 'CROCCPTNDTL' | translate }}</b></td>
+                                        <td>{{AllProfiles.CareerCoreEntity.OccupationInDetail }}</td>
+                                        <td><b>{{ 'CRANINC' | translate }}</b></td>
+                                        <td>{{AllProfiles.CareerCoreEntity.AnnualIncome }}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-1"></div>
+                <div class="col-lg-12"></div>
+                <!--
+                ====================================================
+                Career End
+                ====================================================
+                -->
+                <!-- ===================================================
+                Family Start
+                 ====================================================
+                 -->
+                <div class="col-lg-1"></div>
+                <div class="col-lg-10">
+                    <div class="panel panel-primary bgImage FormShadow">
+                        <div class="panel-heading">
+                            <h3 class="panel-title text-center">
+                                {{ 'LYTPRFTABFAM' | translate }}
+                            </h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="mugurthamTable table-striped table-bordered table-hover FormShadow ">
+                                    <tr>
+                                        <td class="col-lg-2"><b>{{ 'FAMVAL' | translate }} </b></td>
+                                        <td class="col-lg-2">{{AllProfiles.FamilyCoreEntity.FamilyValue}}</td>
+                                        <td class="col-lg-2"><b>{{ 'FAMTYP' | translate }} </b></td>
+                                        <td class="col-lg-2">{{AllProfiles.FamilyCoreEntity.FamilType}}</td>
+                                        <td class="col-lg-2"><b>{{ 'FAMSTA' | translate }} </b></td>
+                                        <td class="col-lg-2">{{AllProfiles.FamilyCoreEntity.FamilyStatus}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>{{ 'FAMPARENTSALIVE' | translate }} </b></td>
+                                        <td>{{AllProfiles.FamilyCoreEntity.ParentsAlive }}</td>
+                                        <td><b>{{ 'FAMFATNAM' | translate }} </b></td>
+                                        <td>{{AllProfiles.FamilyCoreEntity.FathersName }}</td>
+                                        <td><b>{{ 'FAMFATOCC' | translate }}</b></td>
+                                        <td>{{AllProfiles.FamilyCoreEntity.FathersOccupation }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>{{ 'FAMMOTNAM' | translate }}</b></td>
+                                        <td>{{AllProfiles.FamilyCoreEntity.Mothersname }}</td>
+                                        <td><b>{{ 'FAMMOTSUBSEC' | translate }}</b></td>
+                                        <td>{{AllProfiles.FamilyCoreEntity.MothersSubSect }}</td>
+                                        <td><b>{{ 'FAMMOTOCC' | translate }}</b></td>
+                                        <td>{{AllProfiles.FamilyCoreEntity.MothersOccupation }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>{{ 'FAMANSFAMORG' | translate }}</b></td>
+                                        <td>{{AllProfiles.FamilyCoreEntity.FamilyOrigin }}</td>
+                                        <td><b>{{ 'FAMNOOFBRO' | translate }} </b></td>
+                                        <td>{{AllProfiles.FamilyCoreEntity.NoOfBrothers }}</td>
+                                        <td><b>{{ 'FAMMARDBRO' | translate }}</b> </td>
+                                        <td>{{AllProfiles.FamilyCoreEntity.MarriedBrothers }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>{{ 'FAMABTFAM' | translate }} </b></td>
+                                        <td>{{AllProfiles.FamilyCoreEntity.AboutFamily }}</td>
+                                        <td><b>{{ 'FAMNOOFSIS' | translate }} </b></td>
+                                        <td>{{AllProfiles.FamilyCoreEntity.NoOfSisters }}</td>
+                                        <td><b>{{ 'FAMMARDSIS' | translate }} </b></td>
+                                        <td>{{AllProfiles.FamilyCoreEntity.MarriedSisters }}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-1"></div>
+                <div class="col-lg-12"></div>
+                <!--
+                ====================================================
+                Family End
+                ====================================================
+                -->
+                <!-- ===================================================
+                Contact Start
+                 ====================================================
+                 -->
+                <div class="col-lg-1"></div>
+                <div class="col-lg-10">
+                    <div class="panel panel-primary bgImage FormShadow">
+                        <div class="panel-heading">
+                            <h3 class="panel-title text-center">
+                                {{ 'LYTPRFTABCONT' | translate }}
+                            </h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="mugurthamTable table-striped table-bordered table-hover FormShadow ">
+                                    <tr>
+                                        <td class="col-lg-2"><b>{{ 'BINAME' | translate }}</b></td>
+                                        <td>{{AllProfiles.SangamCoreEntity.Name }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-lg-2"><b>{{ 'REFCONTNUM' | translate }}</b></td>
+                                        <td>{{AllProfiles.SangamCoreEntity.ContactNumber }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-lg-2"><b>{{ 'VWCTADRS' | translate }}</b></td>
+                                        <td>{{AllProfiles.SangamCoreEntity.Address }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-lg-2"><b>{{ 'VWABTSGM' | translate }}</b></td>
+                                        <td>{{AllProfiles.SangamCoreEntity.AboutSangam }}</td>
+                                    </tr>
+                                    <!--
+                                    <tr>
+                                        <td><b>{{ 'CONNAME' | translate }}</b></td>
+                                        <td>{{AllProfiles.ContactCoreEntity.Name }}</td>
+                                        <td><b>{{ 'CONREL' | translate }}</b></td>
+                                        <td>{{AllProfiles.ContactCoreEntity.Relationship }}</td>
+                                        <td><b>{{ 'CONMOBNO' | translate }}</b></td>
+                                        <td>{{AllProfiles.ContactCoreEntity.MobileNumber}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>{{ 'CONLNDNO' | translate }}</b></td>
+                                        <td>{{AllProfiles.ContactCoreEntity.LandlineNumber}}</td>
+                                        <td><b>{{ 'CONTMETOCALL' | translate }}</b> </td>
+                                        <td>{{AllProfiles.ContactCoreEntity.TimeToCall }}</td>
+                                        <td><b>{{ 'CONEMAIL' | translate }}</b></td>
+                                        <td>{{AllProfiles.ContactCoreEntity.Email}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>{{ 'CONRESADR' | translate }}</b></td>
+                                        <td colspan="5">{{AllProfiles.ContactCoreEntity.ResidentialAddress }}</td>
+                                    </tr>
+                                        -->
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-1"></div>
+                <div class="col-lg-12"></div>
+                <!--
+                ====================================================
+                Contact End
+                ====================================================
+                -->
                 <!-- ===================================================
                 Location Start
                  ====================================================
@@ -592,6 +609,7 @@
                 Reference Start
                  ====================================================
                  -->
+                <!--
                 <div class="col-lg-1"></div>
                 <div class="col-lg-10">
                     <div class="panel panel-primary bgImage FormShadow">

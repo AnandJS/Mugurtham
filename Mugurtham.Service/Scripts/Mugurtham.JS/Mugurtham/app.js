@@ -35,6 +35,10 @@
                 templateUrl: '/User/User/ViewedProfiles',
                 controller: 'ControllerViewedProfiles'
             })
+            .when('/RecentlyViewedProfiles', {
+                templateUrl: '/User/User/RecentlyViewedProfiles',
+                controller: 'ControllerRecentlyViewedProfiles'
+            })
             .when('/InterestedProfiles', {
                 templateUrl: '/User/User/InterestedProfiles',
                 controller: 'ControllerInterestedProfiles'
@@ -366,12 +370,13 @@
             LYTPROFILESLKDME: 'Profiles liked me',
             LYTPROFILESVWDME: 'Profiles viewed me',
             LYTPROFILESHGLTD: 'Highlighted Profiles',
-            BIPAADHAM: 'Paadham',
-            BIPOB: 'Place of Birth',
-            FAMMOTSUBSEC: "Mother's Subsect",
-            FAMPARENTSALIVE: 'Parents Alive',
-            CONNAME: 'Contact Name',
-            GENSANGAMPROFID: 'Sangam ProfileID'
+            BIPAADHAM: 'பாதம்',
+            BIPOB: 'பிறந்த இடம்',
+            FAMMOTSUBSEC: "தாய்மார்கள் உப",
+            FAMPARENTSALIVE: 'உயிரோடு வாழும் பெற்றோர்',
+            CONNAME: 'தொடர்பு பெயர்',
+            GENSANGAMPROFID: 'சங்க சுயவிவர எண்',
+            LYTPROFILESHISTORY: 'சமீபத்தில் பார்க்கப்பட்ட விவரக்குறிப்புகள்'
         });
         $translateProvider.translations('0449', {
             GENHOME: 'முகப்பு பக்கம்',
@@ -507,6 +512,13 @@
             LYTPROFILESLKDME: 'என்னை பிடித்தவர்கள்',
             LYTPROFILESVWDME: 'என்னை நோக்கியவர்கள்',
             LYTPROFILESHGLTD: 'தனிச்சிறப்பான வரன்கள்',
+            BIPAADHAM: 'Paadham',
+            BIPOB: 'Place of Birth',
+            FAMMOTSUBSEC: "Mother's Subsect",
+            FAMPARENTSALIVE: 'Parents Alive',
+            CONNAME: 'Contact Name',
+            GENSANGAMPROFID: 'Sangam ProfileID',
+            LYTPROFILESHISTORY: 'Profiles Viewed Recently'
         });
         $translateProvider.translations('0439', {
             GENHOME: 'घर',
@@ -641,7 +653,14 @@
             LYTRCNTLYJNDPROFILES: 'प्रोफाइल हाल ही में शामिल हुए',
             LYTPROFILESLKDME: 'प्रोफाइल मुझे पसंद है',
             LYTPROFILESVWDME: 'प्रोफाइल देखा मुझे',
-            LYTPROFILESHGLTD: ' प्रकाश डाला प्रोफाइल'
+            LYTPROFILESHGLTD: ' प्रकाश डाला प्रोफाइल',
+            BIPAADHAM: 'Paadham',
+            BIPOB: 'Place of Birth',
+            FAMMOTSUBSEC: "Mother's Subsect",
+            FAMPARENTSALIVE: 'Parents Alive',
+            CONNAME: 'Contact Name',
+            GENSANGAMPROFID: 'Sangam ProfileID',
+            LYTPROFILESHISTORY: 'Profiles Viewed Recently'
 
         });
         $translateProvider.translations('044a', {
@@ -777,7 +796,14 @@
             LYTRCNTLYJNDPROFILES: 'ప్రొఫైల్స్ ఇటీవల చేరారు',
             LYTPROFILESLKDME: 'ప్రొఫైల్స్ నాకు నచ్చింది',
             LYTPROFILESVWDME: 'ప్రొఫైల్స్ నాకు చూచుటకు ',
-            LYTPROFILESHGLTD: 'హైలైట్ ప్రొఫైల్స్'
+            LYTPROFILESHGLTD: 'హైలైట్ ప్రొఫైల్స్',
+            BIPAADHAM: 'Paadham',
+            BIPOB: 'Place of Birth',
+            FAMMOTSUBSEC: "Mother's Subsect",
+            FAMPARENTSALIVE: 'Parents Alive',
+            CONNAME: 'Contact Name',
+            GENSANGAMPROFID: 'Sangam ProfileID',
+            LYTPROFILESHISTORY: 'Profiles Viewed Recently'
         });
 
         $translateProvider.translations('044c', {
@@ -913,7 +939,14 @@
             LYTRCNTLYJNDPROFILES: 'പ്രൊഫൈലുകൾ അടുത്തിടെ ചേർന്നു',
             LYTPROFILESLKDME: 'പ്രൊഫൈലുകൾ എന്നെ ലൈക്ക്',
             LYTPROFILESVWDME: 'പ്രൊഫൈലുകൾ എന്നെ കണ്ടത്',
-            LYTPROFILESHGLTD: 'എടുത്തുകാണിക്കുന്നു പ്രൊഫൈലുകൾ'
+            LYTPROFILESHGLTD: 'എടുത്തുകാണിക്കുന്നു പ്രൊഫൈലുകൾ',
+            BIPAADHAM: 'Paadham',
+            BIPOB: 'Place of Birth',
+            FAMMOTSUBSEC: "Mother's Subsect",
+            FAMPARENTSALIVE: 'Parents Alive',
+            CONNAME: 'Contact Name',
+            GENSANGAMPROFID: 'Sangam ProfileID',
+            LYTPROFILESHISTORY: 'Profiles Viewed Recently'
         });
 
         $translateProvider.translations('044b', {
@@ -1049,7 +1082,14 @@
             LYTRCNTLYJNDPROFILES: ' ಪ್ರೊಫೈಲ್ಗಳು ಇತ್ತೀಚೆಗೆ ಸೇರಿಕೊಂಡ ',
             LYTPROFILESLKDME: ' ಪ್ರೊಫೈಲ್ಗಳು ನನಗೆ ಇಷ್ಟಪಟ್ಟಿದ್ದಾರೆ ',
             LYTPROFILESVWDME: ' ಪ್ರೊಫೈಲ್ಗಳು ನನಗೆ ವೀಕ್ಷಿಸಿದ ',
-            LYTPROFILESHGLTD: ' ಹೈಲೈಟ್ ಪ್ರೊಫೈಲ್ಗಳು'
+            LYTPROFILESHGLTD: ' ಹೈಲೈಟ್ ಪ್ರೊಫೈಲ್ಗಳು',
+            BIPAADHAM: 'Paadham',
+            BIPOB: 'Place of Birth',
+            FAMMOTSUBSEC: "Mother's Subsect",
+            FAMPARENTSALIVE: 'Parents Alive',
+            CONNAME: 'Contact Name',
+            GENSANGAMPROFID: 'Sangam ProfileID',
+            LYTPROFILESHISTORY: 'Profiles Viewed Recently'
         });
 
         $translateProvider.preferredLanguage('0409');

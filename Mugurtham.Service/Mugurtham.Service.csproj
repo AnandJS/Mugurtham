@@ -399,7 +399,7 @@
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\Controllers\MugurthamAdmin\ControllerUser.js" />
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\Controllers\Search\ControllerSearchSangam.js" />
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\Controllers\UserChamber\ControllerUserChamber.js" />
-    <Content Include="Scripts\Mugurtham.JS\Mugurtham\Controllers\UserChamber\ControllerViewedProfiles.js" />
+    <Content Include="Scripts\Mugurtham.JS\Mugurtham\Controllers\UserChamber\ControllerRecentlyViewedProfiles.js" />
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\Controllers\UserChamber\ControllerInterestedProfiles.js" />
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\Controllers\View\ControllerFullView.js" />
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\Login\Login.js" />
@@ -512,6 +512,7 @@
     <Content Include="Areas\HomePage\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Areas\HomePage\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Areas\HomePage\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Areas\User\Views\User\RecentlyViewedProfiles.cshtml" />
     <None Include="bundleconfig.json" />
     <Content Include="Log\MugurthamLog.log" />
     <None Include="Properties\PublishProfiles\ProfileMugurtham.pubxml" />

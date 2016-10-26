@@ -59,6 +59,10 @@ namespace Mugurtham.Service.Areas.User.Controllers.MVC
         {
             return View();
         }
+        public ActionResult RecentlyViewedProfiles()
+        {
+            return View();
+        }
         public ActionResult Add(string ID)
         {
             Mugurtham.Core.Login.LoggedInUser objLoggedIn = (Mugurtham.Core.Login.LoggedInUser)Session["LoggedInUser"];
@@ -190,6 +194,7 @@ namespace Mugurtham.Service.Areas.User.Controllers.MVC
             objUserBadgeCount.ViewedProfiles = 0;
             objUserBadgeCount.HighlightedProfiles = 0;
             objUserBadgeCount.RecentlyJoined = 0;
+            objUserBadgeCount.RecentlyViewedProfiles = 0;
             using (SqlConnection objSqlConnection = new SqlConnection(Utility.connectionString()))
             {
                 objSqlConnection.Open();
@@ -219,6 +224,8 @@ namespace Mugurtham.Service.Areas.User.Controllers.MVC
                             objUserBadgeCount.RecentlyJoined = Convert.ToInt32(objSqlDataReader["ProfilesJoinedThisWeekCount"].ToString());
                         if (objSqlDataReader["ProfilesViewedMeCount"] != null)
                             objUserBadgeCount.ViewedProfiles = Convert.ToInt32(objSqlDataReader["ProfilesViewedMeCount"].ToString());
+                        if (objSqlDataReader["RecentlyViewedProfilesCount"] != null)
+                            objUserBadgeCount.RecentlyViewedProfiles = Convert.ToInt32(objSqlDataReader["RecentlyViewedProfilesCount"].ToString());
                     }
                     objSqlDataReader.Close();
                 }
@@ -274,5 +281,6 @@ namespace Mugurtham.Service.Areas.User.Controllers.MVC
         public int ViewedProfiles { get; set; }
         public int HighlightedProfiles { get; set; }
         public int RecentlyJoined { get; set; }
+        public int RecentlyViewedProfiles { get; set; }
     }
 }

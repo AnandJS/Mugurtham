@@ -11,6 +11,7 @@
     <link id="stylesheet" rel="stylesheet" href="@Url.Content("~/App_Themes/MugurthamTheme/css/Mugurtham/Bootstrap/bootstrap.min.css")" />
     <link id="stylesheet" rel="stylesheet" href="@Url.Content("~/App_Themes/MugurthamTheme/css/Mugurtham/Mugurtham.min.css")" />
     <link id="stylesheet" rel="stylesheet" href="@Url.Content("~/App_Themes/MugurthamTheme/css/Mugurtham/font-awesome/css/font-awesome.min.css")" />
+    
     <style>
         .dropdown-submenu {
             position: relative;
@@ -125,6 +126,7 @@
                                     <li><a href="/Mugurtham#/AllProfiles"><i class="fa fa-users" style="font-size:24px"></i> &nbsp;&nbsp;Search All Profiles </a> </li>
                                     <li><a href="/Mugurtham#/SangamSearch"><i class="fa fa-building-o" style="font-size:24px"></i> &nbsp;&nbsp;Search by Sangam  </a></li>
                                     <li class="divider"></li>
+                                    <li> <a href="#RecentlyViewedProfiles"><i class="fa fa-eye-slash" style="font-size:24px"></i> &nbsp;&nbsp;{{ 'LYTPROFILESHISTORY' | translate }}  &nbsp;&nbsp;<i class="text-right badge" id="badgeRecentlyViewedProfilesInGblNav"></i></a></li>
                                     <li> <a href="#InterestedProfiles"><i class="fa fa-thumbs-up" style="font-size:24px"></i> &nbsp;&nbsp;{{ 'LYTSHRTLISPROFILES' | translate }}  &nbsp;&nbsp;<i class="text-right badge" id="badgeInterestedInMeProfilesInGblNav"></i></a></li>
                                     <li> <a href="#InterestedInMeProfiles"><i class="fa fa-quote-right" style="font-size:24px"></i> &nbsp;&nbsp;{{ 'LYTPROFILESLKDME' | translate }}  &nbsp;&nbsp;<i class="text-right badge" id="badgeInterestedProfilesInGblNav"></i></a></li>
                                     <li> <a href="#ViewNotifications"><i class="fa fa-eye" style="font-size:24px"></i> &nbsp;&nbsp;{{ 'LYTPROFILESVWDME' | translate }}  &nbsp;&nbsp;<i class="text-right badge" id="badgeViewNotificationsInGblNav"></i></a></li>

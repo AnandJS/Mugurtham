@@ -3,30 +3,30 @@
 THIS CONTROLLER IS SPECIFICALLY FOR DISPLAYING VIEWED PROFILES IN USER HOME PAGE
 ==========================================================================================
 */
-var ControllerViewedProfiles = angular.module('MugurthamApp').controller('ControllerViewedProfiles',
+var ControllerRecentlyViewedProfiles = angular.module('MugurthamApp').controller('ControllerRecentlyViewedProfiles',
         ['$http', '$scope', function ($http, $scope) {
 
-            $scope.ControllerName = 'ControllerViewedProfiles';
+            $scope.ControllerName = 'ControllerRecentlyViewedProfiles';
             //===================================================
             //AJAX GET REQUEST - GETTING ALL PROFILES
             //===================================================
-            $scope.getViewedProfilesProfiles = function () {
+            $scope.getRecentlyViewedProfiles = function () {
                 if (typeof (Storage) !== "undefined") {
-                    if ((!sessionStorage.getItem('ViewedProfiles')))
-                        $scope.getViewedProfilesProfilesfromAPI();
+                    if ((!sessionStorage.getItem('RecentlyViewedProfiles')))
+                        $scope.getRecentlyViewedProfilesfromAPI();
                     else
-                        $scope.getViewedProfilesProfilesfromSession();
+                        $scope.getRecentlyViewedProfilesfromSession();
                 }
                 else
-                    $scope.getViewedProfilesProfilesfromAPI();
+                    $scope.getRecentlyViewedProfilesfromAPI();
             }
 
-            $scope.getViewedProfilesProfilesfromSession = function () {
-                if ((sessionStorage.getItem('ViewedProfiles')))
-                    $scope.initData(JSON.parse(sessionStorage.getItem('ViewedProfiles')));
+            $scope.getRecentlyViewedProfilesfromSession = function () {
+                if ((sessionStorage.getItem('RecentlyViewedProfiles')))
+                    $scope.initData(JSON.parse(sessionStorage.getItem('RecentlyViewedProfiles')));
             }
-            $scope.getViewedProfilesProfilesfromAPI = function () {
-                var strGetURL = "Search/Search/getViewedProfiles";
+            $scope.getRecentlyViewedProfilesfromAPI = function () {
+                var strGetURL = "Search/Search/getRecentlyViewedProfiles";
                 $("#divContainer").mask("Searching profiles please wait...");
                 $http({
                     method: "GET", url: strGetURL
@@ -52,7 +52,7 @@ var ControllerViewedProfiles = angular.module('MugurthamApp').controller('Contro
                     console.log('Profiles page changed to ' + num);
                 };
                 setTimeout(displayThumbnailSlider, 1000);
-                toastr.success('Viewed Profiles loaded Successfully');
+                toastr.success('Recently Viewed Profiles loaded Successfully');
             }
         }])
 
@@ -65,6 +65,6 @@ function NotifyStatus(intStatus) {
         toastr.success('Profiles Received Successfully');
     }
     else if (intStatus == '2') {
-        toastr.Error('Error occured in ControllerViewedProfiles - getData');
+        toastr.Error('Error occured in ControllerRecentlyViewedProfiles - getData');
     }
 }

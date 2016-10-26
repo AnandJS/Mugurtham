@@ -58,6 +58,11 @@ function setBadgeValue(objData) {
 
     $('#badgeHighlightedProfiles').text(objData.HighlightedProfiles);
     $('#badgeHighlightedProfilesInGblNav').text(objData.HighlightedProfiles);
+
+    $('#badgeRecentlyViewedProfiles').text(objData.RecentlyViewedProfiles);
+    $('#badgeRecentlyViewedProfilesInGblNav').text(objData.RecentlyViewedProfiles);
+
+    
 }
 
 function NotifyStatus(intStatus) {

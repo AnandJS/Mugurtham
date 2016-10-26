@@ -1,4 +1,8 @@
-﻿Get host name using JQuwery
+﻿CSS Admin Templates
+===================
+http://www.cssauthor.com/bootstrap-admin-templates/
+
+Get host name using JQuwery
 ==========================================
 http://stackoverflow.com/questions/4815559/how-to-get-domain-name-from-url-using-jquery
 
