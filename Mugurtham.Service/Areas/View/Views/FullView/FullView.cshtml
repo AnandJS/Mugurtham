@@ -9,7 +9,7 @@
     </ul>
 </div>
 <div class="text-right" id="divInterestButton">
-    <button id="btnShowInterest" name="btnShowInterest" class="btn btn-primary" ng-click="showInterest();">Show Interest</button>
+    <button id="btnShowInterest" name="btnShowInterest" class="btn btn-primary" ng-click="showInterest(globalProfileID,true);">Show Interest</button>
     <button id="btnRemoveInterest" name="btnRemoveInterest" class="btn btn-primary" ng-click="removeInterest();">Remove Interest</button>
     &nbsp;&nbsp;
     <a href="javascript:PrintFullProfile();">Print Profile</a>
@@ -512,6 +512,7 @@
                         <div class="panel-body">
                             <div class="table-responsive">
                                 <table class="mugurthamTable table-striped table-bordered table-hover FormShadow ">
+                                    <!-- Remove Reference details in the bottomw as well
                                     <tr>
                                         <td class="col-lg-2"><b>{{ 'BINAME' | translate }}</b></td>
                                         <td>{{AllProfiles.SangamCoreEntity.Name }}</td>
@@ -528,7 +529,7 @@
                                         <td class="col-lg-2"><b>{{ 'VWABTSGM' | translate }}</b></td>
                                         <td>{{AllProfiles.SangamCoreEntity.AboutSangam }}</td>
                                     </tr>
-                                    <!--
+                                    -->
                                     <tr>
                                         <td><b>{{ 'CONNAME' | translate }}</b></td>
                                         <td>{{AllProfiles.ContactCoreEntity.Name }}</td>
@@ -549,7 +550,7 @@
                                         <td><b>{{ 'CONRESADR' | translate }}</b></td>
                                         <td colspan="5">{{AllProfiles.ContactCoreEntity.ResidentialAddress }}</td>
                                     </tr>
-                                        -->
+
                                 </table>
                             </div>
                         </div>
@@ -609,7 +610,7 @@
                 Reference Start
                  ====================================================
                  -->
-                <!--
+
                 <div class="col-lg-1"></div>
                 <div class="col-lg-10">
                     <div class="panel panel-primary bgImage FormShadow">
@@ -644,3 +645,141 @@
         <div class="panel-footer">© {{ 'GENCOPYRT' | translate }} - {{AllProfiles.SangamCoreEntity.Name }}</div>
     </div>
 </div>
+<div class="page-header"><h1>Similar profiles you may be interested in</h1></div>
+<div class="flexslider">
+    <ul class="slides">
+        <li ng-repeat="SimilarProfile in SimilarProfiles | filter: { Star: AllProfiles.BasicInfoCoreEntity.Star }  ">
+            <div class="container">
+                <div class="col-sm-2">
+                    <div class="col-item">
+                        <div class="photo" ng-repeat="SimilarProfilePhoto in SimilarProfilePhotos | filter: {ProfileID: SimilarProfile.MugurthamProfileID} |limitTo:1">
+                            <img src="{{SimilarProfilePhoto.PhotoPath}}" class="img-responsive" alt="{{SimilarProfile.Name}}" />
+                        </div>
+                        <div class="info">
+                            <div class="row">
+                                <div class="price col-md-6">
+                                    <h5>
+                                        {{SimilarProfile.PhotoPath}}
+                                    </h5>
+                                    <h5 class="price-text-color">
+                                        {{SimilarProfile.MugurthamProfileID}}
+                                    </h5>
+                                </div>
+
+                            </div>
+                            <div class="separator clear-left">
+                                <p class="btn-add">
+                                    <i class="fa fa-thumbs-up"></i><a style="cursor:pointer" ng-click="showInterest(SimilarProfile.MugurthamProfileID,false);" class="hidden-sm">Like</a>
+                                </p>
+                                <p class="btn-details">
+                                    <i class="fa fa-file-text-o"></i><a href="#/FullView/{{SimilarProfile.MugurthamProfileID}}" class="hidden-sm">View</a>
+                                </p>
+                            </div>
+                            <div class="clearfix">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </li>
+    </ul>
+</div>
+<br /><br /><br />
+
+
+<style>
+    .col-item {
+        border: 1px solid #E1E1E1;
+        border-radius: 5px;
+        background: #FFF;
+    }
+
+        .col-item .photo img {
+            margin: 0 auto;
+            height: 80%;
+            width: 100%;
+        }
+
+        .col-item .info {
+            padding: 10px;
+            border-radius: 0 0 5px 5px;
+            margin-top: 1px;
+        }
+
+        .col-item:hover .info {
+            background-color: #F5F5DC;
+        }
+
+        .col-item .price {
+            /*width: 50%;*/
+            float: left;
+            margin-top: 5px;
+        }
+
+            .col-item .price h5 {
+                line-height: 20px;
+                margin: 0;
+            }
+
+    .price-text-color {
+        color: #219FD1;
+    }
+
+    .col-item .info .rating {
+        color: #777;
+    }
+
+    .col-item .rating {
+        /*width: 50%;*/
+        float: left;
+        font-size: 17px;
+        text-align: right;
+        line-height: 52px;
+        margin-bottom: 10px;
+        height: 52px;
+    }
+
+    .col-item .separator {
+        border-top: 1px solid #E1E1E1;
+    }
+
+    .clear-left {
+        clear: left;
+    }
+
+    .col-item .separator p {
+        line-height: 20px;
+        margin-bottom: 0;
+        margin-top: 10px;
+        text-align: center;
+    }
+
+        .col-item .separator p i {
+            margin-right: 5px;
+        }
+
+    .col-item .btn-add {
+        width: 50%;
+        float: left;
+    }
+
+    .col-item .btn-add {
+        border-right: 1px solid #E1E1E1;
+    }
+
+    .col-item .btn-details {
+        width: 50%;
+        float: left;
+        padding-left: 10px;
+    }
+
+    .controls {
+        margin-top: 20px;
+    }
+
+    [data-slide="prev"] {
+        margin-right: 10px;
+    }
+</style>
+

@@ -370,13 +370,13 @@
             LYTPROFILESLKDME: 'Profiles liked me',
             LYTPROFILESVWDME: 'Profiles viewed me',
             LYTPROFILESHGLTD: 'Highlighted Profiles',
-            BIPAADHAM: 'பாதம்',
-            BIPOB: 'பிறந்த இடம்',
-            FAMMOTSUBSEC: "தாய்மார்கள் உப",
-            FAMPARENTSALIVE: 'உயிரோடு வாழும் பெற்றோர்',
-            CONNAME: 'தொடர்பு பெயர்',
-            GENSANGAMPROFID: 'சங்க சுயவிவர எண்',
-            LYTPROFILESHISTORY: 'சமீபத்தில் பார்க்கப்பட்ட விவரக்குறிப்புகள்'
+            BIPAADHAM: 'Paadham',
+            BIPOB: 'Place of Birth',
+            FAMMOTSUBSEC: "Mother's Subsect",
+            FAMPARENTSALIVE: 'Parents Alive',
+            CONNAME: 'Contact Name',
+            GENSANGAMPROFID: 'Sangam ProfileID',
+            LYTPROFILESHISTORY: 'Profiles Viewed Recently'            
         });
         $translateProvider.translations('0449', {
             GENHOME: 'முகப்பு பக்கம்',
@@ -512,13 +512,13 @@
             LYTPROFILESLKDME: 'என்னை பிடித்தவர்கள்',
             LYTPROFILESVWDME: 'என்னை நோக்கியவர்கள்',
             LYTPROFILESHGLTD: 'தனிச்சிறப்பான வரன்கள்',
-            BIPAADHAM: 'Paadham',
-            BIPOB: 'Place of Birth',
-            FAMMOTSUBSEC: "Mother's Subsect",
-            FAMPARENTSALIVE: 'Parents Alive',
-            CONNAME: 'Contact Name',
-            GENSANGAMPROFID: 'Sangam ProfileID',
-            LYTPROFILESHISTORY: 'Profiles Viewed Recently'
+            BIPAADHAM: 'பாதம்',
+            BIPOB: 'பிறந்த இடம்',
+            FAMMOTSUBSEC: "தாய்மார்கள் உப",
+            FAMPARENTSALIVE: 'உயிரோடு வாழும் பெற்றோர்',
+            CONNAME: 'தொடர்பு பெயர்',
+            GENSANGAMPROFID: 'சங்க சுயவிவர எண்',
+            LYTPROFILESHISTORY: 'சமீபத்தில் பார்க்கப்பட்ட விவரக்குறிப்புகள்'
         });
         $translateProvider.translations('0439', {
             GENHOME: 'घर',

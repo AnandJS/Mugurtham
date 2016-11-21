@@ -9,9 +9,9 @@
     <title>Mugurtham - Associations Integrated</title>
     <meta name="viewport" content="width=device-width" />
     <link id="stylesheet" rel="stylesheet" href="@Url.Content("~/App_Themes/MugurthamTheme/css/Mugurtham/Bootstrap/bootstrap.min.css")" />
-    <link id="stylesheet" rel="stylesheet" href="@Url.Content("~/App_Themes/MugurthamTheme/css/Mugurtham/Mugurtham.min.css")" />
+    <link id="stylesheet" rel="stylesheet" href="@Url.Content("~/App_Themes/MugurthamTheme/css/Mugurtham/Mugurtham.css")" />
     <link id="stylesheet" rel="stylesheet" href="@Url.Content("~/App_Themes/MugurthamTheme/css/Mugurtham/font-awesome/css/font-awesome.min.css")" />
-    
+
     <style>
         .dropdown-submenu {
             position: relative;
@@ -71,6 +71,7 @@
     @Styles.Render("~/Content/Lightbox")
     @Styles.Render("~/Content/font-awesome")
 
+
     <script>
         (function (d, s, id) {
             var js, fjs = d.getElementsByTagName(s)[0];
@@ -80,11 +81,11 @@
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));</script>
 </head>
-<body>
+<body ng-app="MugurthamApp">
     <!-- Navigation -->
 
 
-    <form ng-app="MugurthamApp" name="frmPortal" novalidate>
+    <form name="frmPortal" novalidate>
         <div id="body" ng-controller="MugurthamController" class="bgBodyImage" data-ng-init="changeLanguage('@objLoggedIn.localeID');">
             <!-- Page top navigation-->
             <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -110,7 +111,7 @@
                                 <img src="@objLoggedIn.BasicInfoCoreEntity.PhotoPath" class="navbar-brand img-circle" width="70" height="5930" />
                             </li>
                             <li>
-                                <a id="lblName">Hii @objLoggedIn.Name  !!! &nbsp;&nbsp;</a>
+                                <a id="lblName">Welcome @objLoggedIn.Name  !!! &nbsp;&nbsp;</a>
                             </li>
 
                             <li class="dropdown">
@@ -230,10 +231,19 @@
                             <br />@objLoggedIn.AboutSangam
                         </div>
                     </div>
+                    <div class="col-lg-12 text-right">
+                        <br /> If you have questions, feel free to call our office - @objLoggedIn.SangamName at &nbsp;&nbsp;<i class="fa fa-phone-square">&nbsp;&nbsp;@objLoggedIn.SangamContactNumber</i> &nbsp;&nbsp; and Mugurtham at <i class="fa fa-phone-square">&nbsp;&nbsp; +91 86080 73820</i>
+                    </div>
                 </div>
             </div>
 
             <div class="container">
+                <!-- Global - closable Info bar -->
+                <br />
+                <div class="alert alert-info fade in">
+                    <a class="close text-center" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>Info!</strong> Please update your profile often to stay at top ranks during search.
+                </div>
                 <!-- Rending Body from child page-->
                 @RenderSection("featured", required: false)
                 @RenderBody()
@@ -242,38 +252,49 @@
                 <hr />
                 <!-- Footer Inofmraion-->
             </div>
+        </div>
     </form>
 
     <div class="panel-footer col-lg-12">
-        <div class="col-lg-3">
-            &#169 {{ 'GENCOPYRT' | translate }} 2013 @objLoggedIn.SangamName
-            <!-- BEGIN: Powered by Supercounters.com -->
-            <center>
-                <script type="text/javascript" src="http://widget.supercounters.com/online_i.js"></script>
-                <script type="text/javascript">sc_online_i(1311488, "ffffff", "e61c1c");</script><br>
-            </center>
-            <!-- END: Powered by Supercounters.com -->
-        </div>
-        <div class="col-lg-5 text-center">
-            <div class="featurette" id="about">
-                <!------------------------code---------------start---------------->
-                <div class="col-md-12">
-                    <ul class="social-network social-circle">
-                        <li><a href="#" class="icoRss" title="Rss"><i class="fa fa-rss"></i></a></li>
-                        <li><a href="https://www.facebook.com/vishwakarmamugurtham/" target="_blank" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
-                        <li><a href="#" class="icoTwitter" title="Twitter"><i class="fa fa-twitter"></i></a></li>
-                        <li><a href="#" class="icoGoogle" title="Google +"><i class="fa fa-google-plus"></i></a></li>
-                        <li><a href="#" class="icoLinkedin" title="Linkedin"><i class="fa fa-linkedin"></i></a></li>
-                    </ul>
+
+        <div class="col-lg-12">
+            <div class="col-lg-3">
+                &#169 {{ 'GENCOPYRT' | translate }} 2013 @objLoggedIn.SangamName
+                <!-- BEGIN: Powered by Supercounters.com -->
+                <center>
+                    <script type="text/javascript" src="http://widget.supercounters.com/online_i.js"></script>
+                    <script type="text/javascript">sc_online_i(1311488, "ffffff", "e61c1c");</script><br>
+                </center>
+                <!-- END: Powered by Supercounters.com -->
+            </div>
+            <div class="col-lg-5 text-center">
+                <div class="featurette" id="about">
+                    <!------------------------code---------------start---------------->
+                    <div class="col-md-12">
+                        <ul class="social-network social-circle">
+                            <li><a href="#" class="icoRss" title="Rss"><i class="fa fa-rss"></i></a></li>
+                            <li><a href="https://www.facebook.com/vishwakarmamugurtham/" target="_blank" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#" class="icoTwitter" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#" class="icoGoogle" title="Google +"><i class="fa fa-google-plus"></i></a></li>
+                            <li><a href="#" class="icoLinkedin" title="Linkedin"><i class="fa fa-linkedin"></i></a></li>
+                        </ul>
+                    </div>
+                    <!----Code------end----------------------------------->
                 </div>
-                <!----Code------end----------------------------------->
+            </div>
+            <div class="col-lg-4 text-right">
+                <img src="/Images/Mugurtham/Flag.jpg" height="19" width="35" />
+                Powered by <img src="/favicon.ico" height="25" width="40" />  Mugurtham &#174
+                &nbsp; @strProductVersion
+                <br /> Reach Mugurtham at &nbsp;&nbsp;<i class="fa fa-phone-square">&nbsp;&nbsp;+91 8608073820</i> <i class="fa fa-envelope">&nbsp;&nbsp;info@mugurtham.com</i>
             </div>
         </div>
-        <div class="col-lg-4 text-right">
-            <img src="/Images/Mugurtham/Flag.jpg" height="19" width="35" />
-            Powered by <img src="/favicon.ico" height="25" width="40" />  Mugurtham &#174
-            &nbsp; @strProductVersion
-            <br /> Reach Mugurtham at &nbsp;&nbsp;<i class="fa fa-phone-square">&nbsp;&nbsp;+91 8608073820</i> <i class="fa fa-envelope">&nbsp;&nbsp;info@mugurtham.com</i>
+
+        <div class="col-lg-12 text-justify"><br /></div>
+
+        <div class="col-lg-12 text-justify">
+            <img src="/favicon.ico" height="25" width="40" /> 
+            Mugurtham a Matrimonial destination proudly founded and maintained by Vishwakarma community since 2014  with one simple objective - to provide a superior collaborative matchmaking experience by expanding the opportunities available to meet potential life partners. Since then we have created a world renowned service that has touched the lives of millions of people all over the world . We have, however, never rested on our laurels. Software division providing cutting edge business solutions to Matrimony Industry. An innovator in teleMatrimony and analytics. Partner focused on quality and growth.
         </div>
     </div>
     <div class="modal fade alert" id="squarespaceModal">
@@ -284,17 +305,50 @@
                     <h3 class="modal-title" id="lineModalLabel">Partnering for positive change in our community</h3>
                 </div>
                 <div class="modal-body">
-
-                    <h4>Panjasakthi from Triplicane, Chennai</h4><br />
-                    <h4>Viswamalar from Vellore</h4><br />
-                    <h4>Kalpana Thirumana Thagaval Maiyam from Mylapore, Chennai</h4><br />
-                    <h4>ViswaJothi from Tricy</h4><br />
-                    <h4>and much more in list...</h4><br />
-
+                    <div class="col-lg-12 table-responsive">
+                        <div class="col-lg-12 ">
+                              <h5>One stop station for all Vishwakarma matches across TamilNadu. 2500+ Vishwakarma only profiles and keeps adding. We are in Mobile view as well. </h5>
+                        </div>
+                        <div class="col-lg-12 text-center"><h3><b>Search Now for Free, Pay Next Year</b></h3></div>
+                        <h5><b>"Open Search " - </b> Search Raasi or Location or Name or anything in Open Search and your Search ends here..  </h5>
+                        <div class="col-lg-12 text-center"><h4><b>Our proud partners</b></h4></div>
+                        <table class="mugurthamTable table-striped table-bordered table-hover FormShadow ">
+                            <tbody>
+                                <tr>
+                                    <td class="col-lg-4">Panjasakthi from Triplicane, Chennai</td>
+                                </tr>
+                                <tr>
+                                    <td class="col-lg-4">Viswamalar from Vellore</td>
+                                </tr>
+                                <tr>
+                                    <td>Kalpana Thirumana Thagaval Maiyam from Mylapore, Chennai</td>
+                                </tr>
+                                <tr>
+                                    <td>ViswaJothi from Tricy</td>
+                                </tr>
+                                <tr>
+                                    <td>Vishwakarma Sezhu Marabinar Trust - Chennai</td>
+                                </tr>
+                                <tr>
+                                    <td>and much more parthers in list...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <br />
+                    </div>
+                    <div class="col-lg-12">
+                        <h5><b>Proudly founded and maintained by Vishwakarma community</b></h5>
+                    </div>
+                    <div class="col-lg-12">
+                        <h6>Mugurtham is available in Tamil, Telgu, Kannada, Malayalam, English and more languages</h6>
+                    </div>
+                    <div class="col-lg-12">
+                    </div>
+                    <div id="fb-root" class="text-center">Please Suport and Like us to get instant alerts when new profile gets added and more..</div>
+                    <div class="fb-like" data-href="https://www.facebook.com/vishwakarmamugurtham/" data-width="500" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
                 </div>
 
-                <div id="fb-root">Like us to get instant alerts when new profile gets added and more..</div>
-                <div class="fb-like" data-href="https://www.facebook.com/vishwakarmamugurtham/" data-width="500" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
+
             </div>
         </div>
     </div>

@@ -1,11 +1,12 @@
 ﻿@{
     Mugurtham.Core.Login.LoggedInUser objLoggedIn = (Mugurtham.Core.Login.LoggedInUser)Session["LoggedInUser"];
-    Scripts.Render("~/bundles/MugurthamValidation")}
+}
 <!--
     THIS PAGE IS THE LAYOUT PAGE FOR THE SEARCH MODULE
     -->
 <!-- Rending Body from child page-->
-<div><h3 translate=""></h3>
+<div>
+    <h3 translate=""></h3>
     <ul class="breadcrumb">
         <li><a href="@objLoggedIn.HomePagePath" translate="">{{ 'GENHOME' | translate}}</a></li>
         <li class="active">{{ 'LYTSRCH' | translate}}</li>
@@ -18,8 +19,39 @@
     </div>
     <div class="panel-body">
         <div class="row">
-            <div class="col-sm-12">
+            <div class="col-sm-9">
                 @RenderBody()
+            </div>
+            <div class="col-sm-3">
+
+                <div class="panel panel-primary FormShadow">
+                    <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" data-target="#collapseOne">
+                        <h4 class="panel-title">
+                            <a class="accordion-toggle">
+                                Filter Panel
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseOne" class="panel-collapse collapse in">
+                        <div class="panel-body bgImage">
+                            <h3>Star</h3><hr />
+                            <ul class="list-group" ng-repeat="star in arrFilterStar">
+                                <li class="list-unstyled" ng-repeat="value in filtered = SearchedProfiles | filter: ({Star: star}) : true | limitTo : 1  ">
+                                    <input type="checkbox"
+                                           id="chkStarFilter"
+                                           name="chkStarFilter"
+                                           value="{{star}}"
+                                           ng-model="colourFilter"
+                                           ng-checked="selection.indexOf(star) > -1"
+                                           ng-click="filterDataByThisItem(star)">
+                                    {{star}}&nbsp;(<b>{{getFilterItemCount(star)}}</b>)
+                                </li>
+                            </ul>
+                           
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>

@@ -322,6 +322,8 @@
     <Content Include="Images\Mugurtham\calendar.gif" />
     <Content Include="Images\Mugurtham\Flag.jpg" />
     <Content Include="Images\Mugurtham\General\like.png" />
+    <Content Include="Images\Mugurtham\General\Mugurtham_01.jpg" />
+    <Content Include="Images\Mugurtham\General\Mugurtham_02.jpg" />
     <Content Include="Images\Mugurtham\General\View.png" />
     <Content Include="Images\Mugurtham\Lightbox\close.png" />
     <Content Include="Images\Mugurtham\Lightbox\demopage\favicon.png" />
@@ -401,6 +403,7 @@
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\Controllers\UserChamber\ControllerUserChamber.js" />
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\Controllers\UserChamber\ControllerRecentlyViewedProfiles.js" />
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\Controllers\UserChamber\ControllerInterestedProfiles.js" />
+    <Content Include="Scripts\Mugurtham.JS\Mugurtham\Controllers\UserChamber\ControllerViewedProfiles.js" />
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\Controllers\View\ControllerFullView.js" />
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\Login\Login.js" />
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\Utility\Helper.js" />
@@ -439,6 +442,11 @@
     <Folder Include="Areas\View\Models\" />
     <Folder Include="Areas\View\Views\Shared\" />
     <Folder Include="Content\" />
+    <Folder Include="Images\Mugurtham\Ace\avatars\" />
+    <Folder Include="Images\Mugurtham\Ace\bootstrap-colorpicker\" />
+    <Folder Include="Images\Mugurtham\Ace\email\" />
+    <Folder Include="Images\Mugurtham\Ace\gallery\" />
+    <Folder Include="Images\Mugurtham\Ace\placeholder\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>

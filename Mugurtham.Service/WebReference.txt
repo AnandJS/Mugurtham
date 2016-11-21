@@ -1,4 +1,27 @@
-﻿CSS Admin Templates
+﻿
+
+Checkbox Filter in Search
+==========================
+http://stackoverflow.com/questions/21411686/how-to-filter-multiple-values-or-operation-in-angularjs-with-checkbox
+http://jsfiddle.net/bmleite/5VbCJ/
+http://codereview.stackexchange.com/questions/24017/angular-checkbox-filtering
+
+
+FlexSlider Properties
+======================
+https://multiplestates.wordpress.com/2015/08/27/a-list-of-the-default-settings-for-flexslider/
+
+Carousel Product Cart Slider - Similar proflies in full view
+================================================================
+http://bootsnipp.com/snippets/featured/carousel-product-cart-slider
+
+=========================================================================================
+=========================================================================================
+https://www.prepbootstrap.com/
+=========================================================================================
+=========================================================================================
+
+CSS Admin Templates
 ===================
 http://www.cssauthor.com/bootstrap-admin-templates/
 

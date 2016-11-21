@@ -6,23 +6,24 @@ THIS CONTROLLER IS SPECIFICALLY FOR ALL-PROFILES PAGE ON SEARCH MODULE
 var ControllerSearchAllProfiles = angular.module('MugurthamApp').controller('ControllerSearchAllProfiles',
         ['$http', '$scope', '$filter', function ($http, $scope, $filter) {
 
-            $scope.ControllerName = 'ControllerSearchAllProfiles';            
+            $scope.ControllerName = 'ControllerSearchAllProfiles';
+            $scope.filter = {};
             //===================================================
             //AJAX GET REQUEST - GETTING ALL PROFILES
             //===================================================
             $scope.getAllProfiles = function () {
                 if (typeof (Storage) !== "undefined") {
-                    if ((!sessionStorage.getItem('AllProfiles'))) 
+                    if ((!sessionStorage.getItem('AllProfiles')))
                         $scope.getAllProfilesfromAPI();
-                    else 
+                    else
                         $scope.getAllProfilesfromSession();
                 }
-                else 
+                else
                     $scope.getAllProfilesfromAPI();
             }
 
             $scope.getAllProfilesfromSession = function () {
-                if ((sessionStorage.getItem('AllProfiles'))) 
+                if ((sessionStorage.getItem('AllProfiles')))
                     $scope.initData(JSON.parse(sessionStorage.getItem('AllProfiles')));
             }
             $scope.getAllProfilesfromAPI = function () {
@@ -54,10 +55,40 @@ var ControllerSearchAllProfiles = angular.module('MugurthamApp').controller('Con
                 };
                 setTimeout(displayThumbnailSlider, 1000);
             }
-            $scope.setProfileIDBySangamAdminForProfilePic = function(ProfileID)
-            {
+            $scope.setProfileIDBySangamAdminForProfilePic = function (ProfileID) {
                 localStorage.setItem("ProfileIDBySangamAdminForProfilePic", ProfileID);
             }
+/*========================================= E-Commerce Filter Section ======================================================*/
+            $scope.getFilterItemCount = function (data) {
+                var counter = 0;
+                angular.forEach($scope.SearchedProfiles, function (value, key) {
+                    if (value.Star == data)
+                        counter = parseInt(counter + 1);
+                });
+                return parseInt(counter);
+            }
+
+            $scope.filterItem = [];
+            $scope.filterDataByThisItem = function (data) {
+                var i = $.inArray(data, $scope.filterItem);
+                if (i > -1) {
+                    $scope.filterItem.splice(i, 1);
+                } else {
+                    $scope.filterItem.push(data);
+                }
+                setTimeout(displayThumbnailSlider, 10);
+                $("html, body").animate({ scrollTop: 220 }, "slow");
+            }
+            $scope.colourFilter = function (item) {
+                if ($scope.filterItem.length > 0) {
+                    if ($.inArray(item.Star, $scope.filterItem) < 0)
+                        return;
+                }
+                return item.Star;
+            } 
+            /*========================================= E-Commerce Filter Section End======================================================*/
+
+
         }])
 
 
@@ -73,4 +104,3 @@ function NotifyStatus(intStatus) {
         toastr.Error('Error occured in ControllerSearchAllProfiles - getData');
     }
 }
- 

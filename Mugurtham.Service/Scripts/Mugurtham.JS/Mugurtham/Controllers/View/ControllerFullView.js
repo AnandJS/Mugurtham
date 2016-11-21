@@ -19,7 +19,7 @@ var ControllerViewFullView = angular.module('MugurthamApp').controller('Controll
               //===================================================
               //AJAX GET REQUEST - GETTING ALL PROFILES
               //===================================================
-              $scope.getByProfileID = function () {                  
+              $scope.getByProfileID = function () {
                   $("#divContainer").mask("Loading profile please wait...");
                   $("#divSangamInfomration").hide();
                   $("#divFullProfile").hide();
@@ -62,6 +62,7 @@ var ControllerViewFullView = angular.module('MugurthamApp').controller('Controll
                               method: "GET", url: '/User/User/Add/' + $scope.globalProfileID
                           }).
                               success(function (data, status, headers, config) {
+                                  $scope.getSimilarProfiles();
                               }).
                               error(function (data, status, headers, config) {
                                   NotifyStatus('2');
@@ -72,16 +73,18 @@ var ControllerViewFullView = angular.module('MugurthamApp').controller('Controll
                        $("#divContainer").unmask();
                        NotifyStatus('2');
                    })
-              };              
-              $scope.showInterest = function () {                 
+              };
+              $scope.showInterest = function (profileID, boolFullView) {
                   $http({
-                      method: "GET", url: '/User/User/ShowInterest/' + $scope.globalProfileID
+                      //method: "GET", url: '/User/User/ShowInterest/' + $scope.globalProfileID
+                      method: "GET", url: '/User/User/ShowInterest/' + profileID
                   }).
                       success(function (data, status, headers, config) {
-                          ToggleInterestButton();
-                          NotifySuccessStatus('15');                         
+                          if (boolFullView)
+                              ToggleInterestButton();
+                          NotifySuccessStatus('15');
                       }).
-                   error(function (data, status, headers, config) {                       
+                   error(function (data, status, headers, config) {
                        NotifyStatus('2');
                    })
               };
@@ -98,24 +101,14 @@ var ControllerViewFullView = angular.module('MugurthamApp').controller('Controll
                    })
               };
 
-              $scope.getHighlightedProfiles = function () {
-                  var strGetURL = "Search/Search/getHighlightedProfiles";
-                  $("#divContainer").mask("Searching profiles please wait...");
-                  $http({
-                      method: "GET", url: strGetURL
-                  }).
-              success(function (data, status, headers, config) {
-                  $("#divContainer").unmask();
-                  $scope.AllProfiles = data;
-                  $scope.SearchedProfiles = data.ProfileBasicInfoViewCoreEntityList;
-                  $scope.profilePhotos = data.PhotoCoreEntityList;
-              }).
-                  error(function (data, status, headers, config) {
-                      $("#divContainer").unmask();
-                      NotifyStatus('2');
-                  });
+
+
+              $scope.getSimilarProfiles = function () {
+                  $scope.SimilarProfiles = ($.parseJSON(sessionStorage.getItem('AllProfiles')).ProfileBasicInfoViewCoreEntityList);
+                  $scope.SimilarProfilePhotos = ($.parseJSON(sessionStorage.getItem('AllProfiles')).PhotoCoreEntityList);
+                  setTimeout(displaySimilarPofilesSlider, 1000);
               }
-              
+
           }]);
 
 
@@ -187,9 +180,9 @@ jssor_1_slider_init = function () {
     //responsive code end
 };
 window.onload = function () {
-//    init_map1();
+    //    init_map1();
     jssor_1_slider_init();
-    
+
 }
 
 
@@ -197,17 +190,17 @@ window.onload = function () {
 
 function init_map1() {
     alert(333);
-        var myLocation = new google.maps.LatLng(38.885516, -77.09327200000001);
-        var mapOptions = {
-            center: myLocation,
-            zoom: 16
-        };
-        var marker = new google.maps.Marker({
-            position: myLocation,
-            title: "Property Location"
-        });
-        var map = new google.maps.Map(document.getElementById("map1"),
-            mapOptions);
-        marker.setMap(map);
-    }
-    
+    var myLocation = new google.maps.LatLng(38.885516, -77.09327200000001);
+    var mapOptions = {
+        center: myLocation,
+        zoom: 16
+    };
+    var marker = new google.maps.Marker({
+        position: myLocation,
+        title: "Property Location"
+    });
+    var map = new google.maps.Map(document.getElementById("map1"),
+        mapOptions);
+    marker.setMap(map);
+}
+

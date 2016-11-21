@@ -1,5 +1,5 @@
 ﻿@{
-    Layout = "~/Areas/User/Views/Shared/LayoutUser.cshtml";
+    Layout = "~/Areas/Search/Views/Shared/LayoutSearch.cshtml";
 }
 <div class="col-lg-12">
     <!-- Tabs-->
@@ -17,30 +17,21 @@
     <div class="col-lg-12">
         <!-- Filter Header-->
         <div class="row">
-            <div class="col-xs-6">
-                <label for="search">Open Search:</label>
-                <!--http://stackoverflow.com/questions/6153047/detect-changed-input-text-box-->
-                <input ng-model="q" id="opensearch" class="form-control" placeholder="Search using Profile ID or Name or Location or Education or more" oninput="setTimeout(displayThumbnailSlider, 1000);">
-            </div>
-            <div class="col-xs-6">
-                <label for="search">Profiles per page:</label>
-                <input type="number" min="1" max="100" class="form-control" ng-model="pageSize">
-            </div><br /><br /><br /><br />
             <div class="col-xs-4">
-                <h5><b>Total Searched Profiles : {{ SearchedProfiles.length }} &nbsp;&nbsp;</b></h5>
+                <h5><b> Searched Profiles : {{ SearchedProfiles.length }} &nbsp;&nbsp;</b></h5>
             </div>
-            <div class="col-xs-4">
+            <div class="col-xs-3">
                 <h5>
                     <b>
-                        Total Filtered Profiles : {{ (SearchedProfiles |filter: (q)).length}}
+                         Filtered Profiles : {{ (SearchedProfiles |filter: (colourFilter)).length}}
                     </b>
                 </h5>
             </div>
-            <div class="col-xs-4">
+            <div class="col-xs-5">
 
                 <h5>
                     <b>
-                        Showing Profiles {{ (((currentPage * pageSize) - pageSize) + 1)  }}  through {{ currentPage * pageSize }} of  {{ (SearchedProfiles |filter: (q || {SangamID :SangamID, Star: Star, SubCaste: SubCaste}  || {Age: '7'} || {Age: '6'})).length}} &nbsp;&nbsp;
+                        Showing Profiles {{ (((currentPage * pageSize) - pageSize) + 1)  }}  through {{ currentPage * pageSize }} of  {{ (SearchedProfiles |filter: (colourFilter)).length}} &nbsp;&nbsp;
                     </b>
                 </h5>
             </div>
@@ -55,7 +46,9 @@
 
 
         <!-- Profiles Listing-->
-        <div class="panel panel-primary FormShadow" dir-paginate="data in AllProfiles.ProfileBasicInfoViewCoreEntityList | filter: (q) | itemsPerPage: pageSize" current-page="currentPage">
+        <!--<ul ng-repeat="movie in ((movies | filter:Filter.Comedy) + (movies | filter:Filter.Action) + (movies | filter:Filter.Drama))">-->
+
+        <div class="panel panel-primary FormShadow" dir-paginate="data in ((AllProfiles.ProfileBasicInfoViewCoreEntityList | filter: (colourFilter) | itemsPerPage: pageSize) ) " current-page="currentPage">
             <div class="panel-heading">
                 <h3 class="panel-title text-center">
                     <a href="#/FullView/{{data.MugurthamProfileID}}" target="_blank">  {{data.Name }}</a>

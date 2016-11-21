@@ -9,12 +9,28 @@ This Learning controller is the global Mugurtham controller for global operation
     $translate.use(key);
   };*/
 function displayThumbnailSlider() {
-    if ($(".flexslider")[0]) {        
+    if ($(".flexslider")[0]) {
         $('.flexslider').flexslider({
             animation: "slide",
             controlsContainer: $(".custom-controls-container"),
             customDirectionNav: $(".custom-navigation a"),
-            start: function (slider) {                
+            start: function (slider) {
+            }
+        })
+    }
+}
+function displaySimilarPofilesSlider() {
+    if ($(".flexslider")[0]) {
+        $('.flexslider').flexslider({
+            animation: "slide",
+            pauseOnHover: true,
+            minItems: 2,
+            maxItems: 5,
+            itemWidth: 150,
+            itemMargin: 0,
+            controlsContainer: $(".custom-controls-container"),
+            customDirectionNav: $(".custom-navigation a"),
+            start: function (slider) {
             }
         })
     }
@@ -59,6 +75,19 @@ var MugurthamController = angular.module('MugurthamApp').
                  $("#ddlLocale > li").removeClass("active");
                  $('#' + key).parent().addClass("active");
              };
+
+
+
+
+
+             /*============================================SEARCH GLOBAL FILTER PANEL=================================*/
+             //http://stackoverflow.com/questions/14514461/how-to-bind-to-list-of-checkbox-values-with-angularjs
+             $scope.arrFilterSubCaste = ['Avusula', 'Kai Kolar', 'Kammari', 'Kanchari', 'Shipi', 'Vadrangi', 'Kamalar', 'Achari'];
+             $scope.arrFilterStar = ['Anusham', 'Aswini', 'Avittam', 'Aayilyam', 'Bharani', 'Chithirai', 'Hastham', 'Karthigai', 'Kettai', 'Makam', 'Moolam', 'Mrigasheersham', 'Pooraadam', 'Pooram', 'Poorattathi', 'Poosam', 'Punarpoosam', 'Revathi', 'Rohini', 'Sadayam', 'Swaathi', 'Thiruvaathirai', 'Thiruvonam', 'Uthiraadam', 'Uthiram', 'Uthirattathi', 'Visaakam'];
+
+             /*============================================SEARCH GLOBAL FILTER PANEL ENDS=================================*/
+
+
          }])
 
 
@@ -133,8 +162,7 @@ function NotifyErrorStatus(data, status) {
 //This method listens to open the Modal window only when loggedin first time
 function landingPageCounter() {
     if (typeof (Storage) !== "undefined") {
-        if (localStorage.getItem("landingFirstTimeCount"))
-        {
+        if (localStorage.getItem("landingFirstTimeCount")) {
             if (Number(localStorage.getItem("landingFirstTimeCount")) == 0) {
                 $('#squarespaceModal').modal('show');
                 localStorage.setItem("landingFirstTimeCount", "1");

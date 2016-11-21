@@ -12,37 +12,62 @@
     </div>
     <div class="panel-body">
 
-      
-
         <div class="row">
             <div class="col-sm-3">
+                <div class="panel-group" id="accordion">
 
-                <ul class="list-group">
-                    <li class="list-group-item">
-                        <a href="#ProfileID">Search</a>
-                    </li>
-                    <li class="list-group-item">
-                        <a href="#BasicInfo/New">New Profile</a>
-                    </li>
-                    <li class="list-group-item">
-                       <a href="#SangamAdminProfiles">Profiles</a> 
-                    </li>
-                     <li class="list-group-item">
-                        <a href="#SangamUserList">Users</a>
-                    </li>
-                    <li class="list-group-item">Reports
-                    </li>
-                    <li class="list-group-item">
-                        <a href="#SangamAdminSettings">Settings</a>
-                    </li>
-                </ul>
+
+
+
+
+                    <div class="panel panel-primary FormShadow">
+                        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" data-target="#collapseOne">
+                            <h4 class="panel-title">
+                                <a class="accordion-toggle">
+                                    Admin Layout
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseOne" class="panel-collapse collapse in">
+                            <div class="panel-body">
+                                <ul class="list-group">
+                                    <li class="list-group-item">
+                                        <a href="#ProfileID">Search</a>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <a href="#BasicInfo/New">New Profile</a>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <a href="#SangamAdminProfiles">Profiles</a>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <a href="#SangamUserList">Users</a>
+                                    </li>
+                                    <li class="list-group-item">
+                                        Reports
+                                    </li>
+                                    <li class="list-group-item">
+                                        <a href="#SangamAdminSettings">Settings</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+                </div>
+
+
             </div>
             <div class="col-sm-9">
-
-
-
                 @RenderBody()
             </div>
         </div>
+
+
+
     </div>
 </div>

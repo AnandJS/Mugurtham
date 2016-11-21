@@ -4763,7 +4763,7 @@ ul.footer-nav li a:hover {
 
 /* mouse grab icon */
 .grabbing { 
-    cursor:url(../images/icons/grabbing.png) 8 8, move;
+    cursor:url(../../../App_Themes/MugurthamTheme/css/Mugurtham/OwlCarousel/grabbing.png) 8 8, move;
 }
 
 /* fix */
@@ -5172,7 +5172,7 @@ ul.footer-nav li a:hover {
 /* preloading images */
 .owl-item.loading{
 	min-height: 150px;
-	background: url(../images/icons/ajaxloader.gif) no-repeat center center
+	background: url(../../../App_Themes/MugurthamTheme/css/Mugurtham/OwlCarousel/ajaxloader.gif) no-repeat center center
 }
 
 
