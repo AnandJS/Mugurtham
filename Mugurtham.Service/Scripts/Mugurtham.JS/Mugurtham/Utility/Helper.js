@@ -15,6 +15,8 @@ window.onbeforeunload = function (event) {
 
 // This function is for global scope
 $(function () {
+
+    //Logout here
     $("#tabLogout").click(function () {
             removeSessionData();
     });
@@ -30,5 +32,5 @@ $(function () {
     }));
 
 
-
+   
 });
