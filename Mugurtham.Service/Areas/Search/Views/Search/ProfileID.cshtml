@@ -67,7 +67,7 @@
                         <div class="col-lg-3">
                             <div class="flexslider">
                                 <ul class="slides">
-                                    <li ng-repeat="objProfilePhoto in MyAllProfiles.PhotoCoreEntityList | filter: {ProfileID: AllProfiles[0].MugurthamProfileID}">
+                                    <li ng-repeat="objProfilePhoto in MyAllProfiles.PhotoCoreEntityList | filter: {ProfileID: AllProfiles[0].MugurthamProfileID} : true">
                                         <img src="{{objProfilePhoto.PhotoPath }}" class="img-thumbnail" style="height:200px; width:350px" />
                                     </li>
                                 </ul>

@@ -347,6 +347,10 @@
     <Content Include="Images\Mugurtham\Sangam\Banner\Default.html" />
     <Content Include="Images\Mugurtham\Sangam\Default.html" />
     <Content Include="Images\Mugurtham\Sangam\Logo\Default.html" />
+    <Content Include="Images\Mugurtham\Sponsors\kalpana.jpg" />
+    <Content Include="Images\Mugurtham\Sponsors\MeenatchiSundareswarar.jpg" />
+    <Content Include="Images\Mugurtham\Sponsors\panchashakthi.png" />
+    <Content Include="Images\Mugurtham\Sponsors\sivan.jpg" />
     <Content Include="Log\Default.txt" />
     <Content Include="Scripts\Mugurtham.JS\AngularJSToastr\toaster.min.js" />
     <Content Include="Scripts\Mugurtham.JS\AngularJS\angular-route.min.js" />

@@ -72,6 +72,13 @@ function setSessionData() {
         })
         .fail(function (jqxhr, textStatus, error) {
         });
+            // API Call for Recently Viewed Profiles JSON
+            $.getJSON("Search/Search/getRecentlyViewedProfiles")
+        .done(function (jsonObject) {
+            sessionStorage.setItem('RecentlyViewedProfiles', JSON.stringify(jsonObject));
+        })
+        .fail(function (jqxhr, textStatus, error) {
+        });
             //End of Calling API Services
             // Global variable check is set to avoid roundtrip API service calls at each page load
             sessionStorage.setItem('IsSessionStorageSet', true);
