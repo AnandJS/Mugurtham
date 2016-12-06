@@ -8,10 +8,10 @@
             <li><a href="#ProfileID" id="tabProfileID"><i class="fa fa-user" style="font-size:18px"></i>&nbsp; {{ 'GENPROFID' | translate }}</a></li>
             <li><a href="#AllProfiles" id="tabAllProfiles"><i class="fa fa-users" style="font-size:18px"></i>&nbsp; {{ 'LYTSRCALLPROF' | translate }}</a></li>
             <li><a href="#GeneralSearch" id="tabGeneralSearch"><i class="fa fa-search" style="font-size:18px"></i>&nbsp; {{ 'LYTGENSRC' | translate }}</a></li>
-            <li  class="active"><a href="#SangamSearch" id="tabSangamSearch"><i class="fa fa-building-o" style="font-size:18px"></i>&nbsp; {{ 'LYTSGMSRC' | translate }}</a></li>
-            <li class="active"><a href="#EducationSearch" id="tabEducationSearch"><i class="fa fa-building-o" style="font-size:18px"></i>&nbsp; {{ 'SRCEDUSEARCH' | translate }}</a></li>
-            <li class="active"><a href="#LocaitonSearch" id="tabLocaitonSearch"><i class="fa fa-building-o" style="font-size:18px"></i>&nbsp; {{ 'SRCLOCSEARCH' | translate }}</a></li>
-            <li class="active"><a href="#OccupationSearch" id="tabOccupationSearch"><i class="fa fa-building-o" style="font-size:18px"></i>&nbsp; {{ 'SRCOCPNSEARCH' | translate }}</a></li>
+            <li><a href="#SangamSearch" id="tabSangamSearch"><i class="fa fa-building-o" style="font-size:18px"></i>&nbsp; {{ 'LYTSGMSRC' | translate }}</a></li>
+            <li><a href="#EducationSearch" id="tabEducationSearch"><i class="fa fa-building-o" style="font-size:18px"></i>&nbsp; {{ 'SRCEDUSEARCH' | translate }}</a></li>
+            <li  class="active"><a href="#LocaitonSearch" id="tabLocaitonSearch"><i class="fa fa-building-o" style="font-size:18px"></i>&nbsp; {{ 'SRCLOCSEARCH' | translate }}</a></li>
+            <li><a href="#OccupationSearch" id="tabOccupationSearch"><i class="fa fa-building-o" style="font-size:18px"></i>&nbsp; {{ 'SRCOCPNSEARCH' | translate }}</a></li>
         </ul>
     </div>
 </div>
@@ -21,7 +21,8 @@
 <div class="col-lg-8">
     <div class="panel panel-primary bs-example well bs-component FormShadow">
         <div class="panel-heading">
-            <h3 class="panel-title text-center">{{ 'SRCSGMSRCH' | translate}}
+            <h3 class="panel-title text-center">
+                {{ 'SRCLOCSEARCH| translate}}
             </h3>
         </div>
         <div class="panel-body">
@@ -67,7 +68,7 @@
             <div class="col-xs-4">
                 <h5>
                     <b>
-                        Total Filtered Profiles : {{ (SearchedProfiles |filter: (q || {SangamID :SangamID})).length}}                        
+                        Total Filtered Profiles : {{ (SearchedProfiles |filter: (q || {SangamID :SangamID})).length}}
                     </b>
                 </h5>
             </div>
@@ -89,64 +90,64 @@
 
 
 
-        <!-- Profiles Listing-->        
+        <!-- Profiles Listing-->
         <div class="panel panel-primary FormShadow" dir-paginate="data in AllProfiles.ProfileBasicInfoViewCoreEntityList | filter: (q || {SangamID :SangamID})  | orderBy: 'Name' | itemsPerPage: pageSize" current-page="currentPage">
-                <div class="panel-heading">
-                    <h3 class="panel-title text-center">
-                        <a href="#/FullView/{{data.MugurthamProfileID}}" target="_blank">  {{data.Name }}</a>
-                    </h3>
-                </div>
-                <div class="panel-body bgImage">
-                    <div class="col-lg-3">
-                        <div class="flexslider">
-                            <ul class="slides">                                
-                                <li ng-repeat="objProfilePhoto in profilePhotos | filter: {ProfileID: data.MugurthamProfileID}">
-                                    <img src="{{objProfilePhoto.PhotoPath }} " class="img-thumbnail" style="height:200px; width:350px" />
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-lg-9 table-responsive">
-                        <table class="mugurthamTable table-striped table-bordered table-hover FormShadow ">
-                            <tr>
-                                <td class="col-lg-4"><b>{{ 'GENPROFID' | translate}}</b></td>
-                                <td class="col-lg-8"><a href="#/FullView/{{data.MugurthamProfileID}}" target="_blank">{{data.MugurthamProfileID }}</a></td>
-                            </tr>
-                            <tr>
-                                <td class="col-lg-4"><b>{{ 'GENSANGAMPROFID' | translate}}</b></td>
-                                <td class="col-lg-8"><a href="#/FullView/{{data.MugurthamProfileID}}" target="_blank">{{data.SangamProfileID }}</a></td>
-                            </tr>
-                            <tr>
-                                <td><b>{{ 'BIAGE' | translate}}</b></td>
-                                <td>{{data.Age }}</td>
-                            </tr>
-                            <tr>
-                                <td><b>{{ 'BISTR' | translate}}</b></td>
-                                <td>{{data.Star }}</td>
-                            </tr>
-                            <tr>
-                                <td><b>{{ 'LYTPRFTABLOC' | translate}}</b></td>
-                                <td>{{data.Location }}</td>
-                            </tr>
-                            <tr>
-                                <td><b>{{ 'CREDUC' | translate}}</b></td>
-                                <td>{{data.Education }}</td>
-                            </tr>
-                            <tr>
-                                <td><b>{{ 'CROCCPTN' | translate}}</b></td>
-                                <td>{{data.Occupation }}</td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div class="col-lg-12 text-justify">
-                        <br />
-                        {{data.AboutMe }}
+            <div class="panel-heading">
+                <h3 class="panel-title text-center">
+                    <a href="#/FullView/{{data.MugurthamProfileID}}" target="_blank">  {{data.Name }}</a>
+                </h3>
+            </div>
+            <div class="panel-body bgImage">
+                <div class="col-lg-3">
+                    <div class="flexslider">
+                        <ul class="slides">
+                            <li ng-repeat="objProfilePhoto in profilePhotos | filter: {ProfileID: data.MugurthamProfileID}">
+                                <img src="{{objProfilePhoto.PhotoPath }} " class="img-thumbnail" style="height:200px; width:350px" />
+                            </li>
+                        </ul>
                     </div>
                 </div>
-                <div class="panel-footer">
-                    © {{'GENCOPYRT' | translate }} 2013 - {{data.SangamName }}
+                <div class="col-lg-9 table-responsive">
+                    <table class="mugurthamTable table-striped table-bordered table-hover FormShadow ">
+                        <tr>
+                            <td class="col-lg-4"><b>{{ 'GENPROFID' | translate}}</b></td>
+                            <td class="col-lg-8"><a href="#/FullView/{{data.MugurthamProfileID}}" target="_blank">{{data.MugurthamProfileID }}</a></td>
+                        </tr>
+                        <tr>
+                            <td class="col-lg-4"><b>{{ 'GENSANGAMPROFID' | translate}}</b></td>
+                            <td class="col-lg-8"><a href="#/FullView/{{data.MugurthamProfileID}}" target="_blank">{{data.SangamProfileID }}</a></td>
+                        </tr>
+                        <tr>
+                            <td><b>{{ 'BIAGE' | translate}}</b></td>
+                            <td>{{data.Age }}</td>
+                        </tr>
+                        <tr>
+                            <td><b>{{ 'BISTR' | translate}}</b></td>
+                            <td>{{data.Star }}</td>
+                        </tr>
+                        <tr>
+                            <td><b>{{ 'LYTPRFTABLOC' | translate}}</b></td>
+                            <td>{{data.Location }}</td>
+                        </tr>
+                        <tr>
+                            <td><b>{{ 'CREDUC' | translate}}</b></td>
+                            <td>{{data.Education }}</td>
+                        </tr>
+                        <tr>
+                            <td><b>{{ 'CROCCPTN' | translate}}</b></td>
+                            <td>{{data.Occupation }}</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-lg-12 text-justify">
+                    <br />
+                    {{data.AboutMe }}
                 </div>
             </div>
+            <div class="panel-footer">
+                © {{'GENCOPYRT' | translate }} 2013 - {{data.SangamName }}
+            </div>
+        </div>
         <!-- Bottom Pagination-->
         <div class="text-center">
             <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="/Scripts/Mugurtham.JS/Paging/dirPagination.tpl.html"></dir-pagination-controls>

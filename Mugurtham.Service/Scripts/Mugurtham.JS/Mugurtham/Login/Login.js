@@ -21,14 +21,14 @@
         }
         $("#container").mask("Signing in please wait...");
         $.post("/Home/validateLogin",
-{    
+{
     LoginID: $('#LoginID').val(),
     Password: $('#Password').val()
 },
 function (data, status) {
     $("#container").unmask();
     if (data.LoginStatus == '1') {
-        location.reload();
+        //location.reload();
 
         //Setting the global popup for advertisenment
         if (typeof (Storage) !== "undefined") {
@@ -64,6 +64,9 @@ function (data, status) {
     }
     else if (data.LoginStatus == '5') {
         alert('Your profile is deactivated  by user sangam');
+    }
+    else if (data.LoginStatus == '6') {
+        alert('Server Maintenance - We sincerely apologize for the inconvinience. We will be back soon');
     }
 }).fail(function (response) {
     alert('Error: ' + response.responseText);

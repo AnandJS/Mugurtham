@@ -41,6 +41,19 @@ namespace Mugurtham.Service.Areas.Search.Controllers
         {
             return View();
         }
+        public ActionResult LocationSearch()
+        {
+            return View();
+        }
+        public ActionResult EducationSearch()
+        {
+            return View();
+        }
+        public ActionResult OccupationSearch()
+        {
+            return View();
+        }
+
         [HttpGet]
         public ActionResult getAllProfiles()
         {

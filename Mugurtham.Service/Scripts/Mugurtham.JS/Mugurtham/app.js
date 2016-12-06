@@ -125,6 +125,18 @@
             templateUrl: '/Search/Search/SangamSearch',
             controller: 'ControllerSearchSangam'
         })
+            .when('/EducationSearch', {
+                templateUrl: '/Search/Search/EducationSearch',
+                controller: 'ControllerEducationSearch'
+            })
+            .when('/LocaitonSearch', {
+                templateUrl: '/Search/Search/LocaitonSearch',
+                controller: 'ControllerLocaitonSearch'
+            })
+            .when('/OccupationSearch', {
+                templateUrl: '/Search/Search/OccupationSearch',
+                controller: 'ControllerOccupationSearch'
+            })
        /*======================================================*/
        /*ROUTING FOR VIEW MODULE STARTS HERE*/
        /*======================================================*/
@@ -220,7 +232,7 @@
          })
 
         // a default page redirect
-            //.
+        //.
         //otherwise('/phones');
 
 
@@ -376,7 +388,11 @@
             FAMPARENTSALIVE: 'Parents Alive',
             CONNAME: 'Contact Name',
             GENSANGAMPROFID: 'Sangam ProfileID',
-            LYTPROFILESHISTORY: 'Profiles Viewed Recently'            
+            LYTPROFILESHISTORY: 'Profiles Viewed Recently',
+            SRCEDUSEARCH: "Education Search",
+            SRCLOCSEARCH: "Location Search",
+            SRCOCPNSEARCH: "Occupation Search"
+
         });
         $translateProvider.translations('0449', {
             GENHOME: 'முகப்பு பக்கம்',
@@ -518,7 +534,10 @@
             FAMPARENTSALIVE: 'உயிரோடு வாழும் பெற்றோர்',
             CONNAME: 'தொடர்பு பெயர்',
             GENSANGAMPROFID: 'சங்க சுயவிவர எண்',
-            LYTPROFILESHISTORY: 'சமீபத்தில் பார்க்கப்பட்ட விவரக்குறிப்புகள்'
+            LYTPROFILESHISTORY: 'சமீபத்தில் பார்க்கப்பட்ட விவரக்குறிப்புகள்',
+            SRCEDUSEARCH: "Education Search",
+            SRCLOCSEARCH: "Location Search",
+            SRCOCPNSEARCH: "Occupation Search"
         });
         $translateProvider.translations('0439', {
             GENHOME: 'घर',
@@ -660,7 +679,10 @@
             FAMPARENTSALIVE: 'Parents Alive',
             CONNAME: 'Contact Name',
             GENSANGAMPROFID: 'Sangam ProfileID',
-            LYTPROFILESHISTORY: 'Profiles Viewed Recently'
+            LYTPROFILESHISTORY: 'Profiles Viewed Recently',
+            SRCEDUSEARCH: "Education Search",
+            SRCLOCSEARCH: "Location Search",
+            SRCOCPNSEARCH: "Occupation Search"
 
         });
         $translateProvider.translations('044a', {
@@ -803,7 +825,10 @@
             FAMPARENTSALIVE: 'Parents Alive',
             CONNAME: 'Contact Name',
             GENSANGAMPROFID: 'Sangam ProfileID',
-            LYTPROFILESHISTORY: 'Profiles Viewed Recently'
+            LYTPROFILESHISTORY: 'Profiles Viewed Recently',
+            SRCEDUSEARCH: "Education Search",
+            SRCLOCSEARCH: "Location Search",
+            SRCOCPNSEARCH: "Occupation Search"
         });
 
         $translateProvider.translations('044c', {
@@ -946,7 +971,10 @@
             FAMPARENTSALIVE: 'Parents Alive',
             CONNAME: 'Contact Name',
             GENSANGAMPROFID: 'Sangam ProfileID',
-            LYTPROFILESHISTORY: 'Profiles Viewed Recently'
+            LYTPROFILESHISTORY: 'Profiles Viewed Recently',
+            SRCEDUSEARCH: "Education Search",
+            SRCLOCSEARCH: "Location Search",
+            SRCOCPNSEARCH: "Occupation Search"
         });
 
         $translateProvider.translations('044b', {
@@ -1089,7 +1117,10 @@
             FAMPARENTSALIVE: 'Parents Alive',
             CONNAME: 'Contact Name',
             GENSANGAMPROFID: 'Sangam ProfileID',
-            LYTPROFILESHISTORY: 'Profiles Viewed Recently'
+            LYTPROFILESHISTORY: 'Profiles Viewed Recently',
+            SRCEDUSEARCH: "Education Search",
+            SRCLOCSEARCH: "Location Search",
+            SRCOCPNSEARCH: "Occupation Search"
         });
 
         $translateProvider.preferredLanguage('0409');

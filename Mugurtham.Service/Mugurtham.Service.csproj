@@ -410,6 +410,7 @@
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\Controllers\UserChamber\ControllerViewedProfiles.js" />
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\Controllers\View\ControllerFullView.js" />
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\Login\Login.js" />
+    <Content Include="Scripts\Mugurtham.JS\Mugurtham\Utility\Constants.js" />
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\Utility\Helper.js" />
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\Utility\SessionData.js" />
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\Utility\Validation.js" />
@@ -452,6 +453,8 @@
     <Folder Include="Images\Mugurtham\Ace\gallery\" />
     <Folder Include="Images\Mugurtham\Ace\placeholder\" />
     <Folder Include="Models\" />
+    <Folder Include="Scripts\Mugurtham.JS\Mugurtham\Adapters\" />
+    <Folder Include="Scripts\Mugurtham.JS\Mugurtham\Config\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
@@ -525,6 +528,9 @@
     <Content Include="Areas\HomePage\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Areas\HomePage\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="Areas\User\Views\User\RecentlyViewedProfiles.cshtml" />
+    <Content Include="Areas\Search\Views\Search\LocationSearch.cshtml" />
+    <Content Include="Areas\Search\Views\Search\EducationSearch.cshtml" />
+    <Content Include="Areas\Search\Views\Search\OccupationSearch.cshtml" />
     <None Include="bundleconfig.json" />
     <Content Include="Log\MugurthamLog.log" />
     <None Include="Properties\PublishProfiles\ProfileMugurtham.pubxml" />
