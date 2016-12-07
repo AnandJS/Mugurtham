@@ -41,8 +41,8 @@ namespace Mugurtham.Service
                     "~/Scripts/Mugurtham.JS/Mugurtham/app.js"));
             bundles.Add(new ScriptBundle("~/bundles/MugurthamControllerBase").Include(
                    "~/Scripts/Mugurtham.js/Mugurtham/Controllers/ControllerMugurtham.js"));
-            bundles.Add(new ScriptBundle("~/bundles/MugurthamDashboard").Include(
-                   "~/Scripts/Mugurtham.JS/Mugurtham/Controllers/Dashboard/*.js"));
+            bundles.Add(new ScriptBundle("~/bundles/MugurthamControllerSangamAdmin").Include(
+                   "~/Scripts/Mugurtham.JS/Mugurtham/Controllers/SangamAdmin/*.js"));
             bundles.Add(new ScriptBundle("~/bundles/MugurthamControllerProfile").Include(
                    "~/Scripts/Mugurtham.JS/Mugurtham/Controllers/Profile/*.js"));
             bundles.Add(new ScriptBundle("~/bundles/MugurthamControllerSearch").Include(

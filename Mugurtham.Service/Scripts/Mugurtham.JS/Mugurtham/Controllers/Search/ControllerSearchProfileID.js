@@ -70,7 +70,7 @@ var ControllerSearchProfileID = angular.module('MugurthamApp').controller('Contr
                 else {
                     return false;
                 }
-                setTimeout(displayThumbnailSlider, 1000);
+                setTimeout(displayThumbnailSlider, 10);
             }
             $scope.hideDiv = function () {
                 $('#divProfileBasicView').hide();

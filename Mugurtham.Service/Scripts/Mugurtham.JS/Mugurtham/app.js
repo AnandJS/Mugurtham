@@ -127,15 +127,15 @@
         })
             .when('/EducationSearch', {
                 templateUrl: '/Search/Search/EducationSearch',
-                controller: 'ControllerEducationSearch'
+                controller: 'ControllerSearchEducation'
             })
-            .when('/LocaitonSearch', {
-                templateUrl: '/Search/Search/LocaitonSearch',
-                controller: 'ControllerLocaitonSearch'
+            .when('/LocationSearch', {
+                templateUrl: '/Search/Search/LocationSearch',
+                controller: 'ControllerSearchLocation'
             })
             .when('/OccupationSearch', {
                 templateUrl: '/Search/Search/OccupationSearch',
-                controller: 'ControllerOccupationSearch'
+                controller: 'ControllerSearchOccupation'
             })
        /*======================================================*/
        /*ROUTING FOR VIEW MODULE STARTS HERE*/
@@ -391,7 +391,9 @@
             LYTPROFILESHISTORY: 'Profiles Viewed Recently',
             SRCEDUSEARCH: "Education Search",
             SRCLOCSEARCH: "Location Search",
-            SRCOCPNSEARCH: "Occupation Search"
+            SRCOCPNSEARCH: "Occupation Search",
+            SMRTSEARCH: "Smart Search",
+
 
         });
         $translateProvider.translations('0449', {

@@ -62,10 +62,10 @@ var ControllerSearchAllProfiles = angular.module('MugurthamApp').controller('Con
                 $scope.profilePhotos = ($.parseJSON(sessionStorage.getItem('AllProfiles')).PhotoCoreEntityList);
                 $scope.pageChangeHandler = function (num) {
                     $("html, body").animate({ scrollTop: 220 }, "slow");
-                    setTimeout(displayThumbnailSlider, 1000);
+                    setTimeout(displayThumbnailSlider, 10);
                     console.log('Profiles page changed to ' + num);
                 };
-                setTimeout(displayThumbnailSlider, 1000);
+                setTimeout(displayThumbnailSlider, 10);
             }
             $scope.setProfileIDBySangamAdminForProfilePic = function (ProfileID) {
                 localStorage.setItem("ProfileIDBySangamAdminForProfilePic", ProfileID);

@@ -9,9 +9,9 @@
             <li><a href="#AllProfiles" id="tabAllProfiles"><i class="fa fa-users" style="font-size:18px"></i>&nbsp; {{ 'LYTSRCALLPROF' | translate }}</a></li>
             <li class="active"><a href="#GeneralSearch" id="tabGeneralSearch"><i class="fa fa-search" style="font-size:18px"></i>&nbsp; {{ 'LYTGENSRC' | translate }}</a></li>
             <li><a href="#SangamSearch" id="tabSangamSearch"><i class="fa fa-building-o" style="font-size:18px"></i>&nbsp; {{ 'LYTSGMSRC' | translate }}</a></li>
-            <li class="active"><a href="#EducationSearch" id="tabEducationSearch"><i class="fa fa-building-o" style="font-size:18px"></i>&nbsp; {{ 'SRCEDUSEARCH' | translate }}</a></li>
-            <li class="active"><a href="#LocaitonSearch" id="tabLocaitonSearch"><i class="fa fa-building-o" style="font-size:18px"></i>&nbsp; {{ 'SRCLOCSEARCH' | translate }}</a></li>
-            <li class="active"><a href="#OccupationSearch" id="tabOccupationSearch"><i class="fa fa-building-o" style="font-size:18px"></i>&nbsp; {{ 'SRCOCPNSEARCH' | translate }}</a></li>
+            <li><a href="#EducationSearch" id="tabEducationSearch"><i class="fa fa-briefcase" style="font-size:18px"></i>&nbsp; {{ 'SRCEDUSEARCH' | translate }}</a></li>
+            <li><a href="#LocationSearch" id="tabLocationSearch"><i class="fa fa-map-marker" style="font-size:18px"></i>&nbsp; {{ 'SRCLOCSEARCH' | translate }}</a></li>
+            <li><a href="#OccupationSearch" id="tabOccupationSearch"><i class="fa fa-briefcase" style="font-size:18px"></i>&nbsp; {{ 'SRCOCPNSEARCH' | translate }}</a></li>
         </ul>
     </div>
 </div>
@@ -85,9 +85,9 @@
         <!-- Filter Header-->
         <div class="row">
             <div class="col-xs-6">
-                <label for="search">Open Search:</label>
+                <label for="search">{{'SMRTSEARCH '| translate }}</label>
                 <!--http://stackoverflow.com/questions/6153047/detect-changed-input-text-box-->
-                <input ng-model="q" id="opensearch" class="form-control" placeholder="Type Raasi or Location or ProfileID or anything here" oninput="setTimeout(displayThumbnailSlider, 1000);">
+                <input ng-model="q" id="opensearch" class="form-control" placeholder="Type Raasi or Location or ProfileID or anything here" oninput="setTimeout(displayThumbnailSlider, 10);">
             </div>
             <div class="col-xs-6">
                 <label for="search">Profiles per page:</label>
@@ -113,7 +113,7 @@
             </div>
         </div>
         <!-- Top Pagination-->
-        <div class="text-center">
+        <div class="text-center bgImage">
             <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="/Scripts/Mugurtham.JS/Paging/dirPagination.tpl.html"></dir-pagination-controls>
         </div>
         <br />
@@ -180,7 +180,7 @@
                 </div>
             </div>
         <!-- Bottom Pagination-->
-        <div class="text-center">
+        <div class="text-center bgImage">
             <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="/Scripts/Mugurtham.JS/Paging/dirPagination.tpl.html"></dir-pagination-controls>
         </div>
     </div>

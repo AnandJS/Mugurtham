@@ -62,10 +62,10 @@ var ControllerRecentlyJoined = angular.module('MugurthamApp').controller('Contro
                 $scope.profilePhotos = ($.parseJSON(sessionStorage.RecentlyJoinedProfiles).PhotoCoreEntityList);
                 $scope.pageChangeHandler = function (num) {
                     $("html, body").animate({ scrollTop: 220 }, "slow");                    
-                    setTimeout(displayThumbnailSlider, 1000);
+                    setTimeout(displayThumbnailSlider, 10);
                     console.log('Profiles page changed to ' + num);
                 };
-                setTimeout(displayThumbnailSlider, 1000);
+                setTimeout(displayThumbnailSlider, 10);
                 toastr.success('Recently Profiles loaded Successfully');
             }
         }])

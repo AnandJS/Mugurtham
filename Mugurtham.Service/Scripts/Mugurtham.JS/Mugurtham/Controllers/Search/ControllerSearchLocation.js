@@ -12,41 +12,40 @@
 /*************************************************************************
 /*
 ==========================================================================================
-THIS CONTROLLER IS SPECIFICALLY FOR DISPLAYING HIGHLIGHTED PROFILES USER HOME PAGE
+THIS CONTROLLER IS SPECIFICALLY FOR DISPLAYING LOCATION SEARCH ON SEARCH MODULE
 ==========================================================================================
 */
-var ControllerHighlightedProfiles = angular.module('MugurthamApp').controller('ControllerHighlightedProfiles',
+var ControllerSearchLocation = angular.module('MugurthamApp').controller('ControllerSearchLocation',
         ['$http', '$scope', function ($http, $scope) {
-            $scope.ControllerName = 'ControllerHighlightedProfiles';
 
-
-            //===================================================
-            //AJAX GET REQUEST - GETTING ALL PROFILES
-            //===================================================
-            $scope.getHighlightedProfiles = function () {
+            $scope.ControllerName = 'ControllerSearchLocation';
+            //===============================================================================================
+            //AJAX GET REQUEST - GETTING ALL PROFILES AND THEN FILTER ON LOCATION THROUGH VIEW SMART SEARCH
+            //===============================================================================================
+            $scope.getAllProfiles = function () {
                 if (typeof (Storage) !== "undefined") {
-                    if ((!sessionStorage.getItem('HiglightedProfiles')))
-                        $scope.getHighlightedProfilesfromAPI();
+                    if ((!sessionStorage.getItem('AllProfiles')))
+                        $scope.getAllProfilesfromAPI();
                     else
-                        $scope.getHighlightedProfilesfromSession();
+                        $scope.getAllProfilesfromSession();
                 }
                 else
-                    $scope.getHighlightedProfilesfromAPI();
+                    $scope.getAllProfilesfromAPI();
             }
 
-            $scope.getHighlightedProfilesfromSession = function () {
-                if ((sessionStorage.getItem('HiglightedProfiles')))
-                    $scope.initData(JSON.parse(sessionStorage.getItem('HiglightedProfiles')));
+            $scope.getAllProfilesfromSession = function () {
+                if ((sessionStorage.getItem('AllProfiles')))
+                    $scope.initData(JSON.parse(sessionStorage.getItem('AllProfiles')));
             }
-            $scope.getHighlightedProfilesfromAPI = function () {
-                var strGetURL = "Search/Search/getHighlightedProfiles";
+            $scope.getAllProfilesfromAPI = function () {
+                var strGetURL = "Search/Search/getAllProfiles";
                 $("#divContainer").mask("Searching profiles please wait...");
                 $http({
                     method: "GET", url: strGetURL
                 }).
             success(function (data, status, headers, config) {
                 $("#divContainer").unmask();
-                $scope.initData(data);
+                initData(data);
             }).
                 error(function (data, status, headers, config) {
                     $("#divContainer").unmask();
@@ -55,32 +54,18 @@ var ControllerHighlightedProfiles = angular.module('MugurthamApp').controller('C
             }
 
             $scope.initData = function (data) {
-                $("#divContainer").unmask();
-                $scope.AllProfiles = data;
+                $scope.AllProfiles = $.parseJSON(sessionStorage.getItem('AllProfiles'));
                 $scope.currentPage = 1;
                 $scope.pageSize = 15;
-                $scope.SearchedProfiles = data.ProfileBasicInfoViewCoreEntityList;
-                $scope.profilePhotos = data.PhotoCoreEntityList;
+                $scope.SearchedProfiles = ($.parseJSON(sessionStorage.getItem('AllProfiles')).ProfileBasicInfoViewCoreEntityList);
+                $scope.profilePhotos = ($.parseJSON(sessionStorage.getItem('AllProfiles')).PhotoCoreEntityList);
                 $scope.pageChangeHandler = function (num) {
                     $("html, body").animate({ scrollTop: 220 }, "slow");
                     setTimeout(displayThumbnailSlider, 10);
                     console.log('Profiles page changed to ' + num);
                 };
                 setTimeout(displayThumbnailSlider, 10);
-                toastr.success('Highlighted Profiles loaded Successfully');
             }
 
         }])
 
-function NotifyStatus(intStatus) {
-    /*
-         1-> Success
-         2-> Error
-    */
-    if (intStatus == '1') {
-        toastr.success('Profiles Received Successfully');
-    }
-    else if (intStatus == '2') {
-        toastr.Error('Error occured in ControllerHighlightedProfiles - getData');
-    }
-}

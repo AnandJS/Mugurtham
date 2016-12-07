@@ -60,10 +60,10 @@ var ControllerViewedProfiles = angular.module('MugurthamApp').controller('Contro
                 $scope.SearchedProfiles = data.ProfileBasicInfoViewCoreEntityList;
                 $scope.pageChangeHandler = function (num) {
                     $("html, body").animate({ scrollTop: 220 }, "slow");
-                    setTimeout(displayThumbnailSlider, 1000);
+                    setTimeout(displayThumbnailSlider, 10);
                     console.log('Profiles page changed to ' + num);
                 };
-                setTimeout(displayThumbnailSlider, 1000);
+                setTimeout(displayThumbnailSlider, 10);
                 toastr.success('Viewed Profiles loaded Successfully');
             }
         }])
