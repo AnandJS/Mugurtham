@@ -3,13 +3,15 @@
 }
 <div class="col-lg-12">
     <!-- Tabs-->
+
+
     <div id="divnavBarSearch">
         <ul class="nav nav-tabs">
             <li><a href="#ProfileID" id="tabProfileID"><i class="fa fa-user" style="font-size:18px"></i>&nbsp; {{ 'GENPROFID' | translate }}</a></li>
             <li><a href="#AllProfiles" id="tabAllProfiles"><i class="fa fa-users" style="font-size:18px"></i>&nbsp; {{ 'LYTSRCALLPROF' | translate }}</a></li>
             <li><a href="#GeneralSearch" id="tabGeneralSearch"><i class="fa fa-search" style="font-size:18px"></i>&nbsp; {{ 'LYTGENSRC' | translate }}</a></li>
             <li><a href="#SangamSearch" id="tabSangamSearch"><i class="fa fa-building-o" style="font-size:18px"></i>&nbsp; {{ 'LYTSGMSRC' | translate }}</a></li>
-            <li class="active"><a href="#EducationSearch" id="tabEducationSearch"><i class="fa fa-briefcase" style="font-size:18px"></i>&nbsp; {{ 'SRCEDUSEARCH' | translate }}</a></li>
+            <li  class="active"><a href="#EducationSearch" id="tabEducationSearch"><i class="fa fa-briefcase" style="font-size:18px"></i>&nbsp; {{ 'SRCEDUSEARCH' | translate }}</a></li>
             <li><a href="#LocationSearch" id="tabLocationSearch"><i class="fa fa-map-marker" style="font-size:18px"></i>&nbsp; {{ 'SRCLOCSEARCH' | translate }}</a></li>
             <li><a href="#OccupationSearch" id="tabOccupationSearch"><i class="fa fa-briefcase" style="font-size:18px"></i>&nbsp; {{ 'SRCOCPNSEARCH' | translate }}</a></li>
         </ul>
@@ -18,45 +20,15 @@
 <div class="col-lg-12">
     <br />
 </div>
-<div class="col-lg-8">
-    <div class="panel panel-primary bs-example well bs-component FormShadow">
-        <div class="panel-heading">
-            <h3 class="panel-title text-center">
-                {{ 'SRCEDUSEARCH' | translate}}
-            </h3>
-        </div>
-        <div class="panel-body">
-            <div class="row">
-                <div class="col-sm-12">
-                    <form class="form-horizontal">
-                        <div class="form-group">
-                            <label for="NomineeName" class="col-lg-3 control-label">{{ 'SRCSGMFLTRBYSGM' | translate}}</label>
-                            <div class="col-lg-9">
-                                <select class="form-control" ng-model="SangamID" id="ddlRoles" onchange=" javascript: setTimeout(displayThumbnailSlider, 10); $('html, body').animate({ scrollTop: 0 }, 'fast');  $('html, body').animate({ scrollTop: 220 }, 'fast'); toastr.success($(this).find('option:selected').text() + '  Profiles loaded Successfully');">
-                                    <option value="">All Sangams</option>
-                                    <option ng-repeat="Sangam in arrSangamID" value="{{Sangam.ID}}">{{Sangam.Name}}</option>
-                                </select>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="col-lg-4">
-    <blockquote>
-        <p>{{ 'SRCSGMHLP' | translate }}</p>
-    </blockquote>
-</div>
-<div id="divEducationSearch" class="col-lg-12">
+
+<div id="divOccupationSearch" class="col-lg-12" ng-init="getAllProfiles();">
     <div class="col-lg-12">
         <!-- Filter Header-->
         <div class="row">
             <div class="col-xs-6">
                 <label for="search">{{'SMRTSEARCH '| translate }}</label>
                 <!--http://stackoverflow.com/questions/6153047/detect-changed-input-text-box-->
-                <input ng-model="q" id="opensearch" class="form-control" placeholder="Type Raasi or Location or ProfileID or anything here" oninput="setTimeout(displayThumbnailSlider, 10);">
+                <input ng-model="q" id="opensearch" class="form-control" placeholder="Type any Education here" oninput="setTimeout(displayThumbnailSlider, 10);">
             </div>
             <div class="col-xs-6">
                 <label for="search">Profiles per page:</label>
@@ -68,7 +40,7 @@
             <div class="col-xs-4">
                 <h5>
                     <b>
-                        Total Filtered Profiles : {{ (SearchedProfiles |filter: (q || {SangamID :SangamID})).length}}
+                        Total Filtered Profiles : {{ (SearchedProfiles |filter: ({Education : q})).length}}
                     </b>
                 </h5>
             </div>
@@ -76,7 +48,7 @@
 
                 <h5>
                     <b>
-                        Showing Profiles {{ (((currentPage * pageSize) - pageSize) + 1)  }}  through {{ currentPage * pageSize }} of  {{ (SearchedProfiles |filter: (q || {SangamID :SangamID, Star: Star, SubCaste: SubCaste}  || {Age: '7'} || {Age: '6'})).length}} &nbsp;&nbsp;
+                        Showing Profiles {{ (((currentPage * pageSize) - pageSize) + 1)  }}  through {{ currentPage * pageSize }} of  {{ (SearchedProfiles |filter: ({Education : q})).length}} &nbsp;&nbsp;
                     </b>
                 </h5>
             </div>
@@ -91,7 +63,7 @@
 
 
         <!-- Profiles Listing-->
-        <div class="panel panel-primary FormShadow" dir-paginate="data in AllProfiles.ProfileBasicInfoViewCoreEntityList | filter: (q || {SangamID :SangamID})  | orderBy: 'Name' | itemsPerPage: pageSize" current-page="currentPage">
+        <div class="panel panel-primary FormShadow" dir-paginate="data in AllProfiles.ProfileBasicInfoViewCoreEntityList | filter: ({Education : q})  | orderBy: 'Name' | itemsPerPage: pageSize" current-page="currentPage">
             <div class="panel-heading">
                 <h3 class="panel-title text-center">
                     <a href="#/FullView/{{data.MugurthamProfileID}}" target="_blank">  {{data.Name }}</a>

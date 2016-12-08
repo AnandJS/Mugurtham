@@ -12,7 +12,7 @@
 /*************************************************************************
 /*
 ==========================================================================================
-THIS CONTROLLER IS SPECIFICALLY FOR DISPLAYING LOCATION SEARCH ON SEARCH MODULE
+THIS CONTROLLER IS SPECIFICALLY FOR DISPLAYING Location SEARCH ON SEARCH MODULE
 ==========================================================================================
 */
 var ControllerSearchLocation = angular.module('MugurthamApp').controller('ControllerSearchLocation',
@@ -20,7 +20,7 @@ var ControllerSearchLocation = angular.module('MugurthamApp').controller('Contro
 
             $scope.ControllerName = 'ControllerSearchLocation';
             //===============================================================================================
-            //AJAX GET REQUEST - GETTING ALL PROFILES AND THEN FILTER ON LOCATION THROUGH VIEW SMART SEARCH
+            //AJAX GET REQUEST - GETTING ALL PROFILES AND THEN FILTER ON Location THROUGH VIEW SMART SEARCH
             //===============================================================================================
             $scope.getAllProfiles = function () {
                 if (typeof (Storage) !== "undefined") {

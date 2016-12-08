@@ -38,7 +38,7 @@
             <div class="col-xs-4">
                 <h5>
                     <b>
-                        Total Filtered Profiles : {{ (SearchedProfiles |filter: ({Location : q})).length}}
+                        Total Filtered Profiles : {{ (SearchedProfiles |filter: ({Occupation : q})).length}}
                     </b>
                 </h5>
             </div>
@@ -46,7 +46,7 @@
 
                 <h5>
                     <b>
-                        Showing Profiles {{ (((currentPage * pageSize) - pageSize) + 1)  }}  through {{ currentPage * pageSize }} of  {{ (SearchedProfiles |filter: ({Location : q})).length}} &nbsp;&nbsp;
+                        Showing Profiles {{ (((currentPage * pageSize) - pageSize) + 1)  }}  through {{ currentPage * pageSize }} of  {{ (SearchedProfiles |filter: ({Occupation : q})).length}} &nbsp;&nbsp;
                     </b>
                 </h5>
             </div>
@@ -61,7 +61,7 @@
 
 
         <!-- Profiles Listing-->
-        <div class="panel panel-primary FormShadow" dir-paginate="data in AllProfiles.ProfileBasicInfoViewCoreEntityList | filter: ({Location : q})  | orderBy: 'Name' | itemsPerPage: pageSize" current-page="currentPage">
+        <div class="panel panel-primary FormShadow" dir-paginate="data in AllProfiles.ProfileBasicInfoViewCoreEntityList | filter: ({Occupation : q})  | orderBy: 'Name' | itemsPerPage: pageSize" current-page="currentPage">
             <div class="panel-heading">
                 <h3 class="panel-title text-center">
                     <a href="#/FullView/{{data.MugurthamProfileID}}" target="_blank">  {{data.Name }}</a>

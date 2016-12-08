@@ -12,7 +12,7 @@
 /*************************************************************************
 /*
 ==========================================================================================
-THIS CONTROLLER IS SPECIFICALLY FOR DISPLAYING EDUCATION SEARCH ON SEARCH MODULE
+THIS CONTROLLER IS SPECIFICALLY FOR DISPLAYING Education SEARCH ON SEARCH MODULE
 ==========================================================================================
 */
 var ControllerSearchEducation = angular.module('MugurthamApp').controller('ControllerSearchEducation',
@@ -20,7 +20,7 @@ var ControllerSearchEducation = angular.module('MugurthamApp').controller('Contr
 
             $scope.ControllerName = 'ControllerSearchEducation';
             //===============================================================================================
-            //AJAX GET REQUEST - GETTING ALL PROFILES AND THEN FILTER ON EDUCATION THROUGH VIEW SMART SEARCH
+            //AJAX GET REQUEST - GETTING ALL PROFILES AND THEN FILTER ON Education THROUGH VIEW SMART SEARCH
             //===============================================================================================
             $scope.getAllProfiles = function () {
                 if (typeof (Storage) !== "undefined") {
@@ -66,6 +66,6 @@ var ControllerSearchEducation = angular.module('MugurthamApp').controller('Contr
                 };
                 setTimeout(displayThumbnailSlider, 10);
             }
-            
+
         }])
 
