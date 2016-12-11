@@ -67,6 +67,7 @@
     <Compile Include="Profile\Photo\PhotoCore.cs" />
     <Compile Include="Profile\Photo\PhotoCoreEntity.cs" />
     <Compile Include="Profile\ProfileCore.cs" />
+    <Compile Include="Profile\ProfileSecurity.cs" />
     <Compile Include="Profile\View\PorfileBasicInfoViewCore.cs" />
     <Compile Include="Profile\View\ProfileBasicInfoViewCoreEntity.cs" />
     <Compile Include="Profile\View\ProfileBasicViewEntity.cs" />

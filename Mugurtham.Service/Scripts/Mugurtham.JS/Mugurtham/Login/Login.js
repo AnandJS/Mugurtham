@@ -28,11 +28,12 @@
 function (data, status) {
     $("#container").unmask();
     if (data.LoginStatus == '1') {
-        //location.reload();
+        //location.reload(); // IE fix - IE doesnt support this command
 
         //Setting the global popup for advertisenment
         if (typeof (Storage) !== "undefined") {
             localStorage.setItem("landingFirstTimeCount", "0");
+            localStorage.setItem("LoggedInUserID", $('#LoginID').val());
         }
         else {
             toastr.error("Sorry, your browser does not support web storage...");

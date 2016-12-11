@@ -58,11 +58,11 @@ var ControllerProfileBasicInfo = angular.module('MugurthamApp').controller('Cont
             $scope.arrHeight = ['4ft 5in - 134 cm', '4ft 6in - 137 cm', '4ft 7in - 139 cm', '4ft 8in - 142 cm', '4ft 9in - 144 cm', '4ft 10in - 147 cm', '4ft 11in - 149 cm', '5ft 1in - 154 cm', '5ft 2in - 157 cm', '5ft 3in - 160 cm', '5ft 4in - 162 cm', '5ft 5in - 165 cm', '5ft 6in - 167 cm', '5ft 7in - 170 cm', '5ft 8in - 172 cm', '5ft 9in - 175 cm', '5ft 10in - 177 cm', '5ft 11in - 180 cm', '6ft - 182 cm', '6ft 1in - 185 cm', '6ft 2in - 187 cm', '6ft 3in - 190 cm', '6ft 4in - 193 cm', '6ft 5in - 195 cm', '6in - 198 cm', '6ft 7in - 200 cm', '8in - 203 cm', '6ft 9in - 205 cm', '6ft 10in - 208 cm', '6ft 11in - 210 cm', '7ft - 213 cm'];
             $scope.arrBlodGroup = ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'];
             $scope.arrProfileCreatedBy = ['Self', 'Parents', 'Gaurdian', 'Relative', 'Friend'];
-            $scope.arrSubCaste = ['Avusula', 'Kai Kolar', 'Kammari','Kanchari','Shipi','Vadrangi','Kamalar', 'Achari'];
+            $scope.arrSubCaste = ['Avusula', 'Kai Kolar', 'Kammari', 'Kanchari', 'Shipi', 'Vadrangi', 'Kamalar', 'Achari'];
 
             $scope.arrStar = ['Anusham', 'Aswini', 'Avittam', 'Aayilyam', 'Bharani', 'Chithirai', 'Hastham', 'Karthigai', 'Kettai', 'Makam', 'Moolam', 'Mrigasheersham', 'Pooraadam', 'Pooram', 'Poorattathi', 'Poosam', 'Punarpoosam', 'Revathi', 'Rohini', 'Sadayam', 'Swaathi', 'Thiruvaathirai', 'Thiruvonam', 'Uthiraadam', 'Uthiram', 'Uthirattathi', 'Visaakam'];
             $scope.arrPaadham = ['1', '2', '3', '4'];
-            $scope.arrGothram = ['Aamat','Aatreya','Agastya','Ainakula','Akshinthala','Angirasa','Atri','Audala','Bharadwaj','Bhargava','Bhrigu','Brihadbala','Chandratre','Dhananjaya','Dubey','Garg','Gaur','Gautam','Harinama','Haritasya','Haritha','Jamadagni','Jilakara','Kadam','Kaplansh','Kashyapa','Kaundinya','Kaushal','Kaushika','Khiaivar','Kutsa','Manu','Marichi','Mouthkalya','Nageswar','Nanda','Nandhi','Neithrubha Kashyapa','Pachori','Parashar','Sabarniya','Sandilya','Sankruthi','Shadamarshana','Shringi','Srivatsa','Upamanyu','Upreti','Uttam','Vashista','Vathul','Vishnu','Vishrava','Vishvamitra'];
+            $scope.arrGothram = ['Aamat', 'Aatreya', 'Agastya', 'Ainakula', 'Akshinthala', 'Angirasa', 'Atri', 'Audala', 'Bharadwaj', 'Bhargava', 'Bhrigu', 'Brihadbala', 'Chandratre', 'Dhananjaya', 'Dubey', 'Garg', 'Gaur', 'Gautam', 'Harinama', 'Haritasya', 'Haritha', 'Jamadagni', 'Jilakara', 'Kadam', 'Kaplansh', 'Kashyapa', 'Kaundinya', 'Kaushal', 'Kaushika', 'Khiaivar', 'Kutsa', 'Manu', 'Marichi', 'Mouthkalya', 'Nageswar', 'Nanda', 'Nandhi', 'Neithrubha Kashyapa', 'Pachori', 'Parashar', 'Sabarniya', 'Sandilya', 'Sankruthi', 'Shadamarshana', 'Shringi', 'Srivatsa', 'Upamanyu', 'Upreti', 'Uttam', 'Vashista', 'Vathul', 'Vishnu', 'Vishrava', 'Vishvamitra'];
 
             if ($rootScope.globalProfileID != 'New')
                 getBasicInfoByProfileID();
@@ -158,6 +158,7 @@ var ControllerProfileBasicInfo = angular.module('MugurthamApp').controller('Cont
             //AJAX POST REQUEST - CREATING NEW PROFILE
             //==========================================
             $scope.Add = function () {
+                var MugurthamUserToken = getLoggedInUserID();
                 $("#body").mask("Saving Basic Information please wait...");
                 $http({
                     method: "post", url: '/Profile/Profile/Add', data: $.param({
@@ -195,8 +196,11 @@ var ControllerProfileBasicInfo = angular.module('MugurthamApp').controller('Cont
                         PhotoPath: $scope.PhotoPath,
                         PlaceOfBirth: $scope.PlaceOfBirth,
                         Paadham: $scope.Paadham
-            }),
-                    headers: { 'content-Type': 'application/x-www-form-urlencoded' }
+                    }),
+                    headers: {
+                        'content-Type': 'application/x-www-form-urlencoded',
+                        "MugurthamUserToken": MugurthamUserToken
+                    }
                 }).
             success(function (data, status, headers, config) {
                 $("#body").unmask();
@@ -216,6 +220,7 @@ var ControllerProfileBasicInfo = angular.module('MugurthamApp').controller('Cont
             //AJAX PUT REQUEST - UPDATING EXISITING PROFILE
             //==========================================
             $scope.Edit = function () {
+                var MugurthamUserToken = getLoggedInUserID();
                 $("#body").mask("Updating Basic Information please wait...");
                 $http({
                     method: "PUT", url: '/BasicInfo/BasicInfoAPI/', data: $.param({
@@ -257,8 +262,11 @@ var ControllerProfileBasicInfo = angular.module('MugurthamApp').controller('Cont
                         CreatedDate: $scope.frmData[0].ProfileCreatedDate,
                         PlaceOfBirth: $scope.frmData[0].PlaceOfBirth,
                         Paadham: $scope.Paadham
-            }),
-                    headers: { 'content-Type': 'application/x-www-form-urlencoded' }
+                    }),
+                    headers: {
+                        'content-Type': 'application/x-www-form-urlencoded',
+                        "MugurthamUserToken": MugurthamUserToken
+                    }
                 }).
             success(function (data, status, headers, config) {
                 $("#body").unmask();
@@ -275,10 +283,16 @@ var ControllerProfileBasicInfo = angular.module('MugurthamApp').controller('Cont
             //AJAX GET REQUEST - GETTING PROFILE BY ID
             //===================================================
             function getBasicInfoByProfileID() {
+                var MugurthamUserToken = getLoggedInUserID();
                 var strGetURL = '/BasicInfo/BasicInfoAPI/' + $scope.ProfileID;
                 $("#body").mask("Retreiving Profile please wait...");
                 $http({
-                    method: "GET", url: strGetURL
+                    method: "GET",
+                    url: strGetURL,
+                    params: {"MugurthamUserToken": MugurthamUserToken},
+                    headers: {
+                        "MugurthamUserToken": MugurthamUserToken
+                    }
                 }).
             success(function (data, status, headers, config) {
                 MaintainState(data);
@@ -318,7 +332,7 @@ var ControllerProfileBasicInfo = angular.module('MugurthamApp').controller('Cont
                     PhotoPath: data.PhotoPath,
                     PlaceOfBirth: data.PlaceOfBirth,
                     Paadham: data.Paadham
-            });
+                });
 
                 /*Logic to add 1 day to JQuery Formatting*/
                 //<!--http://www.miuaiga.com/index.cfm/2009/11/11/Javascript-How-To-Add-a-Number-of-Days-to-a-Date-->

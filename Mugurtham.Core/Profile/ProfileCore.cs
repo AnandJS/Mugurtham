@@ -66,7 +66,6 @@ namespace Mugurtham.Core.Profile.API
         /// <returns></returns>
         public int Add(ref BasicInfoCoreEntity objBasicInfoCoreEntity, out string strProfileID, Mugurtham.Core.Login.LoggedInUser objLoggedIn)
         {
-
             strProfileID = string.Empty;
             string strUserID = string.Empty;
             SangamCore objSangamCore = new SangamCore();
@@ -116,7 +115,7 @@ namespace Mugurtham.Core.Profile.API
                     objBasicInfoCoreEntity.ProfileID = strProfileID;
                     objBasicInfoCoreEntity.ElanUserID = strUserID;
                     objBasicInfoCoreEntity.SangamID = objLoggedIn.sangamID;
-                    objBasicInfoCore.Add(ref objBasicInfoCoreEntity);
+                    objBasicInfoCore.Add(ref objBasicInfoCoreEntity, objLoggedIn.LoginID);
                 }
                 objBasicInfoCore = null;
 
@@ -238,88 +237,91 @@ namespace Mugurtham.Core.Profile.API
                 {
                     // Assign the user object for this profileID
                     objProfileCore.UserCoreEntity = getUserEntity(strProfileID);
-
-                    BasicInfoCore objBICore = new BasicInfoCore();
-                    using (objBICore as IDisposable)
-                    {
-                        //Check profile restrictions
-                        // if allowed then process the rest of the code
-                        // else return error code
-                        IUnitOfWork objIUnitOfWork = new UnitOfWork();
-                        using (objIUnitOfWork as IDisposable)
-                        {
-                            BasicInfoCoreEntity objBasicInfoCoreEntity = new BasicInfo.BasicInfoCoreEntity();
-                            using (objBasicInfoCoreEntity as IDisposable)
-                            {
-                                if (objIUnitOfWork.RepositoryBasicInfo.getByProfileID(strProfileID) != null)
-                                {
-                                    objProfileCore.BasicInfoCoreEntity = objBasicInfoCoreEntity;
-                                    objBICore.AssignEntityFromDTO(objProfileCore.BasicInfoCoreEntity, objIUnitOfWork.RepositoryBasicInfo.getByProfileID(strProfileID));
-                                }
-                                else
-                                {
-                                    return -1; // Error Code
-                                }
-                            }
-                            objBasicInfoCoreEntity = null;
-                        }
-                        objIUnitOfWork = null;
-                        objProfileCore.SangamID = objProfileCore.BasicInfoCoreEntity.SangamID;
-                        objProfileCore.Gender = objProfileCore.BasicInfoCoreEntity.Gender;
-                        objProfileCore.Star = objProfileCore.BasicInfoCoreEntity.Star;
-                        objProfileCore.SubCaste = objProfileCore.BasicInfoCoreEntity.SubCaste;
-                        objProfileCore.Age = objProfileCore.BasicInfoCoreEntity.Age;
-                        objProfileCore.profileDOB = objProfileCore.BasicInfoCoreEntity.DOB.ToString();
-                        objProfileCore.MugurthamProfileID = objProfileCore.BasicInfoCoreEntity.ProfileID;
-                        objProfileCore.SangamProfiledID = objProfileCore.BasicInfoCoreEntity.SangamProfileID;
-                    }
-                    objBICore = null;
-
-                    Photo.PhotoCore objPhotoCore = new Photo.PhotoCore();
-                    using (objPhotoCore as IDisposable)
-                    {
-                        List<Mugurtham.Core.Profile.Photo.PhotoCoreEntity> objPhotoCoreEntityList = new List<Mugurtham.Core.Profile.Photo.PhotoCoreEntity>();
-                        objProfileCore.GetProfilePhotos(ref objPhotoCoreEntityList, strProfileID);
-                        objProfileCore.PhotoCoreEntityList = objPhotoCoreEntityList;
-                    }
-                    objPhotoCore = null;
-                    CareerCore objCareerCore = new CareerCore();
-                    using (objCareerCore as IDisposable)
-                        objProfileCore.CareerCoreEntity = objCareerCore.GetByProfileID(strProfileID);
-                    objCareerCore = null;
-                    LocationCore objLocationCore = new LocationCore();
-                    using (objLocationCore as IDisposable)
-                        objProfileCore.LocationCoreEntity = objLocationCore.GetByProfileID(strProfileID);
-                    objLocationCore = null;
-                    ContactCore objContactCore = new ContactCore();
-                    using (objContactCore as IDisposable)
-                        objProfileCore.ContactCoreEntity = objContactCore.GetByProfileID(strProfileID);
-                    objContactCore = null;
-                    FamilyCore objFamilyCore = new FamilyCore();
-                    using (objFamilyCore as IDisposable)
-                        objProfileCore.FamilyCoreEntity = objFamilyCore.GetByProfileID(strProfileID);
-                    objFamilyCore = null;
-                    ReferenceCore objReferenceCore = new ReferenceCore();
-                    using (objReferenceCore as IDisposable)
-                        objProfileCore.ReferenceCoreEntity = objReferenceCore.GetByProfileID(strProfileID);
-                    objReferenceCore = null;
-                    SangamCore objSangamCore = new SangamCore();
-                    using (objSangamCore as IDisposable)
-                        objProfileCore.SangamCoreEntity = objSangamCore.GetByID(objProfileCore.BasicInfoCoreEntity.SangamID);
-                    objReferenceCore = null;
-                    RaasiCore objRaasiCore = new RaasiCore();
-                    using (objRaasiCore as IDisposable)
-                        objProfileCore.RaasiCoreEntity = objRaasiCore.GetByProfileID(strProfileID);
-                    objRaasiCore = null;
-                    AmsamCore objAmsamCore = new AmsamCore();
-                    using (objAmsamCore as IDisposable)
-                        objProfileCore.AmsamCoreEntity = objAmsamCore.GetByProfileID(strProfileID);
-                    objRaasiCore = null;
-                    HoroscopeCore objHoroscopeCore = new HoroscopeCore();
-                    using (objHoroscopeCore as IDisposable)
-                        objProfileCore.HoroscopeCoreEntity = objHoroscopeCore.GetByProfileID(strProfileID);
-                    objHoroscopeCore = null;
                     validateUserAccessToThisProfile(objProfileCore.BasicInfoCoreEntity.ProfileID, ref objProfileCore, objLoggedIn);
+                    if (objProfileCore.validateFullViewAccess)
+                    {
+                        BasicInfoCore objBICore = new BasicInfoCore();
+                        using (objBICore as IDisposable)
+                        {
+                            //Check profile restrictions
+                            // if allowed then process the rest of the code
+                            // else return error code
+                            IUnitOfWork objIUnitOfWork = new UnitOfWork();
+                            using (objIUnitOfWork as IDisposable)
+                            {
+                                BasicInfoCoreEntity objBasicInfoCoreEntity = new BasicInfo.BasicInfoCoreEntity();
+                                using (objBasicInfoCoreEntity as IDisposable)
+                                {
+                                    if (objIUnitOfWork.RepositoryBasicInfo.getByProfileID(strProfileID) != null)
+                                    {
+                                        objProfileCore.BasicInfoCoreEntity = objBasicInfoCoreEntity;
+                                        objBICore.AssignEntityFromDTO(objProfileCore.BasicInfoCoreEntity, objIUnitOfWork.RepositoryBasicInfo.getByProfileID(strProfileID));
+                                    }
+                                    else
+                                    {
+                                        return -1; // Error Code
+                                    }
+                                }
+                                objBasicInfoCoreEntity = null;
+                            }
+                            objIUnitOfWork = null;
+                            objProfileCore.SangamID = objProfileCore.BasicInfoCoreEntity.SangamID;
+                            objProfileCore.Gender = objProfileCore.BasicInfoCoreEntity.Gender;
+                            objProfileCore.Star = objProfileCore.BasicInfoCoreEntity.Star;
+                            objProfileCore.SubCaste = objProfileCore.BasicInfoCoreEntity.SubCaste;
+                            objProfileCore.Age = objProfileCore.BasicInfoCoreEntity.Age;
+                            objProfileCore.profileDOB = objProfileCore.BasicInfoCoreEntity.DOB.ToString();
+                            objProfileCore.MugurthamProfileID = objProfileCore.BasicInfoCoreEntity.ProfileID;
+                            objProfileCore.SangamProfiledID = objProfileCore.BasicInfoCoreEntity.SangamProfileID;
+                        }
+                        objBICore = null;
+
+                        Photo.PhotoCore objPhotoCore = new Photo.PhotoCore();
+                        using (objPhotoCore as IDisposable)
+                        {
+                            List<Mugurtham.Core.Profile.Photo.PhotoCoreEntity> objPhotoCoreEntityList = new List<Mugurtham.Core.Profile.Photo.PhotoCoreEntity>();
+                            objProfileCore.GetProfilePhotos(ref objPhotoCoreEntityList, strProfileID);
+                            objProfileCore.PhotoCoreEntityList = objPhotoCoreEntityList;
+                        }
+                        objPhotoCore = null;
+                        CareerCore objCareerCore = new CareerCore();
+                        using (objCareerCore as IDisposable)
+                            objProfileCore.CareerCoreEntity = objCareerCore.GetByProfileID(strProfileID);
+                        objCareerCore = null;
+                        LocationCore objLocationCore = new LocationCore();
+                        using (objLocationCore as IDisposable)
+                            objProfileCore.LocationCoreEntity = objLocationCore.GetByProfileID(strProfileID);
+                        objLocationCore = null;
+                        ContactCore objContactCore = new ContactCore();
+                        using (objContactCore as IDisposable)
+                            objProfileCore.ContactCoreEntity = objContactCore.GetByProfileID(strProfileID);
+                        objContactCore = null;
+                        FamilyCore objFamilyCore = new FamilyCore();
+                        using (objFamilyCore as IDisposable)
+                            objProfileCore.FamilyCoreEntity = objFamilyCore.GetByProfileID(strProfileID);
+                        objFamilyCore = null;
+                        ReferenceCore objReferenceCore = new ReferenceCore();
+                        using (objReferenceCore as IDisposable)
+                            objProfileCore.ReferenceCoreEntity = objReferenceCore.GetByProfileID(strProfileID);
+                        objReferenceCore = null;
+                        SangamCore objSangamCore = new SangamCore();
+                        using (objSangamCore as IDisposable)
+                            objProfileCore.SangamCoreEntity = objSangamCore.GetByID(objProfileCore.BasicInfoCoreEntity.SangamID);
+                        objReferenceCore = null;
+                        RaasiCore objRaasiCore = new RaasiCore();
+                        using (objRaasiCore as IDisposable)
+                            objProfileCore.RaasiCoreEntity = objRaasiCore.GetByProfileID(strProfileID);
+                        objRaasiCore = null;
+                        AmsamCore objAmsamCore = new AmsamCore();
+                        using (objAmsamCore as IDisposable)
+                            objProfileCore.AmsamCoreEntity = objAmsamCore.GetByProfileID(strProfileID);
+                        objRaasiCore = null;
+                        HoroscopeCore objHoroscopeCore = new HoroscopeCore();
+                        using (objHoroscopeCore as IDisposable)
+                            objProfileCore.HoroscopeCoreEntity = objHoroscopeCore.GetByProfileID(strProfileID);
+                        objHoroscopeCore = null;
+                    }
+
                 }
             }
             catch (Exception objEx)
@@ -350,10 +352,7 @@ namespace Mugurtham.Core.Profile.API
                     else if (objLoggedIn.roleID == Constants.RoleIDForMugurthamAdmin)
                         objProfileCore.validateFullViewAccess = true;
                 }
-                if (!objProfileCore.validateFullViewAccess)
-                {
-                    //setEmptyInfoToProfile(ref objProfileCore);
-                }
+
             }
             catch (Exception objEx)
             {
@@ -886,6 +885,8 @@ namespace Mugurtham.Core.Profile.API
             }
             return objUserCoreEntity;
         }
+
+
 
     }
 }

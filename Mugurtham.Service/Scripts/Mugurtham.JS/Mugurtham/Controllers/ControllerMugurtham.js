@@ -183,3 +183,17 @@ function landingPageCounter() {
         toastr.error("Sorry, your browser does not support web storage...");
     }
 }
+
+// Global Function to retrieve the loggedIn user from the client side
+function getLoggedInUserID() {
+    var LoggedInUserID;
+    if (typeof (Storage) !== "undefined") {
+        if (localStorage.getItem("LoggedInUserID")) {
+            LoggedInUserID = localStorage.getItem("LoggedInUserID");
+        }
+    }
+    else {
+        toastr.error("Sorry, your browser does not support web storage...");
+    }
+    return LoggedInUserID;
+}

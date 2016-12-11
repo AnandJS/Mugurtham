@@ -101,4 +101,6 @@ function removeSessionData() {
     sessionStorage.removeItem('RecentlyJoinedProfiles');
     sessionStorage.removeItem('UserBadgeCount');
     sessionStorage.removeItem('ViewedProfiles');
+    sessionStorage.removeItem('LoggedInUserID');
+
 };

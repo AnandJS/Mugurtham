@@ -10,24 +10,44 @@ namespace Mugurtham.Core.BasicInfo
 {
     public class BasicInfoCore
     {
-        public int Add(ref Mugurtham.Core.BasicInfo.BasicInfoCoreEntity objBasicInfoCoreEntity)
+        public int Add(ref Mugurtham.Core.BasicInfo.BasicInfoCoreEntity objBasicInfoCoreEntity, string LoggedInUserID)
         {
             try
             {
-                IUnitOfWork objIUnitOfWork = new UnitOfWork();
-                using (objIUnitOfWork as IDisposable)
+                bool GrantAddAccess = false;
+                //One & Only Sangam Admin can add New Profiles.
+                //So validate if the user is in SangamAdmin Role and the proceed
+                Profile.ProfileSecurity objProfileSecurity = new Profile.ProfileSecurity();
+                using (objProfileSecurity as IDisposable)
                 {
-                    Mugurtham.DTO.Profile.BasicInfo objDTOBasicInfo = new DTO.Profile.BasicInfo();
-                    using (objDTOBasicInfo as IDisposable)
+                    if (objProfileSecurity.IsSangamAdmin(LoggedInUserID))
                     {
-                        AssignDTOFromEntity(ref objDTOBasicInfo, ref objBasicInfoCoreEntity);
-                        objDTOBasicInfo.CreatedDate = DateTime.Now;
+                        GrantAddAccess = true;
                     }
-                    objIUnitOfWork.RepositoryBasicInfo.Add(objDTOBasicInfo);
-                    objDTOBasicInfo = null;
+                    objProfileSecurity = null;
                 }
-                objIUnitOfWork.commit();
-                objIUnitOfWork = null;
+                if (GrantAddAccess)
+                {
+                    IUnitOfWork objIUnitOfWork = new UnitOfWork();
+                    using (objIUnitOfWork as IDisposable)
+                    {
+                        Mugurtham.DTO.Profile.BasicInfo objDTOBasicInfo = new DTO.Profile.BasicInfo();
+                        using (objDTOBasicInfo as IDisposable)
+                        {
+                            AssignDTOFromEntity(ref objDTOBasicInfo, ref objBasicInfoCoreEntity);
+                            objDTOBasicInfo.CreatedDate = DateTime.Now;
+                        }
+                        objIUnitOfWork.RepositoryBasicInfo.Add(objDTOBasicInfo);
+                        objDTOBasicInfo = null;
+                    }
+                    objIUnitOfWork.commit();
+                    objIUnitOfWork = null;
+                    return 0;
+                }
+                else
+                {
+                    return -1;
+                }
             }
             catch (Exception objEx)
             {
@@ -36,6 +56,24 @@ namespace Mugurtham.Core.BasicInfo
             return 0;
         }
 
+        public int Edit(ref Mugurtham.Core.BasicInfo.BasicInfoCoreEntity objBasicInfoCoreEntity, string LoggedInUserID)
+        {
+            Profile.ProfileSecurity objProfileSecurity = new Profile.ProfileSecurity();
+            using (objProfileSecurity as IDisposable)
+            {
+                if (!string.IsNullOrEmpty(LoggedInUserID))
+                {
+                    //MugurthamUserToken - If null - hacker is trying to hack the system so redirect to unauthorized page
+                    if (!objProfileSecurity.validateProfileViewAccess(objBasicInfoCoreEntity.ProfileID, LoggedInUserID))
+                    {
+                        objBasicInfoCoreEntity.ProfileID = LoggedInUserID;
+                    }
+                }
+            }
+            objProfileSecurity = null;
+            Edit(ref objBasicInfoCoreEntity);
+            return 0;
+        }
         public int Edit(ref Mugurtham.Core.BasicInfo.BasicInfoCoreEntity objBasicInfoCoreEntity)
         {
             try
@@ -59,6 +97,24 @@ namespace Mugurtham.Core.BasicInfo
                 Helpers.LogExceptionInFlatFile(objEx);
             }
             return 0;
+        }
+
+        public BasicInfoCoreEntity GetByProfileID(string strProfileID, string strLoggedInUserID)
+        {
+            Profile.ProfileSecurity objProfileSecurity = new Profile.ProfileSecurity();
+            using (objProfileSecurity as IDisposable)
+            {
+                if (!string.IsNullOrEmpty(strLoggedInUserID))
+                {
+                    //MugurthamUserToken - If null - hacker is trying to hack the system so redirect to unauthorized page
+                    if (!objProfileSecurity.validateProfileViewAccess(strProfileID, strLoggedInUserID))
+                    {
+                        strProfileID = strLoggedInUserID;
+                    }
+                }
+            }
+            objProfileSecurity = null;
+            return GetByProfileID(strProfileID);
         }
 
         public BasicInfoCoreEntity GetByProfileID(string strProfileID)
