@@ -237,7 +237,7 @@ namespace Mugurtham.Core.Profile.API
                 {
                     // Assign the user object for this profileID
                     objProfileCore.UserCoreEntity = getUserEntity(strProfileID);
-                    validateUserAccessToThisProfile(objProfileCore.BasicInfoCoreEntity.ProfileID, ref objProfileCore, objLoggedIn);
+                    validateUserAccessToThisProfile(strProfileID, ref objProfileCore, objLoggedIn);
                     if (objProfileCore.validateFullViewAccess)
                     {
                         BasicInfoCore objBICore = new BasicInfoCore();
@@ -341,11 +341,11 @@ namespace Mugurtham.Core.Profile.API
                     if (objLoggedIn.LoginID == strProfileID)
                         objProfileCore.validateFullViewAccess = true;
                     // When LoggedIn user is the Sangam Admin of this Profile user then grant access to view
-                    else if ((objLoggedIn.sangamID == objProfileCore.SangamID)
+                    else if ((objLoggedIn.sangamID == objProfileCore.UserCoreEntity.SangamID)
                         && (objLoggedIn.roleID == Constants.RoleIDForSangamAdmin))
                         objProfileCore.validateFullViewAccess = true;
                     // When LoggedIn user is the Member of this Profile users Sangam then grant access to view
-                    else if ((objLoggedIn.sangamID == objProfileCore.SangamCoreEntity.ID)
+                    else if ((objLoggedIn.sangamID == objProfileCore.UserCoreEntity.SangamID)
                         && (objLoggedIn.roleID == Constants.RoleIDForUserProfile))
                         objProfileCore.validateFullViewAccess = true;
                     // When LoggedIn user is the Mugurtham Admin then grant access
