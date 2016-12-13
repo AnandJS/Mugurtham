@@ -39,9 +39,9 @@ namespace Mugurtham.Service.Areas.Profile.Controllers.API
         }
 
         [HttpGet]
-        public HttpResponseMessage Get(string ID)
+        public HttpResponseMessage Get(string ID, string MugurthamUserToken = null)
         {
-            return Request.CreateResponse(HttpStatusCode.OK, new ContactCore().GetByProfileID(ID), Configuration.Formatters.JsonFormatter);
+            return Request.CreateResponse(HttpStatusCode.OK, new ContactCore().GetByProfileID(ID, MugurthamUserToken), Configuration.Formatters.JsonFormatter);
         }
 
     }

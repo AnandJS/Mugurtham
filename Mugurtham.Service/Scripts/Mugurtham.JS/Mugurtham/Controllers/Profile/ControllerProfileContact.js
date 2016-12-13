@@ -113,10 +113,12 @@ var ControllerProfileContact = angular.module('MugurthamApp').controller('Contro
             //===================================================
             //AJAX GET REQUEST - GETTING PROFILE BY ID
             //===================================================
-            function getContactByProfileID() {                
+            function getContactByProfileID() {
+                var MugurthamUserToken = getLoggedInUserID();
                 var strGetURL = '/Contact/ContactAPI/' + $scope.globalProfileID;
                 $http({
-                    method: "GET", url: strGetURL
+                    method: "GET", url: strGetURL,
+                    params: { "MugurthamUserToken": MugurthamUserToken }
                 }).
             success(function (data, status, headers, config) {
                 $scope.frmData.push({

@@ -5,11 +5,13 @@
 
 <div id="divContainer">
     <p class="lead">Profiles List</p>
-    <hr />
+    <hr /> 
+    
+    
     <div class="col-lg-12" data-ng-init="getAllProfilesBySangam();">
         <ul class="breadcrumb">
-            <li >Home</li>
-            <li class="active">List</li>
+            <li><a href="@objLoggedIn.HomePagePath" translate="">{{ 'GENHOME' | translate }}</a></li>
+            <li class="active">Profile List</li>
         </ul>
     </div>
     
