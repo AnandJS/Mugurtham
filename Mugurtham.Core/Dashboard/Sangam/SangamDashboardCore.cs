@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Mugurtham.UOW;
 using Mugurtham.Common.Utilities;
+using System.Data.SqlClient;
+using System.Data;
 
 namespace Mugurtham.Core.Dashboard.Sangam
 {
@@ -43,5 +45,52 @@ namespace Mugurtham.Core.Dashboard.Sangam
             }
             return objListSangamDashboardCoreEntity;
         }
+
+
+        public int GetSangamDashboardData(string strConnectionString, string strSangamID,
+             ref Core.Sangam.SangamDashboardEntity objSangamDashboardEntity)
+        {
+            try
+            {
+                using (SqlConnection objSqlConnection = new SqlConnection(strConnectionString))
+                {
+                    objSqlConnection.Open();
+                    // 1.  create a command object identifying the stored procedure
+                    SqlCommand objSqlCommand = new SqlCommand("UspGetSangamProfilesInfo", objSqlConnection);
+
+                    // 2. set the command object so it knows to execute a stored procedure
+                    objSqlCommand.CommandType = CommandType.StoredProcedure;
+
+                    // 3. add parameter to command, which will be passed to the stored procedure
+                    objSqlCommand.Parameters.Add(new SqlParameter("@SangamID", strSangamID));
+                    // execute the command
+                    using (SqlDataReader objSqlDataReader = objSqlCommand.ExecuteReader())
+                    {
+                        while (objSqlDataReader.Read())
+                        {
+                            if (!string.IsNullOrEmpty(objSqlDataReader["LoggedInCount"].ToString()))
+                                objSangamDashboardEntity.TotalLogin = Convert.ToInt32(objSqlDataReader["LoggedInCount"].ToString());
+                            if (!string.IsNullOrEmpty(objSqlDataReader["ViewedProfile"].ToString()))
+                                objSangamDashboardEntity.ProfilesViewed = Convert.ToInt32(objSqlDataReader["ViewedProfile"].ToString());
+                            if (!string.IsNullOrEmpty(objSqlDataReader["ActiveProfiles"].ToString()))
+                                objSangamDashboardEntity.ActiveProfiles = Convert.ToInt32(objSqlDataReader["ActiveProfiles"].ToString());
+                            if (!string.IsNullOrEmpty(objSqlDataReader["TotalProfiles"].ToString()))
+                                objSangamDashboardEntity.TotalProfiles = Convert.ToInt32(objSqlDataReader["TotalProfiles"].ToString());
+                        }
+                        objSqlDataReader.Close();
+                    }
+                    objSqlCommand.Cancel();
+                    objSqlCommand.Dispose();
+                    objSqlConnection.Close();
+                    objSqlConnection.Dispose();
+                }
+            }
+            catch (Exception objEx)
+            {
+                Helpers.LogExceptionInFlatFile(objEx);
+            }
+            return 0;
+        }
+
     }
 }

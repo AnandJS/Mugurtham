@@ -15,7 +15,7 @@ THIS CONTROLLER IS SPECIFICALLY FOR ROLE REGISTRATION
 ==========================================================================================
 */
 
- 
+
 function displayChart(data) {
     $(document).ready(function () {
         $.jqplot.config.enablePlugins = true;
@@ -38,7 +38,7 @@ function displayChart(data) {
             highlighter: { show: false }
         });
 
-      
+
 
         plot4 = $.jqplot('divStackStar', [[[2, 1], [6, 2], [7, 3], [10, 4]], [[7, 1], [5, 2], [3, 3], [2, 4]], [[14, 1], [9, 2], [9, 3], [8, 4]]], {
             stackSeries: true,
@@ -96,7 +96,7 @@ var ControllerSangamDashboard = angular.module('MugurthamApp').controller('Contr
             //===================================================
             $scope.getChartData = function () {
                 var strGetURL = '/Home/getSangamDashBoardChart';
-                
+
                 $http({
                     method: "GET", url: strGetURL
                 }).
@@ -118,6 +118,29 @@ var ControllerSangamDashboard = angular.module('MugurthamApp').controller('Contr
                    NotifyErrorStatus(data, status);
                });
             };
+
+            //===================================================
+            //AJAX GET REQUEST - GETTING DASHBOARD DATA
+            //===================================================
+            $scope.getDashboardData = function () {
+                var strGetURL = '/SangamAdmin/SangamAdmin/getSangamDashboardData';
+                $http({
+                    method: "GET", url: strGetURL
+                }).
+                success(function (data, status, headers, config) {
+                    $scope.LoggedInCount = data.TotalLogin;
+                    $scope.ViewedProfile = data.ProfilesViewed;
+                    $scope.ActiveProfiles = data.ActiveProfiles;
+                    $scope.TotalProfiles = data.TotalProfiles;
+                }).
+               error(function (data, status, headers, config) {
+                   NotifyErrorStatus(data, status);
+               });
+            };
+
+
+
+
 
         }])
 

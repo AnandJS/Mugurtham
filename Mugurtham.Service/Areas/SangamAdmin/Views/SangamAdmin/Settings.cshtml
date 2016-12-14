@@ -1,11 +1,16 @@
 ﻿@{
     ViewBag.Title = "Settings";
     Layout = "~/Areas/SangamAdmin/Views/Shared/LayoutSangamAdmin.cshtml";    
+    Mugurtham.Core.Login.LoggedInUser objLoggedIn = (Mugurtham.Core.Login.LoggedInUser)Session["LoggedInUser"];
 }
 
 <h2>Settings</h2>
-<hr />
-<hr />
+ <div ng-controller="ControllerUserChamber" data-ng-init="geUserChamberBadgeCount();">
+    <ul class="breadcrumb">
+        <li class="active"><a href="@objLoggedIn.HomePagePath" translate="">{{ 'GENHOME' | translate}}</a></li>
+        <li>{{ 'LYTSETTINGS' | translate}}</li>
+    </ul>
+</div>
 
  <div>
         @using (Html.BeginForm("SaveSangamLogo",

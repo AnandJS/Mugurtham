@@ -80,6 +80,7 @@
     <Compile Include="Role\RoleCoreEntity.cs" />
     <Compile Include="Sangam\SangamCore.cs" />
     <Compile Include="Sangam\SangamCoreEntity.cs" />
+    <Compile Include="Dashboard\Sangam\SangamDashboardEntity.cs" />
     <Compile Include="User\UserCore.cs" />
     <Compile Include="User\UserCoreEntity.cs" />
   </ItemGroup>

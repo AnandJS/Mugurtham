@@ -6,11 +6,12 @@ using System.Web.Mvc;
 using Mugurtham.Service.Controllers;
 using System.IO;
 using Mugurtham.Common.Utilities;
+using Mugurtham.Core.Dashboard.Sangam;
 
 namespace Mugurtham.Service.Areas.SangamAdmin.Controllers.MVC
 {
     [MugurthamAuthorizeAttribute(Mugurtham.Core.Constants.RoleIDForSangamAdmin)]
-    public class SangamAdminController :  MugurthamBaseController
+    public class SangamAdminController : MugurthamBaseController
     {
         public ActionResult Index()
         {
@@ -77,7 +78,7 @@ namespace Mugurtham.Service.Areas.SangamAdmin.Controllers.MVC
                     using (objSangamCore as IDisposable)
                     {
                         Mugurtham.Core.Sangam.SangamCoreEntity objSangamCoreEntity = new Core.Sangam.SangamCoreEntity();
-                        using(objSangamCoreEntity as IDisposable)
+                        using (objSangamCoreEntity as IDisposable)
                         {
                             objSangamCoreEntity = objSangamCore.GetByID(objLoggedIn.sangamID);
                             objSangamCoreEntity.BannerPath = "/Images/Mugurtham/Sangam/Banner/" + objLoggedIn.sangamID + Path.GetExtension(Path.GetFileName(file.FileName));
@@ -97,5 +98,22 @@ namespace Mugurtham.Service.Areas.SangamAdmin.Controllers.MVC
             }
             return Redirect("/Mugurtham#/SangamAdminSettings");
         }
+
+        [HttpGet]
+        public ActionResult getSangamDashboardData()
+        {
+            Mugurtham.Core.Login.LoggedInUser objLoggedIn = (Mugurtham.Core.Login.LoggedInUser)Session["LoggedInUser"];
+            Core.Sangam.SangamDashboardEntity objSangamDashboardEntity = new Core.Sangam.SangamDashboardEntity();
+            SangamDashboardCore objSangamDashboardCore = new SangamDashboardCore();
+            using (objSangamDashboardCore as IDisposable)
+            {
+                objSangamDashboardCore.GetSangamDashboardData(Helpers.ConnectionString, objLoggedIn.sangamID, ref objSangamDashboardEntity);
+            }
+            objSangamDashboardCore = null;
+            return this.Json(objSangamDashboardEntity, JsonRequestBehavior.AllowGet);
+        }
+
+
+
     }
 }
