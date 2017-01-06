@@ -17,16 +17,26 @@ namespace Mugurtham.Service.Areas.Search.Controllers.API
                                  Mugurtham.Core.Constants.RoleIDForMugurthamAdmin)]
     public class AllProfilesAPIController : ApiController
     {
-
+        [HttpGet]
         public HttpResponseMessage getByProfileID(string ID)
         {
             ProfileCore objProfCore = null;
             if (!string.IsNullOrWhiteSpace(ID))
             {
-                ProfileCore objProfileCore = new ProfileCore();
-                using (objProfileCore as IDisposable)
-                    objProfileCore.GetByProfileID(ID, out objProfCore);
-                objProfileCore = null;
+                string strLoggedInUserID = string.Empty;
+                IEnumerable<string> headerValues = Request.Headers.GetValues("MugurthamUserToken");
+                strLoggedInUserID = headerValues.FirstOrDefault();
+
+                Mugurtham.Core.Login.LoggedInUser objLoggedIn = new Core.Login.LoggedInUser(strLoggedInUserID);
+                using (objLoggedIn as IDisposable)
+                {
+                    // Destroy this objLoggedIn object 
+                    ProfileCore objProfileCore = new ProfileCore();
+                    using (objProfileCore as IDisposable)
+                        objProfileCore.GetByProfileID(ID, out objProfCore, objLoggedIn);
+                    objProfileCore = null;
+                }
+                objLoggedIn = null;
             }
             return Request.CreateResponse(HttpStatusCode.OK, objProfCore,
               Configuration.Formatters.JsonFormatter);

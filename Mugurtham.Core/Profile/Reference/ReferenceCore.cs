@@ -60,6 +60,24 @@ namespace Mugurtham.Core.Reference
             return 0;
         }
 
+
+        public ReferenceCoreEntity GetByProfileID(string strProfileID, string strLoggedInUserID)
+        {
+            Profile.ProfileSecurity objProfileSecurity = new Profile.ProfileSecurity();
+            using (objProfileSecurity as IDisposable)
+            {
+                if (!string.IsNullOrEmpty(strLoggedInUserID))
+                {
+                    //MugurthamUserToken - If null - hacker is trying to hack the system so redirect to unauthorized page
+                    if (!objProfileSecurity.validateProfileViewAccess(strProfileID, strLoggedInUserID))
+                    {
+                        strProfileID = strLoggedInUserID;
+                    }
+                }
+            }
+            objProfileSecurity = null;
+            return GetByProfileID(strProfileID);
+        }
         public ReferenceCoreEntity GetByProfileID(string strProfileID)
         {
             ReferenceCoreEntity objReferenceCoreEntity = new ReferenceCoreEntity();

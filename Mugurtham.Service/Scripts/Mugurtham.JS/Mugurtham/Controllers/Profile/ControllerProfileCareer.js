@@ -73,7 +73,10 @@ var ControllerProfileCareer = angular.module('MugurthamApp').controller('Control
                         OccupationInDetail: $scope.OccupationInDetail,
                         AnnualIncome: $scope.AnnualIncome
                     }),
-                    headers: { 'content-Type': 'application/x-www-form-urlencoded' }
+                    headers: {
+                        'content-Type': 'application/x-www-form-urlencoded',
+                        "MugurthamUserToken": getLoggedInUserID()
+                    }
                 }).
             success(function (data, status, headers, config) {
                 NotifySuccessStatus(3);
@@ -98,7 +101,10 @@ var ControllerProfileCareer = angular.module('MugurthamApp').controller('Control
                         OccupationInDetail: $scope.OccupationInDetail,
                         AnnualIncome: $scope.AnnualIncome
                     }),
-                    headers: { 'content-Type': 'application/x-www-form-urlencoded' }
+                    headers: {
+                        'content-Type': 'application/x-www-form-urlencoded',
+                        "MugurthamUserToken": getLoggedInUserID()
+                    }
                 }).
             success(function (data, status, headers, config) {
                 NotifySuccessStatus('3');
@@ -114,7 +120,10 @@ var ControllerProfileCareer = angular.module('MugurthamApp').controller('Control
             function getCareerByProfileID() {
                 var strGetURL = '/Career/CareerAPI/' + $scope.globalProfileID;
                 $http({
-                    method: "GET", url: strGetURL
+                    method: "GET", url: strGetURL,
+                    headers: {
+                        "MugurthamUserToken": getLoggedInUserID()
+                    }
                 }).
             success(function (data, status, headers, config) {
                 $scope.frmData.push({

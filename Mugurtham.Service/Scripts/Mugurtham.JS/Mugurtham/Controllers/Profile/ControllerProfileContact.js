@@ -39,7 +39,7 @@ var ControllerProfileContact = angular.module('MugurthamApp').controller('Contro
             //GLOBAL EVENT HANDLER FOR THIS CONTROLLER
             //=========================================
             $scope.saveFormData = function () {
-                $scope.initFormData();                
+                $scope.initFormData();
                 if ($scope.globalProfileID == '') {
                     $scope.Add();
                 } else {
@@ -75,7 +75,10 @@ var ControllerProfileContact = angular.module('MugurthamApp').controller('Contro
                         TimeToCall: $scope.TimeToCall,
                         Name: $scope.Name
                     }),
-                    headers: { 'content-Type': 'application/x-www-form-urlencoded' }
+                    headers: {
+                        'content-Type': 'application/x-www-form-urlencoded',
+                        "MugurthamUserToken": getLoggedInUserID()
+                    }
                 }).
             success(function (data, status, headers, config) {
                 NotifySuccessStatus(4);
@@ -100,7 +103,10 @@ var ControllerProfileContact = angular.module('MugurthamApp').controller('Contro
                         TimeToCall: $scope.TimeToCall,
                         Name: $scope.Name
                     }),
-                    headers: { 'content-Type': 'application/x-www-form-urlencoded' }
+                    headers: {
+                        'content-Type': 'application/x-www-form-urlencoded',
+                        "MugurthamUserToken": getLoggedInUserID()
+                    }
                 }).
             success(function (data, status, headers, config) {
                 NotifySuccessStatus(4);
@@ -118,7 +124,11 @@ var ControllerProfileContact = angular.module('MugurthamApp').controller('Contro
                 var strGetURL = '/Contact/ContactAPI/' + $scope.globalProfileID;
                 $http({
                     method: "GET", url: strGetURL,
-                    params: { "MugurthamUserToken": MugurthamUserToken }
+                    headers: {
+                        "MugurthamUserToken": getLoggedInUserID()
+                    },
+                    params:
+                        { "MugurthamUserToken": MugurthamUserToken }
                 }).
             success(function (data, status, headers, config) {
                 $scope.frmData.push({
@@ -141,5 +151,5 @@ var ControllerProfileContact = angular.module('MugurthamApp').controller('Contro
 
         }])
 
- 
+
 

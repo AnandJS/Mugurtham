@@ -226,7 +226,7 @@ namespace Mugurtham.Service.Areas.Profile.Controllers.MVC
                             Mugurtham.Core.Profile.Horoscope.HoroscopeCoreEntity objHoroscopeCoreEntity = new Core.Profile.Horoscope.HoroscopeCoreEntity();
                             using (objHoroscopeCoreEntity as IDisposable)
                             {
-                                objHoroscopeCoreEntity = objHoroscopeCore.GetByProfileID(ProfileID);
+                                objHoroscopeCoreEntity = objHoroscopeCore.GetByProfileID(ProfileID, objLoggedIn.LoginID);
                                 objHoroscopeCoreEntity.Path = strProfileHoroPath;
                                 if (!string.IsNullOrEmpty(strProfileHoroPath))
                                     objHoroscopeCore.updateHoroscope(ref objHoroscopeCoreEntity);

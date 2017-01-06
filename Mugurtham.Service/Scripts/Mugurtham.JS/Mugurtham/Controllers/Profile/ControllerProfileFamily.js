@@ -27,7 +27,7 @@ var ControllerProfileFamily = angular.module('MugurthamApp').controller('Control
             $scope.arrFamilyValue = ['Traditional', 'Liberal', 'Orthodox', 'Moderate'];
             $scope.arrFamilyType = ['Joint Family', 'Other', 'Nuclear Family'];
             $scope.arrFamilyStatus = ['Middle Class Family', 'Rich', 'Upper Middle Class Family', 'Affluent'];
-            $scope.arrSiblings = ['0', '1', '2', '3','4','5','6'];
+            $scope.arrSiblings = ['0', '1', '2', '3', '4', '5', '6'];
             $scope.arrParentsAlive = ['Father', 'Mother', 'Both'];
             // Form Control Variables
             getFamilyByProfileID();
@@ -105,7 +105,10 @@ var ControllerProfileFamily = angular.module('MugurthamApp').controller('Control
                         MothersSubsect: $scope.MothersSubsect,
                         ParentsAlive: $scope.ParentsAlive
                     }),
-                    headers: { 'content-Type': 'application/x-www-form-urlencoded' }
+                    headers: {
+                        'content-Type': 'application/x-www-form-urlencoded',
+                        "MugurthamUserToken": getLoggedInUserID()
+                    }
                 }).
             success(function (data, status, headers, config) {
                 NotifyStatus('1');
@@ -138,7 +141,10 @@ var ControllerProfileFamily = angular.module('MugurthamApp').controller('Control
                         MothersSubsect: $scope.MothersSubsect,
                         ParentsAlive: $scope.ParentsAlive
                     }),
-                    headers: { 'content-Type': 'application/x-www-form-urlencoded' }
+                    headers: {
+                        'content-Type': 'application/x-www-form-urlencoded',
+                        "MugurthamUserToken": getLoggedInUserID()
+                    }
                 }).
             success(function (data, status, headers, config) {
                 NotifySuccessStatus('5');
@@ -154,7 +160,10 @@ var ControllerProfileFamily = angular.module('MugurthamApp').controller('Control
             function getFamilyByProfileID() {
                 var strGetURL = '/Family/FamilyAPI/' + $scope.globalProfileID;
                 $http({
-                    method: "GET", url: strGetURL
+                    method: "GET", url: strGetURL,
+                    headers: {
+                        "MugurthamUserToken": getLoggedInUserID()
+                    }
                 }).
             success(function (data, status, headers, config) {
                 $scope.frmData.push({

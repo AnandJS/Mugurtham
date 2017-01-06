@@ -25,9 +25,9 @@ var ControllerProfileHoroscope = angular.module('MugurthamApp').controller('Cont
             $scope.globalProfileID = $rootScope.globalProfileID;
             getHoroscopeByProfileID();
             $scope.arrDasaBalance = ['Surya', ' Chandra', ' Chevva', ' Budha', ' Guru', ' Sukra', ' Sani', ' Rahu', ' Ketu'];
-            $scope.arrYear = ['1', '2', '3', '4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20'];
+            $scope.arrYear = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20'];
             $scope.arrMonth = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
-            $scope.arrDays = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20','21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'];
+            $scope.arrDays = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'];
             // Storing Raasi varaibales
             $scope.RaasiKattam1 = '';
             $scope.RaasiKattam2 = '';
@@ -136,11 +136,14 @@ var ControllerProfileHoroscope = angular.module('MugurthamApp').controller('Cont
                 else { // Viewing
                     localStorage.setItem("ProfileID", $rootScope.globalProfileID);
                 }
-                $rootScope.globalProfileID = localStorage.getItem("ProfileID");                
-                $('#ProfileID').val($rootScope.globalProfileID);                
+                $rootScope.globalProfileID = localStorage.getItem("ProfileID");
+                $('#ProfileID').val($rootScope.globalProfileID);
                 var strGetURL = '/mugurthamapi/HoroscopeAPI/' + $rootScope.globalProfileID;
                 $http({
-                    method: "GET", url: strGetURL
+                    method: "GET", url: strGetURL,
+                    headers: {
+                        "MugurthamUserToken": getLoggedInUserID()
+                    }
                 }).
             success(function (data, status, headers, config) {
                 $scope.frmData.push({
@@ -151,7 +154,7 @@ var ControllerProfileHoroscope = angular.module('MugurthamApp').controller('Cont
                     Day: data.Day,
                     Path: data.Path
                 });
-                
+
                 // Maintainstate for Raasi checkbox
                 setKattamValues('ckKattam1_', data.RaasiKattam1);
                 setKattamValues('ckKattam2_', data.RaasiKattam2);
@@ -220,8 +223,11 @@ var ControllerProfileHoroscope = angular.module('MugurthamApp').controller('Cont
                         Year: $scope.frmData[0].Year,
                         Month: $scope.frmData[0].Month,
                         Day: $scope.frmData[0].Day
-                    }),                    
-                    headers: { 'content-Type': 'application/x-www-form-urlencoded' }
+                    }),
+                    headers: {
+                        'content-Type': 'application/x-www-form-urlencoded',
+                        "MugurthamUserToken": getLoggedInUserID()
+                    }
                 }).
             success(function (data, status, headers, config) {
                 NotifySuccessStatus('6');

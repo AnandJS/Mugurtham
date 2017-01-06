@@ -61,7 +61,10 @@ var ControllerProfileReference = angular.module('MugurthamApp').controller('Cont
                         NomineeName: $scope.frmData[0].NomineeName,
                         ContactNo: $scope.frmData[0].ContactNumber
                     }),
-                    headers: { 'content-Type': 'application/x-www-form-urlencoded' }
+                    headers: {
+                        'content-Type': 'application/x-www-form-urlencoded',
+                        "MugurthamUserToken": getLoggedInUserID()
+                    }
                 }).
             success(function (data, status, headers, config) {
                 NotifyStatus('1');
@@ -78,7 +81,10 @@ var ControllerProfileReference = angular.module('MugurthamApp').controller('Cont
             function getReferenceByProfileID() {
                 var strGetURL = '/Reference/ReferenceAPI/' + $scope.globalProfileID;
                 $http({
-                    method: "GET", url: strGetURL
+                    method: "GET", url: strGetURL,
+                    headers: {
+                        "MugurthamUserToken": getLoggedInUserID()
+                    }
                 }).
             success(function (data, status, headers, config) {
                 $scope.frmData.push({
@@ -102,7 +108,10 @@ var ControllerProfileReference = angular.module('MugurthamApp').controller('Cont
                         NomineeName: $scope.frmData[0].NomineeName,
                         ContactNo: $scope.frmData[0].ContactNumber
                     }),
-                    headers: { 'content-Type': 'application/x-www-form-urlencoded' }
+                    headers: {
+                        'content-Type': 'application/x-www-form-urlencoded',
+                        "MugurthamUserToken": getLoggedInUserID()
+                    }
                 }).
             success(function (data, status, headers, config) {
                 NotifySuccessStatus('8');

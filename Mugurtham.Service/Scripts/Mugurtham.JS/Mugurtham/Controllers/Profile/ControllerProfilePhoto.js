@@ -36,7 +36,11 @@ var ControllerProfilePhoto = angular.module('MugurthamApp').controller('Controll
                 }
                 $('#ProfileID').val($rootScope.globalProfileID);
                 $http({
-                    method: "GET", url: '/SearchAPI/AllProfilesAPI/getByProfileID/' + $rootScope.globalProfileID
+                    method: "GET", url: '/SearchAPI/AllProfilesAPI/getByProfileID/' + $rootScope.globalProfileID,
+                    params: { "MugurthamUserToken": getLoggedInUserID() },
+                    headers: {
+                        "MugurthamUserToken": getLoggedInUserID()
+                    }
                 }).
 success(function (data, status, headers, config) {
     localStorage.removeItem("ProfileIDBySangamAdminForProfilePic");
@@ -89,7 +93,10 @@ success(function (data, status, headers, config) {
                         PhotoPath: strImagePath,
                         CreatedDate: objProfile.BasicInfoCoreEntity.CreatedDate
                     }),
-                    headers: { 'content-Type': 'application/x-www-form-urlencoded' }
+                    headers: {
+                        'content-Type': 'application/x-www-form-urlencoded',
+                        "MugurthamUserToken": getLoggedInUserID()
+                    }
                 }).
             success(function (data, status, headers, config) {
                 NotifySuccessStatus(17);
@@ -106,7 +113,10 @@ success(function (data, status, headers, config) {
             //===================================================
             $scope.deleteProfileImage = function (strPhotoID) {
                 $http({
-                    method: "GET", url: '/Profile/Profile/RemoveProfilePic/' + strPhotoID
+                    method: "GET", url: '/Profile/Profile/RemoveProfilePic/' + strPhotoID,
+                    headers: {
+                        "MugurthamUserToken": getLoggedInUserID()
+                    }
                 }).
 success(function (data, status, headers, config) {
     NotifySuccessStatus(18);

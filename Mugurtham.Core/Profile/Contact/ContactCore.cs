@@ -80,7 +80,7 @@ namespace Mugurtham.Core.Contact
         }
 
 
-        public ContactCoreEntity GetByProfileID(string strProfileID)
+        private ContactCoreEntity GetByProfileID(string strProfileID)
         {
             ContactCoreEntity objContactCoreEntity = new ContactCoreEntity();
             try

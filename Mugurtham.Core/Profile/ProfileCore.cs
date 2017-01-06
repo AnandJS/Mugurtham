@@ -286,19 +286,19 @@ namespace Mugurtham.Core.Profile.API
                         objPhotoCore = null;
                         CareerCore objCareerCore = new CareerCore();
                         using (objCareerCore as IDisposable)
-                            objProfileCore.CareerCoreEntity = objCareerCore.GetByProfileID(strProfileID);
+                            objProfileCore.CareerCoreEntity = objCareerCore.GetByProfileID(strProfileID, objLoggedIn.LoginID);
                         objCareerCore = null;
                         LocationCore objLocationCore = new LocationCore();
                         using (objLocationCore as IDisposable)
-                            objProfileCore.LocationCoreEntity = objLocationCore.GetByProfileID(strProfileID);
+                            objProfileCore.LocationCoreEntity = objLocationCore.GetByProfileID(strProfileID, objLoggedIn.LoginID);
                         objLocationCore = null;
                         ContactCore objContactCore = new ContactCore();
                         using (objContactCore as IDisposable)
-                            objProfileCore.ContactCoreEntity = objContactCore.GetByProfileID(strProfileID);
+                            objProfileCore.ContactCoreEntity = objContactCore.GetByProfileID(strProfileID, objLoggedIn.LoginID);
                         objContactCore = null;
                         FamilyCore objFamilyCore = new FamilyCore();
                         using (objFamilyCore as IDisposable)
-                            objProfileCore.FamilyCoreEntity = objFamilyCore.GetByProfileID(strProfileID);
+                            objProfileCore.FamilyCoreEntity = objFamilyCore.GetByProfileID(strProfileID, objLoggedIn.LoginID);
                         objFamilyCore = null;
                         ReferenceCore objReferenceCore = new ReferenceCore();
                         using (objReferenceCore as IDisposable)
@@ -318,7 +318,7 @@ namespace Mugurtham.Core.Profile.API
                         objRaasiCore = null;
                         HoroscopeCore objHoroscopeCore = new HoroscopeCore();
                         using (objHoroscopeCore as IDisposable)
-                            objProfileCore.HoroscopeCoreEntity = objHoroscopeCore.GetByProfileID(strProfileID);
+                            objProfileCore.HoroscopeCoreEntity = objHoroscopeCore.GetByProfileID(strProfileID, objLoggedIn.LoginID);
                         objHoroscopeCore = null;
                     }
 

@@ -114,7 +114,10 @@ var ControllerProfileLocation = angular.module('MugurthamApp').controller('Contr
             function getLocationByProfileID() {
                 var strGetURL = '/Location/LocationAPI/' + $scope.globalProfileID;
                 $http({
-                    method: "GET", url: strGetURL
+                    method: "GET", url: strGetURL,
+                    headers: {
+                        "MugurthamUserToken": getLoggedInUserID()
+                    }
                 }).
             success(function (data, status, headers, config) {
                 $scope.frmData.push({

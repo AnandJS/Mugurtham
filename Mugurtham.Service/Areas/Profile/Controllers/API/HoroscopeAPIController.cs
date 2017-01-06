@@ -19,7 +19,10 @@ namespace Mugurtham.Service.Areas.Profile.Controllers.API
         [HttpGet]
         public HttpResponseMessage Get(string ID)
         {
-            return Request.CreateResponse(HttpStatusCode.OK, new HoroscopeCore().GetByProfileID(ID), Configuration.Formatters.JsonFormatter);
+            string LoggedInUserID = string.Empty;
+            IEnumerable<string> headerValues = Request.Headers.GetValues("MugurthamUserToken");
+            LoggedInUserID = headerValues.FirstOrDefault();
+            return Request.CreateResponse(HttpStatusCode.OK, new HoroscopeCore().GetByProfileID(ID, LoggedInUserID), Configuration.Formatters.JsonFormatter);
         }
         [HttpPut]
         public void Put([FromBody]HoroscopeCoreEntity objHoroscopeCoreEntity)

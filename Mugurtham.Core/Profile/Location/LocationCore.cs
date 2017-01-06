@@ -60,7 +60,25 @@ namespace Mugurtham.Core.Location
             return 0;
         }
 
-        public LocationCoreEntity GetByProfileID(string strProfileID)
+
+        public LocationCoreEntity GetByProfileID(string strProfileID, string strLoggedInUserID)
+        {
+            Profile.ProfileSecurity objProfileSecurity = new Profile.ProfileSecurity();
+            using (objProfileSecurity as IDisposable)
+            {
+                if (!string.IsNullOrEmpty(strLoggedInUserID))
+                {
+                    //MugurthamUserToken - If null - hacker is trying to hack the system so redirect to unauthorized page
+                    if (!objProfileSecurity.validateProfileViewAccess(strProfileID, strLoggedInUserID))
+                    {
+                        strProfileID = strLoggedInUserID;
+                    }
+                }
+            }
+            objProfileSecurity = null;
+            return GetByProfileID(strProfileID);
+        }
+        private LocationCoreEntity GetByProfileID(string strProfileID)
         {
             LocationCoreEntity objLocationCoreEntity = new LocationCoreEntity();
             try
