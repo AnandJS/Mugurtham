@@ -55,11 +55,12 @@ var ControllerSearchAllProfiles = angular.module('MugurthamApp').controller('Con
             }
 
             $scope.initData = function (data) {
-                $scope.AllProfiles = $.parseJSON(sessionStorage.getItem('AllProfiles'));
+                $scope.AllProfiles = data;
                 $scope.currentPage = 1;
                 $scope.pageSize = 15;
-                $scope.SearchedProfiles = ($.parseJSON(sessionStorage.getItem('AllProfiles')).ProfileBasicInfoViewCoreEntityList);
-                $scope.profilePhotos = ($.parseJSON(sessionStorage.getItem('AllProfiles')).PhotoCoreEntityList);
+                $scope.SearchedProfiles = data.ProfileBasicInfoViewCoreEntityList;
+                $scope.profilePhotos = data.PhotoCoreEntityList;
+
                 $scope.pageChangeHandler = function (num) {
                     $("html, body").animate({ scrollTop: 220 }, "slow");
                     setTimeout(displayThumbnailSlider, 10);

@@ -51,7 +51,7 @@
         <!-- Profiles Listing-->
         <!--<ul ng-repeat="movie in ((movies | filter:Filter.Comedy) + (movies | filter:Filter.Action) + (movies | filter:Filter.Drama))">-->
         <div id="products" class="row list-group">
-            <div class=" item  col-xs-6 col-lg-6 " dir-paginate="data in ((AllProfiles.ProfileBasicInfoViewCoreEntityList | filter: (colourFilter) | itemsPerPage: pageSize) ) " current-page="currentPage">
+            <div class=" item  col-xs-6 col-lg-6 " dir-paginate="data in ((SearchedProfiles | filter: (colourFilter) | itemsPerPage: pageSize) ) " current-page="currentPage">
             <div class="panel panel-primary FormShadow" >
 
 

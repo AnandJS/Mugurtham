@@ -59,7 +59,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Content Include="Database\Database_Mugurtham.sql" />
+    <Content Include="Database\Database_Script_Mugurtham.sql" />
     <Content Include="DefaultData\Calculate_Age.sql" />
     <Content Include="DefaultData\DefaultData.sql" />
     <Content Include="StoredProcedures\uspGetAllProfiles.sql" />
