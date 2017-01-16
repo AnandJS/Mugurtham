@@ -176,6 +176,7 @@ function landingPageCounter() {
         if (localStorage.getItem("landingFirstTimeCount")) {
             if (Number(localStorage.getItem("landingFirstTimeCount")) == 0) {
                 $('#squarespaceModal').modal('show');
+                $('#MugurthamModal').modal('show');
                 localStorage.setItem("landingFirstTimeCount", "1");
             }
         }

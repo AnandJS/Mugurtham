@@ -207,6 +207,17 @@ namespace Mugurtham.Core.Profile.API
                     objAmsamCoreEntity = null;
                 }
                 objAmsamCore = null;
+                HoroscopeCore objHoroscopeCore = new HoroscopeCore();
+                using (objHoroscopeCore as IDisposable)
+                {
+                    HoroscopeCoreEntity objHoroscopeCoreEntity = new HoroscopeCoreEntity();
+                    using (objHoroscopeCoreEntity as IDisposable)
+                    {
+                        objHoroscopeCore.Add(strProfileID);
+                    }
+                    objHoroscopeCoreEntity = null;
+                }
+                objHoroscopeCore = null;
             }
             catch (Exception objEx)
             {
