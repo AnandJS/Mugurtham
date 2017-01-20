@@ -162,6 +162,7 @@
                             <div class="col-lg-9">
                                 <select class="form-control" id="ddlReligion" ng-model="frmData[0].Religion">
                                     <option value="0">--Select--</option>
+                                    <option ng-repeat="arrReligion in arrReligion" value="{{arrReligion}}">{{arrReligion}}</option>
                                 </select>
                             </div>
                         </div>
@@ -170,6 +171,7 @@
                             <div class="col-lg-9">
                                 <select class="form-control" id="ddlCaste" ng-model="frmData[0].Caste">
                                     <option value="0">--Select--</option>
+                                    <option ng-repeat="arrCaste in arrCaste" value="{{arrCaste}}">{{arrCaste}}</option>
                                 </select>
                             </div>
                         </div>
@@ -225,7 +227,7 @@
                         <div class="form-group">
                             <label for="Horoscope Match" class="col-lg-3 control-label">{{'BIHORMTCH'  | translate}}</label>
                             <div class="col-lg-9">
-                                <select class="form-control" id="ddlAnyDhosham" ng-model="frmData[0].AnyDhosham">
+                                <select class="form-control" id="ddlAnyDhosham" ng-model="frmData[0].HoroscopeMatch">
                                     <option value="0">--Select--</option>
                                     <option ng-repeat="HoroscopeMatch in arrHoroscopeMatch">{{HoroscopeMatch}}</option>
                                 </select>
@@ -235,7 +237,7 @@
                         <div class="form-group">
                             <label for="Any Dhosham" class="col-lg-3 control-label">{{'BIANYDHSM'  | translate}}</label>
                             <div class="col-lg-9">
-                                <select class="form-control" id="ddlHoroscopeMatch" ng-model="frmData[0].HoroscopeMatch">
+                                <select class="form-control" id="ddlHoroscopeMatch" ng-model="frmData[0].AnyDhosham">
                                     <option value="0">--Select--</option>
                                     <option ng-repeat="Dhosham in arrDhosham">{{Dhosham}}</option>
                                 </select>

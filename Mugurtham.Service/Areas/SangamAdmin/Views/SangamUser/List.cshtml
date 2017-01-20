@@ -14,8 +14,13 @@
         </ul>
     </div>
     <div class="col-lg-12">
-        <table>
+        <table> 
+
             <tr>
+                <td>&nbsp;Login ID &nbsp;</td>
+                <td>
+                    <input type="text" class="form-control" ng-model="frmData[0].LoginID" placeholder="Login ID of the User">
+                </td>
                 <td>&nbsp;Name &nbsp;</td>
                 <td>
                     <input type="text" class="form-control" ng-model="frmData[0].Name" placeholder="Name of the User">
@@ -32,13 +37,15 @@
     <table class="mugurthamTable table-striped table-bordered table-hover FormShadow">
         <thead>
             <tr>
+                <th>Login ID</th>
                 <th>Name</th>
                 <th>Sangam</th>
                 <th>IsActivated</th>
             </tr>
         </thead>
         <tbody class="example-animate-container">
-            <tr class="animate-repeat" ng-repeat="User in AllUsers | filter: {RoleID: frmData[0].RoleID, Name: frmData[0].Name} | orderBy:'Name'">
+            <tr class="animate-repeat" ng-repeat="User in AllUsers | filter: {LoginID: frmData[0].LoginID, Name: frmData[0].Name} | orderBy:'Name'">
+                <td><a href="#SangamUserForm/{{User.ID}}">{{User.LoginID}}</a></td>
                 <td><a href="#SangamUserForm/{{User.ID}}">{{User.Name}}</a></td>
                 <td>{{User.SangamName}}</td>
                 <td>{{User.IsActivated}}</td>
