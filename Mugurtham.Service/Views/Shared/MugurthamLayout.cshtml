@@ -60,6 +60,50 @@
                     -moz-border-radius: 6px 0 6px 6px;
                     border-radius: 6px 0 6px 6px;
                 }
+
+        #return-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgb(0, 0, 0);
+            background: rgba(0, 0, 0, 0.7);
+            width: 50px;
+            height: 50px;
+            display: block;
+            text-decoration: none;
+            -webkit-border-radius: 35px;
+            -moz-border-radius: 35px;
+            border-radius: 35px;
+            display: none;
+            -webkit-transition: all 0.3s linear;
+            -moz-transition: all 0.3s ease;
+            -ms-transition: all 0.3s ease;
+            -o-transition: all 0.3s ease;
+            transition: all 0.3s ease;
+        }
+
+            #return-to-top i {
+                color: #fff;
+                margin: 0;
+                position: relative;
+                left: 16px;
+                top: 13px;
+                font-size: 19px;
+                -webkit-transition: all 0.3s ease;
+                -moz-transition: all 0.3s ease;
+                -ms-transition: all 0.3s ease;
+                -o-transition: all 0.3s ease;
+                transition: all 0.3s ease;
+            }
+
+            #return-to-top:hover {
+                background: rgba(0, 0, 0, 0.9);
+            }
+
+                #return-to-top:hover i {
+                    color: #fff;
+                    top: 5px;
+                }
     </style>
 
     @Styles.Render("~/Content/MugurthamJQueryUI")
@@ -83,7 +127,8 @@
 </head>
 <body ng-app="MugurthamApp">
     <!-- Navigation -->
-
+    <!-- Return to Top -->
+    <a href="javascript:" id="return-to-top"><i class="fa-chevron-circle-up"></i></a>
 
     <form name="frmPortal" novalidate>
         <div id="body" ng-controller="MugurthamController" class="bgBodyImage" data-ng-init="changeLanguage('@objLoggedIn.localeID');">
@@ -233,7 +278,7 @@
                     </div>
 
                 </div>
-                <div class="col-lg-12 text-right">
+                <div class="col-lg-12">
                     <div class="fb-like" data-href="https://www.facebook.com/vishwakarmamugurtham/" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
                     <br />
                     <br /> If you have questions, feel free to call our office - @objLoggedIn.SangamName at &nbsp;&nbsp;<i class="fa fa-phone-square">&nbsp;&nbsp;@objLoggedIn.SangamContactNumber</i> &nbsp;&nbsp; and Mugurtham at <i class="fa fa-phone-square">&nbsp;&nbsp; +91 86080 73820</i>
@@ -250,8 +295,8 @@
                 </div>
                 <div class="alert alert-danger">
                     <strong>
-                        To continue access to Mugurtham we request you to pay the amount of Rs 150 only, valid for next 6 months to your @objLoggedIn.SangamName Sangam directly. Free access will be coming to end by this Jan 15 2017.<br />
-                        If you have questions, feel free to call our office - @objLoggedIn.SangamName at &nbsp;&nbsp;<i class="fa fa-phone-square">&nbsp;&nbsp;@objLoggedIn.SangamContactNumber</i> &nbsp;&nbsp; and Mugurtham at <i class="fa fa-phone-square">&nbsp;&nbsp; +91 86080 73820</i>
+                        To continue access to Mugurtham we request you to pay the amount of Rs 150 only, valid for next 6 months to your @objLoggedIn.SangamName Sangam directly. Free access is now extended and will be coming to end by this Jan 31 2017. Kindly ignore this message if you have paid already.<br />
+                        If you choose fund transfer through net banking, we request you to mention your Mugurtham ID @objLoggedIn.LoginID on comments during fund transfer which will help us for tracking purpose.
                     </strong>
                 </div>
                 <!-- Rending Body from child page-->
@@ -319,7 +364,7 @@
                         <div class="col-lg-12 ">
                             <h5>One stop station for all Vishwakarma matches across TamilNadu. 2500+ Vishwakarma only profiles and keeps adding. We are in Mobile view as well. </h5>
                         </div>
-                        <div class="col-lg-12 text-center"><h3><b>United We Stand</b></h3></div>
+                        <div class="col-lg-12 text-center"><h3><b>Mugurtham covers Vishwakarma matches better</b></h3></div>
                         <h5><b>"Smart Search " - </b> Search Raasi or Location or Name or anything in Smart Search and your Search ends here..  </h5>
                         <div class="col-lg-12 text-center"><h4><b>Togeather we make a difference - Our proud partners</b></h4></div>
                         <table class="mugurthamTable table-striped table-bordered table-hover FormShadow ">
@@ -361,24 +406,8 @@
 
             </div>
         </div>
+
     </div>
-
-    <div class="modal fade alert" id="MugurthamModal">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">x</span><span class="sr-only">Close</span></button>
-                    <h3 class="modal-title" id="lineModalLabel">United We Stand</h3>
-                </div>
-                <div class="modal-body">
-                    <img src="/Images/Mugurtham/Sponsors/Mugurtham_Banner.jpg" width="550" height="500" />
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-
     <!-- <div class="panel-footer col-lg-12 text-justify">
          <img src="/favicon.ico" height="25" width="40" />   Mugurtham provides superior collaborative matchmaking experience by expanding the opportunities available to meet potential life partners. Since then we have created a world renowned service that has touched the lives of millions of people all over the world and helping accelarint revenue for sangams. We have, however, never rested on our laurels. Software division providing cutting edge business solutions to Matrimony Industry. An innovator in teleMatrimony and analytics. Partner focused on quality and growth.
      </div>
@@ -410,10 +439,24 @@
         $(document).ready(function () {
             landingPageCounter();
             setTimeout(setUserStyleLocale, 1000, '@objLoggedIn.themeID');
+
+            // ===== Scroll to Top ====
+            $(window).scroll(function () {
+                if ($(this).scrollTop() >= 50) {        // If page is scrolled more than 50px
+                    $('#return-to-top').fadeIn(200);    // Fade in the arrow
+                } else {
+                    $('#return-to-top').fadeOut(200);   // Else fade out the arrow
+                }
+            });
+            $('#return-to-top').click(function () {      // When arrow is clicked
+                $('body,html').animate({
+                    scrollTop: 0                       // Scroll to top of body
+                }, 500);
+            });
+            // ===== Scroll to Top end ====
+
         });
     </script>
-
-
 
 
 </body>

@@ -438,7 +438,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Shared\MugurthamLayout.cshtml" />
     <Content Include="Views\Mugurtham\Index.cshtml" />
     <Content Include="Views\Mugurtham\Info.cshtml" />
     <Content Include="WebReference.txt" />
@@ -543,6 +542,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\UploadFile.cshtml" />
     <Content Include="Views\Home\HttpError404.cshtml" />
+    <Content Include="Views\Shared\MugurthamLayout.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

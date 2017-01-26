@@ -249,6 +249,10 @@ namespace Mugurtham.Core.Profile.API
                     // Assign the user object for this profileID
                     objProfileCore.UserCoreEntity = getUserEntity(strProfileID);
                     validateUserAccessToThisProfile(strProfileID, ref objProfileCore, objLoggedIn);
+                    SangamCore objSangamCore = new SangamCore();
+                    using (objSangamCore as IDisposable)
+                        objProfileCore.SangamCoreEntity = objSangamCore.GetByID(objProfileCore.UserCoreEntity.SangamID);
+                    objSangamCore = null;
                     if (objProfileCore.validateFullViewAccess)
                     {
                         BasicInfoCore objBICore = new BasicInfoCore();
@@ -314,11 +318,7 @@ namespace Mugurtham.Core.Profile.API
                         ReferenceCore objReferenceCore = new ReferenceCore();
                         using (objReferenceCore as IDisposable)
                             objProfileCore.ReferenceCoreEntity = objReferenceCore.GetByProfileID(strProfileID);
-                        objReferenceCore = null;
-                        SangamCore objSangamCore = new SangamCore();
-                        using (objSangamCore as IDisposable)
-                            objProfileCore.SangamCoreEntity = objSangamCore.GetByID(objProfileCore.BasicInfoCoreEntity.SangamID);
-                        objReferenceCore = null;
+                        objReferenceCore = null;                       
                         RaasiCore objRaasiCore = new RaasiCore();
                         using (objRaasiCore as IDisposable)
                             objProfileCore.RaasiCoreEntity = objRaasiCore.GetByProfileID(strProfileID);
