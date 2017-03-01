@@ -53,7 +53,9 @@ var MugurthamController = angular.module('MugurthamApp').
     }).
     controller('MugurthamController', ['$http', '$scope', '$location', '$translate',
          function ($http, $scope, $location, $translate) {
-
+             // Global loggedIn User object with full details called only once at login
+             // and during page refreshes, which should not supposed to happen
+             getLoggedInUserInfo($http);
              //==================
              //HIGHLIGHT CLICKED TAB
              //==================
@@ -197,4 +199,27 @@ function getLoggedInUserID() {
         toastr.error("Sorry, your browser does not support web storage...");
     }
     return LoggedInUserID;
+}
+
+
+// Global Function to retrieve the loggedIn user information from the client side
+function getLoggedInUserInfo($http) {
+    LoggedInUserInfo = '';
+    var strGetURL = "Search/Search/getByProfileID";
+    $http({
+        method: "GET", url: strGetURL, params: { ProfileID: getLoggedInUserID() }
+    }).
+success(function (data, status, headers, config) {
+    //alert(data.BasicInfoCoreEntity.Star);
+    if (typeof (Storage) !== "undefined") {
+        localStorage.setItem("LoggedInUser", JSON.stringify(data));
+    }
+    else {
+        toastr.error("Sorry, your browser does not support web storage...");
+    }
+
+}).
+    error(function (data, status, headers, config) {
+    });
+    return LoggedInUserInfo;
 }

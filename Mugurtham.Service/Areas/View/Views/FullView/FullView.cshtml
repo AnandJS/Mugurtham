@@ -17,10 +17,43 @@
 <div>
     <br />
 </div>
+<div class="alert alert-info fade in">
+    <a class="close text-center" data-dismiss="alert" aria-label="close">&times;</a>
+    <i class="fa fa-info-circle" aria-hidden="true"></i> <strong>You are allowed to access only 10 Full View profiles per day. You have now accessed {{AllProfiles.ProfileViewLimitation }} Full View profiles and left with {{10 - (AllProfiles.ProfileViewLimitation ) }} more for today.</strong>
+</div>
+<div>
+    <br />
+</div>
+<!-- FullView Limitation Start-->
+<div id="divFullViewLimitation" class="panel panel-primary bs-example FormShadow">
+    <div class="panel-heading">
+        <h3 class="panel-title">{{ 'VWSGMINFOFORPROFID' | translate }} {{ globalProfileID }}</h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <table class="mugurthamTable">
+                <tr>
+                    <td width="30%">
+                        <table class="mugurthamTable table-striped table-bordered table-hover FormShadow ">
+                            <tr>
+                                <td colspan="2">
+                                    <blockquote>
+                                        <b>You can view 10 profiles Full view per day. You have exceeded your limit. Please try Full view access again tomorow.</b>
+                                    </blockquote>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<!--FullView Limitation Ends-->
 <!-- Full Profile View page-->
 <div id="divSangamInfomration" class="panel panel-primary bs-example FormShadow">
     <div class="panel-heading">
-        <h3 class="panel-title">{{ "VWSGMINFOFORPROFID" || translate }} {{ globalProfileID }}</h3>
+        <h3 class="panel-title">{{ "VWSGMINFOFORPROFID" | translate }} {{ globalProfileID }}</h3>
     </div>
     <div class="panel-body">
         <div class="row">

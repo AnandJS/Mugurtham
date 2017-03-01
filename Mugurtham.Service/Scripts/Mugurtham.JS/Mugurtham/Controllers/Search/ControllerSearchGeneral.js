@@ -24,9 +24,16 @@ var ControllerSearchGeneral = angular.module('MugurthamApp').controller('Control
             $scope.SangamID = '';
             $scope.Gender = '';
             $scope.Star = '';
+            $scope.Age = '';
+            $scope.fromAge = '';
+            $scope.toAge = '';
+            $scope.SubCaste = '';
             $scope.arrStar = ['Anusham', 'Aswini', 'Avittam', 'Aayilyam', 'Bharani', 'Chithirai', 'Hastham', 'Karthigai', 'Kettai', 'Makam', 'Moolam', 'Mrigasheersham', 'Pooraadam', 'Pooram', 'Poorattathi', 'Poosam', 'Punarpoosam', 'Revathi', 'Rohini', 'Sadayam', 'Swaathi', 'Thiruvaathirai', 'Thiruvonam', 'Uthiraadam', 'Uthiram', 'Uthirattathi', 'Visaakam'];
-            $scope.arrSubCaste = ['Kamalar', 'Achari'];
-            
+            $scope.arrSubCaste = ['Avusula', 'Kai Kolar', 'Kammari', 'Kanchari', 'Shipi', 'Vadrangi', 'Kamalar', 'Achari'];
+            $scope.arrFromAge = ['18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46', '47', '48', '49', '50'];
+            $scope.arrToAge = ['18', '19', '20', '21', '22', '23', '24', '25', '26','27', '28', '29', '30', '31', '32', '33', '34', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46', '47', '48', '49', '50'];
+
+
             //===================================================
             //AJAX GET REQUEST - GETTING LOOKUP DTO
             //===================================================
@@ -39,7 +46,7 @@ var ControllerSearchGeneral = angular.module('MugurthamApp').controller('Control
                 $scope.getAllGeneralSearchProfiles();
                 $scope.arrSangamID = data.SangamCoreEntity;
                 $scope.arrRoleID = data.RoleCoreEntity;
-                $('#ddlSangam').empty();                
+                $('#ddlSangam').empty();
                 getUserByID();
             }).
             error(function (data, status, headers, config) {
@@ -93,7 +100,36 @@ var ControllerSearchGeneral = angular.module('MugurthamApp').controller('Control
                 };
                 setTimeout(displayThumbnailSlider, 10);
             }
-            
+
+            $scope.startsWith = function (actual, expected) {
+                var lowerStr = (actual + "").toLowerCase();
+                return lowerStr.indexOf(expected.toLowerCase()) === 0;
+            }
+
+            $scope.byRange = function (fieldName, minValue, maxValue) {
+                if (minValue === undefined) minValue = Number.MIN_VALUE;
+                if (maxValue === undefined) maxValue = Number.MAX_VALUE;
+                return function predicateFunc(item) {
+                    return (minValue <= item[fieldName] && item[fieldName] <= maxValue);
+                };
+
+
+            };
+
+
+            $scope.profileFilter = function (profile) {
+                /*var result = (!$scope.foodName || item.name.toLowerCase().includes($scope.foodName.toLowerCase())) &&
+                             (!$scope.priceFrom || item.price >= $scope.priceFrom) &&
+                             (!$scope.priceTo || item.price <= $scope.priceTo);*/
+
+                var filteredProfileResult = (!$scope.Star || $scope.Star == profile.Star) &&
+                             (!$scope.SangamID || $scope.SangamID == profile.SangamID) &&
+                             (!$scope.SubCaste || $scope.SubCaste == profile.SubCaste) &&
+                             ((!$scope.fromAge || profile.Age >= $scope.fromAge) && (!$scope.toAge || profile.Age <= $scope.toAge))
+                ;
+                return filteredProfileResult;
+            };
+
         }])
 
 function NotifyStatus(intStatus) {

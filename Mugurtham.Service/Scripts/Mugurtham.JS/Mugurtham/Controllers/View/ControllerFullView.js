@@ -36,6 +36,8 @@ var ControllerViewFullView = angular.module('MugurthamApp').controller('Controll
                   $("#divSangamInfomration").hide();
                   $("#divFullProfile").hide();
                   $("#divInterestButton").hide();
+                  $("#divFullViewLimitation").hide();
+                  divSangamInfomration
                   $http({
                       method: "GET", url: '/View/FullView/getProfileByProfileID/' + $scope.globalProfileID
                   }).
@@ -54,6 +56,7 @@ var ControllerViewFullView = angular.module('MugurthamApp').controller('Controll
                           if (data.UserCoreEntity.ShowHoroscope) {
                               $("#divconfidentialInfo").show();
                           }
+                         
                           $scope.AllProfiles = data;
                           if ($scope.AllProfiles.profileDOB != '')
                               $("#dtDOB").text($.datepicker.formatDate('dd-M-yy', new Date($scope.AllProfiles.profileDOB)));
@@ -69,16 +72,25 @@ var ControllerViewFullView = angular.module('MugurthamApp').controller('Controll
                               error(function (data, status, headers, config) {
                                   NotifyStatus('2');
                               })
-                          // Add profile to View notification entry
-                          $http({
-                              method: "GET", url: '/User/User/Add/' + $scope.globalProfileID
-                          }).
-                              success(function (data, status, headers, config) {
-                                  $scope.getSimilarProfiles();
+                          // Validate FullView Limitation
+                          if (data.ProfileViewLimitation > 10) {
+                              $("#divFullViewLimitation").show();
+                              $("#divSangamInfomration").hide();
+                              $("#divFullProfile").hide();
+                              $("#divInterestButton").hide();
+                          }
+                          else {
+                              // Add profile to View notification entry
+                              $http({
+                                  method: "GET", url: '/User/User/Add/' + $scope.globalProfileID
                               }).
-                              error(function (data, status, headers, config) {
-                                  NotifyStatus('2');
-                              })
+                                  success(function (data, status, headers, config) {
+                                      $scope.getSimilarProfiles();
+                                  }).
+                                  error(function (data, status, headers, config) {
+                                      NotifyStatus('2');
+                                  })
+                          }
                           $("#divContainer").unmask();
                       }).
                    error(function (data, status, headers, config) {

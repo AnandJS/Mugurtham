@@ -135,7 +135,7 @@ namespace Mugurtham.Service.Areas.Search.Controllers
             ProfileBasicViewEntity objProfileBasicViewEntity = new ProfileBasicViewEntity();
             using (objProfileCore as IDisposable)
             {
-                objProfileCore.GetHighlightedProfiles(Utility.connectionString(),strGender,
+                objProfileCore.GetHighlightedProfiles(Utility.connectionString(), strGender,
                     objLoggedIn.sangamID,
                     ref objProfileBasicViewEntity,
                     ref objLoggedIn
@@ -252,6 +252,19 @@ namespace Mugurtham.Service.Areas.Search.Controllers
         public ActionResult getTestData()
         {
             return this.Json("[{'name':'1','name2':'2'}]", JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult getByProfileID(string ProfileID)
+        {
+            ProfileCore objProfileCoreReturn = new ProfileCore();
+            ProfileCore objProfileCore = new ProfileCore();
+            using (objProfileCore as IDisposable)
+            {
+                objProfileCore.GetByProfileID(ProfileID, out objProfileCoreReturn);
+            }
+            objProfileCore = null;
+            return this.Json(objProfileCoreReturn, JsonRequestBehavior.AllowGet);
         }
     }
 }

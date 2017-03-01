@@ -63,6 +63,10 @@ namespace Mugurtham.Service.Areas.User.Controllers.MVC
         {
             return View();
         }
+        public ActionResult MyMatchingProfiles()
+        {
+            return View();
+        }
         public ActionResult Add(string ID)
         {
             Mugurtham.Core.Login.LoggedInUser objLoggedIn = (Mugurtham.Core.Login.LoggedInUser)Session["LoggedInUser"];

@@ -1,4 +1,23 @@
 ﻿
+Angular JS 1.x advanced
+=========================
+http://www.advancesharp.com/blog/1194/angularjs-constant-and-enum-with-example
+https://tylermcginnis.com/angularjs-factory-vs-service-vs-provider/
+https://www.tutorialspoint.com/angularjs/index.htm
+http://tutorials.jenkov.com/angularjs/dependency-injection.html -- Angular JS Modularzation
+http://stackoverflow.com/questions/16828287/what-things-can-be-injected-into-others-in-angular-js -- Nice
+http://stackoverflow.com/questions/31432522/how-to-inject-service-to-angular-constant
+
+
+Starts With Filter in Angular -- Perfect
+=========================================
+http://plnkr.co/edit/Bf0Kck?p=preview
+
+
+Number Range filter for Age Search in Angular -- Perfect
+===========================================================
+http://stackoverflow.com/questions/24859420/filter-for-number-range-angularjs
+
 
 Checkbox Filter in Search
 ==========================

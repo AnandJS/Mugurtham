@@ -47,6 +47,10 @@
                 templateUrl: '/User/User/InterestedInMeProfiles',
                 controller: 'ControllerInterestedInMeProfiles'
             })
+            .when('/MyMatchingProfiles', {
+                templateUrl: '/User/User/MyMatchingProfiles',
+                controller: 'ControllerMyMatchingProfiles'
+            })
             // route for the Basic Information View
              .when('/BasicInfo', {
                  templateUrl: '/Profile/Profile/BasicInfo',
@@ -393,6 +397,7 @@
             SRCLOCSEARCH: "Location Search",
             SRCOCPNSEARCH: "Occupation Search",
             SMRTSEARCH: "Smart Search",
+            LYTPROFILESMYMATCHES: "My Matching Profiles",
 
 
         });
@@ -539,7 +544,9 @@
             LYTPROFILESHISTORY: 'சமீபத்தில் பார்க்கப்பட்ட விவரக்குறிப்புகள்',
             SRCEDUSEARCH: "Education Search",
             SRCLOCSEARCH: "Location Search",
-            SRCOCPNSEARCH: "Occupation Search"
+            SRCOCPNSEARCH: "Occupation Search",
+            LYTPROFILESMYMATCHES: "My Matching Profiles",
+
         });
         $translateProvider.translations('0439', {
             GENHOME: 'घर',
@@ -684,7 +691,9 @@
             LYTPROFILESHISTORY: 'Profiles Viewed Recently',
             SRCEDUSEARCH: "Education Search",
             SRCLOCSEARCH: "Location Search",
-            SRCOCPNSEARCH: "Occupation Search"
+            SRCOCPNSEARCH: "Occupation Search",
+            LYTPROFILESMYMATCHES: "My Matching Profiles",
+
 
         });
         $translateProvider.translations('044a', {
@@ -830,7 +839,9 @@
             LYTPROFILESHISTORY: 'Profiles Viewed Recently',
             SRCEDUSEARCH: "Education Search",
             SRCLOCSEARCH: "Location Search",
-            SRCOCPNSEARCH: "Occupation Search"
+            SRCOCPNSEARCH: "Occupation Search",
+            LYTPROFILESMYMATCHES: "My Matching Profiles",
+
         });
 
         $translateProvider.translations('044c', {
@@ -976,7 +987,9 @@
             LYTPROFILESHISTORY: 'Profiles Viewed Recently',
             SRCEDUSEARCH: "Education Search",
             SRCLOCSEARCH: "Location Search",
-            SRCOCPNSEARCH: "Occupation Search"
+            SRCOCPNSEARCH: "Occupation Search",
+            LYTPROFILESMYMATCHES: "My Matching Profiles",
+
         });
 
         $translateProvider.translations('044b', {
@@ -1122,7 +1135,9 @@
             LYTPROFILESHISTORY: 'Profiles Viewed Recently',
             SRCEDUSEARCH: "Education Search",
             SRCLOCSEARCH: "Location Search",
-            SRCOCPNSEARCH: "Occupation Search"
+            SRCOCPNSEARCH: "Occupation Search",
+            LYTPROFILESMYMATCHES: "My Matching Profiles",
+
         });
 
         $translateProvider.preferredLanguage('0409');

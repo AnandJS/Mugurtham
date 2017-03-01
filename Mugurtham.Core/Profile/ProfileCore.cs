@@ -57,6 +57,9 @@ namespace Mugurtham.Core.Profile.API
         // SangamAdminProfileList Page filter property
         public string MugurthamProfileID { get; set; }
         public string SangamProfiledID { get; set; }
+        // Fullview Limitation for Security
+        public decimal? ProfileViewLimitation { get; set; }
+
 
 
         /// <summary>
@@ -248,8 +251,13 @@ namespace Mugurtham.Core.Profile.API
                 {
                     // Assign the user object for this profileID
                     objProfileCore.UserCoreEntity = getUserEntity(strProfileID);
+                    // Validation for Fullview access
                     validateUserAccessToThisProfile(strProfileID, ref objProfileCore, objLoggedIn);
-                    SangamCore objSangamCore = new SangamCore();
+                    // Validation on Profile View Limitation for Security
+                    objProfileCore.ProfileViewLimitation = GetViewedProfilesToday(Helpers.ConnectionString, ref objLoggedIn);
+                    if (objProfileCore.ProfileViewLimitation > 10)
+                        objProfileCore.validateFullViewAccess = false;
+                        SangamCore objSangamCore = new SangamCore();
                     using (objSangamCore as IDisposable)
                         objProfileCore.SangamCoreEntity = objSangamCore.GetByID(objProfileCore.UserCoreEntity.SangamID);
                     objSangamCore = null;
@@ -318,7 +326,7 @@ namespace Mugurtham.Core.Profile.API
                         ReferenceCore objReferenceCore = new ReferenceCore();
                         using (objReferenceCore as IDisposable)
                             objProfileCore.ReferenceCoreEntity = objReferenceCore.GetByProfileID(strProfileID);
-                        objReferenceCore = null;                       
+                        objReferenceCore = null;
                         RaasiCore objRaasiCore = new RaasiCore();
                         using (objRaasiCore as IDisposable)
                             objProfileCore.RaasiCoreEntity = objRaasiCore.GetByProfileID(strProfileID);
@@ -343,6 +351,12 @@ namespace Mugurtham.Core.Profile.API
         }
         private int validateUserAccessToThisProfile(string strProfileID, ref ProfileCore objProfileCore, Mugurtham.Core.Login.LoggedInUser objLoggedIn = null)
         {
+            // On Jan 28 2017 Business has created a change request to enable full view access to all profile irrespective of sangams.
+            // So commenting the below code this may be in use in the future so dont delete it
+
+            objProfileCore.validateFullViewAccess = true;
+            return 0;
+
             objProfileCore.validateFullViewAccess = false;
             try
             {
@@ -895,6 +909,44 @@ namespace Mugurtham.Core.Profile.API
                 Helpers.LogExceptionInFlatFile(objEx);
             }
             return objUserCoreEntity;
+        }
+        public int GetViewedProfilesToday(string strConnectionString,
+             ref Mugurtham.Core.Login.LoggedInUser objLoggedIn)
+        {
+            int profileViewedCount = 0;
+            try
+            {
+                using (SqlConnection objSqlConnection = new SqlConnection(strConnectionString))
+                {
+                    objSqlConnection.Open();
+                    // 1.  create a command object identifying the stored procedure
+                    SqlCommand objSqlCommand = new SqlCommand("uspGetViewedProfilesToday", objSqlConnection);
+
+                    // 2. set the command object so it knows to execute a stored procedure
+                    objSqlCommand.CommandType = CommandType.StoredProcedure;
+
+                    // 3. add parameter to command, which will be passed to the stored procedure
+                    objSqlCommand.Parameters.Add(new SqlParameter("@viewerID", objLoggedIn.LoginID));
+                    // execute the command
+                    using (SqlDataReader objSqlDataReader = objSqlCommand.ExecuteReader())
+                    {
+                        while (objSqlDataReader.Read())
+                        {
+                            profileViewedCount += 1;
+                        }
+                        objSqlDataReader.Close();
+                    }
+                    objSqlCommand.Cancel();
+                    objSqlCommand.Dispose();
+                    objSqlConnection.Close();
+                    objSqlConnection.Dispose();
+                }
+            }
+            catch (Exception objEx)
+            {
+                Helpers.LogExceptionInFlatFile(objEx);
+            }
+            return profileViewedCount;
         }
 
 

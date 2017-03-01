@@ -128,7 +128,8 @@
 <body ng-app="MugurthamApp">
     <!-- Navigation -->
     <!-- Return to Top -->
-    <a href="javascript:" id="return-to-top"><i class="fa-chevron-circle-up"></i></a>
+    <a href="javascript:" id="return-to-top"><i class="icon-chevron-up"></i></a>
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet"> 
 
     <form name="frmPortal" novalidate>
         <div id="body" ng-controller="MugurthamController" class="bgBodyImage" data-ng-init="changeLanguage('@objLoggedIn.localeID');">
@@ -293,12 +294,6 @@
                     <strong>Info!</strong> Please update your profile often to stay at high ranking during search.
                     Growing data, More value, Nation wide coverage. How can we help you identify your serach.
                 </div>
-                <div class="alert alert-danger">
-                    <strong>
-                        To continue access to Mugurtham we request you to pay the amount of Rs 150 only, valid for next 6 months to your @objLoggedIn.SangamName Sangam directly. Free access is now extended and will be coming to end by this Jan 31 2017. Kindly ignore this message if you have paid already.<br />
-                        If you choose fund transfer through net banking, we request you to mention your Mugurtham ID @objLoggedIn.LoginID on comments during fund transfer which will help us for tracking purpose.
-                    </strong>
-                </div>
                 <!-- Rending Body from child page-->
                 @RenderSection("featured", required: false)
                 @RenderBody()
@@ -362,7 +357,7 @@
                 <div class="modal-body">
                     <div class="col-lg-12 table-responsive">
                         <div class="col-lg-12 ">
-                            <h5>One stop station for all Vishwakarma matches across TamilNadu. 2500+ Vishwakarma only profiles and keeps adding. We are in Mobile view as well. </h5>
+                            <h5>One stop station for all Vishwakarma matches across TamilNadu. 3000+ Vishwakarma only profiles and keeps adding. We are in Mobile view as well. </h5>
                         </div>
                         <div class="col-lg-12 text-center"><h3><b>Mugurtham covers Vishwakarma matches better</b></h3></div>
                         <h5><b>"Smart Search " - </b> Search Raasi or Location or Name or anything in Smart Search and your Search ends here..  </h5>
@@ -382,8 +377,21 @@
                                     <td>ViswaJothi from Tricy</td>
                                 </tr>
                                 <tr>
+                                    <td>கடலூர் மாவட்ட விஸ்வகர்ம நல சங்கம்</td>
+                                </tr>
+                                <tr>
+                                    <td>ஸ்ரீ காமாட்சி அம்மன் இலவச திருமண தகவல் மையம்</td>
+                                </tr>
+                                <tr>
+                                    <td>ஸ்ரீ காமாட்சி அம்மன் விஸ்வகர்ம திருமண தகவல் சேவை மையம்</td>
+                                </tr>
+                                <tr>
+                                    <td>கடலூர் மாவட்ட விஸ்வகர்ம நல சங்கம்</td>
+                                </tr>
+                                <tr>
                                     <td>Vishwakarma Sezhu Marabinar Trust - Chennai</td>
                                 </tr>
+                                
                                 <tr>
                                     <td>and much more parthers in list...</td>
                                 </tr>
@@ -427,6 +435,11 @@
     @Scripts.Render("~/bundles/MugurthamSlider")
     @Scripts.Render("~/bundles/MugurthamApp")
     <script type="text/javascript" src="@Url.Content("~/Scripts/Mugurtham.js/Mugurtham/Controllers/ControllerMugurtham.js")"></script>
+    @Scripts.Render("~/bundles/MugurthamConstants")
+    @Scripts.Render("~/bundles/MugurthamServices")
+    @Scripts.Render("~/bundles/MugurthamFactories")
+    @Scripts.Render("~/bundles/MugurthamFilters")
+    @Scripts.Render("~/bundles/MugurthamDirectives")
     @Scripts.Render("~/bundles/MugurthamControllerSangamAdmin")
     @Scripts.Render("~/bundles/MugurthamControllerProfile")
     @Scripts.Render("~/bundles/MugurthamControllerSearch")
@@ -434,6 +447,8 @@
     @Scripts.Render("~/bundles/MugurthamControllerFullView")
     @Scripts.Render("~/bundles/MugurthamControllerMugurthamAdmin")
     @Scripts.Render("~/bundles/MugurthamValidation")
+    
+    
 
     <script type="text/javascript">
         $(document).ready(function () {
