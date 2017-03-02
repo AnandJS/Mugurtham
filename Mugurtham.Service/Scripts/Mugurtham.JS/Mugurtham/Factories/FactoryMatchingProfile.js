@@ -19,41 +19,43 @@ THIS FACTORY IS SPECIFICALLY FOR PROCESSING MY MATCHING PROFILES
 var app = angular.module('MugurthamApp');
 
 
-app.factory('FactoryMatchingProfiles', ['$http', function ($http) {
+app.factory('FactoryMatchingProfiles', ['$http', 'ConstantMatchingStarsForGroom', function ($http, ConstantMatchingStarsForGroom) {
     var serviceFactoryMatchingStar = {}
     serviceFactoryMatchingStar.propFactoryName = 'FactoryMatchingProfiles'
-    serviceFactoryMatchingStar.ConstantMatchingStarsForGroom = '';
+
     serviceFactoryMatchingStar.MyMatchingProfilesBadgeCount = 0;
+    serviceFactoryMatchingStar.AllProfiles;
+    serviceFactoryMatchingStar.SearchedProfiles;
+    serviceFactoryMatchingStar.profilePhotos;
 
     //alert(serviceFactoryMatchingStar.propFactoryName);
     //alert(ConstantMatchingStarsForGroom.Aswini[1].Category);
 
-    serviceFactoryMatchingStar.getMatchingProfiles = function ($scope) {
-
+    serviceFactoryMatchingStar.getMatchingProfiles = function () {
         if (typeof (Storage) !== "undefined") {
             if ((!sessionStorage.getItem('HiglightedProfiles')))
-                getMatchingProfilesfromAPI($scope);
+                getMatchingProfilesfromAPI();
             else
-                getMatchingProfilesfromSession($scope);
+                getMatchingProfilesfromSession();
         }
         else
-            getMatchingProfilesfromAPI($scope);
+            getMatchingProfilesfromAPI();
     };
 
-    function getMatchingProfilesfromSession($scope) {
-        if ((sessionStorage.getItem('HiglightedProfiles')))
-            initData($http, $scope, JSON.parse(sessionStorage.getItem('HiglightedProfiles')));
+    function getMatchingProfilesfromSession() {
+        if ((sessionStorage.getItem('AllProfiles')))
+            initData($http, JSON.parse(sessionStorage.getItem('AllProfiles')));
     }
 
-    function getMatchingProfilesfromAPI($scope) {
-        var strGetURL = "Search/Search/getHighlightedProfiles";
+    function getMatchingProfilesfromAPI() {
+        var strGetURL = "Search/Search/getAllProfiles";
         $("#divContainer").mask("Searching profiles please wait...");
         $http({
             method: "GET", url: strGetURL
         }).
     success(function (data, status, headers, config) {
         $("#divContainer").unmask();
-        initData($http, $scope, data);
+        initData($http, data);
     }).
         error(function (data, status, headers, config) {
             $("#divContainer").unmask();
@@ -61,37 +63,36 @@ app.factory('FactoryMatchingProfiles', ['$http', function ($http) {
         });
     }
 
-    function initData($http, $scope, data) {        
+    function initData($http, data) {        
         var _star = '';
         if (typeof (Storage) !== "undefined") {
             _star = JSON.parse(localStorage.getItem("LoggedInUser")).BasicInfoCoreEntity.Star;
-        }
-        $("#divContainer").unmask();
-        $scope.pageHeader = 'LYTPROFILESMYMATCHES';
-        $scope.AllProfiles = data;
-        $scope.currentPage = 1;
-        $scope.pageSize = 15;
-        $scope.SearchedProfiles = getMatchingProfiles($scope, data, _star);
-        $scope.profilePhotos = data.PhotoCoreEntityList;
-        serviceFactoryMatchingStar.MyMatchingProfilesBadgeCount = $scope.SearchedProfiles.length;
-        $('#badgeMyMactchingProfiles').text($scope.SearchedProfiles.length);
+        }        
+        serviceFactoryMatchingStar.AllProfiles = data;
+        serviceFactoryMatchingStar.SearchedProfiles = getMatchingProfiles(data, _star);
+        serviceFactoryMatchingStar.profilePhotos = data.PhotoCoreEntityList;
 
-        $scope.pageChangeHandler = function (num) {
-            $("html, body").animate({ scrollTop: 220 }, "slow");
-            setTimeout(displayThumbnailSlider, 10);
-        };
-        setTimeout(displayThumbnailSlider, 10);
-        toastr.success('My Matching Profiles loaded Successfully');
+        
+        serviceFactoryMatchingStar.MyMatchingProfilesBadgeCount = serviceFactoryMatchingStar.SearchedProfiles.length;
+        sessionStorage.setItem("MyMatchingProfilesBadgeCount", (serviceFactoryMatchingStar.SearchedProfiles.length));
+
+      //  alert(serviceFactoryMatchingStar.MyMatchingProfilesBadgeCount + 'In Factory');
+
+
+
+        $('#badgeMyMactchingProfiles').text(serviceFactoryMatchingStar.SearchedProfiles.length);
     }
 
-    function getMatchingProfiles($scope, data, _star) {
+    function getMatchingProfiles(data, _star) {
         var matchingProfiles = [];
-        $.each($scope.ConstantMatchingStarsForGroom, function (key, value) {
+        var itrIndex = 0;
+        $.each(ConstantMatchingStarsForGroom, function (key, value) {
             if (key === _star) {
                 $.each(value, function (index, object) {
                     $.each(data.ProfileBasicInfoViewCoreEntityList, function (profilekey, profilevalue) {
                         if (object.Star === profilevalue.Star) {
-                            matchingProfiles[profilekey] = data.ProfileBasicInfoViewCoreEntityList[profilekey];
+                            matchingProfiles[itrIndex] = data.ProfileBasicInfoViewCoreEntityList[profilekey];
+                            itrIndex += 1;
                         }
                     });
                 });

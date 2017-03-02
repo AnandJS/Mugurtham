@@ -19,12 +19,33 @@ var ControllerMyMatchingProfiles = angular.module('MugurthamApp').
                                 controller('ControllerMyMatchingProfiles',
                                             ['$http', '$scope', 'ConstantMatchingStarsForGroom', 'FactoryMatchingProfiles',
                                              function ($http, $scope, ConstantMatchingStarsForGroom, FactoryMatchingProfiles) {
-
                                                  $scope.ControllerName = 'ControllerMyMatchingProfiles';
-                                                 $scope.ConstantMatchingStarsForGroom = ConstantMatchingStarsForGroom;
+                                                 $scope.currentPage = 1;
+                                                 $scope.pageSize = 15;
+
 
                                                  $scope.getHighlightedProfiles = function () {
-                                                     FactoryMatchingProfiles.getMatchingProfiles($scope);
+                                                     FactoryMatchingProfiles.getMatchingProfiles();
+                                                     $("#divContainer").unmask();
+                                                     $scope.pageHeader = 'LYTPROFILESMYMATCHES';
+                                                     $scope.currentPage = 1;
+                                                     $scope.pageSize = 15;
+                                                     
+
+
+                                                     $scope.AllProfiles = FactoryMatchingProfiles.AllProfiles;
+                                                     $scope.SearchedProfiles = FactoryMatchingProfiles.SearchedProfiles;
+                                                     $scope.profilePhotos = FactoryMatchingProfiles.profilePhotos;
+
+                                                     $scope.pageChangeHandler = function (num) {
+                                                         $("html, body").animate({ scrollTop: 220 }, "slow");
+                                                         setTimeout(displayThumbnailSlider, 100);
+                                                     };
+                                                     $scope.pageChangeHandlerSmartSearch = function (num) {
+                                                         setTimeout(displayThumbnailSlider, 100);
+                                                     };
+                                                     toastr.success('My Matching Profiles loaded Successfully');
                                                  }
+                                                 // Wiring up with Template through Custom Directive
                                                  $scope.objScope = $scope;
                                              }])

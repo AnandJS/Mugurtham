@@ -16,12 +16,19 @@ THIS CONTROLLER IS SPECIFICALLY FOR DISPLAYING VIEWED PROFILES IN USER HOME PAGE
 ==========================================================================================
 */
 var ControllerUserChamber = angular.module('MugurthamApp').controller('ControllerUserChamber',
-        ['$http', '$scope', function ($http, $scope) {
+        ['$http', '$scope', 'ConstantMatchingStarsForGroom', 'FactoryMatchingProfiles', function ($http, $scope, ConstantMatchingStarsForGroom, FactoryMatchingProfiles) {
             $scope.ControllerName = 'ControllerUserChamber';
             //===================================================
             //AJAX GET REQUEST - GETTING ALL PROFILES
             //===================================================
             $scope.geUserChamberBadgeCount = function () {
+
+                if (typeof (Storage) !== "undefined") {
+                    if ((!sessionStorage.getItem('MyMatchingProfilesBadgeCount')))
+                        FactoryMatchingProfiles.getMatchingProfiles();
+                    else
+                        $('#badgeMyMactchingProfiles').text(sessionStorage.getItem('MyMatchingProfilesBadgeCount'));
+                }
                 if (typeof (Storage) !== "undefined") {
                     if ((!sessionStorage.getItem('UserBadgeCount')))
                         $scope.geUserChamberBadgeCountfromAPI();
@@ -74,7 +81,7 @@ function setBadgeValue(objData) {
     $('#badgeRecentlyViewedProfiles').text(objData.RecentlyViewedProfiles);
     $('#badgeRecentlyViewedProfilesInGblNav').text(objData.RecentlyViewedProfiles);
 
-    
+
 }
 
 function NotifyStatus(intStatus) {
