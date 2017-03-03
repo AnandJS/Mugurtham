@@ -71,15 +71,8 @@ app.factory('FactoryMatchingProfiles', ['$http', 'ConstantMatchingStarsForGroom'
         serviceFactoryMatchingStar.AllProfiles = data;
         serviceFactoryMatchingStar.SearchedProfiles = getMatchingProfiles(data, _star);
         serviceFactoryMatchingStar.profilePhotos = data.PhotoCoreEntityList;
-
-        
         serviceFactoryMatchingStar.MyMatchingProfilesBadgeCount = serviceFactoryMatchingStar.SearchedProfiles.length;
         sessionStorage.setItem("MyMatchingProfilesBadgeCount", (serviceFactoryMatchingStar.SearchedProfiles.length));
-
-      //  alert(serviceFactoryMatchingStar.MyMatchingProfilesBadgeCount + 'In Factory');
-
-
-
         $('#badgeMyMactchingProfiles').text(serviceFactoryMatchingStar.SearchedProfiles.length);
     }
 

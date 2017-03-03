@@ -38,7 +38,7 @@ http://tutorials.jenkov.com/angularjs/dependency-injection.html -- Angular JS Mo
 app.constant('ConstantMatchingStarsForGroom', {
      
     Avittam: [
-                { ID: 1, Star: 'Ashwini', Match: '8', Category: 'Uthamam', Accepted: 'True' },
+                { ID: 1, Star: 'Aswini', Match: '8', Category: 'Uthamam', Accepted: 'True' },
                 { ID: 19, Star: 'Pooraadam', Match: '5', Category: 'Mathimam', Accepted: 'True' }
 
     ]

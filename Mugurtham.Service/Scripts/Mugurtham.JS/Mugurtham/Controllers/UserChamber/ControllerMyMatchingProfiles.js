@@ -22,17 +22,17 @@ var ControllerMyMatchingProfiles = angular.module('MugurthamApp').
                                                  $scope.ControllerName = 'ControllerMyMatchingProfiles';
                                                  $scope.currentPage = 1;
                                                  $scope.pageSize = 15;
-
+                                                 setTimeout(displayThumbnailSlider, 10)
 
                                                  $scope.getHighlightedProfiles = function () {
+                                                     setTimeout(displayThumbnailSlider, 10)
+
                                                      FactoryMatchingProfiles.getMatchingProfiles();
                                                      $("#divContainer").unmask();
                                                      $scope.pageHeader = 'LYTPROFILESMYMATCHES';
                                                      $scope.currentPage = 1;
                                                      $scope.pageSize = 15;
                                                      
-
-
                                                      $scope.AllProfiles = FactoryMatchingProfiles.AllProfiles;
                                                      $scope.SearchedProfiles = FactoryMatchingProfiles.SearchedProfiles;
                                                      $scope.profilePhotos = FactoryMatchingProfiles.profilePhotos;
