@@ -2,13 +2,13 @@
 
 <p class="lead">{{attrscope.pageHeader | translate}}</p>
 <hr />
-<div class="col-lg-12" data-ng-init="getHighlightedProfiles();">
+<div class="col-lg-12">
     <ul class="breadcrumb">
         <li><a href="#ProfileUserDashboard">{{ 'GENHOME' | translate }} </a></li>
         <li class="active">{{attrscope.pageHeader | translate}}</li>
     </ul>
 </div>
-<div id="divHighlightedProfiles">
+<div id="divHighlightedProfiles" class="col-sm-9">
     <div class="col-lg-12">
         <!-- Filter Header-->
         <div class="row">
@@ -27,7 +27,7 @@
             <div class="col-xs-4">
                 <h5>
                     <b>
-                        Total Filtered Profiles : {{ (attrscope.SearchedProfiles |filter: (q)).length}}
+                        Total Filtered Profiles : {{ (attrscope.SearchedProfiles |filter: (attrscope.colourFilter) |filter: (attrscope.colourFilter) |  filter: (attrscope.subcasteFilter) ).length}}
                     </b>
                 </h5>
             </div>
@@ -35,7 +35,7 @@
 
                 <h5>
                     <b>
-                        Showing Profiles {{ (((attrscope.currentPage * attrscope.pageSize) - attrscope.pageSize) + 1)  }}  through {{ attrscope.currentPage * attrscope.pageSize }} of  {{ (attrscope.SearchedProfiles |filter: (q || {SangamID :SangamID, Star: Star, SubCaste: SubCaste}  || {Age: '7'} || {Age: '6'})).length}} &nbsp;&nbsp;
+                        Showing Profiles {{ (((attrscope.currentPage * attrscope.pageSize) - attrscope.pageSize) + 1)  }}  through {{ attrscope.currentPage * attrscope.pageSize }} of  {{ (attrscope.SearchedProfiles |filter: (attrscope.colourFilter) |  filter: (attrscope.subcasteFilter) ).length}} &nbsp;&nbsp;
                     </b>
                 </h5>
             </div>
@@ -46,14 +46,14 @@
         </div>
         <br />
         <!-- Profiles Listing-->
-        <div class="panel panel-primary FormShadow" dir-paginate="data in attrscope.SearchedProfiles | filter: (q) | itemsPerPage: attrscope.pageSize" current-page="attrscope.currentPage">
+        <div class="panel panel-primary FormShadow" dir-paginate="data in attrscope.SearchedProfiles |  filter: (attrscope.colourFilter)   |  filter: (attrscope.subcasteFilter)   | itemsPerPage: attrscope.pageSize" current-page="attrscope.currentPage">
             <div class="panel-heading">
                 <h3 class="panel-title text-center">
                     <a href="#/FullView/{{data.MugurthamProfileID}}" target="_blank">  {{data.Name }}</a>
                 </h3>
             </div>
             <div class="panel-body bgImage">
-                <div class="col-lg-3">
+                <div class="col-lg-4">
                     <div class="flexslider">
                         <ul class="slides">
                             <li ng-repeat="objProfilePhoto in attrscope.profilePhotos | filter: {ProfileID: data.MugurthamProfileID}">
@@ -62,7 +62,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-lg-9 table-responsive">
+                <div class="col-lg-6 table-responsive">
                     <table class="mugurthamTable table-striped table-bordered table-hover FormShadow ">
                         <tr>
                             <td class="col-lg-4"><b>{{ 'GENPROFID' | translate}}</b></td>
@@ -108,5 +108,58 @@
             <dir-pagination-controls boundary-links="true" on-page-change="attrscope.pageChangeHandler(newPageNumber)" template-url="/Scripts/Mugurtham.JS/Paging/dirPagination.tpl.html"></dir-pagination-controls>
         </div>
     </div>
+</div>
+
+
+
+<div class="col-sm-3">
+
+    
+
+    <div class="panel panel-primary FormShadow">
+        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" data-target="#collapseOne">
+            <h4 class="panel-title">
+                <a class="accordion-toggle">
+                    Filter Panel
+                </a>
+            </h4>
+        </div>
+        <div id="collapseOne" class="panel-collapse collapse in">
+            <div class="panel-body bgImage">
+                <h3>Sub Caste</h3><hr />
+                <ul class="list-group" ng-repeat="subcaste in attrscope.arrFilterSubCaste">
+                    <li class="list-unstyled"  ng-repeat="value in filtered = attrscope.SearchedProfiles | filter: ({SubCaste: subcaste}) : true | limitTo : 1  " >
+                        <input type="checkbox"
+                               id="chkSubCasteFilter"
+                               name="chkSubCasteFilter"
+                               value="{{subcaste}}"
+                               ng-model="subCasteFilter"
+                               ng-checked="selection.indexOf(subcaste) > -1"
+                               ng-click="attrscope.filterSubCasteByThisItem(subcaste)">
+                        {{subcaste}}&nbsp;(<b>{{attrscope.getSubCasteFilterItemCount(subcaste)}}</b>)
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+        <div id="collapseOne" class="panel-collapse collapse in">
+            <div class="panel-body bgImage">
+                <h3>Star</h3><hr /> 
+                <ul class="list-group" ng-repeat="star in attrscope.arrFilterStar">
+                    <li class="list-unstyled" ng-repeat="value in filtered = attrscope.SearchedProfiles | filter: ({Star: star}) : true | limitTo : 1  " >
+                        <input type="checkbox"
+                               id="chk{{star}}"
+                               name="chk{{star}}"
+                               value="{{star}}"
+                               ng-checked="selection.indexOf(star) > -1"
+                               ng-click="attrscope.filterStarByThisItem(star)">
+                        {{star}}&nbsp;(<b>{{attrscope.getStarFilterItemCount(star)}}</b>)
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+
 </div>
 
