@@ -1,4 +1,4 @@
-﻿ 
+﻿
 
 <p class="lead">{{attrscope.pageHeader | translate}}</p>
 <hr />
@@ -27,7 +27,7 @@
             <div class="col-xs-4">
                 <h5>
                     <b>
-                        Total Filtered Profiles : {{ (attrscope.SearchedProfiles |filter: (attrscope.colourFilter) |filter: (attrscope.colourFilter) |  filter: (attrscope.subcasteFilter) ).length}}
+                        Total Filtered Profiles : {{ (attrscope.SearchedProfiles  | filter: q |filter: (attrscope.starFilter) |filter: (attrscope.starFilter) |  filter: (attrscope.subcasteFilter) | filter: (attrscope.sangamFilter)   ).length}}
                     </b>
                 </h5>
             </div>
@@ -35,7 +35,7 @@
 
                 <h5>
                     <b>
-                        Showing Profiles {{ (((attrscope.currentPage * attrscope.pageSize) - attrscope.pageSize) + 1)  }}  through {{ attrscope.currentPage * attrscope.pageSize }} of  {{ (attrscope.SearchedProfiles |filter: (attrscope.colourFilter) |  filter: (attrscope.subcasteFilter) ).length}} &nbsp;&nbsp;
+                        Showing Profiles {{ (((attrscope.currentPage * attrscope.pageSize) - attrscope.pageSize) + 1)  }}  through {{ attrscope.currentPage * attrscope.pageSize }} of  {{ (attrscope.SearchedProfiles |filter: (attrscope.starFilter) | filter: q |  filter: (attrscope.subcasteFilter) | filter: (attrscope.sangamFilter)  ).length}} &nbsp;&nbsp;
                     </b>
                 </h5>
             </div>
@@ -46,14 +46,14 @@
         </div>
         <br />
         <!-- Profiles Listing-->
-        <div class="panel panel-primary FormShadow" dir-paginate="data in attrscope.SearchedProfiles |  filter: (attrscope.colourFilter)   |  filter: (attrscope.subcasteFilter)   | itemsPerPage: attrscope.pageSize" current-page="attrscope.currentPage">
+        <div class="panel panel-primary FormShadow" dir-paginate="data in attrscope.SearchedProfiles |  filter: q | filter: (attrscope.starFilter)   |  filter: (attrscope.subcasteFilter) | filter: (attrscope.sangamFilter)    | itemsPerPage: attrscope.pageSize" current-page="attrscope.currentPage">
             <div class="panel-heading">
                 <h3 class="panel-title text-center">
                     <a href="#/FullView/{{data.MugurthamProfileID}}" target="_blank">  {{data.Name }}</a>
                 </h3>
             </div>
             <div class="panel-body bgImage">
-                <div class="col-lg-4">
+                <div class="col-lg-5">
                     <div class="flexslider">
                         <ul class="slides">
                             <li ng-repeat="objProfilePhoto in attrscope.profilePhotos | filter: {ProfileID: data.MugurthamProfileID}">
@@ -62,7 +62,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-lg-6 table-responsive">
+                <div class="col-lg-7 table-responsive">
                     <table class="mugurthamTable table-striped table-bordered table-hover FormShadow ">
                         <tr>
                             <td class="col-lg-4"><b>{{ 'GENPROFID' | translate}}</b></td>
@@ -113,22 +113,20 @@
 
 
 <div class="col-sm-3">
-
-    
-
     <div class="panel panel-primary FormShadow">
-        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" data-target="#collapseOne">
+        <div class="panel-heading">
             <h4 class="panel-title">
                 <a class="accordion-toggle">
                     Filter Panel
                 </a>
             </h4>
         </div>
-        <div id="collapseOne" class="panel-collapse collapse in">
+
+        <div id="collapseFive" class="panel-collapse collapse in">
             <div class="panel-body bgImage">
                 <h3>Sub Caste</h3><hr />
                 <ul class="list-group" ng-repeat="subcaste in attrscope.arrFilterSubCaste">
-                    <li class="list-unstyled"  ng-repeat="value in filtered = attrscope.SearchedProfiles | filter: ({SubCaste: subcaste}) : true | limitTo : 1  " >
+                    <li class="list-unstyled" ng-repeat="value in filtered = attrscope.SearchedProfiles | filter: ({SubCaste: subcaste}) : true | limitTo : 1  ">
                         <input type="checkbox"
                                id="chkSubCasteFilter"
                                name="chkSubCasteFilter"
@@ -142,11 +140,35 @@
 
             </div>
         </div>
+
+
+
+
         <div id="collapseOne" class="panel-collapse collapse in">
             <div class="panel-body bgImage">
-                <h3>Star</h3><hr /> 
+                <h3>Sangam</h3><hr />
+                <ul class="list-group" ng-repeat="sangam in attrscope.arrSangamMaster">
+
+                    <li class="list-unstyled" ng-repeat="value in filtered = attrscope.SearchedProfiles | filter: ({SangamID: sangam.ID}) : true | limitTo : 1  ">
+
+                        <input type="checkbox"
+                               id="chk{{sangam.ID}}"
+                               name="chk{{sangam.ID}}"
+                               value="{{sangam.ID}}"
+                               ng-checked="selection.indexOf(sangam.ID) > -1"
+                               ng-click="attrscope.filterSangamByThisItem(sangam.ID)" />
+                        {{sangam.Name}}&nbsp;(<b>{{attrscope.getSangamFilterItemCount(sangam.ID)}}</b>)
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+
+        <div id="collapseOne" class="panel-collapse collapse in">
+            <div class="panel-body bgImage">
+                <h3>Star</h3><hr />
                 <ul class="list-group" ng-repeat="star in attrscope.arrFilterStar">
-                    <li class="list-unstyled" ng-repeat="value in filtered = attrscope.SearchedProfiles | filter: ({Star: star}) : true | limitTo : 1  " >
+                    <li class="list-unstyled" ng-repeat="value in filtered = attrscope.SearchedProfiles | filter: ({Star: star}) : true | limitTo : 1  ">
                         <input type="checkbox"
                                id="chk{{star}}"
                                name="chk{{star}}"
@@ -162,4 +184,3 @@
     </div>
 
 </div>
-

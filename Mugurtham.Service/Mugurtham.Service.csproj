@@ -382,6 +382,8 @@
       <DependentUpon>lightbox.js</DependentUpon>
     </Content>
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\app.js" />
+    <Content Include="Scripts\Mugurtham.JS\Mugurtham\Constants\ConstantGlobal.js" />
+    <Content Include="Scripts\Mugurtham.JS\Mugurtham\Constants\ConstantRegistrationPage.js" />
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\Constants\ConstantStar.js" />
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\Constants\Filters.html" />
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\Controllers\ControllerMugurtham.js" />

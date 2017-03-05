@@ -17,8 +17,8 @@ THIS CONTROLLER IS SPECIFICALLY FOR DISPLAYING MY MATCHING PROFILES USER HOME PA
 */
 var ControllerMyMatchingProfiles = angular.module('MugurthamApp').
                                 controller('ControllerMyMatchingProfiles',
-                                            ['$http', '$scope', 'ConstantMatchingStarsForGroom', 'FactoryMatchingProfiles',
-                                             function ($http, $scope, ConstantMatchingStarsForGroom, FactoryMatchingProfiles) {
+                                            ['$http', '$scope', 'FactoryMatchingProfiles',
+                                             function ($http, $scope, FactoryMatchingProfiles) {
                                                  $scope.ControllerName = 'ControllerMyMatchingProfiles';
                                                  $scope.currentPage = 1;
                                                  $scope.pageSize = 15;
@@ -26,11 +26,11 @@ var ControllerMyMatchingProfiles = angular.module('MugurthamApp').
 
                                                  $scope.getMyMatchingProfiles = function () {
                                                      setTimeout(displayThumbnailSlider, 10)
-
                                                      FactoryMatchingProfiles.getMatchingProfiles();
-
-                                                   
-
+                                                     $scope.arrFilterStar = FactoryMatchingProfiles.arrFilterStar;
+                                                     $scope.arrFilterSubCaste = FactoryMatchingProfiles.arrFilterSubCaste;
+                                                     $scope.arrSangamMaster = FactoryMatchingProfiles.arrSangamMaster;
+                                                     
                                                      $("#divContainer").unmask();
                                                      $scope.pageHeader = 'LYTPROFILESMYMATCHES';
                                                      $scope.currentPage = 1;
@@ -51,24 +51,38 @@ var ControllerMyMatchingProfiles = angular.module('MugurthamApp').
                                                  }
 
                                                  /*========================================= E-Commerce Filter Section ======================================================*/
+
+                                                 //Item Count
                                                  $scope.getStarFilterItemCount = function (star) {
                                                      return FactoryMatchingProfiles.getStarFilterItemCount(star, $scope.SearchedProfiles);
-                                                 }
-
+                                                 };
                                                  $scope.getSubCasteFilterItemCount = function (subCaste) {
                                                      return FactoryMatchingProfiles.getSubCasteFilterItemCount(subCaste, $scope.SearchedProfiles);
                                                  };
+                                                 $scope.getSangamFilterItemCount = function (SangamID) {
+                                                     return FactoryMatchingProfiles.getSangamFilterItemCount(SangamID, $scope.SearchedProfiles);
+                                                 };
+
+                                                 //Item event handler
                                                  $scope.filterStarByThisItem = function (data) {
                                                      FactoryMatchingProfiles.filterStarByThisItem(data);
                                                  };
                                                  $scope.filterSubCasteByThisItem = function (data) {
                                                      FactoryMatchingProfiles.filterSubCasteByThisItem(data);
                                                  };
-                                                 $scope.colourFilter = function (data) {
-                                                    return FactoryMatchingProfiles.colourFilter(data);
+                                                 $scope.filterSangamByThisItem = function (data) {
+                                                     FactoryMatchingProfiles.filterSangamByThisItem(data);
+                                                 };
+                                                  
+                                                 // Item declarative data binding
+                                                 $scope.starFilter = function (data) {
+                                                     return FactoryMatchingProfiles.starFilter(data);
                                                  };
                                                  $scope.subcasteFilter = function (data) {
                                                      return FactoryMatchingProfiles.subcasteFilter(data);
+                                                 };
+                                                 $scope.sangamFilter = function (data) {
+                                                     return FactoryMatchingProfiles.sangamFilter(data);
                                                  };
                                                  
                                                  
