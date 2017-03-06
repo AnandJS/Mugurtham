@@ -7,7 +7,9 @@ https://www.tutorialspoint.com/angularjs/index.htm
 http://tutorials.jenkov.com/angularjs/dependency-injection.html -- Angular JS Modularzation
 http://stackoverflow.com/questions/16828287/what-things-can-be-injected-into-others-in-angular-js -- Nice
 http://stackoverflow.com/questions/31432522/how-to-inject-service-to-angular-constant
-
+http://stackoverflow.com/questions/16881478/how-to-call-a-method-defined-in-an-angularjs-directive
+http://stackoverflow.com/questions/27710037/angularjs-templateurl-file-location-not-found
+https://docs.angularjs.org/error/$injector/unpr?p0=FactoryMatchingProfilesProvider%20%3C-%20FactoryMatchingProfiles
 
 Starts With Filter in Angular -- Perfect
 =========================================

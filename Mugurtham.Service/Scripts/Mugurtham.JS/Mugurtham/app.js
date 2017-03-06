@@ -49,7 +49,7 @@
             })
             .when('/MyMatchingProfiles', {
                 templateUrl: '/User/User/MyMatchingProfiles',
-                controller: 'ControllerMyMatchingProfiles'
+                controller: 'ControllerAstrologicalMatchers'
             })
             // route for the Basic Information View
              .when('/BasicInfo', {
@@ -397,7 +397,7 @@
             SRCLOCSEARCH: "Location Search",
             SRCOCPNSEARCH: "Occupation Search",
             SMRTSEARCH: "Smart Search",
-            LYTPROFILESMYMATCHES: "My Matching Profiles",
+            LYTPROFILESMYMATCHES: "Astrological Matchers",
 
 
         });
@@ -545,7 +545,7 @@
             SRCEDUSEARCH: "Education Search",
             SRCLOCSEARCH: "Location Search",
             SRCOCPNSEARCH: "Occupation Search",
-            LYTPROFILESMYMATCHES: "My Matching Profiles",
+            LYTPROFILESMYMATCHES: "ஜோதிட தகுந்த வரன்கள்",
 
         });
         $translateProvider.translations('0439', {

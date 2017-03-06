@@ -383,9 +383,9 @@
     </Content>
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\app.js" />
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\Constants\ConstantGlobal.js" />
+    <Content Include="Scripts\Mugurtham.JS\Mugurtham\Constants\ConstantMatchingStarsForBride.js" />
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\Constants\ConstantRegistrationPage.js" />
-    <Content Include="Scripts\Mugurtham.JS\Mugurtham\Constants\ConstantStar.js" />
-    <Content Include="Scripts\Mugurtham.JS\Mugurtham\Constants\Filters.html" />
+    <Content Include="Scripts\Mugurtham.JS\Mugurtham\Constants\ConstantMatchingStarsForGroom.js" />
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\Controllers\ControllerMugurtham.js" />
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\Controllers\ControllerMugurtham.min.js">
       <DependentUpon>ControllerMugurtham.js</DependentUpon>
@@ -407,7 +407,7 @@
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\Controllers\Search\ControllerSearchOccupation.js" />
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\Controllers\UserChamber\ControllerHighlightedProfiles.js" />
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\Controllers\UserChamber\ControllerInterestedInMeProfiles.js" />
-    <Content Include="Scripts\Mugurtham.JS\Mugurtham\Controllers\UserChamber\ControllerMyMatchingProfiles.js" />
+    <Content Include="Scripts\Mugurtham.JS\Mugurtham\Controllers\UserChamber\ControllerAstrologicalMatchers.js" />
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\Controllers\UserChamber\ControllerRecentlyJoined.js" />
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\Controllers\Search\ControllerSearchAllProfiles.js" />
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\Controllers\Search\ControllerSearchGeneral.js" />
@@ -419,11 +419,10 @@
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\Controllers\UserChamber\ControllerInterestedProfiles.js" />
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\Controllers\UserChamber\ControllerViewedProfiles.js" />
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\Controllers\View\ControllerFullView.js" />
-    <Content Include="Scripts\Mugurtham.JS\Mugurtham\Directives\DirectiveMatchingProfile.js" />
-    <Content Include="Scripts\Mugurtham.JS\Mugurtham\Factories\FactoryMatchingProfile.js" />
+    <Content Include="Scripts\Mugurtham.JS\Mugurtham\Directives\DirectiveAstrologicalMatchers.js" />
+    <Content Include="Scripts\Mugurtham.JS\Mugurtham\Factories\FactoryAstrologicalMatchers.js" />
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\Login\Login.js" />
-    <Content Include="Scripts\Mugurtham.JS\Mugurtham\Templates\Filters.html" />
-    <Content Include="Scripts\Mugurtham.JS\Mugurtham\Templates\TemplateMatchingProfile.html" />
+    <Content Include="Scripts\Mugurtham.JS\Mugurtham\Templates\TemplateAstrologicalMatchers.html" />
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\Utility\Constants.js" />
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\Utility\Helper.js" />
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\Utility\SessionData.js" />

@@ -18,11 +18,11 @@ THIS CUSTOM DIRECTIVE IS SPECIFICALLY FOR RENDERING MY MATCHING PROFILES
 
 var app = angular.module('MugurthamApp');
 
-app.directive('directiveMatchingprofiles', function () {
+app.directive('directiveAstrologicalMatchers', function () {
 
     var directive = {};
     directive.restrict = 'E';
-    directive.templateUrl = "/Scripts/Mugurtham.JS/Mugurtham/Templates/TemplateMatchingProfile.html";
+    directive.templateUrl = "/Scripts/Mugurtham.JS/Mugurtham/Templates/TemplateAstrologicalMatchers.html";
     directive.scope = {
         attrscope: "="
     }

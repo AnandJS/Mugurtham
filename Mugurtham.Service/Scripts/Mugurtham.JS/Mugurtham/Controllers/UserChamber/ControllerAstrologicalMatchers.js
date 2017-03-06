@@ -15,30 +15,37 @@
 THIS CONTROLLER IS SPECIFICALLY FOR DISPLAYING MY MATCHING PROFILES USER HOME PAGE
 ==========================================================================================
 */
-var ControllerMyMatchingProfiles = angular.module('MugurthamApp').
-                                controller('ControllerMyMatchingProfiles',
-                                            ['$http', '$scope', 'FactoryMatchingProfiles',
-                                             function ($http, $scope, FactoryMatchingProfiles) {
-                                                 $scope.ControllerName = 'ControllerMyMatchingProfiles';
+var ControllerAstrologicalMatchers = angular.module('MugurthamApp').
+                                controller('ControllerAstrologicalMatchers',
+                                            ['$http', '$scope', 'FactoryAstrologicalMatchers', 'ConstantRegistrationPage',
+                                             function ($http, $scope, FactoryAstrologicalMatchers, ConstantRegistrationPage) {
+                                                 $scope.ControllerName = 'ControllerAstrologicalMatchers';
                                                  $scope.currentPage = 1;
                                                  $scope.pageSize = 15;
+                                                 $scope.fromAge = 0;
+                                                 $scope.toAge = 0;
+                                                 $scope.filterSubcasteSelected = [];
+                                                 $scope.filterStarSelected = [];
+                                                 $scope.filterSangamSelected = [];
+                                                 $scope.arrFromAge = ConstantRegistrationPage.FromAge;
+                                                 $scope.arrToAge = ConstantRegistrationPage.ToAge;
                                                  setTimeout(displayThumbnailSlider, 10)
 
-                                                 $scope.getMyMatchingProfiles = function () {
+                                                 $scope.getAstrologicalMatchers = function () {
                                                      setTimeout(displayThumbnailSlider, 10)
-                                                     FactoryMatchingProfiles.getMatchingProfiles();
-                                                     $scope.arrFilterStar = FactoryMatchingProfiles.arrFilterStar;
-                                                     $scope.arrFilterSubCaste = FactoryMatchingProfiles.arrFilterSubCaste;
-                                                     $scope.arrSangamMaster = FactoryMatchingProfiles.arrSangamMaster;
-                                                     
+                                                     FactoryAstrologicalMatchers.getAstrologicalMatchers();
+                                                     $scope.arrFilterStar = FactoryAstrologicalMatchers.arrFilterStar;
+                                                     $scope.arrFilterSubCaste = FactoryAstrologicalMatchers.arrFilterSubCaste;
+                                                     $scope.arrSangamMaster = FactoryAstrologicalMatchers.arrSangamMaster;
+
                                                      $("#divContainer").unmask();
                                                      $scope.pageHeader = 'LYTPROFILESMYMATCHES';
                                                      $scope.currentPage = 1;
                                                      $scope.pageSize = 15;
 
-                                                     $scope.AllProfiles = FactoryMatchingProfiles.AllProfiles;
-                                                     $scope.SearchedProfiles = FactoryMatchingProfiles.SearchedProfiles;
-                                                     $scope.profilePhotos = FactoryMatchingProfiles.profilePhotos;
+                                                     $scope.AllProfiles = FactoryAstrologicalMatchers.AllProfiles;
+                                                     $scope.SearchedProfiles = FactoryAstrologicalMatchers.SearchedProfiles;
+                                                     $scope.profilePhotos = FactoryAstrologicalMatchers.profilePhotos;
 
                                                      $scope.pageChangeHandler = function (num) {
                                                          $("html, body").animate({ scrollTop: 220 }, "slow");
@@ -54,42 +61,48 @@ var ControllerMyMatchingProfiles = angular.module('MugurthamApp').
 
                                                  //Item Count
                                                  $scope.getStarFilterItemCount = function (star) {
-                                                     return FactoryMatchingProfiles.getStarFilterItemCount(star, $scope.SearchedProfiles);
+                                                     return FactoryAstrologicalMatchers.getStarFilterItemCount(star, $scope.SearchedProfiles);
                                                  };
                                                  $scope.getSubCasteFilterItemCount = function (subCaste) {
-                                                     return FactoryMatchingProfiles.getSubCasteFilterItemCount(subCaste, $scope.SearchedProfiles);
+                                                     return FactoryAstrologicalMatchers.getSubCasteFilterItemCount(subCaste, $scope.SearchedProfiles);
                                                  };
                                                  $scope.getSangamFilterItemCount = function (SangamID) {
-                                                     return FactoryMatchingProfiles.getSangamFilterItemCount(SangamID, $scope.SearchedProfiles);
+                                                     return FactoryAstrologicalMatchers.getSangamFilterItemCount(SangamID, $scope.SearchedProfiles);
                                                  };
 
                                                  //Item event handler
                                                  $scope.filterStarByThisItem = function (data) {
-                                                     FactoryMatchingProfiles.filterStarByThisItem(data);
+                                                     FactoryAstrologicalMatchers.filterStarByThisItem(data);
+                                                     $scope.filterStarSelected = FactoryAstrologicalMatchers.filterStarItem;
                                                  };
                                                  $scope.filterSubCasteByThisItem = function (data) {
-                                                     FactoryMatchingProfiles.filterSubCasteByThisItem(data);
+                                                     FactoryAstrologicalMatchers.filterSubCasteByThisItem(data);
+                                                     $scope.filterSubcasteSelected = FactoryAstrologicalMatchers.filterSubCasteItem;
                                                  };
                                                  $scope.filterSangamByThisItem = function (data) {
-                                                     FactoryMatchingProfiles.filterSangamByThisItem(data);
+                                                     FactoryAstrologicalMatchers.filterSangamByThisItem(data);
+                                                     $scope.filterSangamSelected = FactoryAstrologicalMatchers.filterSangamItem;
                                                  };
-                                                  
+
                                                  // Item declarative data binding
                                                  $scope.starFilter = function (data) {
-                                                     return FactoryMatchingProfiles.starFilter(data);
+                                                     return FactoryAstrologicalMatchers.starFilter(data);
                                                  };
                                                  $scope.subcasteFilter = function (data) {
-                                                     return FactoryMatchingProfiles.subcasteFilter(data);
+                                                     return FactoryAstrologicalMatchers.subcasteFilter(data);
                                                  };
                                                  $scope.sangamFilter = function (data) {
-                                                     return FactoryMatchingProfiles.sangamFilter(data);
+                                                     return FactoryAstrologicalMatchers.sangamFilter(data);
                                                  };
-                                                 
-                                                 
+                                                 $scope.ageFilter = function (data) {
+                                                     return FactoryAstrologicalMatchers.ageFilter(data, $scope.fromAge, $scope.toAge);
+                                                 };
+
+
                                                  /*========================================= E-Commerce Filter Section End======================================================*/
 
 
 
                                                  // Wiring up with Template through Custom Directive
                                                  $scope.objScope = $scope;
-                                             }])
+                                             }]);

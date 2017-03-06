@@ -16,7 +16,7 @@ THIS CONTROLLER IS SPECIFICALLY FOR DISPLAYING VIEWED PROFILES IN USER HOME PAGE
 ==========================================================================================
 */
 var ControllerUserChamber = angular.module('MugurthamApp').controller('ControllerUserChamber',
-        ['$http', '$scope', 'ConstantMatchingStarsForGroom', 'FactoryMatchingProfiles', function ($http, $scope, ConstantMatchingStarsForGroom, FactoryMatchingProfiles) {
+        ['$http', '$scope', 'ConstantMatchingStarsForGroom', 'FactoryAstrologicalMatchers', function ($http, $scope, ConstantMatchingStarsForGroom, FactoryAstrologicalMatchers) {
             $scope.ControllerName = 'ControllerUserChamber';
             //===================================================
             //AJAX GET REQUEST - GETTING ALL PROFILES
@@ -25,7 +25,7 @@ var ControllerUserChamber = angular.module('MugurthamApp').controller('Controlle
 
                 if (typeof (Storage) !== "undefined") {
                     if ((!sessionStorage.getItem('MyMatchingProfilesBadgeCount')))
-                        FactoryMatchingProfiles.getMatchingProfiles();
+                        FactoryAstrologicalMatchers.getAstrologicalMatchers();
                     else
                         $('#badgeMyMactchingProfiles').text(sessionStorage.getItem('MyMatchingProfilesBadgeCount'));
                 }

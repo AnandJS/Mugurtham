@@ -9,11 +9,17 @@
     </ul>
 </div>
 <div id="divHighlightedProfiles" class="col-sm-9">
+
+    
     <div class="col-lg-12">
         <!-- Filter Header-->
         <div class="row">
             <div class="col-xs-6">
-                <label for="search">{{'SMRTSEARCH '| translate }}</label>
+                <label for="search">
+                    {{
+'SMRTSEARCH '| translate
+                    }}
+                </label>
                 <!--http://stackoverflow.com/questions/6153047/detect-changed-input-text-box-->
                 <input ng-model="q" id="opensearch" class="form-control" placeholder="Type Raasi or Location or ProfileID or anything here" oninput="setTimeout(displayThumbnailSlider, 10);">
             </div>
@@ -27,7 +33,7 @@
             <div class="col-xs-4">
                 <h5>
                     <b>
-                        Total Filtered Profiles : {{ (attrscope.SearchedProfiles  | filter: q |filter: (attrscope.starFilter) |filter: (attrscope.starFilter) |  filter: (attrscope.subcasteFilter) | filter: (attrscope.sangamFilter)   ).length}}
+                        Total Filtered Profiles : {{ (attrscope.SearchedProfiles  | filter: q |filter: (attrscope.starFilter) |filter: (attrscope.starFilter) |  filter: (attrscope.subcasteFilter) | filter: (attrscope.sangamFilter) | filter: (attrscope.ageFilter)   ).length}}
                     </b>
                 </h5>
             </div>
@@ -35,10 +41,11 @@
 
                 <h5>
                     <b>
-                        Showing Profiles {{ (((attrscope.currentPage * attrscope.pageSize) - attrscope.pageSize) + 1)  }}  through {{ attrscope.currentPage * attrscope.pageSize }} of  {{ (attrscope.SearchedProfiles |filter: (attrscope.starFilter) | filter: q |  filter: (attrscope.subcasteFilter) | filter: (attrscope.sangamFilter)  ).length}} &nbsp;&nbsp;
+                        Showing Profiles {{ (((attrscope.currentPage * attrscope.pageSize) - attrscope.pageSize) + 1)  }}  through {{ attrscope.currentPage * attrscope.pageSize }} of  {{ (attrscope.SearchedProfiles |filter: (attrscope.starFilter) | filter: q |  filter: (attrscope.subcasteFilter) | filter: (attrscope.sangamFilter) | filter: (attrscope.ageFilter)  ).length}} &nbsp;&nbsp;
                     </b>
                 </h5>
             </div>
+            <p> <h3 class="text-danger">Filtered by {{attrscope.filterSubcasteSelected}} ,  {{attrscope.filterStarSelected}}</h3></p>
         </div>
         <!-- Top Pagination-->
         <div class="text-center bgImage">
@@ -46,7 +53,7 @@
         </div>
         <br />
         <!-- Profiles Listing-->
-        <div class="panel panel-primary FormShadow" dir-paginate="data in attrscope.SearchedProfiles |  filter: q | filter: (attrscope.starFilter)   |  filter: (attrscope.subcasteFilter) | filter: (attrscope.sangamFilter)    | itemsPerPage: attrscope.pageSize" current-page="attrscope.currentPage">
+        <div class="panel panel-primary FormShadow" dir-paginate="data in attrscope.SearchedProfiles |  filter: q | filter: (attrscope.starFilter)   |  filter: (attrscope.subcasteFilter) | filter: (attrscope.sangamFilter) | filter: (attrscope.ageFilter)   | itemsPerPage: attrscope.pageSize" current-page="attrscope.currentPage">
             <div class="panel-heading">
                 <h3 class="panel-title text-center">
                     <a href="#/FullView/{{data.MugurthamProfileID}}" target="_blank">  {{data.Name }}</a>
@@ -122,6 +129,23 @@
             </h4>
         </div>
 
+        <div class="row form-group ">
+            <br />
+            <label for="NomineeName" class="col-lg-12  text-center ">{{ 'BIAGE' | translate}}</label>
+            <br />
+            <div class="col-lg-12 ">
+                <select class="form-control" ng-model="attrscope.fromAge" id="fromAge">
+                    <option value="0" selected>From</option>
+                    <option ng-repeat="arrFromAge in attrscope.arrFromAge" value="{{arrFromAge}}">{{arrFromAge}}</option>
+                </select>
+            </div>
+            <div class="col-lg-12">
+                <select class="form-control" ng-model="attrscope.toAge" id="toAge">
+                    <option value="0" selected>To</option>
+                    <option ng-repeat="arrToAge in attrscope.arrToAge" value="{{arrToAge}}">{{arrToAge}}</option>
+                </select>
+            </div>
+        </div>
         <div id="collapseFive" class="panel-collapse collapse in">
             <div class="panel-body bgImage">
                 <h3>Sub Caste</h3><hr />
@@ -140,10 +164,23 @@
 
             </div>
         </div>
+        <div id="collapseOne" class="panel-collapse collapse in">
+            <div class="panel-body bgImage">
+                <h3>Star</h3><hr />
+                <ul class="list-group" ng-repeat="star in attrscope.arrFilterStar">
+                    <li class="list-unstyled" ng-repeat="value in filtered = attrscope.SearchedProfiles | filter: ({Star: star}) : true | limitTo : 1  ">
+                        <input type="checkbox"
+                               id="chk{{star}}"
+                               name="chk{{star}}"
+                               value="{{star}}"
+                               ng-checked="selection.indexOf(star) > -1"
+                               ng-click="attrscope.filterStarByThisItem(star)">
+                        {{star}}&nbsp;(<b>{{attrscope.getStarFilterItemCount(star)}}</b>)
+                    </li>
+                </ul>
 
-
-
-
+            </div>
+        </div>
         <div id="collapseOne" class="panel-collapse collapse in">
             <div class="panel-body bgImage">
                 <h3>Sangam</h3><hr />
@@ -164,23 +201,6 @@
             </div>
         </div>
 
-        <div id="collapseOne" class="panel-collapse collapse in">
-            <div class="panel-body bgImage">
-                <h3>Star</h3><hr />
-                <ul class="list-group" ng-repeat="star in attrscope.arrFilterStar">
-                    <li class="list-unstyled" ng-repeat="value in filtered = attrscope.SearchedProfiles | filter: ({Star: star}) : true | limitTo : 1  ">
-                        <input type="checkbox"
-                               id="chk{{star}}"
-                               name="chk{{star}}"
-                               value="{{star}}"
-                               ng-checked="selection.indexOf(star) > -1"
-                               ng-click="attrscope.filterStarByThisItem(star)">
-                        {{star}}&nbsp;(<b>{{attrscope.getStarFilterItemCount(star)}}</b>)
-                    </li>
-                </ul>
-
-            </div>
-        </div>
     </div>
 
 </div>

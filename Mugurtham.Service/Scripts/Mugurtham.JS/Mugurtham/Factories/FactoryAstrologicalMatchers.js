@@ -19,24 +19,20 @@ THIS FACTORY IS SPECIFICALLY FOR PROCESSING MY MATCHING PROFILES
 var app = angular.module('MugurthamApp');
 
 
-app.factory('FactoryMatchingProfiles', ['$http', 'ConstantMatchingStarsForGroom', 'ConstantRegistrationPage', 'ConstantGlobal',
-    function ($http, ConstantMatchingStarsForGroom, ConstantRegistrationPage, ConstantGlobal) {
+app.factory('FactoryAstrologicalMatchers', ['$http', 'ConstantMatchingStarsForGroom', 'ConstantMatchingStarsForBride',
+                                        'ConstantRegistrationPage', 'ConstantGlobal',
+    function ($http, ConstantMatchingStarsForGroom,ConstantMatchingStarsForBride,  ConstantRegistrationPage, ConstantGlobal) {
         var serviceFactoryMatchingStar = {}
-        serviceFactoryMatchingStar.propFactoryName = 'FactoryMatchingProfiles'
-
+        serviceFactoryMatchingStar.propFactoryName = 'FactoryAstrologicalMatchers';
         serviceFactoryMatchingStar.arrFilterStar = ConstantRegistrationPage.Star;
         serviceFactoryMatchingStar.arrFilterSubCaste = ConstantRegistrationPage.SubCaste;
         serviceFactoryMatchingStar.arrSangamMaster = ConstantGlobal.SangamMaster;
-
         serviceFactoryMatchingStar.MyMatchingProfilesBadgeCount = 0;
         serviceFactoryMatchingStar.AllProfiles;
         serviceFactoryMatchingStar.SearchedProfiles;
         serviceFactoryMatchingStar.profilePhotos;
 
-        //alert(serviceFactoryMatchingStar.propFactoryName);
-        //alert(ConstantMatchingStarsForGroom.Aswini[1].Category);
-
-        serviceFactoryMatchingStar.getMatchingProfiles = function () {
+        serviceFactoryMatchingStar.getAstrologicalMatchers = function () {
             if (typeof (Storage) !== "undefined") {
                 if ((!sessionStorage.getItem('HiglightedProfiles')))
                     getMatchingProfilesfromAPI();
@@ -70,21 +66,28 @@ app.factory('FactoryMatchingProfiles', ['$http', 'ConstantMatchingStarsForGroom'
 
         function initData($http, data) {
             var _star = '';
+            var _gender = '';
+            var objConstantMatchingStar = ConstantMatchingStarsForGroom;
+
             if (typeof (Storage) !== "undefined") {
                 _star = JSON.parse(localStorage.getItem("LoggedInUser")).BasicInfoCoreEntity.Star;
+                _gender = JSON.parse(localStorage.getItem("LoggedInUser")).BasicInfoCoreEntity.Gender;
+            }
+            if (_gender === 'female') {
+                objConstantMatchingStar = ConstantMatchingStarsForBride;
             }
             serviceFactoryMatchingStar.AllProfiles = data;
-            serviceFactoryMatchingStar.SearchedProfiles = getMatchingProfiles(data, _star);
+            serviceFactoryMatchingStar.SearchedProfiles = getAstrologicalMatchingProfiles(data, _star, objConstantMatchingStar);
             serviceFactoryMatchingStar.profilePhotos = data.PhotoCoreEntityList;
             serviceFactoryMatchingStar.MyMatchingProfilesBadgeCount = serviceFactoryMatchingStar.SearchedProfiles.length;
             sessionStorage.setItem("MyMatchingProfilesBadgeCount", (serviceFactoryMatchingStar.SearchedProfiles.length));
             $('#badgeMyMactchingProfiles').text(serviceFactoryMatchingStar.SearchedProfiles.length);
         }
 
-        function getMatchingProfiles(data, _star) {
+        function getAstrologicalMatchingProfiles(data, _star, objConstantMatchingStar) {
             var matchingProfiles = [];
             var itrIndex = 0;
-            $.each(ConstantMatchingStarsForGroom, function (key, value) {
+            $.each(objConstantMatchingStar, function (key, value) {
                 if (key === _star) {
                     $.each(value, function (index, object) {
                         $.each(data.ProfileBasicInfoViewCoreEntityList, function (profilekey, profilevalue) {
@@ -102,9 +105,9 @@ app.factory('FactoryMatchingProfiles', ['$http', 'ConstantMatchingStarsForGroom'
 
         /*========================================= E-Commerce Filter Section ======================================================*/
 
-        
+
         //Item Count
-        serviceFactoryMatchingStar.filterItem = [];
+        serviceFactoryMatchingStar.filterStarItem = [];
         serviceFactoryMatchingStar.filterSubCasteItem = [];
         serviceFactoryMatchingStar.filterSangamItem = [];
 
@@ -135,11 +138,11 @@ app.factory('FactoryMatchingProfiles', ['$http', 'ConstantMatchingStarsForGroom'
 
         // Item Event Handler
         serviceFactoryMatchingStar.filterStarByThisItem = function (data) {
-            var i = $.inArray(data, serviceFactoryMatchingStar.filterItem);
+            var i = $.inArray(data, serviceFactoryMatchingStar.filterStarItem);
             if (i > -1) {
-                serviceFactoryMatchingStar.filterItem.splice(i, 1);
+                serviceFactoryMatchingStar.filterStarItem.splice(i, 1);
             } else {
-                serviceFactoryMatchingStar.filterItem.push(data);
+                serviceFactoryMatchingStar.filterStarItem.push(data);
             }
             setTimeout(displayThumbnailSlider, 10);
             $("html, body").animate({ scrollTop: 220 }, "slow");
@@ -166,8 +169,8 @@ app.factory('FactoryMatchingProfiles', ['$http', 'ConstantMatchingStarsForGroom'
         };
         // Item Declarative Data Binding
         serviceFactoryMatchingStar.starFilter = function (item) {
-            if (serviceFactoryMatchingStar.filterItem.length > 0) {
-                if ($.inArray(item.Star, serviceFactoryMatchingStar.filterItem) < 0)
+            if (serviceFactoryMatchingStar.filterStarItem.length > 0) {
+                if ($.inArray(item.Star, serviceFactoryMatchingStar.filterStarItem) < 0)
                     return;
             }
             return item.Star;
@@ -186,7 +189,14 @@ app.factory('FactoryMatchingProfiles', ['$http', 'ConstantMatchingStarsForGroom'
             }
             return item.SangamID;
         };
-
+        serviceFactoryMatchingStar.ageFilter = function (item, fromAge, toAge) {
+            var filteredProfileResult = (
+                            ((!fromAge || item.Age >= fromAge) && (!toAge || item.Age <= toAge)
+                            )
+                     );
+            setTimeout(displayThumbnailSlider, 1);
+            return filteredProfileResult;
+        };
 
 
 
