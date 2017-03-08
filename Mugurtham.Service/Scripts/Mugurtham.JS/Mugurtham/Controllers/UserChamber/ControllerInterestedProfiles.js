@@ -12,101 +12,96 @@
 /*************************************************************************
 /*
 ==========================================================================================
-THIS CONTROLLER IS SPECIFICALLY FOR DISPLAYING VIEWED PROFILES IN USER HOME PAGE
+THIS CONTROLLER IS SPECIFICALLY FOR DISPLAYING INTERESTED IN ME PROFILES IN USER HOME PAGE
 ==========================================================================================
 */
 var ControllerInterestedProfiles = angular.module('MugurthamApp').controller('ControllerInterestedProfiles',
-        ['$http', '$scope', function ($http, $scope) {
+        ['$http', '$scope', 'FactoryAstrologicalMatchers', 'ConstantRegistrationPage',
+                                             function ($http, $scope, FactoryAstrologicalMatchers, ConstantRegistrationPage) {
+                                                 $scope.ControllerName = 'ControllerInterestedProfiles';
+                                                 $scope.currentPage = 1;
+                                                 $scope.pageSize = 15;
+                                                 $scope.fromAge = 0;
+                                                 $scope.toAge = 0;
+                                                 $scope.filterSubcasteSelected = [];
+                                                 $scope.filterStarSelected = [];
+                                                 $scope.filterSangamSelected = [];
+                                                 $scope.arrFromAge = ConstantRegistrationPage.FromAge;
+                                                 $scope.arrToAge = ConstantRegistrationPage.ToAge;
+                                                 setTimeout(displayThumbnailSlider, 10)
 
-            $scope.ControllerName = 'ControllerInterestedProfiles';
-            //===================================================
-            //AJAX GET REQUEST - GETTING ALL PROFILES
-            //===================================================
+                                                 $scope.getAstrologicalMatchers = function () {
+                                                     setTimeout(displayThumbnailSlider, 10)
+                                                     FactoryAstrologicalMatchers.getAstrologicalMatchers("InterestedProfiles", "User/User/getInterestedProfiles", false);
+                                                     $scope.arrFilterStar = FactoryAstrologicalMatchers.arrFilterStar;
+                                                     $scope.arrFilterSubCaste = FactoryAstrologicalMatchers.arrFilterSubCaste;
+                                                     $scope.arrSangamMaster = FactoryAstrologicalMatchers.arrSangamMaster;
+
+                                                     $("#divContainer").unmask();
+                                                     $scope.pageHeader = 'LYTPROFILESLKDME';
+                                                     $scope.currentPage = 1;
+                                                     $scope.pageSize = 15;
+
+                                                     $scope.AllProfiles = FactoryAstrologicalMatchers.AllProfiles;
+                                                     $scope.SearchedProfiles = FactoryAstrologicalMatchers.SearchedProfiles;
+                                                     $scope.profilePhotos = FactoryAstrologicalMatchers.profilePhotos;
+
+                                                     $scope.pageChangeHandler = function (num) {
+                                                         $("html, body").animate({ scrollTop: 220 }, "slow");
+                                                         setTimeout(displayThumbnailSlider, 10);
+                                                     };
+                                                     $scope.pageChangeHandlerSmartSearch = function (num) {
+                                                         setTimeout(displayThumbnailSlider, 10);
+                                                     };
+                                                     toastr.success('Interested Profiles loaded Successfully');
+                                                 }
+
+                                                 /*========================================= E-Commerce Filter Section ======================================================*/
+
+                                                 //Item Count
+                                                 $scope.getStarFilterItemCount = function (star) {
+                                                     return FactoryAstrologicalMatchers.getStarFilterItemCount(star, $scope.SearchedProfiles);
+                                                 };
+                                                 $scope.getSubCasteFilterItemCount = function (subCaste) {
+                                                     return FactoryAstrologicalMatchers.getSubCasteFilterItemCount(subCaste, $scope.SearchedProfiles);
+                                                 };
+                                                 $scope.getSangamFilterItemCount = function (SangamID) {
+                                                     return FactoryAstrologicalMatchers.getSangamFilterItemCount(SangamID, $scope.SearchedProfiles);
+                                                 };
+
+                                                 //Item event handler
+                                                 $scope.filterStarByThisItem = function (data) {
+                                                     FactoryAstrologicalMatchers.filterStarByThisItem(data);
+                                                     $scope.filterStarSelected = FactoryAstrologicalMatchers.filterStarItem;
+                                                 };
+                                                 $scope.filterSubCasteByThisItem = function (data) {
+                                                     FactoryAstrologicalMatchers.filterSubCasteByThisItem(data);
+                                                     $scope.filterSubcasteSelected = FactoryAstrologicalMatchers.filterSubCasteItem;
+                                                 };
+                                                 $scope.filterSangamByThisItem = function (data) {
+                                                     FactoryAstrologicalMatchers.filterSangamByThisItem(data);
+                                                     $scope.filterSangamSelected = FactoryAstrologicalMatchers.filterSangamItem;
+                                                 };
+
+                                                 // Item declarative data binding
+                                                 $scope.starFilter = function (data) {
+                                                     return FactoryAstrologicalMatchers.starFilter(data);
+                                                 };
+                                                 $scope.subcasteFilter = function (data) {
+                                                     return FactoryAstrologicalMatchers.subcasteFilter(data);
+                                                 };
+                                                 $scope.sangamFilter = function (data) {
+                                                     return FactoryAstrologicalMatchers.sangamFilter(data);
+                                                 };
+                                                 $scope.ageFilter = function (data) {
+                                                     return FactoryAstrologicalMatchers.ageFilter(data, $scope.fromAge, $scope.toAge);
+                                                 };
 
 
-            $scope.getInterestedProfiles = function () {
-                if (typeof (Storage) !== "undefined") {
-                    if ((!sessionStorage.getItem('InterestedProfiles'))) 
-                        $scope.getInterestedProfilesfromAPI();
-                    else 
-                        $scope.getInterestedProfilesfromSession();
-                }
-                else 
-                    $scope.getInterestedProfilesfromAPI();
-            }
+                                                 /*========================================= E-Commerce Filter Section End======================================================*/
 
-            $scope.getInterestedProfilesfromSession = function () {
-                if ((sessionStorage.getItem('InterestedProfiles'))) 
-                    $scope.initData(JSON.parse(sessionStorage.getItem('InterestedProfiles')));
-            }
-            $scope.getInterestedProfilesfromAPI = function () {
-                var strGetURL = "Search/Search/getAllProfiles";
-                $("#divContainer").mask("Searching profiles please wait...");
-                $http({
-                    method: "GET", url: strGetURL
-                }).
-            success(function (data, status, headers, config) {
-                $("#divContainer").unmask();
-                $scope.initData(data);
-            }).
-                error(function (data, status, headers, config) {
-                    $("#divContainer").unmask();
-                    NotifyStatus('2');
-                });
-            }
 
-            $scope.initData = function (data) {
-                $scope.AllProfiles = data;
-                $scope.currentPage = 1;
-                $scope.pageSize = 15;
-                $scope.SearchedProfiles = data.ProfileBasicInfoViewCoreEntityList;
-                $scope.pageChangeHandler = function (num) {
-                    $("html, body").animate({ scrollTop: 220 }, "slow");
-                    setTimeout(displayThumbnailSlider, 10);
-                    console.log('Profiles page changed to ' + num);
-                };
-                setTimeout(displayThumbnailSlider, 10);
-                toastr.success('Interested Profiles loaded Successfully');
-            }
 
-            /*
-            $scope.getInterestedProfiles = function () {
-                var strGetURL = "User/User/getInterestedProfiles";
-                $("#divContainer").mask("Searching profiles please wait...");
-                $http({
-                    method: "GET", url: strGetURL
-                }).
-            success(function (data, status, headers, config) {
-                $("#divContainer").unmask();
-                $scope.AllProfiles = data;
-                $scope.currentPage = 1;
-                $scope.pageSize = 15;
-                $scope.SearchedProfiles = data.ProfileBasicInfoViewCoreEntityList;
-                $scope.pageChangeHandler = function (num) {
-                    $("html, body").animate({ scrollTop: 220 }, "slow");                    
-                    setTimeout(displayThumbnailSlider, 10);
-                    console.log('Profiles page changed to ' + num);
-                };
-                setTimeout(displayThumbnailSlider, 10);
-            }).
-                error(function (data, status, headers, config) {
-                    $("#divContainer").unmask();
-                    NotifyStatus('2');
-                });
-            }
-             */
-        }])
-
-function NotifyStatus(intStatus) {
-    /*
-         1-> Success
-         2-> Error
-    */
-           
-    if (intStatus == '1') {
-        toastr.success('Profiles Received Successfully');
-    }
-    else if (intStatus == '2') {
-        toastr.Error('Error occured in ControllerInterestedProfiles - getData');
-    }
-}
+                                                 // Wiring up with Template through Custom Directive
+                                                 $scope.objScope = $scope;
+                                             }]);

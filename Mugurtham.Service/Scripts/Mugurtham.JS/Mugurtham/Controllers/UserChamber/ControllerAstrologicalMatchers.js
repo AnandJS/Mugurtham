@@ -33,7 +33,7 @@ var ControllerAstrologicalMatchers = angular.module('MugurthamApp').
 
                                                  $scope.getAstrologicalMatchers = function () {
                                                      setTimeout(displayThumbnailSlider, 10)
-                                                     FactoryAstrologicalMatchers.getAstrologicalMatchers();
+                                                     FactoryAstrologicalMatchers.getAstrologicalMatchers("AllProfiles", "Search/Search/getAllProfiles", true);
                                                      $scope.arrFilterStar = FactoryAstrologicalMatchers.arrFilterStar;
                                                      $scope.arrFilterSubCaste = FactoryAstrologicalMatchers.arrFilterSubCaste;
                                                      $scope.arrSangamMaster = FactoryAstrologicalMatchers.arrSangamMaster;
@@ -46,14 +46,13 @@ var ControllerAstrologicalMatchers = angular.module('MugurthamApp').
                                                      $scope.AllProfiles = FactoryAstrologicalMatchers.AllProfiles;
                                                      $scope.SearchedProfiles = FactoryAstrologicalMatchers.SearchedProfiles;
                                                      $scope.profilePhotos = FactoryAstrologicalMatchers.profilePhotos;
-
                                                      $scope.pageChangeHandler = function (num) {
                                                          $("html, body").animate({ scrollTop: 220 }, "slow");
                                                          setTimeout(displayThumbnailSlider, 10);
                                                      };
                                                      $scope.pageChangeHandlerSmartSearch = function (num) {
                                                          setTimeout(displayThumbnailSlider, 10);
-                                                     };
+                                                     };                                                    
                                                      toastr.success('My Matching Profiles loaded Successfully');
                                                  }
 

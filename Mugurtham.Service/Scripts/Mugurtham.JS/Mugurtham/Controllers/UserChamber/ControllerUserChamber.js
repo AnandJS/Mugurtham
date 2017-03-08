@@ -25,9 +25,11 @@ var ControllerUserChamber = angular.module('MugurthamApp').controller('Controlle
 
                 if (typeof (Storage) !== "undefined") {
                     if ((!sessionStorage.getItem('MyMatchingProfilesBadgeCount')))
-                        FactoryAstrologicalMatchers.getAstrologicalMatchers();
-                    else
+                        FactoryAstrologicalMatchers.getAstrologicalMatchers("AllProfile", "Search/Search/getAllProfiles", true);
+                    else {
                         $('#badgeMyMactchingProfiles').text(sessionStorage.getItem('MyMatchingProfilesBadgeCount'));
+                        $('#badgeMyMactchingProfilesInGblNav').text(sessionStorage.getItem('MyMatchingProfilesBadgeCount'));
+                    }
                 }
                 if (typeof (Storage) !== "undefined") {
                     if ((!sessionStorage.getItem('UserBadgeCount')))

@@ -21,7 +21,7 @@ var app = angular.module('MugurthamApp');
 
 app.factory('FactoryAstrologicalMatchers', ['$http', 'ConstantMatchingStarsForGroom', 'ConstantMatchingStarsForBride',
                                         'ConstantRegistrationPage', 'ConstantGlobal',
-    function ($http, ConstantMatchingStarsForGroom,ConstantMatchingStarsForBride,  ConstantRegistrationPage, ConstantGlobal) {
+    function ($http, ConstantMatchingStarsForGroom, ConstantMatchingStarsForBride, ConstantRegistrationPage, ConstantGlobal) {
         var serviceFactoryMatchingStar = {}
         serviceFactoryMatchingStar.propFactoryName = 'FactoryAstrologicalMatchers';
         serviceFactoryMatchingStar.arrFilterStar = ConstantRegistrationPage.Star;
@@ -31,10 +31,16 @@ app.factory('FactoryAstrologicalMatchers', ['$http', 'ConstantMatchingStarsForGr
         serviceFactoryMatchingStar.AllProfiles;
         serviceFactoryMatchingStar.SearchedProfiles;
         serviceFactoryMatchingStar.profilePhotos;
+        serviceFactoryMatchingStar.endPointName = '';
+        serviceFactoryMatchingStar.endPoint = '';
+        serviceFactoryMatchingStar.isAstrologicalMatchers = false;
 
-        serviceFactoryMatchingStar.getAstrologicalMatchers = function () {
+        serviceFactoryMatchingStar.getAstrologicalMatchers = function (_endPointName, _endPoint, _isAstrologicalMatchers) {
+            serviceFactoryMatchingStar.endPoint = _endPoint;
+            serviceFactoryMatchingStar.endPointName = _endPointName;
+            serviceFactoryMatchingStar.isAstrologicalMatchers = _isAstrologicalMatchers;
             if (typeof (Storage) !== "undefined") {
-                if ((!sessionStorage.getItem('HiglightedProfiles')))
+                if ((!sessionStorage.getItem(serviceFactoryMatchingStar.endPointName)))
                     getMatchingProfilesfromAPI();
                 else
                     getMatchingProfilesfromSession();
@@ -44,12 +50,12 @@ app.factory('FactoryAstrologicalMatchers', ['$http', 'ConstantMatchingStarsForGr
         };
 
         function getMatchingProfilesfromSession() {
-            if ((sessionStorage.getItem('AllProfiles')))
-                initData($http, JSON.parse(sessionStorage.getItem('AllProfiles')));
+            if ((sessionStorage.getItem(serviceFactoryMatchingStar.endPointName)))
+                initData($http, JSON.parse(sessionStorage.getItem(serviceFactoryMatchingStar.endPointName)));
         }
 
         function getMatchingProfilesfromAPI() {
-            var strGetURL = "Search/Search/getAllProfiles";
+            var strGetURL = serviceFactoryMatchingStar.endPoint;
             $("#divContainer").mask("Searching profiles please wait...");
             $http({
                 method: "GET", url: strGetURL
@@ -77,11 +83,11 @@ app.factory('FactoryAstrologicalMatchers', ['$http', 'ConstantMatchingStarsForGr
                 objConstantMatchingStar = ConstantMatchingStarsForBride;
             }
             serviceFactoryMatchingStar.AllProfiles = data;
-            serviceFactoryMatchingStar.SearchedProfiles = getAstrologicalMatchingProfiles(data, _star, objConstantMatchingStar);
+            serviceFactoryMatchingStar.SearchedProfiles = data.ProfileBasicInfoViewCoreEntityList;
+            if (serviceFactoryMatchingStar.isAstrologicalMatchers)
+                serviceFactoryMatchingStar.SearchedProfiles = getAstrologicalMatchingProfiles(data, _star, objConstantMatchingStar);
             serviceFactoryMatchingStar.profilePhotos = data.PhotoCoreEntityList;
             serviceFactoryMatchingStar.MyMatchingProfilesBadgeCount = serviceFactoryMatchingStar.SearchedProfiles.length;
-            sessionStorage.setItem("MyMatchingProfilesBadgeCount", (serviceFactoryMatchingStar.SearchedProfiles.length));
-            $('#badgeMyMactchingProfiles').text(serviceFactoryMatchingStar.SearchedProfiles.length);
         }
 
         function getAstrologicalMatchingProfiles(data, _star, objConstantMatchingStar) {
@@ -99,13 +105,12 @@ app.factory('FactoryAstrologicalMatchers', ['$http', 'ConstantMatchingStarsForGr
                     });
                 }
             });
+            sessionStorage.setItem("MyMatchingProfilesBadgeCount", (matchingProfiles.length));
+            $('#badgeMyMactchingProfiles').text(matchingProfiles.length);
+            $('#badgeMyMactchingProfilesInGblNav').text(matchingProfiles.length);
             return matchingProfiles;
         }
-
-
         /*========================================= E-Commerce Filter Section ======================================================*/
-
-
         //Item Count
         serviceFactoryMatchingStar.filterStarItem = [];
         serviceFactoryMatchingStar.filterSubCasteItem = [];
@@ -135,7 +140,6 @@ app.factory('FactoryAstrologicalMatchers', ['$http', 'ConstantMatchingStarsForGr
             });
             return parseInt(counter);
         };
-
         // Item Event Handler
         serviceFactoryMatchingStar.filterStarByThisItem = function (data) {
             var i = $.inArray(data, serviceFactoryMatchingStar.filterStarItem);
@@ -197,14 +201,10 @@ app.factory('FactoryAstrologicalMatchers', ['$http', 'ConstantMatchingStarsForGr
             setTimeout(displayThumbnailSlider, 1);
             return filteredProfileResult;
         };
-
-
-
-
         /*========================================= E-Commerce Filter Section End======================================================*/
-
-
         return serviceFactoryMatchingStar;
+
+
     }]);
 
 

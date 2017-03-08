@@ -11,72 +11,97 @@
  * from Mugurtham Technology, Incorporated.
 /*************************************************************************
 /*
-==========================================================================================
-THIS CONTROLLER IS SPECIFICALLY FOR DISPLAYING VIEWED PROFILES IN USER HOME PAGE
-==========================================================================================
+===================================================================================================
+THIS CONTROLLER IS SPECIFICALLY FOR DISPLAYING  PROFILES WHO VIEWED ME AT FULL VIEW PAGE IN USER HOME PAGE
+===================================================================================================
 */
 var ControllerViewedProfiles = angular.module('MugurthamApp').controller('ControllerViewedProfiles',
-        ['$http', '$scope', function ($http, $scope) {
+        ['$http', '$scope', 'FactoryAstrologicalMatchers', 'ConstantRegistrationPage',
+                                             function ($http, $scope, FactoryAstrologicalMatchers, ConstantRegistrationPage) {
+                                                 $scope.ControllerName = 'ControllerViewedProfiles';
+                                                 $scope.currentPage = 1;
+                                                 $scope.pageSize = 15;
+                                                 $scope.fromAge = 0;
+                                                 $scope.toAge = 0;
+                                                 $scope.filterSubcasteSelected = [];
+                                                 $scope.filterStarSelected = [];
+                                                 $scope.filterSangamSelected = [];
+                                                 $scope.arrFromAge = ConstantRegistrationPage.FromAge;
+                                                 $scope.arrToAge = ConstantRegistrationPage.ToAge;
+                                                 setTimeout(displayThumbnailSlider, 10)
 
-            $scope.ControllerName = 'ControllerViewedProfiles';
-            //===================================================
-            //AJAX GET REQUEST - GETTING ALL PROFILES
-            //===================================================
-            $scope.getViewedProfilesProfiles = function () {
-                if (typeof (Storage) !== "undefined") {
-                    if ((!sessionStorage.getItem('ViewedProfiles')))
-                        $scope.getViewedProfilesProfilesfromAPI();
-                    else
-                        $scope.getViewedProfilesProfilesfromSession();
-                }
-                else
-                    $scope.getViewedProfilesProfilesfromAPI();
-            }
+                                                 $scope.getAstrologicalMatchers = function () {
+                                                     setTimeout(displayThumbnailSlider, 10)
+                                                     FactoryAstrologicalMatchers.getAstrologicalMatchers("ViewedProfiles", "Search/Search/getViewedProfiles", false);
+                                                     $scope.arrFilterStar = FactoryAstrologicalMatchers.arrFilterStar;
+                                                     $scope.arrFilterSubCaste = FactoryAstrologicalMatchers.arrFilterSubCaste;
+                                                     $scope.arrSangamMaster = FactoryAstrologicalMatchers.arrSangamMaster;
 
-            $scope.getViewedProfilesProfilesfromSession = function () {
-                if ((sessionStorage.getItem('ViewedProfiles')))
-                    $scope.initData(JSON.parse(sessionStorage.getItem('ViewedProfiles')));
-            }
-            $scope.getViewedProfilesProfilesfromAPI = function () {
-                var strGetURL = "Search/Search/getViewedProfiles";
-                $("#divContainer").mask("Searching profiles please wait...");
-                $http({
-                    method: "GET", url: strGetURL
-                }).
-            success(function (data, status, headers, config) {
-                $("#divContainer").unmask();
-                $scope.initData(data);
-            }).
-                error(function (data, status, headers, config) {
-                    $("#divContainer").unmask();
-                    NotifyStatus('2');
-                });
-            }
+                                                     $("#divContainer").unmask();
+                                                     $scope.pageHeader = 'LYTPROFILESVWDME';
+                                                     $scope.currentPage = 1;
+                                                     $scope.pageSize = 15;
 
-            $scope.initData = function (data) {
-                $scope.AllProfiles = data;
-                $scope.currentPage = 1;
-                $scope.pageSize = 15;
-                $scope.SearchedProfiles = data.ProfileBasicInfoViewCoreEntityList;
-                $scope.pageChangeHandler = function (num) {
-                    $("html, body").animate({ scrollTop: 220 }, "slow");
-                    setTimeout(displayThumbnailSlider, 10);
-                    console.log('Profiles page changed to ' + num);
-                };
-                setTimeout(displayThumbnailSlider, 10);
-                toastr.success('Viewed Profiles loaded Successfully');
-            }
-        }])
+                                                     $scope.AllProfiles = FactoryAstrologicalMatchers.AllProfiles;
+                                                     $scope.SearchedProfiles = FactoryAstrologicalMatchers.SearchedProfiles;
+                                                     $scope.profilePhotos = FactoryAstrologicalMatchers.profilePhotos;
 
-function NotifyStatus(intStatus) {
-    /*
-         1-> Success
-         2-> Error
-    */
-    if (intStatus == '1') {
-        toastr.success('Profiles Received Successfully');
-    }
-    else if (intStatus == '2') {
-        toastr.Error('Error occured in ControllerViewedProfiles - getData');
-    }
-}
+                                                     $scope.pageChangeHandler = function (num) {
+                                                         $("html, body").animate({ scrollTop: 220 }, "slow");
+                                                         setTimeout(displayThumbnailSlider, 10);
+                                                     };
+                                                     $scope.pageChangeHandlerSmartSearch = function (num) {
+                                                         setTimeout(displayThumbnailSlider, 10);
+                                                     };
+                                                     toastr.success('Viewed Profiles loaded Successfully');
+                                                 }
+
+                                                 /*========================================= E-Commerce Filter Section ======================================================*/
+
+                                                 //Item Count
+                                                 $scope.getStarFilterItemCount = function (star) {
+                                                     return FactoryAstrologicalMatchers.getStarFilterItemCount(star, $scope.SearchedProfiles);
+                                                 };
+                                                 $scope.getSubCasteFilterItemCount = function (subCaste) {
+                                                     return FactoryAstrologicalMatchers.getSubCasteFilterItemCount(subCaste, $scope.SearchedProfiles);
+                                                 };
+                                                 $scope.getSangamFilterItemCount = function (SangamID) {
+                                                     return FactoryAstrologicalMatchers.getSangamFilterItemCount(SangamID, $scope.SearchedProfiles);
+                                                 };
+
+                                                 //Item event handler
+                                                 $scope.filterStarByThisItem = function (data) {
+                                                     FactoryAstrologicalMatchers.filterStarByThisItem(data);
+                                                     $scope.filterStarSelected = FactoryAstrologicalMatchers.filterStarItem;
+                                                 };
+                                                 $scope.filterSubCasteByThisItem = function (data) {
+                                                     FactoryAstrologicalMatchers.filterSubCasteByThisItem(data);
+                                                     $scope.filterSubcasteSelected = FactoryAstrologicalMatchers.filterSubCasteItem;
+                                                 };
+                                                 $scope.filterSangamByThisItem = function (data) {
+                                                     FactoryAstrologicalMatchers.filterSangamByThisItem(data);
+                                                     $scope.filterSangamSelected = FactoryAstrologicalMatchers.filterSangamItem;
+                                                 };
+
+                                                 // Item declarative data binding
+                                                 $scope.starFilter = function (data) {
+                                                     return FactoryAstrologicalMatchers.starFilter(data);
+                                                 };
+                                                 $scope.subcasteFilter = function (data) {
+                                                     return FactoryAstrologicalMatchers.subcasteFilter(data);
+                                                 };
+                                                 $scope.sangamFilter = function (data) {
+                                                     return FactoryAstrologicalMatchers.sangamFilter(data);
+                                                 };
+                                                 $scope.ageFilter = function (data) {
+                                                     return FactoryAstrologicalMatchers.ageFilter(data, $scope.fromAge, $scope.toAge);
+                                                 };
+
+
+                                                 /*========================================= E-Commerce Filter Section End======================================================*/
+
+
+
+                                                 // Wiring up with Template through Custom Directive
+                                                 $scope.objScope = $scope;
+                                             }]);

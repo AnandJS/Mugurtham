@@ -57,12 +57,16 @@ namespace Mugurtham.Service
                    "~/Scripts/Mugurtham.JS/Mugurtham/Utility/*.js"));
             bundles.Add(new ScriptBundle("~/bundles/MugurthamConstants").Include(
                         "~/Scripts/Mugurtham.JS/Mugurtham/Constants/*.js"));
-            bundles.Add(new ScriptBundle("~/bundles/MugurthamServices").Include(
-                        "~/Scripts/Mugurtham.JS/Mugurtham/Services/*.js"));
+
+           /* bundles.Add(new ScriptBundle("~/bundles/MugurthamServices").Include(
+                        "~/Scripts/Mugurtham.JS/Mugurtham/Services/*.js"));*/
+
             bundles.Add(new ScriptBundle("~/bundles/MugurthamFactories").Include(
                         "~/Scripts/Mugurtham.JS/Mugurtham/Factories/*.js"));
-            bundles.Add(new ScriptBundle("~/bundles/MugurthamFilters").Include(
-                        "~/Scripts/Mugurtham.JS/Mugurtham/Filters/*.js"));
+
+            /*bundles.Add(new ScriptBundle("~/bundles/MugurthamFilters").Include(
+                        "~/Scripts/Mugurtham.JS/Mugurtham/Filters/*.js"));*/
+
             bundles.Add(new ScriptBundle("~/bundles/MugurthamDirectives").Include(
                         "~/Scripts/Mugurtham.JS/Mugurtham/Directives/*.js"));
 
