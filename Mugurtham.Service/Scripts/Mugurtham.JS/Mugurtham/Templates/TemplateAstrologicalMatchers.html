@@ -1,4 +1,4 @@
-﻿
+﻿{{ attrscope.SearchedProfiles.length }} ----
 
 <p class="lead">{{attrscope.pageHeader | translate}}</p>
 <hr />
@@ -8,9 +8,9 @@
         <li class="active">{{attrscope.pageHeader | translate}}</li>
     </ul>
 </div>
-<div id="divHighlightedProfiles" class="col-sm-9">
+<div id="divHighlightedProfiles" class="col-sm-8">
 
-    
+
     <div class="col-lg-12">
         <!-- Filter Header-->
         <div class="row">
@@ -45,7 +45,7 @@
                     </b>
                 </h5>
             </div>
-            <p> <h3 class="text-danger">Filtered by {{attrscope.filterSubcasteSelected}} ,  {{attrscope.filterStarSelected}}</h3></p>
+            <p> <h4 class="text-danger">Filtered by {{attrscope.filterSubcasteSelected}} ,  {{attrscope.filterStarSelected}}</h4></p>
         </div>
         <!-- Top Pagination-->
         <div class="text-center bgImage">
@@ -119,7 +119,7 @@
 
 
 
-<div class="col-sm-3">
+<div class="col-sm-4">
     <div class="panel panel-primary FormShadow">
         <div class="panel-heading">
             <h4 class="panel-title">
@@ -158,7 +158,7 @@
                                ng-model="subCasteFilter"
                                ng-checked="selection.indexOf(subcaste) > -1"
                                ng-click="attrscope.filterSubCasteByThisItem(subcaste)">
-                        {{subcaste}}&nbsp;(<b>{{attrscope.getSubCasteFilterItemCount(subcaste)}}</b>)
+                        <b>{{subcaste}}</b>&nbsp;<span class="badge">{{attrscope.getSubCasteFilterItemCount(subcaste)}}</span>
                     </li>
                 </ul>
 
@@ -175,7 +175,7 @@
                                value="{{star}}"
                                ng-checked="selection.indexOf(star) > -1"
                                ng-click="attrscope.filterStarByThisItem(star)">
-                        {{star}}&nbsp;(<b>{{attrscope.getStarFilterItemCount(star)}}</b>)
+                        {{star}}&nbsp;<span class="badge">{{attrscope.getStarFilterItemCount(star)}}</span>
                     </li>
                 </ul>
 
@@ -187,14 +187,13 @@
                 <ul class="list-group" ng-repeat="sangam in attrscope.arrSangamMaster">
 
                     <li class="list-unstyled" ng-repeat="value in filtered = attrscope.SearchedProfiles | filter: ({SangamID: sangam.ID}) : true | limitTo : 1  ">
-
                         <input type="checkbox"
                                id="chk{{sangam.ID}}"
                                name="chk{{sangam.ID}}"
                                value="{{sangam.ID}}"
                                ng-checked="selection.indexOf(sangam.ID) > -1"
                                ng-click="attrscope.filterSangamByThisItem(sangam.ID)" />
-                        {{sangam.Name}}&nbsp;(<b>{{attrscope.getSangamFilterItemCount(sangam.ID)}}</b>)
+                        {{sangam.Name}}&nbsp;<span class="badge">{{attrscope.getSangamFilterItemCount(sangam.ID)}}</span>
                     </li>
                 </ul>
 

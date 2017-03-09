@@ -102,5 +102,5 @@ function removeSessionData() {
     sessionStorage.removeItem('UserBadgeCount');
     sessionStorage.removeItem('ViewedProfiles');
     sessionStorage.removeItem('LoggedInUserID');
-
+    sessionStorage.removeItem('MyMatchingProfilesBadgeCount');
 };
