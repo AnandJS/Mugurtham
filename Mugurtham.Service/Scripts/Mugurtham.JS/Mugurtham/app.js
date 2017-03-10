@@ -397,7 +397,7 @@
             SRCLOCSEARCH: "Location Search",
             SRCOCPNSEARCH: "Occupation Search",
             SMRTSEARCH: "Smart Search",
-            LYTPROFILESMYMATCHES: "Astrological Matchers",
+            LYTPROFILESMYMATCHES: "Horoscope Matches",
 
 
         });
@@ -545,7 +545,7 @@
             SRCEDUSEARCH: "Education Search",
             SRCLOCSEARCH: "Location Search",
             SRCOCPNSEARCH: "Occupation Search",
-            LYTPROFILESMYMATCHES: "ஜோதிட தகுந்த வரன்கள்",
+            LYTPROFILESMYMATCHES: "ஜாதக பொருத்த வரன்கள்",
 
         });
         $translateProvider.translations('0439', {
