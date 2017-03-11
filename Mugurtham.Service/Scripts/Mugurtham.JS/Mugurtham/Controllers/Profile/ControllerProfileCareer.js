@@ -25,7 +25,7 @@ var ControllerProfileCareer = angular.module('MugurthamApp').controller('Control
             $scope.frmData = []; // To store the values of the controls in form
             $scope.globalProfileID = $rootScope.globalProfileID;
             getCareerByProfileID();
-            $scope.arrEmployedIn = ['Business', 'Defence', 'Private Job', 'Government Job', 'Self Employed'];
+            $scope.arrEmployedIn = ['Business', 'Defence', 'Private Job', 'Government Job', 'Self Employed', 'NRI'];
             // Form Control Variables
             $scope.CareerID = '';
             $scope.ProfileID = '';

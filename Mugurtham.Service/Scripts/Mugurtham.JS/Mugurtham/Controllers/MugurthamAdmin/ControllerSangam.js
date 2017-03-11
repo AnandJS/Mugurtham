@@ -35,7 +35,10 @@ var ControllerSangam = angular.module('MugurthamApp').controller('ControllerSang
             $scope.ProfileIDStartsWith = '';
             $scope.AboutSangam = '';
             $scope.LogoPath = '';
-            $scope.BannerPath = '';            
+            $scope.BannerPath = '';
+            $scope.ContactName = '';
+            $scope.ShowContactDetails = '';
+
             //========================================
             //GLOBAL EVENT HANDLER FOR THIS CONTROLLER
             //=========================================
@@ -59,6 +62,8 @@ var ControllerSangam = angular.module('MugurthamApp').controller('ControllerSang
                 $scope.AboutSangam = $scope.frmData[0].AboutSangam;
                 $scope.LogoPath = $scope.frmData[0].LogoPath;
                 $scope.BannerPath = $scope.frmData[0].BannerPath;
+                $scope.ContactName = $scope.frmData[0].ContactName;
+                $scope.ShowContactDetails = $scope.frmData[0].ShowContactDetails;
             }
 
             //===================================================
@@ -75,7 +80,9 @@ var ControllerSangam = angular.module('MugurthamApp').controller('ControllerSang
                         AboutSangam: $scope.frmData[0].AboutSangam,
                         LogoPath: $scope.frmData[0].LogoPath,
                         BannerPath: $scope.frmData[0].BannerPath,
-                        IsActivated: geSangamActivation()
+                        ContactName: $scope.frmData[0].ContactName,
+                        IsActivated: geSangamActivation(),
+                        ShowContactDetails: getShowContactDetails()
                     }),
                     headers: { 'content-Type': 'application/x-www-form-urlencoded' }
                 }).
@@ -108,7 +115,9 @@ var ControllerSangam = angular.module('MugurthamApp').controller('ControllerSang
                     AboutSangam: data.AboutSangam,
                     LogoPath: data.LogoPath,
                     BannerPath: data.BannerPath,
-                    IsActivated: setSangamActivation(data.IsActivated)
+                    ContactName: data.ContactName,
+                    IsActivated: setSangamActivation(data.IsActivated),
+                    ShowContactDetails: setShowContactDetails(data.ShowContactDetails)
                 });
             }).
             error(function (data, status, headers, config) {
@@ -130,7 +139,9 @@ var ControllerSangam = angular.module('MugurthamApp').controller('ControllerSang
                         AboutSangam: $scope.frmData[0].AboutSangam,
                         LogoPath: $scope.frmData[0].LogoPath,
                         BannerPath: $scope.frmData[0].BannerPath,
-                        IsActivated: geSangamActivation()
+                        ContactName: $scope.frmData[0].ContactName,
+                        IsActivated: geSangamActivation(),
+                        ShowContactDetails: getShowContactDetails(),
                     }),
                     headers: { 'content-Type': 'application/x-www-form-urlencoded' }
                 }).
@@ -176,6 +187,27 @@ function setSangamActivation(strActivation) {
     var arrActivation = strActivation.split(',');
     $.each(arrActivation, function (index, item) {
         $('.sangamActivationCheckbox').each(function () {
+            if (item.toString().trim() == '1') {
+                $(this).attr('checked', 'true');
+            };
+        });
+    });
+}
+
+function getShowContactDetails() {
+    var chkId = '';
+    $('.showContactDetailsCheckbox:checked').each(function () {
+        chkId += $(this).val() + ",";
+    });
+    chkId = chkId.slice(0, -1);// Remove last comma        
+    if (chkId == '')
+        chkId = 0;
+    return chkId;
+}
+function setShowContactDetails(strActivation) {
+    var arrActivation = strActivation.split(',');
+    $.each(arrActivation, function (index, item) {
+        $('.showContactDetailsCheckbox').each(function () {
             if (item.toString().trim() == '1') {
                 $(this).attr('checked', 'true');
             };

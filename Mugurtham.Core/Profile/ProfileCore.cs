@@ -59,6 +59,8 @@ namespace Mugurtham.Core.Profile.API
         public string SangamProfiledID { get; set; }
         // Fullview Limitation for Security
         public decimal? ProfileViewLimitation { get; set; }
+        // Fullview - Display Contact Configuration
+        public bool isLoggedInUserProfilesSangam { get; set; }
 
 
 
@@ -241,9 +243,11 @@ namespace Mugurtham.Core.Profile.API
         public int GetByProfileID(string strProfileID, out ProfileCore objProfileCore, Mugurtham.Core.Login.LoggedInUser objLoggedIn = null, bool boolAddAllEntities = false)
         {
             objProfileCore = null;
+            string displayProfileContact = "0";
             try
             {
                 objProfileCore = new ProfileCore();
+                objProfileCore.isLoggedInUserProfilesSangam = false;
                 if (string.IsNullOrWhiteSpace(strProfileID))
                     return -1;
                 //Adding all entities to Profile object
@@ -257,9 +261,12 @@ namespace Mugurtham.Core.Profile.API
                     objProfileCore.ProfileViewLimitation = GetViewedProfilesToday(Helpers.ConnectionString, ref objLoggedIn);
                     if (objProfileCore.ProfileViewLimitation > 10)
                         objProfileCore.validateFullViewAccess = false;
-                        SangamCore objSangamCore = new SangamCore();
+                    SangamCore objSangamCore = new SangamCore();
                     using (objSangamCore as IDisposable)
+                    {
                         objProfileCore.SangamCoreEntity = objSangamCore.GetByID(objProfileCore.UserCoreEntity.SangamID);
+                        displayProfileContact = objProfileCore.SangamCoreEntity.ShowContactDetails;
+                    }
                     objSangamCore = null;
                     if (objProfileCore.validateFullViewAccess)
                     {
@@ -317,7 +324,15 @@ namespace Mugurtham.Core.Profile.API
                         objLocationCore = null;
                         ContactCore objContactCore = new ContactCore();
                         using (objContactCore as IDisposable)
+                        {
                             objProfileCore.ContactCoreEntity = objContactCore.GetByProfileID(strProfileID, string.Empty);
+                            // 0 => Show Sangam Contact and hide profile and reference contact
+                            // 1 => Show Profile Contact, Reference Contact and Hide Sangam contact
+                            if ((displayProfileContact == "0") || (objLoggedIn.sangamID != objProfileCore.SangamID))
+                                objContactCore.AssignEntityToEmpty(objProfileCore.ContactCoreEntity);
+                            if ((objLoggedIn.sangamID == objProfileCore.SangamID))
+                                objProfileCore.isLoggedInUserProfilesSangam = true;
+                        }
                         objContactCore = null;
                         FamilyCore objFamilyCore = new FamilyCore();
                         using (objFamilyCore as IDisposable)
@@ -325,7 +340,13 @@ namespace Mugurtham.Core.Profile.API
                         objFamilyCore = null;
                         ReferenceCore objReferenceCore = new ReferenceCore();
                         using (objReferenceCore as IDisposable)
+                        {
                             objProfileCore.ReferenceCoreEntity = objReferenceCore.GetByProfileID(strProfileID);
+                            // 0 => Show Sangam Contact and hide profile and reference contact
+                            // 1 => Show Profile Contact, Reference Contact and Hide Sangam contact
+                            if ((displayProfileContact == "0") || (objLoggedIn.sangamID != objProfileCore.SangamID))
+                                objReferenceCore.AssignEntityToEmpty(objProfileCore.ReferenceCoreEntity);
+                        }
                         objReferenceCore = null;
                         RaasiCore objRaasiCore = new RaasiCore();
                         using (objRaasiCore as IDisposable)
@@ -356,9 +377,7 @@ namespace Mugurtham.Core.Profile.API
 
             objProfileCore.validateFullViewAccess = true;
             return 0;
-
-            objProfileCore.validateFullViewAccess = false;
-            try
+            /*try
             {
                 if (objLoggedIn != null)
                 {
@@ -383,7 +402,7 @@ namespace Mugurtham.Core.Profile.API
             {
                 Helpers.LogExceptionInFlatFile(objEx);
             }
-            return 0;
+            return 0;*/
         }
         /// <summary>
         /// Preventing Hacking - Through Inspect Element when display hidden is disabled

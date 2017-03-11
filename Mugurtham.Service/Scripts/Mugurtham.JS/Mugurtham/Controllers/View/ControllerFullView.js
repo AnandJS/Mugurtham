@@ -56,8 +56,9 @@ var ControllerViewFullView = angular.module('MugurthamApp').controller('Controll
                           if (data.UserCoreEntity.ShowHoroscope) {
                               $("#divconfidentialInfo").show();
                           }
-                         
+
                           $scope.AllProfiles = data;
+                          $scope.displayContactInfo($scope.AllProfiles.SangamCoreEntity.ShowContactDetails, $scope.AllProfiles.isLoggedInUserProfilesSangam);
                           if ($scope.AllProfiles.profileDOB != '')
                               $("#dtDOB").text($.datepicker.formatDate('dd-M-yy', new Date($scope.AllProfiles.profileDOB)));
                           // Check if this is an interested profile
@@ -124,13 +125,23 @@ var ControllerViewFullView = angular.module('MugurthamApp').controller('Controll
                        NotifyStatus('2');
                    })
               };
-
-
-
               $scope.getSimilarProfiles = function () {
                   $scope.SimilarProfiles = ($.parseJSON(sessionStorage.getItem('AllProfiles')).ProfileBasicInfoViewCoreEntityList);
                   $scope.SimilarProfilePhotos = ($.parseJSON(sessionStorage.getItem('AllProfiles')).PhotoCoreEntityList);
                   setTimeout(displaySimilarPofilesSlider, 1000);
+              }
+
+              $scope.displayContactInfo = function (data, boolIsLoggedInUserSameSangam) {
+                  $('#fullViewProfileContact').hide();
+                  $('#fullViewReferenceContact').hide();
+                  $('#fullViewSangamContact').hide();
+                  if ((data === '1') && (boolIsLoggedInUserSameSangam)) {
+                      $('#fullViewProfileContact').show();
+                      $('#fullViewReferenceContact').show();
+                  }
+                  else if ((data === '0') && (!boolIsLoggedInUserSameSangam)) {
+                      $('#fullViewSangamContact').show();
+                  }
               }
 
           }]);
@@ -160,6 +171,8 @@ function NotifyStatus(intStatus) {
         toastr.Error('Error occured in ControllerViewFullView - getData');
     }
 }
+
+
 
 function PrintFullProfile(globalProfileID) {
     $("#divFullProfile").jqprint();

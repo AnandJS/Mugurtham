@@ -147,5 +147,25 @@ namespace Mugurtham.Core.Contact
             }
             return 0;
         }
+
+        public int AssignEntityToEmpty(Mugurtham.Core.Contact.ContactCoreEntity objContactCoreEntity)
+        {
+            try
+            {
+                objContactCoreEntity.Name = string.Empty;
+                objContactCoreEntity.ResidentialAddress = string.Empty;
+                objContactCoreEntity.TimeToCall = string.Empty;
+                objContactCoreEntity.Email = string.Empty;
+                objContactCoreEntity.LandlineNumber = string.Empty;
+                objContactCoreEntity.MobileNumber = string.Empty;
+                objContactCoreEntity.Relationship = string.Empty;
+                objContactCoreEntity.ProfileID = string.Empty;
+            }
+            catch (Exception objEx)
+            {
+                Helpers.LogExceptionInFlatFile(objEx);
+            }
+            return 0;
+        }
     }
 }

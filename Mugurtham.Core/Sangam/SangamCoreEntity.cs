@@ -18,7 +18,9 @@ namespace Mugurtham.Core.Sangam
         public string AboutSangam { get; set; }
         public string IsActivated { get; set; }
         public string LogoPath { get; set; }
-        public string BannerPath { get; set; }     
+        public string BannerPath { get; set; }
+        public string ContactName { get; set; }
+        public string ShowContactDetails { get; set; }     
 
     }
 }

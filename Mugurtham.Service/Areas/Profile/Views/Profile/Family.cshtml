@@ -17,7 +17,7 @@
                             <label for="FamilyValue" class="col-lg-3 control-label">{{ 'FAMVAL' | translate }}</label>
                             <div class="col-lg-9">
                                 <select class="form-control" id="ddlFamilyvalue" ng-model="frmData[0].Familyvalue">
-                                    <option value="0">--Select--</option>
+                                    <option value="-1">--Select--</option>
                                     <option ng-repeat="FamilyValue in arrFamilyValue">{{FamilyValue}}</option>
                                 </select>
                             </div>
@@ -26,7 +26,7 @@
                             <label for="FamilyType" class="col-lg-3 control-label">{{ 'FAMTYP' | translate }}</label>
                             <div class="col-lg-9">
                                 <select class="form-control" id="ddlFamilyType" ng-model="frmData[0].FamilyType">
-                                    <option value="0">--Select--</option>
+                                    <option value="-1">--Select--</option>
                                     <option ng-repeat="FamilyType in arrFamilyType">{{FamilyType}}</option>
                                 </select>
                             </div>
@@ -35,7 +35,7 @@
                             <label for="FamilyStatus" class="col-lg-3 control-label">{{ 'FAMSTA' | translate }}</label>
                             <div class="col-lg-9">
                                 <select class="form-control" id="ddlFamilyStatus" ng-model="frmData[0].FamilyStatus">
-                                    <option value="0">--Select--</option>
+                                    <option value="-1">--Select--</option>
                                     <option ng-repeat="FamilyStatus in arrFamilyStatus">{{FamilyStatus}}</option>
                                 </select>
                             </div>
@@ -44,7 +44,7 @@
                             <label for="ParentsAlive" class="col-lg-3 control-label">{{ 'FAMPARENTSALIVE' | translate }}</label>
                             <div class="col-lg-9">
                                 <select class="form-control" id="ddlParentsAlive" ng-model="frmData[0].ParentsAlive">
-                                    <option value="0">--Select--</option>
+                                    <option value="-1">--Select--</option>
                                     <option ng-repeat="ParentsAlive in arrParentsAlive">{{ParentsAlive}}</option>
                                 </select>
                             </div>
@@ -89,7 +89,7 @@
                             <label for="No of Brothers" class="col-lg-3 control-label">{{ 'FAMNOOFBRO' | translate }}</label>
                             <div class="col-lg-9">
                                 <select class="form-control" id="ddlNoOfBrothers" ng-model="frmData[0].NoOfBrothers">
-                                    <option value="0">--Select--</option>
+                                    <option value="-1">--Select--</option>
                                     <option ng-repeat="Siblings in arrSiblings">{{Siblings}}</option>
                                 </select>
                             </div>
@@ -98,7 +98,7 @@
                             <label for="Married Brothers" class="col-lg-3 control-label">{{ 'FAMMARDBRO' | translate }}</label>
                             <div class="col-lg-9">
                                 <select class="form-control" id="ddlMarriedBrothers" ng-model="frmData[0].MarriedBrothers">
-                                    <option value="0">--Select--</option>
+                                    <option value="-1">--Select--</option>
                                     <option ng-repeat="Siblings in arrSiblings">{{Siblings}}</option>
                                 </select>
                             </div>
@@ -107,7 +107,7 @@
                             <label for="No of Sisters" class="col-lg-3 control-label">{{ 'FAMNOOFSIS' | translate }}</label>
                             <div class="col-lg-9">
                                 <select class="form-control" id="ddlNoOfSisters" ng-model="frmData[0].NoOfSisters">
-                                    <option value="0">--Select--</option>
+                                    <option value="-1">--Select--</option>
                                     <option ng-repeat="Siblings in arrSiblings">{{Siblings}}</option>
                                 </select>
                             </div>
@@ -116,7 +116,7 @@
                             <label for="Married Sisters" class="col-lg-3 control-label">{{ 'FAMMARDSIS' | translate }}</label>
                             <div class="col-lg-9">
                                 <select class="form-control" ng-model="frmData[0].MarriedSisters">
-                                    <option value="0">--Select--</option>
+                                    <option value="-1">--Select--</option>
                                     <option ng-repeat="Siblings in arrSiblings">{{Siblings}}</option>
                                 </select>
                             </div>

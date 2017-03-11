@@ -190,6 +190,9 @@ namespace Mugurtham.Core.Sangam
                 objDTOSangam.BannerPath = objSangamCoreEntity.BannerPath;
                 objDTOSangam.RunningNoStartsFrom = objSangamCoreEntity.RunningNoStartsFrom;
                 objDTOSangam.LastProfileIDNo = objSangamCoreEntity.LastProfileIDNo;
+                objDTOSangam.ContactName = objSangamCoreEntity.ContactName;
+                objDTOSangam.ShowContactDetails = objSangamCoreEntity.ShowContactDetails;
+
             }
             catch (Exception objEx)
             {
@@ -213,6 +216,8 @@ namespace Mugurtham.Core.Sangam
                 objSangamCoreEntity.BannerPath = objDTOSangam.BannerPath;
                 objSangamCoreEntity.RunningNoStartsFrom = objDTOSangam.RunningNoStartsFrom;
                 objSangamCoreEntity.LastProfileIDNo = objDTOSangam.LastProfileIDNo;
+                objSangamCoreEntity.ContactName = objDTOSangam.ContactName;
+                objSangamCoreEntity.ShowContactDetails = objDTOSangam.ShowContactDetails;
             }
             catch (Exception objEx)
             {

@@ -564,73 +564,105 @@
                 ====================================================
                 -->
                 <!-- ===================================================
-                Contact Start
-                 ====================================================
-                 -->
-                <div class="col-lg-1">
-                    <i class="fa fa-volume-control-phone fa-5x"></i>
-                </div>
-                <div class="col-lg-10">
-                    <div class="panel panel-primary bgImage FormShadow">
-                        <div class="panel-heading">
-                            <h3 class="panel-title text-center">
-                                {{ 'LYTPRFTABCONT' | translate }}
-                            </h3>
-                        </div>
-                        <div class="panel-body">
-                            <div class="table-responsive">
-                                <table class="mugurthamTable table-striped table-bordered table-hover FormShadow ">
+                Sangam Contact Start
+                  ====================================================
+                  -->
+                <div id="fullViewSangamContact">
+                    <div class="col-lg-1">
+                        <i class="fa fa-volume-control-phone fa-5x"></i>
+                    </div>
+                    <div class="col-lg-10">
+                        <div class="panel panel-primary bgImage FormShadow">
+                            <div class="panel-heading">
+                                <h3 class="panel-title text-center">
+                                    {{ 'LYTPRFTABCONT' | translate }}
+                                </h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="table-responsive">
+                                    <table class="mugurthamTable table-striped table-bordered table-hover FormShadow">
 
-                                    <tr>
-                                        <td class="col-lg-2"><b>{{ 'BINAME' | translate }}</b></td>
-                                        <td>{{AllProfiles.SangamCoreEntity.Name }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="col-lg-2"><b>{{ 'REFCONTNUM' | translate }}</b></td>
-                                        <td>{{AllProfiles.SangamCoreEntity.ContactNumber }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="col-lg-2"><b>{{ 'VWCTADRS' | translate }}</b></td>
-                                        <td>{{AllProfiles.SangamCoreEntity.Address }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="col-lg-2"><b>{{ 'VWABTSGM' | translate }}</b></td>
-                                        <td>{{AllProfiles.SangamCoreEntity.AboutSangam }}</td>
-                                    </tr>
-                                    <!-- Remove Reference details in the bottomw as well
-                                    <tr>
-                                        <td><b>{{ 'CONNAME' | translate }}</b></td>
-                                        <td>{{AllProfiles.ContactCoreEntity.Name }}</td>
-                                        <td><b>{{ 'CONREL' | translate }}</b></td>
-                                        <td>{{AllProfiles.ContactCoreEntity.Relationship }}</td>
-                                        <td><b>{{ 'CONMOBNO' | translate }}</b></td>
-                                        <td>{{AllProfiles.ContactCoreEntity.MobileNumber}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td><b>{{ 'CONLNDNO' | translate }}</b></td>
-                                        <td>{{AllProfiles.ContactCoreEntity.LandlineNumber}}</td>
-                                        <td><b>{{ 'CONTMETOCALL' | translate }}</b> </td>
-                                        <td>{{AllProfiles.ContactCoreEntity.TimeToCall }}</td>
-                                        <td><b>{{ 'CONEMAIL' | translate }}</b></td>
-                                        <td>{{AllProfiles.ContactCoreEntity.Email}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td><b>{{ 'CONRESADR' | translate }}</b></td>
-                                        <td colspan="5">{{AllProfiles.ContactCoreEntity.ResidentialAddress }}</td>
-                                    </tr>
-                                        -->
-                                </table>
+                                        <tr>
+                                            <td class="col-lg-2"><b>{{ 'BINAME' | translate }}</b></td>
+                                            <td>{{AllProfiles.SangamCoreEntity.Name }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-lg-2"><b>{{ 'REFCONTNUM' | translate }}</b></td>
+                                            <td>{{AllProfiles.SangamCoreEntity.ContactNumber }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-lg-2"><b>{{ 'VWCTADRS' | translate }}</b></td>
+                                            <td>{{AllProfiles.SangamCoreEntity.Address }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-lg-2"><b>{{ 'VWABTSGM' | translate }}</b></td>
+                                            <td>{{AllProfiles.SangamCoreEntity.AboutSangam }}</td>
+                                        </tr>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <div class="col-lg-1"></div>
+                    <div class="col-lg-12"></div>
                 </div>
-                <div class="col-lg-1"></div>
-                <div class="col-lg-12"></div>
                 <!--
                 ====================================================
-                Contact End
+                Sangam Contact End
                 ====================================================
                 -->
+                <!-- ===================================================
+                Profile Contact Start
+                  ====================================================
+                  -->
+                <div id="fullViewProfileContact">
+                    <div class="col-lg-1">
+                        <i class="fa fa-volume-control-phone fa-5x"></i>
+                    </div>
+                    <div class="col-lg-10">
+                        <div class="panel panel-primary bgImage FormShadow">
+                            <div class="panel-heading">
+                                <h3 class="panel-title text-center">
+                                    {{ 'LYTPRFTABCONT' | translate }}
+                                </h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="table-responsive">
+                                    <table class="mugurthamTable table-striped table-bordered table-hover FormShadow">
+                                        <!-- Remove Reference details in the bottomw as well-->
+                                        <tr>
+                                            <td><b>{{ 'CONNAME' | translate }}</b></td>
+                                            <td>{{AllProfiles.ContactCoreEntity.Name }} </td>
+                                            <td><b>{{ 'CONREL' | translate }}</b></td>
+                                            <td>{{AllProfiles.ContactCoreEntity.Relationship }}</td>
+                                            <td><b>{{ 'CONMOBNO' | translate }}</b></td>
+                                            <td>{{AllProfiles.ContactCoreEntity.MobileNumber}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>{{ 'CONLNDNO' | translate }}</b></td>
+                                            <td>{{AllProfiles.ContactCoreEntity.LandlineNumber}}</td>
+                                            <td><b>{{ 'CONTMETOCALL' | translate }}</b> </td>
+                                            <td>{{AllProfiles.ContactCoreEntity.TimeToCall }}</td>
+                                            <td><b>{{ 'CONEMAIL' | translate }}</b></td>
+                                            <td>{{AllProfiles.ContactCoreEntity.Email}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>{{ 'CONRESADR' | translate }}</b></td>
+                                            <td colspan="5">{{AllProfiles.ContactCoreEntity.ResidentialAddress }}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-1"></div>
+                    <div class="col-lg-12"></div>
+                </div>
+                <!--
+                ====================================================
+                Profile Contact End
+                ====================================================
+                    -->
                 <!-- ===================================================
                 Location Start
                  ====================================================
@@ -680,33 +712,34 @@
                 Reference Start
                  ====================================================
                  -->
-
-                <div class="col-lg-1">
-                    <i class="fa fa-hand-o-right fa-5x"></i>
-                </div>
-                <div class="col-lg-10">
-                    <div class="panel panel-primary bgImage FormShadow">
-                        <div class="panel-heading">
-                            <h3 class="panel-title text-center">
-                                {{ 'LYTPRFTABREF' | translate }}
-                            </h3>
-                        </div>
-                        <div class="panel-body">
-                            <div class="table-responsive">
-                                <table class="mugurthamTable table-striped table-bordered table-hover FormShadow ">
-                                    <tr>
-                                        <td><b>{{ 'REFNOMNAME' | translate }}</b></td>
-                                        <td>{{AllProfiles.ReferenceCoreEntity.NomineeName }}</td>
-                                        <td><b>{{ 'REFCONTNUM' | translate }}</b></td>
-                                        <td>{{AllProfiles.ReferenceCoreEntity.ContactNo }}</td>
-                                    </tr>
-                                </table>
+                <div id="fullViewReferenceContact">
+                    <div class="col-lg-1">
+                        <i class="fa fa-hand-o-right fa-5x"></i>
+                    </div>
+                    <div class="col-lg-10">
+                        <div class="panel panel-primary bgImage FormShadow">
+                            <div class="panel-heading">
+                                <h3 class="panel-title text-center">
+                                    {{ 'LYTPRFTABREF' | translate }}
+                                </h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="table-responsive">
+                                    <table class="mugurthamTable table-striped table-bordered table-hover FormShadow ">
+                                        <tr>
+                                            <td><b>{{ 'REFNOMNAME' | translate }}</b></td>
+                                            <td>{{AllProfiles.ReferenceCoreEntity.NomineeName }}</td>
+                                            <td><b>{{ 'REFCONTNUM' | translate }}</b></td>
+                                            <td>{{AllProfiles.ReferenceCoreEntity.ContactNo }}</td>
+                                        </tr>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <div class="col-lg-1"></div>
+                    <div class="col-lg-12"></div>
                 </div>
-                <div class="col-lg-1"></div>
-                <div class="col-lg-12"></div>
                 <!--
                 ====================================================
                 Reference End
@@ -734,7 +767,7 @@
                                         {{SimilarProfile.PhotoPath}}
                                     </h5>
                                     <h5 class="price-text-color">
-                                        {{SimilarProfile.MugurthamProfileID}} 
+                                        {{SimilarProfile.MugurthamProfileID}}
                                     </h5>
                                 </div>
 
@@ -748,7 +781,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                
+
                                 <div class="col-md-12">
                                     {{SimilarProfile.Education}}
                                 </div>

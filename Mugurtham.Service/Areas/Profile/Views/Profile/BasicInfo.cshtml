@@ -65,7 +65,7 @@
                             <label for="Marital Status" class="col-lg-3 control-label">{{'BIMARSTATUS'  | translate}}</label>
                             <div class="col-lg-9">
                                 <select class="form-control" id="ddlMaritalStatus" ng-model="frmData[0].MaritalStatus">
-                                    <option value="0">--Select--</option>
+                                    <option value="-1">--Select--</option>
                                     <option ng-repeat="MaritalStatus in arrMaritalStatus">{{MaritalStatus}}</option>
                                 </select>
                             </div>
@@ -80,7 +80,7 @@
                             <label for="Children Living Status" class="col-lg-3 control-label">{{'BICHILLVNGST'  | translate}}</label>
                             <div class="col-lg-9">
                                 <select class="form-control" id="ddlChildrenLivingStatus" ng-model="frmData[0].ChildrenLivingStatus">
-                                    <option value="0">--Select--</option>
+                                    <option value="-1">--Select--</option>
                                     <option ng-repeat="ChildrenLivingStatus in arrChildrenLivingStatus">{{ChildrenLivingStatus}}</option>
                                 </select>
                             </div>
@@ -89,7 +89,7 @@
                             <label for="Height" class="col-lg-3 control-label">{{'BIHEIGHT'  | translate}}</label>
                             <div class="col-lg-9">
                                 <select class="form-control" id="ddlHeight" ng-model="frmData[0].Height">
-                                    <option value="0">--Select--</option>
+                                    <option value="-1">--Select--</option>
                                     <option ng-repeat="height in arrHeight">{{height}}</option>
                                 </select>
                             </div>
@@ -104,7 +104,7 @@
                             <label for="Body Type" class="col-lg-3 control-label">{{'BIBDYTPE'  | translate}}</label>
                             <div class="col-lg-9">
                                 <select class="form-control" id="ddlBodyType" ng-model="frmData[0].BodyType">
-                                    <option value="0">--Select--</option>
+                                    <option value="-1">--Select--</option>
                                     <option ng-repeat="BodyType in arrBodyType">{{BodyType}}</option>
                                 </select>
                             </div>
@@ -114,7 +114,7 @@
                             <label for="Complexion" class="col-lg-3 control-label">{{'BICOMPLEXION'  | translate}}</label>
                             <div class="col-lg-9">
                                 <select class="form-control" id="ddlComplexion" ng-model="frmData[0].Complexion">
-                                    <option value="0">--Select--</option>
+                                    <option value="-1">--Select--</option>
                                     <option ng-repeat="Complexion in arrComplexion">{{Complexion}}</option>
                                 </select>
                             </div>
@@ -123,7 +123,7 @@
                             <label for="Physical Status" class="col-lg-3 control-label">{{'BIPHYSTA'  | translate}}</label>
                             <div class="col-lg-9">
                                 <select class="form-control" id="ddlPhysicalStatus" ng-model="frmData[0].PhysicalStatus">
-                                    <option value="0">--Select--</option>
+                                    <option value="-1">--Select--</option>
                                     <option ng-repeat="PhysicalStatus in arrPhysicalStatus">{{PhysicalStatus}}</option>
                                 </select>
                             </div>
@@ -132,7 +132,7 @@
                             <label for="Blood Group" class="col-lg-3 control-label">{{'BIBLGRP'  | translate}}</label>
                             <div class="col-lg-9">
                                 <select class="form-control" id="ddlBloodGroup" ng-model="frmData[0].BloodGroup">
-                                    <option value="0">--Select--</option>
+                                    <option value="-1">--Select--</option>
                                     <option ng-repeat="BlodGroup in arrBlodGroup">{{BlodGroup}}</option>
                                 </select>
                             </div>
@@ -142,7 +142,7 @@
                             <label for="Mother Tongue" class="col-lg-3 control-label">{{'BIMOTONG'  | translate}}</label>
                             <div class="col-lg-9">
                                 <select class="form-control" id="ddlMotherTongue" ng-model="frmData[0].MotherTongue">
-                                    <option value="0">--Select--</option>
+                                    <option value="-1">--Select--</option>
                                     <option ng-repeat="MotherToungue in arrMotherToungue">{{MotherToungue}}</option>
                                 </select>
                             </div>
@@ -151,7 +151,7 @@
                             <label for="Profile Created By" class="col-lg-3 control-label">{{'BIPROFCRBY'  | translate}}</label>
                             <div class="col-lg-9">
                                 <select class="form-control" id="ddlProfileCreatedBy" ng-model="frmData[0].ProfileCreatedBy">
-                                    <option value="0">--Select--</option>
+                                    <option value="-1">--Select--</option>
                                     <option ng-repeat="ProfileCreatedBy in arrProfileCreatedBy">{{ProfileCreatedBy}}</option>
                                 </select>
                             </div>
@@ -161,7 +161,7 @@
                             <label for="Religion" class="col-lg-3 control-label">{{'BIRLGN'  | translate}}</label>
                             <div class="col-lg-9">
                                 <select class="form-control" id="ddlReligion" ng-model="frmData[0].Religion">
-                                    <option value="0">--Select--</option>
+                                    <option value="-1">--Select--</option>
                                     <option ng-repeat="arrReligion in arrReligion" value="{{arrReligion}}">{{arrReligion}}</option>
                                 </select>
                             </div>
@@ -170,7 +170,7 @@
                             <label for="Caste" class="col-lg-3 control-label">{{'BICST'  | translate}}</label>
                             <div class="col-lg-9">
                                 <select class="form-control" id="ddlCaste" ng-model="frmData[0].Caste">
-                                    <option value="0">--Select--</option>
+                                    <option value="-1">--Select--</option>
                                     <option ng-repeat="arrCaste in arrCaste" value="{{arrCaste}}">{{arrCaste}}</option>
                                 </select>
                             </div>
@@ -179,7 +179,7 @@
                             <label for="Sub Caste" class="col-lg-3 control-label">{{'BISUBCST'  | translate}}</label>
                             <div class="col-lg-9">
                                 <select class="form-control" id="ddlSubCaste" ng-model="frmData[0].SubCaste">
-                                    <option value="0">--Select--</option>
+                                    <option value="-1">--Select--</option>
                                     <option ng-repeat="arrSubCaste in arrSubCaste" value="{{arrSubCaste}}">{{arrSubCaste}}</option>
                                 </select>
                             </div>
@@ -189,7 +189,7 @@
                             <label for="Gothra(m)" class="col-lg-3 control-label">{{'BIGOTHRM'  | translate}}</label>
                             <div class="col-lg-9">                                
                                 <select class="form-control" id="ddlGothram" ng-model="frmData[0].Gothram">
-                                    <option value="0">--Select--</option>
+                                    <option value="-1">--Select--</option>
                                     <option ng-repeat="arrGothram in arrGothram" value="{{arrGothram}}">{{arrGothram}}</option>
                                 </select>
                             </div>
@@ -198,7 +198,7 @@
                             <label for="Star" class="col-lg-3 control-label">{{'BISTR'  | translate}}</label>
                             <div class="col-lg-9">
                                 <select class="form-control" id="ddlStar" ng-model="frmData[0].Star">
-                                    <option value="0">--Select--</option>
+                                    <option value="-1">--Select--</option>
                                     <option ng-repeat="arrStar in arrStar" value="{{arrStar}}">{{arrStar}}</option>
 
                                 </select>
@@ -208,7 +208,7 @@
                             <label for="PAADHAM" class="col-lg-3 control-label">{{'BIPAADHAM'  | translate}}</label>
                             <div class="col-lg-9">
                                 <select class="form-control" id="ddlPAADHAM" ng-model="frmData[0].Paadham">
-                                    <option value="0">--Select--</option>
+                                    <option value="-1">--Select--</option>
                                     <option ng-repeat="arrPaadham in arrPaadham" value="{{arrPaadham}}">{{arrPaadham}}</option>
 
                                 </select>
@@ -218,7 +218,7 @@
                             <label for="Raasi" class="col-lg-3 control-label">{{'BIRAASI'  | translate}}</label>
                             <div class="col-lg-9">
                                 <select class="form-control" id="ddlRaasi" ng-model="frmData[0].Raasi">
-                                    <option value="0">--Select--</option>
+                                    <option value="-1">--Select--</option>
                                     <option ng-repeat="Raasi in arrRaasi">{{Raasi}}</option>
                                 </select>
                             </div>
@@ -228,7 +228,7 @@
                             <label for="Horoscope Match" class="col-lg-3 control-label">{{'BIHORMTCH'  | translate}}</label>
                             <div class="col-lg-9">
                                 <select class="form-control" id="ddlAnyDhosham" ng-model="frmData[0].HoroscopeMatch">
-                                    <option value="0">--Select--</option>
+                                    <option value="-1">--Select--</option>
                                     <option ng-repeat="HoroscopeMatch in arrHoroscopeMatch">{{HoroscopeMatch}}</option>
                                 </select>
                             </div>
@@ -238,7 +238,7 @@
                             <label for="Any Dhosham" class="col-lg-3 control-label">{{'BIANYDHSM'  | translate}}</label>
                             <div class="col-lg-9">
                                 <select class="form-control" id="ddlHoroscopeMatch" ng-model="frmData[0].AnyDhosham">
-                                    <option value="0">--Select--</option>
+                                    <option value="-1">--Select--</option>
                                     <option ng-repeat="Dhosham in arrDhosham">{{Dhosham}}</option>
                                 </select>
                             </div>
@@ -248,7 +248,7 @@
                             <label for="Eating" class="col-lg-3 control-label">{{'BIETNG'  | translate}}</label>
                             <div class="col-lg-9">
                                 <select class="form-control" id="ddlEating" ng-model="frmData[0].Eating">
-                                    <option value="0">--Select--</option>
+                                    <option value="-1">--Select--</option>
                                     <option ng-repeat="Eating in arrEating">{{Eating}}</option>
                                 </select>
                             </div>
@@ -258,7 +258,7 @@
                             <label for="Smoking" class="col-lg-3 control-label">{{'BISMKNG'  | translate}}</label>
                             <div class="col-lg-9">
                                 <select class="form-control" id="ddlSmoking" ng-model="frmData[0].Smoking">
-                                    <option value="0">--Select--</option>
+                                    <option value="-1">--Select--</option>
                                     <option ng-repeat="Smoking in arrSmoking">{{Smoking}}</option>
                                 </select>
                             </div>
@@ -268,7 +268,7 @@
                             <label for="Drinking" class="col-lg-3 control-label">{{'BIDRNKNG'  | translate}}</label>
                             <div class="col-lg-9">
                                 <select class="form-control" id="ddlDrinking" ng-model="frmData[0].Drinking">
-                                    <option value="0">--Select--</option>
+                                    <option value="-1">--Select--</option>
                                     <option ng-repeat="Drinking in arrDrinking">{{Drinking}}</option>
                                 </select>
                             </div>

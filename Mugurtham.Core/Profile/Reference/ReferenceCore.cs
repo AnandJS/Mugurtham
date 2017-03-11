@@ -135,5 +135,20 @@ namespace Mugurtham.Core.Reference
             }
             return 0;
         }
+
+        public int AssignEntityToEmpty(Mugurtham.Core.Reference.ReferenceCoreEntity objReferenceCoreEntity)
+        {
+            try
+            {
+                objReferenceCoreEntity.ContactNo = string.Empty;
+                objReferenceCoreEntity.NomineeName = string.Empty;
+                objReferenceCoreEntity.ProfileID = string.Empty;
+            }
+            catch (Exception objEx)
+            {
+                Helpers.LogExceptionInFlatFile(objEx);
+            }
+            return 0;
+        }
     }
 }
