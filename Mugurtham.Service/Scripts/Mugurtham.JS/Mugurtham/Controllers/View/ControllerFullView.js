@@ -58,7 +58,13 @@ var ControllerViewFullView = angular.module('MugurthamApp').controller('Controll
                           }
 
                           $scope.AllProfiles = data;
-                          $scope.displayContactInfo($scope.AllProfiles.SangamCoreEntity.ShowContactDetails, $scope.AllProfiles.isLoggedInUserProfilesSangam);
+                          // Display Contact information based on Sangam Customization in Sangam Master
+                          $scope.displayContactInfo($scope.AllProfiles.SangamCoreEntity.ShowContactDetails);
+                          // Display Contact information based on the logged in user
+                          if (($scope.AllProfiles.isLoggedInUserProfilesSangam) && ($scope.AllProfiles.SangamCoreEntity.ShowContactDetails === '1'))
+                              $scope.displayContactInfo('1'); // Show Profile Contact
+                          else
+                              $scope.displayContactInfo('0'); // Show Sangam Contact
                           if ($scope.AllProfiles.profileDOB != '')
                               $("#dtDOB").text($.datepicker.formatDate('dd-M-yy', new Date($scope.AllProfiles.profileDOB)));
                           // Check if this is an interested profile
@@ -131,15 +137,15 @@ var ControllerViewFullView = angular.module('MugurthamApp').controller('Controll
                   setTimeout(displaySimilarPofilesSlider, 1000);
               }
 
-              $scope.displayContactInfo = function (data, boolIsLoggedInUserSameSangam) {
+              $scope.displayContactInfo = function (data) {
                   $('#fullViewProfileContact').hide();
                   $('#fullViewReferenceContact').hide();
                   $('#fullViewSangamContact').hide();
-                  if ((data === '1') && (boolIsLoggedInUserSameSangam)) {
+                  if (data === '1') {
                       $('#fullViewProfileContact').show();
                       $('#fullViewReferenceContact').show();
                   }
-                  else if ((data === '0') && (!boolIsLoggedInUserSameSangam)) {
+                  else if (data === '0') {
                       $('#fullViewSangamContact').show();
                   }
               }
