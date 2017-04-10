@@ -192,6 +192,7 @@ namespace Mugurtham.Core.Sangam
                 objDTOSangam.LastProfileIDNo = objSangamCoreEntity.LastProfileIDNo;
                 objDTOSangam.ContactName = objSangamCoreEntity.ContactName;
                 objDTOSangam.ShowContactDetails = objSangamCoreEntity.ShowContactDetails;
+                objDTOSangam.MugurthamSPOC = objSangamCoreEntity.MugurthamSPOC;
 
             }
             catch (Exception objEx)
@@ -218,6 +219,7 @@ namespace Mugurtham.Core.Sangam
                 objSangamCoreEntity.LastProfileIDNo = objDTOSangam.LastProfileIDNo;
                 objSangamCoreEntity.ContactName = objDTOSangam.ContactName;
                 objSangamCoreEntity.ShowContactDetails = objDTOSangam.ShowContactDetails;
+                objSangamCoreEntity.MugurthamSPOC = objDTOSangam.MugurthamSPOC;
             }
             catch (Exception objEx)
             {

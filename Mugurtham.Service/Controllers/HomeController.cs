@@ -107,10 +107,15 @@ namespace Mugurtham.Service.Controllers
                                               Request.ServerVariables["REMOTE_ADDR"].ToString());
                     FormsAuthentication.SetAuthCookie(objUserCoreEntity.LoginID, false);
                     Session.Timeout = 60;
+                    LoggedInUser objLoggedIn = new LoggedInUser(objUserCoreEntity.LoginID);
+                    Session["LoggedInUser"] = objLoggedIn;
+                }
+                else if (inLoginStatus == 6) // Connection Timed Out
+                {
+                    objUserCoreEntity.LoginStatus = "6";
                 }
             }
-            objUserCore = null; LoggedInUser objLoggedIn = new LoggedInUser(objUserCoreEntity.LoginID);
-            Session["LoggedInUser"] = objLoggedIn;
+            objUserCore = null;
             return this.Json(objUserCoreEntity);
         }
         [HttpGet]

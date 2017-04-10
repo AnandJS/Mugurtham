@@ -1,6 +1,17 @@
 ﻿
+Best
+========
+https://colorlib.com/wp/bootstrap-website-templates/
+
+MEAN Stack
+==========
+http://www.bradoncode.com/tutorials/learn-mean-stack-tutorial/
+
 Angular JS 1.x advanced
 =========================
+https://tests4geeks.com/build-angular-1-5-component-angularjs-tutorial/
+https://coderwall.com/p/wpwtxg/loading-big-dataset-quickly-in-angularjs
+http://tutorials.jenkov.com/angularjs/watch-digest-apply.html
 http://www.advancesharp.com/blog/1194/angularjs-constant-and-enum-with-example
 https://tylermcginnis.com/angularjs-factory-vs-service-vs-provider/
 https://www.tutorialspoint.com/angularjs/index.htm

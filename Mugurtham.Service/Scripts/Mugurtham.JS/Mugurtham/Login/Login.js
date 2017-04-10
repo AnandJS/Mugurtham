@@ -1,4 +1,4 @@
-﻿$(document).ready(function () {
+﻿ $(document).ready(function () {
 
     $('#Password').keypress(function (e) {
         var key = e.which;
@@ -67,7 +67,7 @@ function (data, status) {
         alert('Your profile is deactivated  by user sangam');
     }
     else if (data.LoginStatus == '6') {
-        alert('Server Maintenance - We sincerely apologize for the inconvinience. We will be back soon');
+        alert('Connection Timed Out - Please contact HIOX team - We sincerely apologize for the inconvinience. We will be back soon. Timeout expired. An error occurred while executing the command definition. See the inner exception for details. The timeout period elapsed prior to completion of the operation or the server is not responding. System.ComponentModel.Win32Exception (0x80004005): The wait operation timed out');
     }
 }).fail(function (response) {
     alert('Error: ' + response.responseText);

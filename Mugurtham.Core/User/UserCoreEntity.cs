@@ -10,6 +10,7 @@ namespace Mugurtham.Core.User
     {
         public Decimal? IsHighlighted { get; set; }
         public Decimal? ShowHoroscope { get; set; }
+        public Decimal? IsMarried { get; set; }
 
         public DateTime CreatedDate { get; set; }
         public DateTime ModifiedDate { get; set; }

@@ -17,8 +17,7 @@ namespace Mugurtham.Core.User
             strUserID = Helpers.primaryKey;
             try
             {
-                IUnitOfWork objIUnitOfWork = new UnitOfWork();
-                using (objIUnitOfWork as IDisposable)
+                IUnitOfWork objIUnitOfWork = new UnitOfWork();using (objIUnitOfWork as IDisposable)
                 {
                     Mugurtham.DTO.User.User objDTOUser = new DTO.User.User();
                     using (objDTOUser as IDisposable)
@@ -110,6 +109,7 @@ namespace Mugurtham.Core.User
             }
             catch (Exception objEx)
             {
+                objUserCoreEntity.LoginStatus = "6";
                 Helpers.LogExceptionInFlatFile(objEx);
             }
             return objUserCoreEntity;
@@ -218,6 +218,7 @@ namespace Mugurtham.Core.User
                 objDTOUser.HomePagePath = objUserCoreEntity.HomePagePath;
                 objDTOUser.IsHighlighted = objUserCoreEntity.IsHighlighted;
                 objDTOUser.ShowHoroscope = objUserCoreEntity.ShowHoroscope;
+                objDTOUser.IsMarried = objUserCoreEntity.IsMarried;
             }
             catch (Exception objEx)
             {
@@ -245,6 +246,7 @@ namespace Mugurtham.Core.User
                 objUserCoreEntity.HomePagePath = objDTOUser.HomePagePath;
                 objUserCoreEntity.IsHighlighted = objDTOUser.IsHighlighted;
                 objUserCoreEntity.ShowHoroscope = objDTOUser.ShowHoroscope;
+                objUserCoreEntity.IsMarried = objDTOUser.IsMarried;
             }
             catch (Exception objEx)
             {
@@ -263,6 +265,7 @@ namespace Mugurtham.Core.User
              3 -> Invalid Password
              4 -> DeActivated Sangam
              5 -> DeActivated Profile
+             6 -> Connection Timed Out
              */
             int intLoginStatus = 0;
             boolLogin = false;
@@ -271,6 +274,11 @@ namespace Mugurtham.Core.User
             {
                 Mugurtham.Core.User.UserCoreEntity _objUserCoreEntity = null;
                 _objUserCoreEntity = GetByLoginID(objUserCoreEntity.LoginID);
+                if (_objUserCoreEntity.LoginStatus == "6")
+                {
+                    intLoginStatus = 6;
+                    return intLoginStatus;
+                }
                 if (_objUserCoreEntity.LoginID == null)
                 {
                     intLoginStatus = 2;
@@ -294,6 +302,12 @@ namespace Mugurtham.Core.User
                     objSangamCoreEntity = null;
                 }
                 objSangamCore = null;
+                // Validate Connection Timed Out - Server connectivity
+                if (_objUserCoreEntity.LoginStatus == "6")
+                {
+                    intLoginStatus = 6;
+                    return intLoginStatus;
+                }
                 if (intLoginStatus == 4)
                     return intLoginStatus;
                 // Validate if User is activated
@@ -370,10 +384,10 @@ namespace Mugurtham.Core.User
                         objCommand.Parameters.AddWithValue("@SessionID", SessionID);
                         objCommand.Parameters.AddWithValue("@UserID", UserID);
                         objCommand.Parameters.AddWithValue("@LoggedInClientIP", LoggedInClientIP);
-                        objCommand.CommandText = "INSERT INTO Portalsession (SessionID,UserID,LoggedInClientIP) "+
-                                                 " VALUES ('"+ 
-                                                 objCommand.Parameters["@SessionID"].Value.ToString() + "','"+
-                                                 objCommand.Parameters["@UserID"].Value.ToString() + "','"+
+                        objCommand.CommandText = "INSERT INTO Portalsession (SessionID,UserID,LoggedInClientIP) " +
+                                                 " VALUES ('" +
+                                                 objCommand.Parameters["@SessionID"].Value.ToString() + "','" +
+                                                 objCommand.Parameters["@UserID"].Value.ToString() + "','" +
                                                  objCommand.Parameters["@LoggedInClientIP"].Value.ToString() +
                                                  "')";
                         objCommand.ExecuteNonQuery();

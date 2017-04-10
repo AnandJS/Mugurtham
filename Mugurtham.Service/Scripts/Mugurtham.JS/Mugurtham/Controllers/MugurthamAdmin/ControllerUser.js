@@ -43,11 +43,12 @@ var ControllerUser = angular.module('MugurthamApp').controller('ControllerUser',
             $scope.IsActivated = '';
             $scope.IsHighlighted = '';
             $scope.ShowHoroscope = '';
-
+            $scope.IsMarried = '';
+            
             //========================================
             //GLOBAL EVENT HANDLER FOR THIS CONTROLLER
             //=========================================
-            $scope.saveFormData = function () {
+            $scope.saveFormData = function () {                
                 $scope.initFormData();
                 if ($scope.globalUserID == '') {
                     $scope.Add();
@@ -59,7 +60,7 @@ var ControllerUser = angular.module('MugurthamApp').controller('ControllerUser',
             //=====================================
             //PRIVATE METHODS FOR THIS CONTROLLER
             //=====================================
-            $scope.initFormData = function () {
+            $scope.initFormData = function () {                
                 $scope.Name = $scope.userFormData[0].Name;
                 $scope.LoginID = $scope.userFormData[0].LoginID;
                 $scope.Password = $scope.userFormData[0].Password;
@@ -70,6 +71,7 @@ var ControllerUser = angular.module('MugurthamApp').controller('ControllerUser',
                 $scope.SangamID = $scope.userFormData[0].SangamID;
                 $scope.IsHighlighted = $scope.userFormData[0].IsHighlighted;
                 $scope.ShowHoroscope = $scope.userFormData[0].ShowHoroscope;
+                $scope.IsMarried = $scope.userFormData[0].IsMarried;
             }
 
             //===================================================
@@ -88,7 +90,8 @@ var ControllerUser = angular.module('MugurthamApp').controller('ControllerUser',
                         LocaleID: $scope.userFormData[0].LocaleID,
                         IsActivated: $scope.userFormData[0].IsActivated,
                         IsHighlighted: $scope.userFormData[0].IsHighlighted,
-                        ShowHoroscope: $scope.userFormData[0].ShowHoroscope
+                        ShowHoroscope: $scope.userFormData[0].ShowHoroscope,
+                        IsMarried: $scope.userFormData[0].IsMarried
                     }),
                     headers: { 'content-Type': 'application/x-www-form-urlencoded' }
                 }).
@@ -104,9 +107,10 @@ var ControllerUser = angular.module('MugurthamApp').controller('ControllerUser',
             //===================================================
             //AJAX GET REQUEST - GETTING User BY ID
             //===================================================
-            function getUserByID() {
+            function getUserByID() {                
                 var strHighlighted = '0';
                 var strShowHoroscope = '0';
+                var strMarried = '0';
                 $scope.userFormData = [];
                 if ($scope.globalUserID != '') {
                     var strGetURL = '/MugurthamUserLookup/UserAPI/Get/' + $scope.globalUserID;
@@ -114,11 +118,15 @@ var ControllerUser = angular.module('MugurthamApp').controller('ControllerUser',
                         method: "GET", url: strGetURL
                     }).
                 success(function (data, status, headers, config) {
+                    
                     if (data.IsHighlighted != null) {
                         strHighlighted = data.IsHighlighted.toString();
                     }
                     if (data.ShowHoroscope != null) {
                         strShowHoroscope = data.ShowHoroscope.toString();
+                    }
+                    if (data.IsMarried != null) {
+                        strMarried = data.IsMarried.toString();
                     }
                     $scope.userFormData.push({
                         ID: data.ID,
@@ -131,6 +139,7 @@ var ControllerUser = angular.module('MugurthamApp').controller('ControllerUser',
                         IsActivated: setActivation(data.IsActivated, 'userActivationCheckbox'),
                         IsHighlighted: setActivation(strHighlighted, 'userHighlightedCheckbox'),
                         ShowHoroscope: setActivation(strShowHoroscope, 'userShowHoroscope'),
+                        IsMarried: setActivation(strMarried, 'userMarriedCheckbox'),
                         SangamID: data.SangamID
                     });                    
                     $('#ddlSangams').val(data.SangamID);
@@ -144,6 +153,7 @@ var ControllerUser = angular.module('MugurthamApp').controller('ControllerUser',
             //AJAX PUT REQUEST - EDIT User
             //===================================================
             $scope.Edit = function () {
+                alert(geActivation('userMarriedCheckbox'));
                 var strsangamID = '';
                 var strRoleID = '';
                 if (typeof $('#ddlSangams').val() === "undefined") {
@@ -168,7 +178,9 @@ var ControllerUser = angular.module('MugurthamApp').controller('ControllerUser',
                         LocaleID: $scope.userFormData[0].LocaleID,
                         IsActivated: geActivation('userActivationCheckbox'),
                         IsHighlighted: geActivation('userHighlightedCheckbox'),
-                        ShowHoroscope: geActivation('userShowHoroscope')
+                        ShowHoroscope: geActivation('userShowHoroscope'),
+                        IsMarried: geActivation('userMarriedCheckbox')
+
                     }),
                     headers: { 'content-Type': 'application/x-www-form-urlencoded' }
                 }).

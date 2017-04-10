@@ -38,6 +38,7 @@ var ControllerSangam = angular.module('MugurthamApp').controller('ControllerSang
             $scope.BannerPath = '';
             $scope.ContactName = '';
             $scope.ShowContactDetails = '';
+            $scope.MugurthamSPOC = '';
 
             //========================================
             //GLOBAL EVENT HANDLER FOR THIS CONTROLLER
@@ -64,6 +65,7 @@ var ControllerSangam = angular.module('MugurthamApp').controller('ControllerSang
                 $scope.BannerPath = $scope.frmData[0].BannerPath;
                 $scope.ContactName = $scope.frmData[0].ContactName;
                 $scope.ShowContactDetails = $scope.frmData[0].ShowContactDetails;
+                $scope.MugurthamSPOC = $scope.frmData[0].MugurthamSPOC;
             }
 
             //===================================================
@@ -82,7 +84,8 @@ var ControllerSangam = angular.module('MugurthamApp').controller('ControllerSang
                         BannerPath: $scope.frmData[0].BannerPath,
                         ContactName: $scope.frmData[0].ContactName,
                         IsActivated: geSangamActivation(),
-                        ShowContactDetails: getShowContactDetails()
+                        ShowContactDetails: getShowContactDetails(),
+                        MugurthamSPOC: $scope.frmData[0].MugurthamSPOC
                     }),
                     headers: { 'content-Type': 'application/x-www-form-urlencoded' }
                 }).
@@ -117,7 +120,8 @@ var ControllerSangam = angular.module('MugurthamApp').controller('ControllerSang
                     BannerPath: data.BannerPath,
                     ContactName: data.ContactName,
                     IsActivated: setSangamActivation(data.IsActivated),
-                    ShowContactDetails: setShowContactDetails(data.ShowContactDetails)
+                    ShowContactDetails: setShowContactDetails(data.ShowContactDetails),
+                    MugurthamSPOC: data.MugurthamSPOC
                 });
             }).
             error(function (data, status, headers, config) {
@@ -128,7 +132,7 @@ var ControllerSangam = angular.module('MugurthamApp').controller('ControllerSang
             //===================================================
             //AJAX PUT REQUEST - EDIT SANGAM
             //===================================================
-            $scope.Edit = function () {
+            $scope.Edit = function () {                
                 $http({
                     method: "PUT", url: '/Sangam/SangamAPI', data: $.param({
                         Name: $scope.frmData[0].Name,
@@ -142,6 +146,7 @@ var ControllerSangam = angular.module('MugurthamApp').controller('ControllerSang
                         ContactName: $scope.frmData[0].ContactName,
                         IsActivated: geSangamActivation(),
                         ShowContactDetails: getShowContactDetails(),
+                        MugurthamSPOC: $scope.frmData[0].MugurthamSPOC
                     }),
                     headers: { 'content-Type': 'application/x-www-form-urlencoded' }
                 }).

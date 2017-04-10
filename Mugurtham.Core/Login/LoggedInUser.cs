@@ -181,6 +181,13 @@ namespace Mugurtham.Core.Login
                 return objBasicInfoCoreEntity;
             }
         }
+        public Core.Sangam.SangamCoreEntity SangamCoreEntity
+        {
+            get
+            {
+                return objSangamCoreEntity;
+            }
+        }
         public void Dispose()
         {
             Dispose(true);
