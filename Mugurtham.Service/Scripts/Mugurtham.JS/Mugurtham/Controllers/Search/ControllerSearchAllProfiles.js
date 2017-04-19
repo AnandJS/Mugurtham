@@ -16,7 +16,7 @@ THIS CONTROLLER IS SPECIFICALLY FOR ALL-PROFILES PAGE ON SEARCH MODULE
 ==========================================================================================
 */
 var ControllerSearchAllProfiles = angular.module('MugurthamApp').controller('ControllerSearchAllProfiles',
-        ['$http', '$scope', '$filter', function ($http, $scope, $filter) {
+        ['$http', '$scope', '$filter', '$timeout', function ($http, $scope, $filter, $timeout) {
 
             $scope.ControllerName = 'ControllerSearchAllProfiles';
             $scope.filter = {};
@@ -36,7 +36,7 @@ var ControllerSearchAllProfiles = angular.module('MugurthamApp').controller('Con
 
             $scope.getAllProfilesfromSession = function () {
                 if ((sessionStorage.getItem('AllProfiles')))
-                    $scope.initData(JSON.parse(sessionStorage.getItem('AllProfiles')));
+                    $scope.initData();
             }
             $scope.getAllProfilesfromAPI = function () {
                 var strGetURL = "Search/Search/getAllProfiles";
@@ -46,7 +46,7 @@ var ControllerSearchAllProfiles = angular.module('MugurthamApp').controller('Con
                 }).
             success(function (data, status, headers, config) {
                 $("#divContainer").unmask();
-                initData(data);
+                initData();
             }).
                 error(function (data, status, headers, config) {
                     $("#divContainer").unmask();
@@ -54,24 +54,53 @@ var ControllerSearchAllProfiles = angular.module('MugurthamApp').controller('Con
                 });
             }
 
-            $scope.initData = function (data) {
-                $scope.AllProfiles = data;
+            $scope.initData = function () {
+                //$scope.AllProfiles = data;
                 $scope.currentPage = 1;
                 $scope.pageSize = 15;
-                $scope.SearchedProfiles = data.ProfileBasicInfoViewCoreEntityList;
-                $scope.profilePhotos = data.PhotoCoreEntityList;
-
-                $scope.pageChangeHandler = function (num) {
-                    $("html, body").animate({ scrollTop: 220 }, "slow");
-                    setTimeout(displayThumbnailSlider, 10);
-                    console.log('Profiles page changed to ' + num);
-                };
-                setTimeout(displayThumbnailSlider, 10);
+                $scope.SearchedProfiles = JSON.parse(sessionStorage.getItem('AllProfiles'));
+                $scope.profilePhotos = JSON.parse(sessionStorage.getItem('AllProfilesPhoto'));
+               // $scope.lazyLoadData(data);
             }
+
+            /*==========================Lazy loading custom logic starts==============================*/
+
+            $scope.lazyLoadData = function (data) {
+                var loadAll;
+                //Give a max of 40 rows to the view
+                if (data.ProfileBasicInfoViewCoreEntityList.length > 1000) {
+                    $scope.dataView = data.ProfileBasicInfoViewCoreEntityList.slice(0, 1000);
+                    $scope.photoView = data.PhotoCoreEntityList.slice(0, 1000);
+                } else {
+                    $scope.dataView = data.ProfileBasicInfoViewCoreEntityList;
+                    $scope.photoView = data.PhotoCoreEntityList;
+                }
+                //Cancel previous deferred function
+                if (loadAll !== undefined) {
+                    $timeout.cancel(loadAll);
+                }
+                $scope.SearchedProfiles = $scope.dataView;
+                $scope.profilePhotos = $scope.photoView;
+                //Will load all the rest of data after 1.5s
+                loadAll = $timeout(function () {
+                    $scope.SearchedProfiles = data.ProfileBasicInfoViewCoreEntityList;
+                    $scope.profilePhotos = data.PhotoCoreEntityList;
+                }, 5000);
+            };
+            /*==========================Lazy loading custom logic ends==============================*/
+
+            $scope.pageChangeHandler = function (num) {
+                $("html, body").animate({ scrollTop: 220 }, "slow");
+                setTimeout(displayThumbnailSlider, 10);
+                console.log('Profiles page changed to ' + num);
+            };
+            setTimeout(displayThumbnailSlider, 10);
+
+
             $scope.setProfileIDBySangamAdminForProfilePic = function (ProfileID) {
                 localStorage.setItem("ProfileIDBySangamAdminForProfilePic", ProfileID);
             }
-/*========================================= E-Commerce Filter Section ======================================================*/
+            /*========================================= E-Commerce Filter Section ======================================================*/
             $scope.getFilterItemCount = function (data) {
                 var counter = 0;
                 angular.forEach($scope.SearchedProfiles, function (value, key) {
@@ -98,7 +127,7 @@ var ControllerSearchAllProfiles = angular.module('MugurthamApp').controller('Con
                         return;
                 }
                 return item.Star;
-            } 
+            }
             /*========================================= E-Commerce Filter Section End======================================================*/
 
 

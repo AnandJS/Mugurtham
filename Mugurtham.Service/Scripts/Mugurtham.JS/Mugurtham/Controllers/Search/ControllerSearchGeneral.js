@@ -57,14 +57,15 @@ var ControllerSearchGeneral = angular.module('MugurthamApp').controller('Control
             //AJAX GET REQUEST - GETTING ALL PROFILES
             //===================================================
             $scope.getAllGeneralSearchProfiles = function () {
-                if (typeof (Storage) !== "undefined") {
+              /*  if (typeof (Storage) !== "undefined") {
                     if ((!sessionStorage.getItem('AllProfiles')))
                         $scope.getAllGeneralSearchProfilesfromAPI();
                     else
                         $scope.getAllGeneralSearchProfilesfromSession();
                 }
                 else
-                    $scope.getAllGeneralSearchProfilesfromAPI();
+                    $scope.getAllGeneralSearchProfilesfromAPI();*/
+                $scope.initData();
             }
 
             $scope.getAllGeneralSearchProfilesfromSession = function () {
@@ -87,12 +88,11 @@ var ControllerSearchGeneral = angular.module('MugurthamApp').controller('Control
                 });
             }
 
-            $scope.initData = function (data) {
-                $scope.AllProfiles = $.parseJSON(sessionStorage.getItem('AllProfiles'));
+            $scope.initData = function () {
                 $scope.currentPage = 1;
                 $scope.pageSize = 15;
-                $scope.SearchedProfiles = ($.parseJSON(sessionStorage.getItem('AllProfiles')).ProfileBasicInfoViewCoreEntityList);
-                $scope.profilePhotos = ($.parseJSON(sessionStorage.getItem('AllProfiles')).PhotoCoreEntityList);
+                $scope.SearchedProfiles = JSON.parse(sessionStorage.getItem('AllProfiles'));
+                $scope.profilePhotos = JSON.parse(sessionStorage.getItem('AllProfilesPhoto'));
                 $scope.pageChangeHandler = function (num) {
                     $("html, body").animate({ scrollTop: 220 }, "slow");
                     setTimeout(displayThumbnailSlider, 10);

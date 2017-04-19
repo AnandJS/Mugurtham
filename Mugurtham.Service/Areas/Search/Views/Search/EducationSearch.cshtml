@@ -63,7 +63,7 @@
 
 
         <!-- Profiles Listing-->
-        <div class="panel panel-primary FormShadow" dir-paginate="data in AllProfiles.ProfileBasicInfoViewCoreEntityList | filter: ({Education : q})  | orderBy: 'Name' | itemsPerPage: pageSize" current-page="currentPage">
+        <div class="panel panel-primary FormShadow" dir-paginate="data in SearchedProfiles | filter: ({Education : q})  | orderBy: 'Name' | itemsPerPage: pageSize" current-page="currentPage">
             <div class="panel-heading">
                 <h3 class="panel-title text-center">
                     <a href="#/FullView/{{data.MugurthamProfileID}}" target="_blank">  {{data.Name }}</a>

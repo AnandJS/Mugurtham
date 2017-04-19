@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using Mugurtham.Common.Utilities;
 using Mugurtham.Service.Controllers;
+using Mugurtham.Core;
 
 namespace Mugurtham.Service.Areas.Search.Controllers
 {
@@ -59,7 +60,7 @@ namespace Mugurtham.Service.Areas.Search.Controllers
         {
             string strGender = "admin"; // Mugurtham admin, Sangam admin, public user
             Mugurtham.Core.Login.LoggedInUser objLoggedIn = (Mugurtham.Core.Login.LoggedInUser)Session["LoggedInUser"];
-            if (objLoggedIn.roleID == "F62DDFBE55448E3A3") // User Profiles 
+            if (objLoggedIn.roleID == Constants.RoleIDForUserProfile) // User Profiles 
             {
                 if (!string.IsNullOrWhiteSpace(objLoggedIn.BasicInfoCoreEntity.Gender))
                 {
@@ -88,14 +89,50 @@ namespace Mugurtham.Service.Areas.Search.Controllers
                 objProfileCore.GetAll(ref objProfileCoreList, strGender, objLoggedIn.sangamID);
             objProfileCore = null;*/
             //Response.AddHeader("Content-Encoding", "gzip");
-            return this.Json(objProfileBasicViewEntity, JsonRequestBehavior.AllowGet);
+            return this.Json(objProfileBasicViewEntity.ProfileBasicInfoViewCoreEntityList, JsonRequestBehavior.AllowGet);
+        }
+        [HttpGet]
+        public ActionResult getAllProfilesPhoto()
+        {
+            string strGender = "admin"; // Mugurtham admin, Sangam admin, public user
+            Mugurtham.Core.Login.LoggedInUser objLoggedIn = (Mugurtham.Core.Login.LoggedInUser)Session["LoggedInUser"];
+            if (objLoggedIn.roleID == Constants.RoleIDForUserProfile) // User Profiles 
+            {
+                if (!string.IsNullOrWhiteSpace(objLoggedIn.BasicInfoCoreEntity.Gender))
+                {
+                    if (objLoggedIn.BasicInfoCoreEntity.Gender.ToLower().Trim() == "male".ToLower().Trim())
+                        strGender = "female";
+                    else
+                        strGender = "male";
+                }
+            }
+            //string cs = System.Configuration.ConfigurationManager.ConnectionStrings["connectionStringName"].ConnectionString;
+            ProfileBasicViewEntity objProfileBasicViewEntity = new ProfileBasicViewEntity();
+            PorfileBasicInfoViewCore objPorfileBasicInfoViewCore = new PorfileBasicInfoViewCore();
+            using (objPorfileBasicInfoViewCore as IDisposable)
+            {
+                objPorfileBasicInfoViewCore.GetAllProfiles(Utility.connectionString(), strGender,
+                    ref objProfileBasicViewEntity,
+                    ref objLoggedIn
+                    );
+            }
+            objPorfileBasicInfoViewCore = null;
+            //Uncommented the below code for performance optimization - Apr 11 2016 - Anand J
+            /*
+            List<ProfileCore> objProfileCoreList = new List<ProfileCore>();
+            ProfileCore objProfileCore = new ProfileCore();
+            using (objProfileCore as IDisposable)
+                objProfileCore.GetAll(ref objProfileCoreList, strGender, objLoggedIn.sangamID);
+            objProfileCore = null;*/
+            //Response.AddHeader("Content-Encoding", "gzip");
+            return this.Json(objProfileBasicViewEntity.PhotoCoreEntityList, JsonRequestBehavior.AllowGet);
         }
         [HttpGet]
         public ActionResult GetRecentlyJoinedProfiles()
         {
             string strGender = "admin"; // Mugurtham admin, Sangam admin, public user
             Mugurtham.Core.Login.LoggedInUser objLoggedIn = (Mugurtham.Core.Login.LoggedInUser)Session["LoggedInUser"];
-            if (objLoggedIn.roleID == "F62DDFBE55448E3A3") // User Profiles 
+            if (objLoggedIn.roleID == Constants.RoleIDForUserProfile) // User Profiles 
             {
                 if (!string.IsNullOrWhiteSpace(objLoggedIn.BasicInfoCoreEntity.Gender))
                 {
@@ -121,7 +158,7 @@ namespace Mugurtham.Service.Areas.Search.Controllers
         {
             string strGender = "admin"; // Mugurtham admin, Sangam admin, public user
             Mugurtham.Core.Login.LoggedInUser objLoggedIn = (Mugurtham.Core.Login.LoggedInUser)Session["LoggedInUser"];
-            if (objLoggedIn.roleID == "F62DDFBE55448E3A3") // User Profiles 
+            if (objLoggedIn.roleID == Constants.RoleIDForUserProfile) // User Profiles 
             {
                 if (!string.IsNullOrWhiteSpace(objLoggedIn.BasicInfoCoreEntity.Gender))
                 {
@@ -149,7 +186,7 @@ namespace Mugurtham.Service.Areas.Search.Controllers
         {
             string strGender = "admin"; // Mugurtham admin, Sangam admin, public user
             Mugurtham.Core.Login.LoggedInUser objLoggedIn = (Mugurtham.Core.Login.LoggedInUser)Session["LoggedInUser"];
-            if (objLoggedIn.roleID == "F62DDFBE55448E3A3") // User Profiles 
+            if (objLoggedIn.roleID == Constants.RoleIDForUserProfile) // User Profiles 
             {
                 if (!string.IsNullOrWhiteSpace(objLoggedIn.BasicInfoCoreEntity.Gender))
                 {
@@ -177,7 +214,7 @@ namespace Mugurtham.Service.Areas.Search.Controllers
         {
             string strGender = "admin"; // Mugurtham admin, Sangam admin, public user
             Mugurtham.Core.Login.LoggedInUser objLoggedIn = (Mugurtham.Core.Login.LoggedInUser)Session["LoggedInUser"];
-            if (objLoggedIn.roleID == "F62DDFBE55448E3A3") // User Profiles 
+            if (objLoggedIn.roleID == Constants.RoleIDForUserProfile) // User Profiles 
             {
                 if (!string.IsNullOrWhiteSpace(objLoggedIn.BasicInfoCoreEntity.Gender))
                 {
@@ -216,7 +253,7 @@ namespace Mugurtham.Service.Areas.Search.Controllers
         {
             string strGender = "admin"; // Mugurtham admin, Sangam admin, public user
             Mugurtham.Core.Login.LoggedInUser objLoggedIn = (Mugurtham.Core.Login.LoggedInUser)Session["LoggedInUser"];
-            if (objLoggedIn.roleID == "F62DDFBE55448E3A3") // User Profiles 
+            if (objLoggedIn.roleID == Constants.RoleIDForUserProfile) // User Profiles 
             {
                 if (!string.IsNullOrWhiteSpace(objLoggedIn.BasicInfoCoreEntity.Gender))
                 {

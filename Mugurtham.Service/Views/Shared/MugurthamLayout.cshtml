@@ -267,23 +267,17 @@
                 </div>
                 <!-- /.container -->
             </nav>
-            <div class="container ">
+            <div class="container">
                 <!-- The big header-->
-                <div class="jumbotron">
-                    <div class="col-lg-12">
-                        <div class="col-lg-3">
-                            <br /> <br /><img src="@objLoggedIn.SangamLogoPath" />
-                        </div>
-                        <div class="col-lg-9 text-justify">
-                            <br />@objLoggedIn.AboutSangam
-                        </div>
-                    </div>
-
-                </div>
-                <div class="col-lg-12">
+                <div class="col-lg-9 text-center">
+                    <br><br><br>
                     <div class="fb-like" data-href="https://www.facebook.com/vishwakarmamugurtham/" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
                     <br />
                     <br /> If you have questions, feel free to call our office - @objLoggedIn.SangamName at &nbsp;&nbsp;<i class="fa fa-phone-square">&nbsp;&nbsp;@objLoggedIn.SangamContactNumber</i> &nbsp;&nbsp; and Mugurtham at <i class="fa fa-phone-square">&nbsp;&nbsp; @objLoggedIn.SangamCoreEntity.MugurthamSPOC</i>
+                </div>
+                <div class="col-lg-3">
+                    <br><br><br>
+                    <img src="/Images/Mugurtham/General/logo.png" class="img-responsive">
                 </div>
             </div>
 
@@ -358,12 +352,13 @@
                 <div class="modal-body">
                     <div class="col-lg-12 table-responsive">
                         <div class="col-lg-12 ">
-                            <h5>One stop station for all Vishwakarma matches across TamilNadu. <b>4000+</b> Vishwakarma only profiles and keeps adding. We are in Mobile view as well. </h5>
+                            <h5>One stop station for all Vishwakarma matches across TamilNadu. <b>8000+</b> Vishwakarma only profiles and keeps adding. We are in Mobile view as well. </h5>
                         </div>
                         <div class="col-lg-12 text-center"><h3><b>Mugurtham covers Vishwakarma matches better</b></h3></div>
                         <h5><b>"Smart Search " - </b> Search Raasi or Location or Name or anything in Smart Search and your Search ends here..  </h5>
                         <div class="col-lg-12 text-center"><h4><b>Togeather we make a difference - Our proud partners</b></h4></div>
-                        <table class="mugurthamTable table-striped table-bordered table-hover FormShadow ">
+                        <!--
+                            <table class="mugurthamTable table-striped table-bordered table-hover FormShadow ">
                             <tbody>
                                 <tr>
                                     <td>ஸ்ரீ காமாட்சி அம்மன் விஸ்வகர்ம திருமண தகவல் சேவை மையம், Chidambaram</td>
@@ -395,8 +390,8 @@
                                 <tr>
                                     <td>ViswaJothi from Tricy</td>
                                 </tr>
-                               
-                                
+
+
                                 <tr>
                                     <td>Vishwakarma Sezhu Marabinar Trust - Chennai</td>
                                 </tr>
@@ -406,6 +401,7 @@
                                 </tr>
                             </tbody>
                         </table>
+                            -->
                         <br />
                     </div>
                     <div class="col-lg-12">
@@ -443,6 +439,7 @@
     @Scripts.Render("~/bundles/MugurthamPaging")
     @Scripts.Render("~/bundles/MugurthamSlider")
     @Scripts.Render("~/bundles/MugurthamApp")
+    @Scripts.Render("~/bundles/MugurthamValidation")
     <script type="text/javascript" src="@Url.Content("~/Scripts/Mugurtham.js/Mugurtham/Controllers/ControllerMugurtham.js")"></script>
     @Scripts.Render("~/bundles/MugurthamConstants")
     @Scripts.Render("~/bundles/MugurthamServices")
@@ -455,7 +452,7 @@
     @Scripts.Render("~/bundles/MugurthamControllerUserChamber")
     @Scripts.Render("~/bundles/MugurthamControllerFullView")
     @Scripts.Render("~/bundles/MugurthamControllerMugurthamAdmin")
-    @Scripts.Render("~/bundles/MugurthamValidation")
+    
 
 
 

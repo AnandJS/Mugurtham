@@ -56,6 +56,8 @@ var MugurthamController = angular.module('MugurthamApp').
              // Global loggedIn User object with full details called only once at login
              // and during page refreshes, which should not supposed to happen
              getLoggedInUserInfo($http);
+             //Global Call once to set the session
+             setSessionData();
              //==================
              //HIGHLIGHT CLICKED TAB
              //==================

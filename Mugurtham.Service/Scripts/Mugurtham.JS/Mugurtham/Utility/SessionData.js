@@ -1,9 +1,6 @@
 ﻿
 
-$(document).ready(function () {
-    setSessionData();
 
-});
 
 
 
@@ -15,17 +12,7 @@ function setSessionData() {
         var boolIsSessionStorageSet = sessionStorage.getItem('IsSessionStorageSet');
 
         if (!boolIsSessionStorageSet) {
-            // Intentionally the GetAllProfiles API is kept first
-            // becuase this may take some times during heavy data load
-            // so the following APIs will get called Asynchroubnously
 
-            // API Call for AllProfiles JSON
-            $.getJSON("Search/Search/getAllProfiles")
-        .done(function (jsonObject) {
-            sessionStorage.setItem('AllProfiles', JSON.stringify(jsonObject));
-        })
-        .fail(function (jqxhr, textStatus, error) {
-        });
 
             // API Call for HighlightedProfiles JSON
             $.getJSON("Search/Search/getHighlightedProfiles")
@@ -88,6 +75,25 @@ function setSessionData() {
             alert((sessionStorage.getItem('HiglightedProfiles')) + 'From Session Storage2');
             alert((sessionStorage.getItem('InterestedInMeProfiles')) + 'From Session Storage3');*/
         }
+
+        // Intentionally the GetAllProfiles API is kept first
+        // becuase this may take some times during heavy data load
+        // so the following APIs will get called Asynchroubnously
+
+        // API Call for AllProfiles BasicInfo JSON
+        $.getJSON("Search/Search/getAllProfiles")
+    .done(function (jsonObject) {
+        sessionStorage.setItem('AllProfiles', JSON.stringify(jsonObject));
+    })
+    .fail(function (jqxhr, textStatus, error) {
+    });
+        // API Call for AllProfiles BasicInfo Photo JSON
+        $.getJSON("Search/Search/getAllProfilesPhoto")
+    .done(function (jsonObject) {
+        sessionStorage.setItem('AllProfilesPhoto', JSON.stringify(jsonObject));
+    })
+    .fail(function (jqxhr, textStatus, error) {
+    });
     }// Check for session storage support in browser
 };
 

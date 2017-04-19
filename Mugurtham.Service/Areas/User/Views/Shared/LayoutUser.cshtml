@@ -1,7 +1,17 @@
 ﻿@{
     Mugurtham.Core.Login.LoggedInUser objLoggedIn = (Mugurtham.Core.Login.LoggedInUser)Session["LoggedInUser"];
 }
-@Scripts.Render("~/bundles/MugurthamValidation")
+<script type="text/javascript">
+    // Validation for Page Size on listing profiles
+    //per page on all profiles list page
+    ($("[ng-model=pageSize]").on('input', function () {
+        if (this.value > 50) {
+            this.value = 50;
+            toastr.error('Please enter page size less than 50 profiles');
+            return false;
+        }
+    }));
+</script>
 <!--
     THIS PAGE IS THE LAYOUT PAGE FOR THE MUGURTHAM ADMIN MODULE
     -->

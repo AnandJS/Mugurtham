@@ -39,6 +39,7 @@ app.factory('FactoryAstrologicalMatchers', ['$http', 'ConstantMatchingStarsForGr
             serviceFactoryMatchingStar.endPoint = _endPoint;
             serviceFactoryMatchingStar.endPointName = _endPointName;
             serviceFactoryMatchingStar.isAstrologicalMatchers = _isAstrologicalMatchers;
+            /*
             if (typeof (Storage) !== "undefined") {
                 if ((!sessionStorage.getItem(serviceFactoryMatchingStar.endPointName)))
                     getMatchingProfilesfromAPI();
@@ -47,6 +48,8 @@ app.factory('FactoryAstrologicalMatchers', ['$http', 'ConstantMatchingStarsForGr
             }
             else
                 getMatchingProfilesfromAPI();
+                */
+            getMatchingProfilesfromSession();
         };
 
         function getMatchingProfilesfromSession() {
@@ -82,12 +85,15 @@ app.factory('FactoryAstrologicalMatchers', ['$http', 'ConstantMatchingStarsForGr
             if (_gender === 'female') {
                 objConstantMatchingStar = ConstantMatchingStarsForBride;
             }
-            serviceFactoryMatchingStar.AllProfiles = data;
-            serviceFactoryMatchingStar.SearchedProfiles = data.ProfileBasicInfoViewCoreEntityList;
-            if (serviceFactoryMatchingStar.isAstrologicalMatchers)
-                serviceFactoryMatchingStar.SearchedProfiles = getAstrologicalMatchingProfiles(data, _star, objConstantMatchingStar);
-            serviceFactoryMatchingStar.profilePhotos = data.PhotoCoreEntityList;
-            serviceFactoryMatchingStar.MyMatchingProfilesBadgeCount = serviceFactoryMatchingStar.SearchedProfiles.length;
+            if (serviceFactoryMatchingStar.isAstrologicalMatchers) {
+                serviceFactoryMatchingStar.SearchedProfiles = getAstrologicalMatchingProfiles(JSON.parse(sessionStorage.getItem('AllProfiles')), _star, objConstantMatchingStar);
+                serviceFactoryMatchingStar.profilePhotos = JSON.parse(sessionStorage.getItem('AllProfilesPhoto'));
+                serviceFactoryMatchingStar.MyMatchingProfilesBadgeCount = serviceFactoryMatchingStar.SearchedProfiles.length;
+            }
+            else {
+                serviceFactoryMatchingStar.profilePhotos = data.PhotoCoreEntityList;
+                serviceFactoryMatchingStar.SearchedProfiles = data.ProfileBasicInfoViewCoreEntityList;
+            }            
         }
 
         function getAstrologicalMatchingProfiles(data, _star, objConstantMatchingStar) {
@@ -96,9 +102,9 @@ app.factory('FactoryAstrologicalMatchers', ['$http', 'ConstantMatchingStarsForGr
             $.each(objConstantMatchingStar, function (key, value) {
                 if (key === _star) {
                     $.each(value, function (index, object) {
-                        $.each(data.ProfileBasicInfoViewCoreEntityList, function (profilekey, profilevalue) {
+                        $.each(data, function (profilekey, profilevalue) {
                             if (object.Star === profilevalue.Star) {
-                                matchingProfiles[itrIndex] = data.ProfileBasicInfoViewCoreEntityList[profilekey];
+                                matchingProfiles[itrIndex] = data[profilekey];
                                 itrIndex += 1;
                             }
                         });

@@ -152,8 +152,7 @@ var ControllerUser = angular.module('MugurthamApp').controller('ControllerUser',
             //===================================================
             //AJAX PUT REQUEST - EDIT User
             //===================================================
-            $scope.Edit = function () {
-                alert(geActivation('userMarriedCheckbox'));
+            $scope.Edit = function () {                
                 var strsangamID = '';
                 var strRoleID = '';
                 if (typeof $('#ddlSangams').val() === "undefined") {

@@ -23,7 +23,7 @@ namespace Mugurtham.Core.Profile.View
             {                
                 List<PhotoCoreEntity> objPhotoCoreEntityList = new List<PhotoCoreEntity>();
                 List<ProfileBasicInfoViewCoreEntity> objProfileBasicInfoViewCoreEntityList = new List<ProfileBasicInfoViewCoreEntity>();
-                if (objLoggedIn.roleID == "F62DDFBE55448E3A3") // User Profiles 
+                if (objLoggedIn.roleID == Constants.RoleIDForUserProfile) // User Profiles 
                 {
                     if (!string.IsNullOrWhiteSpace(objLoggedIn.BasicInfoCoreEntity.Gender))
                     {
@@ -75,6 +75,7 @@ namespace Mugurtham.Core.Profile.View
                                 objProfileBasicInfoViewCoreEntity.Age = Convert.ToInt32(objSqlDataReader["Age"].ToString());
                             objProfileBasicInfoViewCoreEntityList.Add(objProfileBasicInfoViewCoreEntity);
                         }
+                         
                         if (objSqlDataReader.NextResult())
                         {
                             while (objSqlDataReader.Read())
@@ -91,6 +92,7 @@ namespace Mugurtham.Core.Profile.View
                                 objPhotoCoreEntity = null;
                             }
                         }
+                         
                         objProfileBasicViewEntity.ProfileBasicInfoViewCoreEntityList = objProfileBasicInfoViewCoreEntityList;
                         objProfileBasicViewEntity.PhotoCoreEntityList = objPhotoCoreEntityList;
                         objSqlDataReader.Close();
@@ -117,7 +119,7 @@ namespace Mugurtham.Core.Profile.View
             {
                 List<PhotoCoreEntity> objPhotoCoreEntityList = new List<PhotoCoreEntity>();
                 List<ProfileBasicInfoViewCoreEntity> objProfileBasicInfoViewCoreEntityList = new List<ProfileBasicInfoViewCoreEntity>();
-                if (objLoggedIn.roleID == "F62DDFBE55448E3A3") // User Profiles 
+                if (objLoggedIn.roleID == Constants.RoleIDForUserProfile) // User Profiles 
                 {
                     if (!string.IsNullOrWhiteSpace(objLoggedIn.BasicInfoCoreEntity.Gender))
                     {

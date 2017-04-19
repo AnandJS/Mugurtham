@@ -536,7 +536,7 @@ namespace Mugurtham.Core.Profile.API
             {
                 List<PhotoCoreEntity> objPhotoCoreEntityList = new List<PhotoCoreEntity>();
                 List<ProfileBasicInfoViewCoreEntity> objProfileBasicInfoViewCoreEntityList = new List<ProfileBasicInfoViewCoreEntity>();
-                if (objLoggedIn.roleID == "F62DDFBE55448E3A3") // User Profiles 
+                if (objLoggedIn.roleID == Constants.RoleIDForUserProfile) // User Profiles 
                 {
                     if (!string.IsNullOrWhiteSpace(objLoggedIn.BasicInfoCoreEntity.Gender))
                     {
@@ -621,7 +621,7 @@ namespace Mugurtham.Core.Profile.API
             {
                 List<PhotoCoreEntity> objPhotoCoreEntityList = new List<PhotoCoreEntity>();
                 List<ProfileBasicInfoViewCoreEntity> objProfileBasicInfoViewCoreEntityList = new List<ProfileBasicInfoViewCoreEntity>();
-                if (objLoggedIn.roleID == "F62DDFBE55448E3A3") // User Profiles 
+                if (objLoggedIn.roleID == Constants.RoleIDForUserProfile) // User Profiles 
                 {
                     if (!string.IsNullOrWhiteSpace(objLoggedIn.BasicInfoCoreEntity.Gender))
                     {
@@ -707,7 +707,7 @@ namespace Mugurtham.Core.Profile.API
             {
                 List<PhotoCoreEntity> objPhotoCoreEntityList = new List<PhotoCoreEntity>();
                 List<ProfileBasicInfoViewCoreEntity> objProfileBasicInfoViewCoreEntityList = new List<ProfileBasicInfoViewCoreEntity>();
-                if (objLoggedIn.roleID == "F62DDFBE55448E3A3") // User Profiles 
+                if (objLoggedIn.roleID == Constants.RoleIDForUserProfile) // User Profiles 
                 {
                     if (!string.IsNullOrWhiteSpace(objLoggedIn.BasicInfoCoreEntity.Gender))
                     {
@@ -794,7 +794,7 @@ namespace Mugurtham.Core.Profile.API
             {
                 List<PhotoCoreEntity> objPhotoCoreEntityList = new List<PhotoCoreEntity>();
                 List<ProfileBasicInfoViewCoreEntity> objProfileBasicInfoViewCoreEntityList = new List<ProfileBasicInfoViewCoreEntity>();
-                if (objLoggedIn.roleID == "F62DDFBE55448E3A3") // User Profiles 
+                if (objLoggedIn.roleID == Constants.RoleIDForUserProfile) // User Profiles 
                 {
                     if (!string.IsNullOrWhiteSpace(objLoggedIn.BasicInfoCoreEntity.Gender))
                     {
@@ -933,6 +933,8 @@ namespace Mugurtham.Core.Profile.API
              ref Mugurtham.Core.Login.LoggedInUser objLoggedIn)
         {
             int profileViewedCount = 0;
+            if (objLoggedIn == null)
+                return 0;
             try
             {
                 using (SqlConnection objSqlConnection = new SqlConnection(strConnectionString))

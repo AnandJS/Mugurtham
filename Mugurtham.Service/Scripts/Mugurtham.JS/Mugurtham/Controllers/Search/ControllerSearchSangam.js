@@ -41,7 +41,7 @@ var ControllerSearchSangam = angular.module('MugurthamApp').controller('Controll
             //AJAX GET REQUEST - GETTING ALL PROFILES
             //===================================================
             $scope.getAllSangamProfiles = function () {
-                if (typeof (Storage) !== "undefined") {
+                /*if (typeof (Storage) !== "undefined") {
                     if ((!sessionStorage.getItem('AllProfiles')))
                         $scope.getAllSangamProfilesfromAPI();
                     else
@@ -49,6 +49,8 @@ var ControllerSearchSangam = angular.module('MugurthamApp').controller('Controll
                 }
                 else
                     $scope.getAllSangamProfilesfromAPI();
+                */
+                $scope.initData();
             }
 
             $scope.getAllSangamProfilesfromSession = function () {
@@ -71,12 +73,11 @@ var ControllerSearchSangam = angular.module('MugurthamApp').controller('Controll
                 });
             }
 
-            $scope.initData = function (data) {
-                $scope.AllProfiles = $.parseJSON(sessionStorage.getItem('AllProfiles'));
+            $scope.initData = function () {
                 $scope.currentPage = 1;
                 $scope.pageSize = 15;
-                $scope.SearchedProfiles = ($.parseJSON(sessionStorage.getItem('AllProfiles')).ProfileBasicInfoViewCoreEntityList);
-                $scope.profilePhotos = ($.parseJSON(sessionStorage.getItem('AllProfiles')).PhotoCoreEntityList);
+                $scope.SearchedProfiles = JSON.parse(sessionStorage.getItem('AllProfiles'));
+                $scope.profilePhotos = JSON.parse(sessionStorage.getItem('AllProfilesPhoto'));
                 $scope.pageChangeHandler = function (num) {
                     $("html, body").animate({ scrollTop: 220 }, "slow");
                     setTimeout(displayThumbnailSlider, 10);

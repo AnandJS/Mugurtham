@@ -1,4 +1,6 @@
-﻿// This function is for global scope
+﻿ 
+
+// This function is for global scope
 $(function () {
 
 
@@ -13,5 +15,6 @@ $(function () {
     }));
 
 });
+
 
 
