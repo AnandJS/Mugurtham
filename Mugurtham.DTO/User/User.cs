@@ -17,6 +17,7 @@ namespace Mugurtham.DTO.User
 
         public DateTime CreatedDate { get; set; }
         public DateTime ModifiedDate { get; set; }
+        public DateTime? PaymentDate { get; set; }
         [Key]
         public string ID { get; set; }
         public string Name { get; set; }

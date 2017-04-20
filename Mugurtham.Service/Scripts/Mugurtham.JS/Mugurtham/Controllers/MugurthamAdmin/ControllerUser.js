@@ -17,6 +17,16 @@ THIS CONTROLLER IS SPECIFICALLY FOR User REGISTRATION
 */
 var ControllerUser = angular.module('MugurthamApp').controller('ControllerUser',
         ['$http', '$scope', '$rootScope', '$routeParams', function ($http, $scope, $rootScope, $routeParams) {
+
+            //Code commented - As to use the HTML5 DTPicker instead of JQuery DTPicker
+            $("#dtPayDate").datepicker({
+                showOn: "button",
+                buttonImage: "images/Mugurtham/calendar.gif",
+                buttonImageOnly: true,
+                buttonText: "Select date",
+                changeMonth: true,
+                changeYear: true
+            });
             //========================================
             //GLOBAL VARIABLES FOR THIS CONTROLLER
             //=========================================            
@@ -44,11 +54,12 @@ var ControllerUser = angular.module('MugurthamApp').controller('ControllerUser',
             $scope.IsHighlighted = '';
             $scope.ShowHoroscope = '';
             $scope.IsMarried = '';
-            
+            $scope.PaymentDate = '';
+
             //========================================
             //GLOBAL EVENT HANDLER FOR THIS CONTROLLER
             //=========================================
-            $scope.saveFormData = function () {                
+            $scope.saveFormData = function () {
                 $scope.initFormData();
                 if ($scope.globalUserID == '') {
                     $scope.Add();
@@ -60,7 +71,7 @@ var ControllerUser = angular.module('MugurthamApp').controller('ControllerUser',
             //=====================================
             //PRIVATE METHODS FOR THIS CONTROLLER
             //=====================================
-            $scope.initFormData = function () {                
+            $scope.initFormData = function () {
                 $scope.Name = $scope.userFormData[0].Name;
                 $scope.LoginID = $scope.userFormData[0].LoginID;
                 $scope.Password = $scope.userFormData[0].Password;
@@ -72,6 +83,7 @@ var ControllerUser = angular.module('MugurthamApp').controller('ControllerUser',
                 $scope.IsHighlighted = $scope.userFormData[0].IsHighlighted;
                 $scope.ShowHoroscope = $scope.userFormData[0].ShowHoroscope;
                 $scope.IsMarried = $scope.userFormData[0].IsMarried;
+                $scope.PaymentDate = $scope.userFormData[0].PaymentDate;
             }
 
             //===================================================
@@ -88,10 +100,12 @@ var ControllerUser = angular.module('MugurthamApp').controller('ControllerUser',
                         RoleID: $('#ddlRoles').val(),
                         ThemeID: $scope.userFormData[0].ThemeID,
                         LocaleID: $scope.userFormData[0].LocaleID,
-                        IsActivated: $scope.userFormData[0].IsActivated,
+                        IsActivated: geActivation('userActivationCheckbox'),
                         IsHighlighted: $scope.userFormData[0].IsHighlighted,
                         ShowHoroscope: $scope.userFormData[0].ShowHoroscope,
-                        IsMarried: $scope.userFormData[0].IsMarried
+                        IsMarried: $scope.userFormData[0].IsMarried,
+                        PaymentDate: $scope.userFormData[0].PaymentDate
+
                     }),
                     headers: { 'content-Type': 'application/x-www-form-urlencoded' }
                 }).
@@ -107,7 +121,7 @@ var ControllerUser = angular.module('MugurthamApp').controller('ControllerUser',
             //===================================================
             //AJAX GET REQUEST - GETTING User BY ID
             //===================================================
-            function getUserByID() {                
+            function getUserByID() {
                 var strHighlighted = '0';
                 var strShowHoroscope = '0';
                 var strMarried = '0';
@@ -118,7 +132,7 @@ var ControllerUser = angular.module('MugurthamApp').controller('ControllerUser',
                         method: "GET", url: strGetURL
                     }).
                 success(function (data, status, headers, config) {
-                    
+
                     if (data.IsHighlighted != null) {
                         strHighlighted = data.IsHighlighted.toString();
                     }
@@ -140,9 +154,12 @@ var ControllerUser = angular.module('MugurthamApp').controller('ControllerUser',
                         IsHighlighted: setActivation(strHighlighted, 'userHighlightedCheckbox'),
                         ShowHoroscope: setActivation(strShowHoroscope, 'userShowHoroscope'),
                         IsMarried: setActivation(strMarried, 'userMarriedCheckbox'),
+                        PaymentDate: data.PaymentDate,
                         SangamID: data.SangamID
-                    });                    
+                    });
                     $('#ddlSangams').val(data.SangamID);
+                    if (data.PaymentDate != null)
+                        $scope.userFormData[0].PaymentDate = $.datepicker.formatDate('dd-M-yy', new Date(data.PaymentDate));
                 }).
                 error(function (data, status, headers, config) {
                     NotifyErrorStatus(data, status);
@@ -178,8 +195,8 @@ var ControllerUser = angular.module('MugurthamApp').controller('ControllerUser',
                         IsActivated: geActivation('userActivationCheckbox'),
                         IsHighlighted: geActivation('userHighlightedCheckbox'),
                         ShowHoroscope: geActivation('userShowHoroscope'),
-                        IsMarried: geActivation('userMarriedCheckbox')
-
+                        IsMarried: geActivation('userMarriedCheckbox'),
+                        PaymentDate: $scope.PaymentDate
                     }),
                     headers: { 'content-Type': 'application/x-www-form-urlencoded' }
                 }).
@@ -262,7 +279,8 @@ var ControllerUser = angular.module('MugurthamApp').controller('ControllerUser',
                         LocaleID: $('#ddlUserLocale').val(),
                         IsActivated: '1',
                         IsHighlighted: $scope.userFormData[0].IsHighlighted,
-                        ShowHoroscope: $scope.userFormData[0].ShowHoroscope
+                        ShowHoroscope: $scope.userFormData[0].ShowHoroscope,
+                        PaymentDate: $scope.userFormData[0].PaymentDate
                     }),
                     headers: { 'content-Type': 'application/x-www-form-urlencoded' }
                 }).
@@ -297,12 +315,13 @@ var ControllerUser = angular.module('MugurthamApp').controller('ControllerUser',
                     //IsActivated: setActivation(data.IsActivated),
                     IsHighlighted: data.IsHighlighted,
                     ShowHoroscope: $scope.userFormData[0].ShowHoroscope,
-                    SangamID: data.SangamID
-                });                
+                    SangamID: data.SangamID,
+                    PaymentDate: data.PaymentDate
+                });
             }).
             error(function (data, status, headers, config) {
                 NotifyErrorStatus(data, status);
-            });                
+            });
             }
 
         }])
@@ -317,9 +336,9 @@ function geActivation(checkBox) {
         chkId = 0;
     return chkId;
 }
-function setActivation(strActivation, checkBox) {    
+function setActivation(strActivation, checkBox) {
     if (strActivation != null) {
-        var arrActivation = strActivation.split(',');        
+        var arrActivation = strActivation.split(',');
         $.each(arrActivation, function (index, item) {
             $('.' + checkBox).each(function () {
                 if (item.toString().trim() == '1') {

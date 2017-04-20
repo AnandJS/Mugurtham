@@ -16,7 +16,7 @@ THIS CONTROLLER IS SPECIFICALLY FOR DISPLAYING Occupation SEARCH ON SEARCH MODUL
 ==========================================================================================
 */
 var ControllerSearchOccupation = angular.module('MugurthamApp').controller('ControllerSearchOccupation',
-        ['$http', '$scope', '$timeout', function ($http, $scope, $timeout) {
+        ['$http', '$scope', '$timeout', 'ServiceSearchAllProfiles', function ($http, $scope, $timeout, ServiceSearchAllProfiles) {
 
             $scope.ControllerName = 'ControllerSearchOccupation';
             //===============================================================================================
@@ -32,29 +32,37 @@ var ControllerSearchOccupation = angular.module('MugurthamApp').controller('Cont
                 else
                     $scope.getAllProfilesfromAPI();*/
 
+
+                /*Service Impementation*/
+                /*ServiceSearchAllProfiles.getData().then(function (data) {                    
+                    
+                }).catch(function (error) {
+                    alert(error);
+                });*/
+
                 $scope.initData();
             }
-/*
-            $scope.getAllProfilesfromSession = function () {
-                if ((sessionStorage.getItem('AllProfiles')))
-                    $scope.initData();
-            }
-            $scope.getAllProfilesfromAPI = function () {
-                var strGetURL = "Search/Search/getAllProfiles";
-                $("#divContainer").mask("Searching profiles please wait...");
-                $http({
-                    method: "GET", url: strGetURL
-                }).
-            success(function (data, status, headers, config) {
-                $("#divContainer").unmask();
-                initData();
-            }).
-                error(function (data, status, headers, config) {
-                    $("#divContainer").unmask();
-                    NotifyStatus('2');
-                });
-            }
-*/
+            /*
+                        $scope.getAllProfilesfromSession = function () {
+                            if ((sessionStorage.getItem('AllProfiles')))
+                                $scope.initData();
+                        }
+                        $scope.getAllProfilesfromAPI = function () {
+                            var strGetURL = "Search/Search/getAllProfiles";
+                            $("#divContainer").mask("Searching profiles please wait...");
+                            $http({
+                                method: "GET", url: strGetURL
+                            }).
+                        success(function (data, status, headers, config) {
+                            $("#divContainer").unmask();
+                            initData();
+                        }).
+                            error(function (data, status, headers, config) {
+                                $("#divContainer").unmask();
+                                NotifyStatus('2');
+                            });
+                        }
+            */
             $scope.initData = function () {
                 //$scope.AllProfiles = $.parseJSON(sessionStorage.getItem('AllProfiles'));
                 $scope.currentPage = 1;

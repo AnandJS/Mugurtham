@@ -426,6 +426,7 @@
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\Directives\DirectiveAstrologicalMatchers.js" />
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\Factories\FactoryAstrologicalMatchers.js" />
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\Login\Login.js" />
+    <Content Include="Scripts\Mugurtham.JS\Mugurtham\Services\ServiceSearchAllProfiles.js" />
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\Templates\TemplateAstrologicalMatchers.html" />
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\Utility\Constants.js" />
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\Utility\Helper.js" />
@@ -557,6 +558,8 @@
     <Content Include="Views\Home\UploadFile.cshtml" />
     <Content Include="Views\Home\HttpError404.cshtml" />
     <Content Include="Views\Shared\MugurthamLayout.cshtml" />
+    <Content Include="Scripts\Mugurtham.JS\Mugurtham\Jsons\SearchAllProfiles.json" />
+    <Content Include="Scripts\Mugurtham.JS\Mugurtham\Services\SearchAllProfiles.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

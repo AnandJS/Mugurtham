@@ -219,6 +219,8 @@ namespace Mugurtham.Core.User
                 objDTOUser.IsHighlighted = objUserCoreEntity.IsHighlighted;
                 objDTOUser.ShowHoroscope = objUserCoreEntity.ShowHoroscope;
                 objDTOUser.IsMarried = objUserCoreEntity.IsMarried;
+                objDTOUser.PaymentDate = objUserCoreEntity.PaymentDate;
+
             }
             catch (Exception objEx)
             {
@@ -247,6 +249,7 @@ namespace Mugurtham.Core.User
                 objUserCoreEntity.IsHighlighted = objDTOUser.IsHighlighted;
                 objUserCoreEntity.ShowHoroscope = objDTOUser.ShowHoroscope;
                 objUserCoreEntity.IsMarried = objDTOUser.IsMarried;
+                objUserCoreEntity.PaymentDate = objDTOUser.PaymentDate;
             }
             catch (Exception objEx)
             {
