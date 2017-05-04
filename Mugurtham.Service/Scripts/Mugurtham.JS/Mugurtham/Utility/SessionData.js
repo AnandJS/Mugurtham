@@ -6,6 +6,7 @@
 
 
 function setSessionData() {
+   
     if (typeof (Storage) !== "undefined") {
 
         // Global check to avoid API service roundtrip call each time during page load
@@ -108,5 +109,6 @@ function removeSessionData() {
     sessionStorage.removeItem('UserBadgeCount');
     sessionStorage.removeItem('ViewedProfiles');
     sessionStorage.removeItem('LoggedInUserID');
+    sessionStorage.removeItem('AstrologicalMatchers');
     sessionStorage.removeItem('MyMatchingProfilesBadgeCount');
 };

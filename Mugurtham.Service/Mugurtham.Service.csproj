@@ -427,6 +427,7 @@
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\Factories\FactoryAstrologicalMatchers.js" />
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\Login\Login.js" />
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\Services\ServiceSearchAllProfiles.js" />
+    <Content Include="Scripts\Mugurtham.JS\Mugurtham\Services\ServiceUserChamber.js" />
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\Templates\TemplateAstrologicalMatchers.html" />
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\Utility\Constants.js" />
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\Utility\Helper.js" />

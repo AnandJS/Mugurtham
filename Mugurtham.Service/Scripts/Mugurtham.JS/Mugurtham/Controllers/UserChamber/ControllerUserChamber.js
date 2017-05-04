@@ -16,51 +16,26 @@ THIS CONTROLLER IS SPECIFICALLY FOR DISPLAYING VIEWED PROFILES IN USER HOME PAGE
 ==========================================================================================
 */
 var ControllerUserChamber = angular.module('MugurthamApp').controller('ControllerUserChamber',
-        ['$http', '$scope', 'ConstantMatchingStarsForGroom', 'FactoryAstrologicalMatchers', function ($http, $scope, ConstantMatchingStarsForGroom, FactoryAstrologicalMatchers) {
-            $scope.ControllerName = 'ControllerUserChamber';
-            //===================================================
-            //AJAX GET REQUEST - GETTING ALL PROFILES
-            //===================================================
-            $scope.geUserChamberBadgeCount = function () {
+        ['$http', '$scope', 'ConstantMatchingStarsForGroom', 'FactoryAstrologicalMatchers', 'ServiceUserChamber',
+            function ($http, $scope, ConstantMatchingStarsForGroom, FactoryAstrologicalMatchers, ServiceUserChamber) {
+                $scope.ControllerName = 'ControllerUserChamber';
 
-                if (typeof (Storage) !== "undefined") {
-                    if ((!sessionStorage.getItem('MyMatchingProfilesBadgeCount')))
-                        FactoryAstrologicalMatchers.getAstrologicalMatchers("AllProfile", "Search/Search/getAllProfiles", true);
-                    else {
-                        $('#badgeMyMactchingProfiles').text(sessionStorage.getItem('MyMatchingProfilesBadgeCount'));
-                        $('#badgeMyMactchingProfilesInGblNav').text(sessionStorage.getItem('MyMatchingProfilesBadgeCount'));
+                $scope.geUserChamberBadgeCount = function () {
+                    if (sessionStorage.getItem('UserBadgeCount')) {
+                        setBadgeValue(JSON.parse(sessionStorage.getItem('UserBadgeCount')).data);
                     }
-                }
-                if (typeof (Storage) !== "undefined") {
-                    if ((!sessionStorage.getItem('UserBadgeCount')))
-                        $scope.geUserChamberBadgeCountfromAPI();
-                    else
-                        $scope.geUserChamberBadgeCountfromSession();
-                }
-                else
-                    $scope.geUserChamberBadgeCountfromAPI();
-            }
+                    else {
+                        ServiceUserChamber.getUserBadgeCountJSON().then(function (response) {
+                            sessionStorage.setItem('UserBadgeCount', JSON.stringify(response));
+                            setBadgeValue(response.data);
+                        });
+                    }
+                };
 
-            $scope.geUserChamberBadgeCountfromSession = function () {
-                if ((sessionStorage.getItem('UserBadgeCount')))
-                    setBadgeValue(JSON.parse(sessionStorage.getItem('UserBadgeCount')));
-            }
-            $scope.geUserChamberBadgeCountfromAPI = function () {
-                var strGetURL = "User/User/getUserBadgeCount";
-                $("#divContainer").mask("Searching profiles please wait...");
-                $http({
-                    method: "GET", url: strGetURL
-                }).
-            success(function (data, status, headers, config) {
-                $("#divContainer").unmask();
-                setBadgeValue(data);
-            }).
-                error(function (data, status, headers, config) {
-                    $("#divContainer").unmask();
-                    NotifyStatus('2');
-                });
-            }
-        }])
+                /* ServiceUserChamber.getAstrologicalMatchersJSON().then(function (response) {
+                FactoryAstrologicalMatchers.getUserChamberJSON(response.data, true);
+             });*/
+            }])
 
 
 function setBadgeValue(objData) {

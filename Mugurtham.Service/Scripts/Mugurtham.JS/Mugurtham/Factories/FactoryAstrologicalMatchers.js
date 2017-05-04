@@ -35,45 +35,12 @@ app.factory('FactoryAstrologicalMatchers', ['$http', 'ConstantMatchingStarsForGr
         serviceFactoryMatchingStar.endPoint = '';
         serviceFactoryMatchingStar.isAstrologicalMatchers = false;
 
-        serviceFactoryMatchingStar.getAstrologicalMatchers = function (_endPointName, _endPoint, _isAstrologicalMatchers) {
-            serviceFactoryMatchingStar.endPoint = _endPoint;
-            serviceFactoryMatchingStar.endPointName = _endPointName;
+        serviceFactoryMatchingStar.getUserChamberJSON = function (objJSON, _isAstrologicalMatchers) {
             serviceFactoryMatchingStar.isAstrologicalMatchers = _isAstrologicalMatchers;
-            /*
-            if (typeof (Storage) !== "undefined") {
-                if ((!sessionStorage.getItem(serviceFactoryMatchingStar.endPointName)))
-                    getMatchingProfilesfromAPI();
-                else
-                    getMatchingProfilesfromSession();
-            }
-            else
-                getMatchingProfilesfromAPI();
-                */
-            getMatchingProfilesfromSession();
+            initData(objJSON);
         };
 
-        function getMatchingProfilesfromSession() {
-            if ((sessionStorage.getItem(serviceFactoryMatchingStar.endPointName)))
-                initData($http, JSON.parse(sessionStorage.getItem(serviceFactoryMatchingStar.endPointName)));
-        }
-
-        function getMatchingProfilesfromAPI() {
-            var strGetURL = serviceFactoryMatchingStar.endPoint;
-            $("#divContainer").mask("Searching profiles please wait...");
-            $http({
-                method: "GET", url: strGetURL
-            }).
-        success(function (data, status, headers, config) {
-            $("#divContainer").unmask();
-            initData($http, data);
-        }).
-            error(function (data, status, headers, config) {
-                $("#divContainer").unmask();
-                // NotifyStatus('2');
-            });
-        }
-
-        function initData($http, data) {
+        function initData(data) {
             var _star = '';
             var _gender = '';
             var objConstantMatchingStar = ConstantMatchingStarsForGroom;
@@ -86,17 +53,17 @@ app.factory('FactoryAstrologicalMatchers', ['$http', 'ConstantMatchingStarsForGr
                 objConstantMatchingStar = ConstantMatchingStarsForBride;
             }
             if (serviceFactoryMatchingStar.isAstrologicalMatchers) {
-                serviceFactoryMatchingStar.SearchedProfiles = getAstrologicalMatchingProfiles(JSON.parse(sessionStorage.getItem('AllProfiles')), _star, objConstantMatchingStar);
-                serviceFactoryMatchingStar.profilePhotos = JSON.parse(sessionStorage.getItem('AllProfilesPhoto'));
+                serviceFactoryMatchingStar.SearchedProfiles = serviceFactoryMatchingStar.SearchedProfiles = getAstrologicalMatchingProfiles(data, _star, objConstantMatchingStar);
+                serviceFactoryMatchingStar.profilePhotos = data.PhotoCoreEntityList;
                 serviceFactoryMatchingStar.MyMatchingProfilesBadgeCount = serviceFactoryMatchingStar.SearchedProfiles.length;
             }
             else {
                 serviceFactoryMatchingStar.profilePhotos = data.PhotoCoreEntityList;
                 serviceFactoryMatchingStar.SearchedProfiles = data.ProfileBasicInfoViewCoreEntityList;
-            }            
+            } 
         }
 
-        function getAstrologicalMatchingProfiles(data, _star, objConstantMatchingStar) {
+        function getAstrologicalMatchingProfiles(data, _star, objConstantMatchingStar) {           
             var matchingProfiles = [];
             var itrIndex = 0;
             $.each(objConstantMatchingStar, function (key, value) {
@@ -154,7 +121,7 @@ app.factory('FactoryAstrologicalMatchers', ['$http', 'ConstantMatchingStarsForGr
             } else {
                 serviceFactoryMatchingStar.filterStarItem.push(data);
             }
-            setTimeout(displayThumbnailSlider, 10);
+            setTimeout(displayThumbnailSlider, 1);
             $("html, body").animate({ scrollTop: 220 }, "slow");
         };
         serviceFactoryMatchingStar.filterSubCasteByThisItem = function (data) {
@@ -164,7 +131,7 @@ app.factory('FactoryAstrologicalMatchers', ['$http', 'ConstantMatchingStarsForGr
             } else {
                 serviceFactoryMatchingStar.filterSubCasteItem.push(data);
             }
-            setTimeout(displayThumbnailSlider, 10);
+            setTimeout(displayThumbnailSlider, 1);
             $("html, body").animate({ scrollTop: 220 }, "slow");
         };
         serviceFactoryMatchingStar.filterSangamByThisItem = function (data) {
@@ -174,7 +141,7 @@ app.factory('FactoryAstrologicalMatchers', ['$http', 'ConstantMatchingStarsForGr
             } else {
                 serviceFactoryMatchingStar.filterSangamItem.push(data);
             }
-            setTimeout(displayThumbnailSlider, 10);
+            setTimeout(displayThumbnailSlider, 1);
             $("html, body").animate({ scrollTop: 220 }, "slow");
         };
         // Item Declarative Data Binding

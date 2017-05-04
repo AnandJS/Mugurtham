@@ -17,8 +17,8 @@ THIS CONTROLLER IS SPECIFICALLY FOR DISPLAYING RECENTLY VIEWED PROFILES IN USER 
 */
 
 var ControllerRecentlyViewedProfiles = angular.module('MugurthamApp').controller('ControllerRecentlyViewedProfiles',
-        ['$http', '$scope', 'FactoryAstrologicalMatchers', 'ConstantRegistrationPage',
-                                             function ($http, $scope, FactoryAstrologicalMatchers, ConstantRegistrationPage) {
+        ['$http', '$scope', 'FactoryAstrologicalMatchers', 'ConstantRegistrationPage', 'ServiceUserChamber',
+                                             function ($http, $scope, FactoryAstrologicalMatchers, ConstantRegistrationPage, ServiceUserChamber) {
                                                  $scope.ControllerName = 'ControllerRecentlyViewedProfiles';
                                                  $scope.currentPage = 1;
                                                  $scope.pageSize = 15;
@@ -31,9 +31,21 @@ var ControllerRecentlyViewedProfiles = angular.module('MugurthamApp').controller
                                                  $scope.arrToAge = ConstantRegistrationPage.ToAge;
                                                  setTimeout(displayThumbnailSlider, 10)
 
+
                                                  $scope.getAstrologicalMatchers = function () {
                                                      setTimeout(displayThumbnailSlider, 10)
-                                                     FactoryAstrologicalMatchers.getAstrologicalMatchers("RecentlyViewedProfiles", "Search/Search/getRecentlyViewedProfiles", false);
+                                                     if (sessionStorage.getItem('ViewedProfiles')) {
+                                                         $scope.displayProfile(JSON.parse(sessionStorage.getItem('ViewedProfiles')));
+                                                     }
+                                                     else {
+                                                         ServiceUserChamber.getRecentlyViewedProfilesJSON().then(function (response) {                                                             
+                                                             sessionStorage.setItem('ViewedProfiles', JSON.stringify(response));
+                                                             $scope.displayProfile(response);
+                                                         });
+                                                     }
+                                                 }
+                                                 $scope.displayProfile = function (response) {
+                                                     FactoryAstrologicalMatchers.getUserChamberJSON(response.data, false);
                                                      $scope.arrFilterStar = FactoryAstrologicalMatchers.arrFilterStar;
                                                      $scope.arrFilterSubCaste = FactoryAstrologicalMatchers.arrFilterSubCaste;
                                                      $scope.arrSangamMaster = FactoryAstrologicalMatchers.arrSangamMaster;
@@ -46,17 +58,17 @@ var ControllerRecentlyViewedProfiles = angular.module('MugurthamApp').controller
                                                      $scope.AllProfiles = FactoryAstrologicalMatchers.AllProfiles;
                                                      $scope.SearchedProfiles = FactoryAstrologicalMatchers.SearchedProfiles;
                                                      $scope.profilePhotos = FactoryAstrologicalMatchers.profilePhotos;
-
-                                                     $scope.pageChangeHandler = function (num) {
-                                                         $("html, body").animate({ scrollTop: 220 }, "slow");
-                                                         setTimeout(displayThumbnailSlider, 10);
-                                                     };
-                                                     $scope.pageChangeHandlerSmartSearch = function (num) {
-                                                         setTimeout(displayThumbnailSlider, 10);
-                                                     };
-                                                     toastr.success('Recently viewed Profiles loaded Successfully');
                                                  }
 
+
+                                                 $scope.pageChangeHandler = function (num) {
+                                                     $("html, body").animate({ scrollTop: 220 }, "slow");
+                                                     setTimeout(displayThumbnailSlider, 10);
+                                                 };
+                                                 $scope.pageChangeHandlerSmartSearch = function (num) {
+                                                     setTimeout(displayThumbnailSlider, 10);
+                                                 };
+                                                 toastr.success('Recently viewed Profiles loaded Successfully');
                                                  /*========================================= E-Commerce Filter Section ======================================================*/
 
                                                  //Item Count

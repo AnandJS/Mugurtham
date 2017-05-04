@@ -16,7 +16,7 @@ THIS CONTROLLER IS SPECIFICALLY FOR DISPLAYING HIGHLIGHTED PROFILES USER HOME PA
 ==========================================================================================
 */
 var ControllerHighlightedProfiles = angular.module('MugurthamApp').controller('ControllerHighlightedProfiles',
-        ['$http', '$scope', function ($http, $scope) {
+        ['$http', '$scope', 'ServiceUserChamber', function ($http, $scope, ServiceUserChamber) {
             $scope.ControllerName = 'ControllerHighlightedProfiles';
 
 
@@ -24,34 +24,15 @@ var ControllerHighlightedProfiles = angular.module('MugurthamApp').controller('C
             //AJAX GET REQUEST - GETTING ALL PROFILES
             //===================================================
             $scope.getHighlightedProfiles = function () {
-                if (typeof (Storage) !== "undefined") {
-                    if ((!sessionStorage.getItem('HiglightedProfiles')))
-                        $scope.getHighlightedProfilesfromAPI();
-                    else
-                        $scope.getHighlightedProfilesfromSession();
+                if (sessionStorage.getItem('HiglightedProfiles')) {
+                    $scope.initData(JSON.parse(sessionStorage.getItem('HiglightedProfiles')).data);
                 }
-                else
-                    $scope.getHighlightedProfilesfromAPI();
-            }
-
-            $scope.getHighlightedProfilesfromSession = function () {
-                if ((sessionStorage.getItem('HiglightedProfiles')))
-                    $scope.initData(JSON.parse(sessionStorage.getItem('HiglightedProfiles')));
-            }
-            $scope.getHighlightedProfilesfromAPI = function () {
-                var strGetURL = "Search/Search/getHighlightedProfiles";
-                $("#divContainer").mask("Searching profiles please wait...");
-                $http({
-                    method: "GET", url: strGetURL
-                }).
-            success(function (data, status, headers, config) {
-                $("#divContainer").unmask();
-                $scope.initData(data);
-            }).
-                error(function (data, status, headers, config) {
-                    $("#divContainer").unmask();
-                    NotifyStatus('2');
-                });
+                else {
+                    ServiceUserChamber.getHighlightedProfilesJSON().then(function (response) {
+                        sessionStorage.setItem('HiglightedProfiles', JSON.stringify(response));
+                        $scope.initData(response.data)
+                    });
+                }
             }
 
             $scope.initData = function (data) {
@@ -71,16 +52,3 @@ var ControllerHighlightedProfiles = angular.module('MugurthamApp').controller('C
             }
 
         }])
-
-function NotifyStatus(intStatus) {
-    /*
-         1-> Success
-         2-> Error
-    */
-    if (intStatus == '1') {
-        toastr.success('Profiles Received Successfully');
-    }
-    else if (intStatus == '2') {
-        toastr.Error('Error occured in ControllerHighlightedProfiles - getData');
-    }
-}

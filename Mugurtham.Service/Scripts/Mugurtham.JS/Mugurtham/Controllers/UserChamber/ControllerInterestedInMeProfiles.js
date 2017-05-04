@@ -16,8 +16,8 @@ THIS CONTROLLER IS SPECIFICALLY FOR DISPLAYING SHORTLISTED PROFILES IN USER HOME
 ==========================================================================================
 */
 var ControllerInterestedInMeProfiles = angular.module('MugurthamApp').controller('ControllerInterestedInMeProfiles',
-        ['$http', '$scope', 'FactoryAstrologicalMatchers', 'ConstantRegistrationPage',
-                                             function ($http, $scope, FactoryAstrologicalMatchers, ConstantRegistrationPage) {
+        ['$http', '$scope', 'FactoryAstrologicalMatchers', 'ConstantRegistrationPage', 'ServiceUserChamber',
+                                             function ($http, $scope, FactoryAstrologicalMatchers, ConstantRegistrationPage, ServiceUserChamber) {
                                                  $scope.ControllerName = 'ControllerInterestedInMeProfiles';
                                                  $scope.currentPage = 1;
                                                  $scope.pageSize = 15;
@@ -28,34 +28,44 @@ var ControllerInterestedInMeProfiles = angular.module('MugurthamApp').controller
                                                  $scope.filterSangamSelected = [];
                                                  $scope.arrFromAge = ConstantRegistrationPage.FromAge;
                                                  $scope.arrToAge = ConstantRegistrationPage.ToAge;
-                                                 setTimeout(displayThumbnailSlider, 10)
+                                                 setTimeout(displayThumbnailSlider, 10);
 
                                                  $scope.getAstrologicalMatchers = function () {
-                                                     setTimeout(displayThumbnailSlider, 10)
-                                                     FactoryAstrologicalMatchers.getAstrologicalMatchers("InterestedInMeProfiles", "User/User/getInterestedInMeProfiles", false);
+                                                     setTimeout(displayThumbnailSlider, 10);
+                                                     if (sessionStorage.getItem('InterestedInMeProfiles')) {
+                                                         $scope.displayProfile(JSON.parse(sessionStorage.getItem('InterestedInMeProfiles')));
+                                                     }
+                                                     else {
+                                                         ServiceUserChamber.getInterestedInMeProfilesJSON().then(function (response) {
+                                                             sessionStorage.setItem('InterestedInMeProfiles', JSON.stringify(response));
+                                                             $scope.displayProfile(response)
+                                                         });
+                                                     }
+                                                 }
+                                                 $scope.displayProfile = function (response) {
+                                                     FactoryAstrologicalMatchers.getUserChamberJSON(response.data, false);
+
                                                      $scope.arrFilterStar = FactoryAstrologicalMatchers.arrFilterStar;
                                                      $scope.arrFilterSubCaste = FactoryAstrologicalMatchers.arrFilterSubCaste;
                                                      $scope.arrSangamMaster = FactoryAstrologicalMatchers.arrSangamMaster;
 
                                                      $("#divContainer").unmask();
-                                                     $scope.pageHeader = 'LYTSHRTLISPROFILES';
+                                                     $scope.pageHeader = 'LYTPROFILESLKDME';
                                                      $scope.currentPage = 1;
                                                      $scope.pageSize = 15;
 
                                                      $scope.AllProfiles = FactoryAstrologicalMatchers.AllProfiles;
                                                      $scope.SearchedProfiles = FactoryAstrologicalMatchers.SearchedProfiles;
                                                      $scope.profilePhotos = FactoryAstrologicalMatchers.profilePhotos;
-
-                                                     $scope.pageChangeHandler = function (num) {
-                                                         $("html, body").animate({ scrollTop: 220 }, "slow");
-                                                         setTimeout(displayThumbnailSlider, 10);
-                                                     };
-                                                     $scope.pageChangeHandlerSmartSearch = function (num) {
-                                                         setTimeout(displayThumbnailSlider, 10);
-                                                     };
-                                                     toastr.success('InterestedInMe Profiles loaded Successfully');
                                                  }
-
+                                                 $scope.pageChangeHandler = function (num) {
+                                                     $("html, body").animate({ scrollTop: 220 }, "slow");
+                                                     setTimeout(displayThumbnailSlider, 10);
+                                                 };
+                                                 $scope.pageChangeHandlerSmartSearch = function (num) {
+                                                     setTimeout(displayThumbnailSlider, 10);
+                                                 };
+                                                 toastr.success('InterestedInMe Profiles loaded Successfully');
                                                  /*========================================= E-Commerce Filter Section ======================================================*/
 
                                                  //Item Count

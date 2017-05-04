@@ -57,7 +57,7 @@ var MugurthamController = angular.module('MugurthamApp').
              // and during page refreshes, which should not supposed to happen
              getLoggedInUserInfo($http);
              //Global Call once to set the session
-             setSessionData();
+             //setSessionData();
              //==================
              //HIGHLIGHT CLICKED TAB
              //==================

@@ -17,7 +17,7 @@ namespace Mugurtham.Core.User
             strUserID = Helpers.primaryKey;
             try
             {
-                IUnitOfWork objIUnitOfWork = new UnitOfWork();using (objIUnitOfWork as IDisposable)
+                IUnitOfWork objIUnitOfWork = new UnitOfWork(); using (objIUnitOfWork as IDisposable)
                 {
                     Mugurtham.DTO.User.User objDTOUser = new DTO.User.User();
                     using (objDTOUser as IDisposable)
@@ -269,6 +269,7 @@ namespace Mugurtham.Core.User
              4 -> DeActivated Sangam
              5 -> DeActivated Profile
              6 -> Connection Timed Out
+             7 -> Payment Subscription expired
              */
             int intLoginStatus = 0;
             boolLogin = false;
@@ -277,6 +278,17 @@ namespace Mugurtham.Core.User
             {
                 Mugurtham.Core.User.UserCoreEntity _objUserCoreEntity = null;
                 _objUserCoreEntity = GetByLoginID(objUserCoreEntity.LoginID);
+                if (_objUserCoreEntity.PaymentDate != null)
+                {
+                    if (DateTime.Today >= _objUserCoreEntity.PaymentDate.Value.AddMonths(6))
+                    {
+                        Helpers.LogMessageInFlatFile(_objUserCoreEntity.PaymentDate + "<====== Payment Date");
+                        Helpers.LogMessageInFlatFile(_objUserCoreEntity.PaymentDate.Value.AddMonths(6).ToString() + "<======Added Date");
+                        Helpers.LogMessageInFlatFile(DateTime.Today.ToString() + "<======Added Date");
+                        intLoginStatus = 7;
+                        return intLoginStatus;
+                    }
+                }
                 if (_objUserCoreEntity.LoginStatus == "6")
                 {
                     intLoginStatus = 6;

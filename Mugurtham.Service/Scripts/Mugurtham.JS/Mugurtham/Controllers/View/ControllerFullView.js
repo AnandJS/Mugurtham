@@ -132,8 +132,8 @@ var ControllerViewFullView = angular.module('MugurthamApp').controller('Controll
                    })
               };
               $scope.getSimilarProfiles = function () {
-                  $scope.SimilarProfiles = ($.parseJSON(sessionStorage.getItem('AllProfiles')).ProfileBasicInfoViewCoreEntityList);
-                  $scope.SimilarProfilePhotos = ($.parseJSON(sessionStorage.getItem('AllProfiles')).PhotoCoreEntityList);
+                  $scope.SimilarProfiles = JSON.parse(sessionStorage.getItem('AllProfiles'));
+                  $scope.SimilarProfilePhotos = JSON.parse(sessionStorage.getItem('AllProfilesPhoto'));
                   setTimeout(displaySimilarPofilesSlider, 1000);
               }
 

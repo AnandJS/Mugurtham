@@ -17,8 +17,8 @@ THIS CONTROLLER IS SPECIFICALLY FOR DISPLAYING MY MATCHING PROFILES USER HOME PA
 */
 var ControllerAstrologicalMatchers = angular.module('MugurthamApp').
                                 controller('ControllerAstrologicalMatchers',
-                                            ['$http', '$scope', 'FactoryAstrologicalMatchers', 'ConstantRegistrationPage',
-                                             function ($http, $scope, FactoryAstrologicalMatchers, ConstantRegistrationPage) {
+                                            ['$http', '$scope', 'FactoryAstrologicalMatchers', 'ConstantRegistrationPage','ServiceUserChamber',
+                                             function ($http, $scope, FactoryAstrologicalMatchers, ConstantRegistrationPage, ServiceUserChamber) {
                                                  $scope.ControllerName = 'ControllerAstrologicalMatchers';
                                                  $scope.currentPage = 1;
                                                  $scope.pageSize = 15;
@@ -32,8 +32,19 @@ var ControllerAstrologicalMatchers = angular.module('MugurthamApp').
                                                  setTimeout(displayThumbnailSlider, 10)
 
                                                  $scope.getAstrologicalMatchers = function () {
-                                                     setTimeout(displayThumbnailSlider, 10)
-                                                     FactoryAstrologicalMatchers.getAstrologicalMatchers("AllProfiles", "Search/Search/getAllProfiles", true);
+                                                     setTimeout(displayThumbnailSlider, 10);
+                                                     if (sessionStorage.getItem('AstrologicalMatchers')) {
+                                                         $scope.displayProfile(JSON.parse(sessionStorage.getItem('AstrologicalMatchers')));
+                                                     }
+                                                     else {
+                                                         ServiceUserChamber.getAstrologicalMatchersJSON().then(function (response) {
+                                                             sessionStorage.setItem('AstrologicalMatchers', JSON.stringify(response));
+                                                             $scope.displayProfile(response);
+                                                         });
+                                                     } 
+                                                 }
+                                                 $scope.displayProfile = function (response) {
+                                                     FactoryAstrologicalMatchers.getUserChamberJSON(response.data, true);
                                                      $scope.arrFilterStar = FactoryAstrologicalMatchers.arrFilterStar;
                                                      $scope.arrFilterSubCaste = FactoryAstrologicalMatchers.arrFilterSubCaste;
                                                      $scope.arrSangamMaster = FactoryAstrologicalMatchers.arrSangamMaster;
@@ -46,16 +57,16 @@ var ControllerAstrologicalMatchers = angular.module('MugurthamApp').
                                                      $scope.AllProfiles = FactoryAstrologicalMatchers.AllProfiles;
                                                      $scope.SearchedProfiles = FactoryAstrologicalMatchers.SearchedProfiles;
                                                      $scope.profilePhotos = FactoryAstrologicalMatchers.profilePhotos;
-                                                     $scope.pageChangeHandler = function (num) {
-                                                         $("html, body").animate({ scrollTop: 220 }, "slow");
-                                                         setTimeout(displayThumbnailSlider, 10);
-                                                     };
-                                                     $scope.pageChangeHandlerSmartSearch = function (num) {
-                                                         setTimeout(displayThumbnailSlider, 10);
-                                                     };                                                    
-                                                     toastr.success('My Matching Profiles loaded Successfully');
                                                  }
 
+                                                 $scope.pageChangeHandler = function (num) {
+                                                     $("html, body").animate({ scrollTop: 220 }, "slow");
+                                                     setTimeout(displayThumbnailSlider, 10);
+                                                 };
+                                                 $scope.pageChangeHandlerSmartSearch = function (num) {
+                                                     setTimeout(displayThumbnailSlider, 10);
+                                                 };
+                                                 toastr.success('My Matching Profiles loaded Successfully');
                                                  /*========================================= E-Commerce Filter Section ======================================================*/
 
                                                  //Item Count
