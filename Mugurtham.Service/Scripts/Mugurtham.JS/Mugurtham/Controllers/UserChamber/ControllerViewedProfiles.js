@@ -32,12 +32,12 @@ var ControllerViewedProfiles = angular.module('MugurthamApp').controller('Contro
 
                                                  $scope.getAstrologicalMatchers = function () {
                                                      setTimeout(displayThumbnailSlider, 10);
-                                                     if (sessionStorage.getItem('ViewedProfiles')) {
-                                                         $scope.displayProfile(JSON.parse(sessionStorage.getItem('ViewedProfiles')));
+                                                     if (sessionStorage.getItem('ViewedMeProfiles')) {
+                                                         $scope.displayProfile(JSON.parse(sessionStorage.getItem('ViewedMeProfiles')));
                                                      }
                                                      else {
-                                                         ServiceUserChamber.getViewedProfilesJSON().then(function (response) {
-                                                             sessionStorage.setItem('ViewedProfiles', JSON.stringify(response));
+                                                         ServiceUserChamber.getViewedMeProfilesJSON().then(function (response) {
+                                                             sessionStorage.setItem('ViewedMeProfiles', JSON.stringify(response));
                                                              $scope.displayProfile(response);
                                                          });
                                                      }

@@ -34,12 +34,15 @@ var ControllerRecentlyViewedProfiles = angular.module('MugurthamApp').controller
 
                                                  $scope.getAstrologicalMatchers = function () {
                                                      setTimeout(displayThumbnailSlider, 10)
-                                                     if (sessionStorage.getItem('ViewedProfiles')) {
-                                                         $scope.displayProfile(JSON.parse(sessionStorage.getItem('ViewedProfiles')));
+                                                     if (sessionStorage.getItem('RecentlyViewedProfiles')) {
+
+                                                         
+
+                                                         $scope.displayProfile(JSON.parse(sessionStorage.getItem('RecentlyViewedProfiles')));
                                                      }
                                                      else {
-                                                         ServiceUserChamber.getRecentlyViewedProfilesJSON().then(function (response) {                                                             
-                                                             sessionStorage.setItem('ViewedProfiles', JSON.stringify(response));
+                                                         ServiceUserChamber.getRecentlyViewedProfilesJSON().then(function (response) {
+                                                             sessionStorage.setItem('RecentlyViewedProfiles', JSON.stringify(response));
                                                              $scope.displayProfile(response);
                                                          });
                                                      }

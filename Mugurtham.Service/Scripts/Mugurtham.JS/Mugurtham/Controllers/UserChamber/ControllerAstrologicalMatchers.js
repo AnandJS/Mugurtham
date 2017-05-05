@@ -39,6 +39,7 @@ var ControllerAstrologicalMatchers = angular.module('MugurthamApp').
                                                      else {
                                                          ServiceUserChamber.getAstrologicalMatchersJSON().then(function (response) {
                                                              sessionStorage.setItem('AstrologicalMatchers', JSON.stringify(response));
+                                                             sessionStorage.setItem('AllProfiles', JSON.stringify(response));
                                                              $scope.displayProfile(response);
                                                          });
                                                      } 

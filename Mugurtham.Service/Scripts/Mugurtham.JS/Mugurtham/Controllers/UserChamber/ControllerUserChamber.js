@@ -58,6 +58,11 @@ function setBadgeValue(objData) {
     $('#badgeRecentlyViewedProfiles').text(objData.RecentlyViewedProfiles);
     $('#badgeRecentlyViewedProfilesInGblNav').text(objData.RecentlyViewedProfiles);
 
+    if (sessionStorage.getItem("MyMatchingProfilesBadgeCount"))
+        $('#badgeMyMactchingProfiles').text(sessionStorage.getItem("MyMatchingProfilesBadgeCount"));
+    else
+        $('#badgeMyMactchingProfiles').text("1000+");
+
 
 }
 

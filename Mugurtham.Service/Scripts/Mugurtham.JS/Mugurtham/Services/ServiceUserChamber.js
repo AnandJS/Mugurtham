@@ -64,12 +64,11 @@ app.service('ServiceUserChamber', ['$http', function ($http) {
         return promise;
     };
 
-    this.getViewedProfilesJSON = function () {
+    this.getViewedMeProfilesJSON = function () {
         var endPoint = 'Search/Search/getViewedProfiles';
         var promise = this.getJSONObject(endPoint);
         return promise;
-    };
-
+    }; 
 
     // Can make this function private
     this.getJSONObject = function (endPoint) {

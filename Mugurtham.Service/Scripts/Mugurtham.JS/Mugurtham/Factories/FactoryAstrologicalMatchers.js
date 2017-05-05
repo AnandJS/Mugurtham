@@ -44,6 +44,7 @@ app.factory('FactoryAstrologicalMatchers', ['$http', 'ConstantMatchingStarsForGr
             var _star = '';
             var _gender = '';
             var objConstantMatchingStar = ConstantMatchingStarsForGroom;
+            serviceFactoryMatchingStar.clearFilters();
 
             if (typeof (Storage) !== "undefined") {
                 _star = JSON.parse(localStorage.getItem("LoggedInUser")).BasicInfoCoreEntity.Star;
@@ -60,10 +61,10 @@ app.factory('FactoryAstrologicalMatchers', ['$http', 'ConstantMatchingStarsForGr
             else {
                 serviceFactoryMatchingStar.profilePhotos = data.PhotoCoreEntityList;
                 serviceFactoryMatchingStar.SearchedProfiles = data.ProfileBasicInfoViewCoreEntityList;
-            } 
+            }
         }
 
-        function getAstrologicalMatchingProfiles(data, _star, objConstantMatchingStar) {           
+        function getAstrologicalMatchingProfiles(data, _star, objConstantMatchingStar) {
             var matchingProfiles = [];
             var itrIndex = 0;
             $.each(objConstantMatchingStar, function (key, value) {
@@ -88,6 +89,12 @@ app.factory('FactoryAstrologicalMatchers', ['$http', 'ConstantMatchingStarsForGr
         serviceFactoryMatchingStar.filterStarItem = [];
         serviceFactoryMatchingStar.filterSubCasteItem = [];
         serviceFactoryMatchingStar.filterSangamItem = [];
+
+        serviceFactoryMatchingStar.clearFilters = function () {
+            serviceFactoryMatchingStar.filterStarItem = [];
+            serviceFactoryMatchingStar.filterSubCasteItem = [];
+            serviceFactoryMatchingStar.filterSangamItem = [];
+        };
 
         serviceFactoryMatchingStar.getStarFilterItemCount = function (_star, SearchedProfiles) {
             var counter = 0;

@@ -107,7 +107,8 @@ function removeSessionData() {
     sessionStorage.removeItem('InterestedInMeProfiles');
     sessionStorage.removeItem('RecentlyJoinedProfiles');
     sessionStorage.removeItem('UserBadgeCount');
-    sessionStorage.removeItem('ViewedProfiles');
+    sessionStorage.removeItem('ViewedMeProfiles');
+    sessionStorage.removeItem('RecentlyViewedProfiles');
     sessionStorage.removeItem('LoggedInUserID');
     sessionStorage.removeItem('AstrologicalMatchers');
     sessionStorage.removeItem('MyMatchingProfilesBadgeCount');
