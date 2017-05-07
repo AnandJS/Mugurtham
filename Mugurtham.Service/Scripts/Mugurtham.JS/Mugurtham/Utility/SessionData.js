@@ -102,6 +102,7 @@ function setSessionData() {
 function removeSessionData() {
     sessionStorage.removeItem('IsSessionStorageSet');
     sessionStorage.removeItem('AllProfiles');
+    sessionStorage.removeItem('AllProfilesPhotos');
     sessionStorage.removeItem('HiglightedProfiles');
     sessionStorage.removeItem('InterestedProfiles');
     sessionStorage.removeItem('InterestedInMeProfiles');

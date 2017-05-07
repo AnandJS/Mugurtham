@@ -16,7 +16,7 @@ THIS CONTROLLER IS SPECIFICALLY FOR DISPLAYING INTERESTED IN ME PROFILES IN USER
 ==========================================================================================
 */
 var ControllerInterestedProfiles = angular.module('MugurthamApp').controller('ControllerInterestedProfiles',
-        ['$http', '$scope', 'FactoryAstrologicalMatchers', 'ConstantRegistrationPage','ServiceUserChamber',
+        ['$http', '$scope', 'FactoryAstrologicalMatchers', 'ConstantRegistrationPage', 'ServiceUserChamber',
                                              function ($http, $scope, FactoryAstrologicalMatchers, ConstantRegistrationPage, ServiceUserChamber) {
                                                  $scope.ControllerName = 'ControllerInterestedProfiles';
                                                  $scope.currentPage = 1;
@@ -43,7 +43,7 @@ var ControllerInterestedProfiles = angular.module('MugurthamApp').controller('Co
                                                      }
                                                  };
                                                  $scope.displayProfile = function (response) {
-                                                     FactoryAstrologicalMatchers.getUserChamberJSON(response.data, false);
+                                                     FactoryAstrologicalMatchers.getUserChamberJSON(response.data);
                                                      $scope.arrFilterStar = FactoryAstrologicalMatchers.arrFilterStar;
                                                      $scope.arrFilterSubCaste = FactoryAstrologicalMatchers.arrFilterSubCaste;
                                                      $scope.arrSangamMaster = FactoryAstrologicalMatchers.arrSangamMaster;

@@ -58,6 +58,64 @@ app.service('ServiceUserChamber', ['$http', function ($http) {
         return promise;
     };
 
+    this.geAllProfilesJSON = function () {
+        var endPoint = 'Search/Search/getAllProfiles';
+        var promise = this.getJSONObject(endPoint);
+        $("#divContainer").unmask();
+        return promise;
+    };
+
+    this.geAllProfilesPhotosJSON = function () {
+        var endPoint = 'Search/Search/getAllProfilesPhoto';
+        var promise = this.getJSONObject(endPoint);
+        $("#divContainer").unmask();
+        return promise;
+    };
+
+    this.geAllProfilesSlicedJSON = function () {
+        try {
+            var endPoint = 'Search/Search/getAllProfiles';
+            $("#divContainer").mask();
+            var jsonObject;
+            var promise = $http({
+                method: "GET", url: endPoint, params: { lazyLoad: 'true' }
+            }).
+           success(function (data, status, headers, config) {
+               $("#divContainer").unmask();
+               return data;
+           }).
+            error(function (data, status, headers, config) {
+                $("#divContainer").unmask();
+                toastr.error('Error Occured :' + status);
+            });
+        }
+        catch (err)
+        { toastr.error(err.message); }
+        return promise;
+    };
+
+    this.geAllProfilesPhotosSlicedJSON = function () {
+        try {
+            var endPoint = 'Search/Search/getAllProfilesPhoto';
+            $("#divContainer").mask();
+            var jsonObject;
+            var promise = $http({
+                method: "GET", url: endPoint, params: { lazyLoad: 'true' }
+            }).
+           success(function (data, status, headers, config) {
+               $("#divContainer").unmask();
+               return data;
+           }).
+            error(function (data, status, headers, config) {
+                $("#divContainer").unmask();
+                toastr.error('Error Occured :' + status);
+            });
+        }
+        catch (err)
+        { toastr.error(err.message); }
+        return promise;
+    };
+
     this.getInterestedProfilesJSON = function () {
         var endPoint = 'User/User/getInterestedProfiles';
         var promise = this.getJSONObject(endPoint);
@@ -68,7 +126,7 @@ app.service('ServiceUserChamber', ['$http', function ($http) {
         var endPoint = 'Search/Search/getViewedProfiles';
         var promise = this.getJSONObject(endPoint);
         return promise;
-    }; 
+    };
 
     // Can make this function private
     this.getJSONObject = function (endPoint) {

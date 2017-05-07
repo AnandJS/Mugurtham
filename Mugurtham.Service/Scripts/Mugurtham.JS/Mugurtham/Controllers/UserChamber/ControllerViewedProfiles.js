@@ -43,7 +43,7 @@ var ControllerViewedProfiles = angular.module('MugurthamApp').controller('Contro
                                                      }
                                                  };
                                                  $scope.displayProfile = function (response) {
-                                                     FactoryAstrologicalMatchers.getUserChamberJSON(response.data, false);
+                                                     FactoryAstrologicalMatchers.getUserChamberJSON(response.data);
                                                      $scope.arrFilterStar = FactoryAstrologicalMatchers.arrFilterStar;
                                                      $scope.arrFilterSubCaste = FactoryAstrologicalMatchers.arrFilterSubCaste;
                                                      $scope.arrSangamMaster = FactoryAstrologicalMatchers.arrSangamMaster;

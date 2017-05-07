@@ -15,7 +15,7 @@ namespace Mugurtham.Core.Profile.View
     /// </summary>
     public class PorfileBasicInfoViewCore
     {
-        public int GetAllProfiles(string strConnectionString, string strGender,
+        public int GetAllProfiles(string strConnectionString, string strGender, bool lazyLoad,
             ref ProfileBasicViewEntity objProfileBasicViewEntity,
             ref Mugurtham.Core.Login.LoggedInUser objLoggedIn)
         {
@@ -37,7 +37,7 @@ namespace Mugurtham.Core.Profile.View
                 {
                     objSqlConnection.Open();
                     // 1.  create a command object identifying the stored procedure
-                    SqlCommand objSqlCommand = new SqlCommand("uspGetProfileBasicInfoView", objSqlConnection);
+                    SqlCommand objSqlCommand = new SqlCommand("uspGetProfileBasicInfoViewLazyLoad", objSqlConnection);
 
                     // 2. set the command object so it knows to execute a stored procedure
                     objSqlCommand.CommandType = CommandType.StoredProcedure;
@@ -45,6 +45,7 @@ namespace Mugurtham.Core.Profile.View
                     // 3. add parameter to command, which will be passed to the stored procedure
                     objSqlCommand.Parameters.Add(new SqlParameter("@GENDER", strGender));
                     objSqlCommand.Parameters.Add(new SqlParameter("@SangamID", objLoggedIn.sangamID));
+                    objSqlCommand.Parameters.Add(new SqlParameter("@lazyLoad", lazyLoad));
 
                     //using (SqlDataAdapter objSqlDataAdapter = new SqlDataAdapter(objSqlCommand))
                     //{

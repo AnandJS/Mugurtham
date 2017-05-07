@@ -132,7 +132,7 @@
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 
     <form name="frmPortal" novalidate>
-        <div id="body" ng-controller="MugurthamController" class="bgBodyImage" data-ng-init="changeLanguage('@objLoggedIn.localeID');">
+        <div id="body" ng-controller="MugurthamController" class="bgBodyImage" data-ng-init="lazyloadAllProfiles();changeLanguage('@objLoggedIn.localeID');">
             <!-- Page top navigation-->
             <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
                 <div class="container">
@@ -452,7 +452,7 @@
     @Scripts.Render("~/bundles/MugurthamControllerUserChamber")
     @Scripts.Render("~/bundles/MugurthamControllerFullView")
     @Scripts.Render("~/bundles/MugurthamControllerMugurthamAdmin")
-    
+
 
 
 

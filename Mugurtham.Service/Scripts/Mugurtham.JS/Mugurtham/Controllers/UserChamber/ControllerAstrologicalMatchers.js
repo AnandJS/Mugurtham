@@ -17,8 +17,8 @@ THIS CONTROLLER IS SPECIFICALLY FOR DISPLAYING MY MATCHING PROFILES USER HOME PA
 */
 var ControllerAstrologicalMatchers = angular.module('MugurthamApp').
                                 controller('ControllerAstrologicalMatchers',
-                                            ['$http', '$scope', 'FactoryAstrologicalMatchers', 'ConstantRegistrationPage','ServiceUserChamber',
-                                             function ($http, $scope, FactoryAstrologicalMatchers, ConstantRegistrationPage, ServiceUserChamber) {
+                                            ['$http', '$scope', 'FactoryAstrologicalMatchers', 'ConstantRegistrationPage', 'ServiceUserChamber', '$timeout',
+                                             function ($http, $scope, FactoryAstrologicalMatchers, ConstantRegistrationPage, ServiceUserChamber, $timeout) {
                                                  $scope.ControllerName = 'ControllerAstrologicalMatchers';
                                                  $scope.currentPage = 1;
                                                  $scope.pageSize = 15;
@@ -32,20 +32,40 @@ var ControllerAstrologicalMatchers = angular.module('MugurthamApp').
                                                  setTimeout(displayThumbnailSlider, 10)
 
                                                  $scope.getAstrologicalMatchers = function () {
+                                                     try {
+                                                         var loadAll;
+                                                         $scope.loadAastrologicalMatchingProfiles();
+                                                         if (loadAll !== undefined) {
+                                                             $timeout.cancel(loadAll);
+                                                         }
+                                                         //Will load all the rest of data after 1.5s
+                                                         loadAll = $timeout(function () {
+                                                             $scope.loadAastrologicalMatchingProfiles();
+                                                         }, 40000)
+                                                     }
+                                                     catch (err) {
+                                                         toastr.error(err.message);
+                                                     }
+                                                 };
+                                                 $scope.loadAastrologicalMatchingProfiles = function () {
                                                      setTimeout(displayThumbnailSlider, 10);
-                                                     if (sessionStorage.getItem('AstrologicalMatchers')) {
-                                                         $scope.displayProfile(JSON.parse(sessionStorage.getItem('AstrologicalMatchers')));
+                                                     if (sessionStorage.getItem('AllProfiles')) {
+                                                         $scope.displayProfile(JSON.parse(sessionStorage.getItem('AllProfiles')), JSON.parse(sessionStorage.getItem('AllProfilesPhotos')));
                                                      }
                                                      else {
-                                                         ServiceUserChamber.getAstrologicalMatchersJSON().then(function (response) {
-                                                             sessionStorage.setItem('AstrologicalMatchers', JSON.stringify(response));
-                                                             sessionStorage.setItem('AllProfiles', JSON.stringify(response));
-                                                             $scope.displayProfile(response);
+                                                         ServiceUserChamber.geAllProfilesJSON().then(function (responseAllProfiles) {
+                                                             sessionStorage.setItem('AllProfiles', JSON.stringify(responseAllProfiles));
+                                                             ServiceUserChamber.geAllProfilesPhotosJSON().then(function (responseAllProfilesPhotos) {
+                                                                 sessionStorage.setItem('AllProfilesPhotos', JSON.stringify(responseAllProfilesPhotos));
+                                                                 $scope.displayProfile(responseAllProfiles, responseAllProfilesPhotos);
+                                                                 toastr.success('My Matching Profiles loaded Successfully');
+                                                             });
                                                          });
-                                                     } 
-                                                 }
-                                                 $scope.displayProfile = function (response) {
-                                                     FactoryAstrologicalMatchers.getUserChamberJSON(response.data, true);
+                                                     }
+                                                 };
+
+                                                 $scope.displayProfile = function (objProfilesJSON, objProfilesPhotoJSON) {
+                                                     FactoryAstrologicalMatchers.getAstrologicalMatchingProfiles(objProfilesJSON.data, objProfilesPhotoJSON.data);
                                                      $scope.arrFilterStar = FactoryAstrologicalMatchers.arrFilterStar;
                                                      $scope.arrFilterSubCaste = FactoryAstrologicalMatchers.arrFilterSubCaste;
                                                      $scope.arrSangamMaster = FactoryAstrologicalMatchers.arrSangamMaster;
@@ -67,7 +87,6 @@ var ControllerAstrologicalMatchers = angular.module('MugurthamApp').
                                                  $scope.pageChangeHandlerSmartSearch = function (num) {
                                                      setTimeout(displayThumbnailSlider, 10);
                                                  };
-                                                 toastr.success('My Matching Profiles loaded Successfully');
                                                  /*========================================= E-Commerce Filter Section ======================================================*/
 
                                                  //Item Count

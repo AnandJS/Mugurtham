@@ -56,8 +56,10 @@ namespace Mugurtham.Service.Areas.Search.Controllers
         }
 
         [HttpGet]
-        public ActionResult getAllProfiles()
+        public ActionResult getAllProfiles(bool lazyLoad = false)
         {
+
+
             string strGender = "admin"; // Mugurtham admin, Sangam admin, public user
             Mugurtham.Core.Login.LoggedInUser objLoggedIn = (Mugurtham.Core.Login.LoggedInUser)Session["LoggedInUser"];
             if (objLoggedIn.roleID == Constants.RoleIDForUserProfile) // User Profiles 
@@ -75,7 +77,7 @@ namespace Mugurtham.Service.Areas.Search.Controllers
             PorfileBasicInfoViewCore objPorfileBasicInfoViewCore = new PorfileBasicInfoViewCore();
             using (objPorfileBasicInfoViewCore as IDisposable)
             {
-                objPorfileBasicInfoViewCore.GetAllProfiles(Utility.connectionString(), strGender,
+                objPorfileBasicInfoViewCore.GetAllProfiles(Utility.connectionString(), strGender, lazyLoad,
                     ref objProfileBasicViewEntity,
                     ref objLoggedIn
                     );
@@ -92,7 +94,7 @@ namespace Mugurtham.Service.Areas.Search.Controllers
             return this.Json(objProfileBasicViewEntity.ProfileBasicInfoViewCoreEntityList, JsonRequestBehavior.AllowGet);
         }
         [HttpGet]
-        public ActionResult getAllProfilesPhoto()
+        public ActionResult getAllProfilesPhoto(bool lazyLoad = false)
         {
             string strGender = "admin"; // Mugurtham admin, Sangam admin, public user
             Mugurtham.Core.Login.LoggedInUser objLoggedIn = (Mugurtham.Core.Login.LoggedInUser)Session["LoggedInUser"];
@@ -111,7 +113,7 @@ namespace Mugurtham.Service.Areas.Search.Controllers
             PorfileBasicInfoViewCore objPorfileBasicInfoViewCore = new PorfileBasicInfoViewCore();
             using (objPorfileBasicInfoViewCore as IDisposable)
             {
-                objPorfileBasicInfoViewCore.GetAllProfiles(Utility.connectionString(), strGender,
+                objPorfileBasicInfoViewCore.GetAllProfiles(Utility.connectionString(), strGender, lazyLoad,
                     ref objProfileBasicViewEntity,
                     ref objLoggedIn
                     );

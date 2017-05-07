@@ -24,16 +24,23 @@ var ControllerHighlightedProfiles = angular.module('MugurthamApp').controller('C
             //AJAX GET REQUEST - GETTING ALL PROFILES
             //===================================================
             $scope.getHighlightedProfiles = function () {
-                if (sessionStorage.getItem('HiglightedProfiles')) {
-                    $scope.initData(JSON.parse(sessionStorage.getItem('HiglightedProfiles')).data);
+                try {
+                    if (sessionStorage.getItem('HiglightedProfiles')) {
+                        $scope.initData(JSON.parse(sessionStorage.getItem('HiglightedProfiles')).data);
+                    }
+                    else {
+                        ServiceUserChamber.getHighlightedProfilesJSON().then(function (response) {
+                            sessionStorage.setItem('HiglightedProfiles', JSON.stringify(response));
+                            toastr.success('Highlighted Profiles loaded Successfully');
+                            $scope.initData(response.data);
+                        })
+                    }
                 }
-                else {
-                    ServiceUserChamber.getHighlightedProfilesJSON().then(function (response) {
-                        sessionStorage.setItem('HiglightedProfiles', JSON.stringify(response));
-                        $scope.initData(response.data)
-                    });
+                catch (err) {
+                    toastr.error(err.message);
                 }
-            }
+
+            };
 
             $scope.initData = function (data) {
                 $("#divContainer").unmask();
@@ -48,7 +55,6 @@ var ControllerHighlightedProfiles = angular.module('MugurthamApp').controller('C
                     console.log('Profiles page changed to ' + num);
                 };
                 setTimeout(displayThumbnailSlider, 10);
-                toastr.success('Highlighted Profiles loaded Successfully');
             }
 
         }])

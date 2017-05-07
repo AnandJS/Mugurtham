@@ -51,8 +51,8 @@ var MugurthamController = angular.module('MugurthamApp').
         $rootScope.globalProfileID = '';
         $rootScope.HomePageLink = 'ProfileID';
     }).
-    controller('MugurthamController', ['$http', '$scope', '$location', '$translate',
-         function ($http, $scope, $location, $translate) {
+    controller('MugurthamController', ['$http', '$scope', '$location', '$translate', 'ServiceUserChamber', '$timeout',
+         function ($http, $scope, $location, $translate, ServiceUserChamber, $timeout) {
              // Global loggedIn User object with full details called only once at login
              // and during page refreshes, which should not supposed to happen
              getLoggedInUserInfo($http);
@@ -64,7 +64,7 @@ var MugurthamController = angular.module('MugurthamApp').
              $scope.setActiveTab = function (tabID) {
                  $('#navBarProfile li').removeClass('active');
                  $('#' + tabID).parent().addClass('active');
-             }
+             };
 
              $scope.sangamName = 'Viswakarma Sangam';
              $scope.globalProfileID = '';
@@ -92,8 +92,44 @@ var MugurthamController = angular.module('MugurthamApp').
              };
 
 
+             /************LAZYLOAD ALL PROFILES ON PAGE LOAD ************************/
 
+             $scope.lazyloadAllProfiles = function () {
+                 var loadAll;
+                 try {
+                     loadAllProfilesSliced(ServiceUserChamber);
+                   /*  ServiceUserChamber.getHighlightedProfilesJSON().then(function (response) {
+                         sessionStorage.setItem('HiglightedProfiles', JSON.stringify(response));
+                     });
+                     ServiceUserChamber.getRecentlyJoinedProfilesJSON().then(function (response) {
+                         sessionStorage.setItem('RecentlyJoinedProfiles', JSON.stringify(response));
+                     });
+                     ServiceUserChamber.getRecentlyViewedProfilesJSON().then(function (response) {
+                         sessionStorage.setItem('RecentlyViewedProfiles', JSON.stringify(response));
+                     });
+                     ServiceUserChamber.getInterestedProfilesJSON().then(function (response) {
+                         sessionStorage.setItem('InterestedProfiles', JSON.stringify(response));
+                     });
+                     ServiceUserChamber.getViewedMeProfilesJSON().then(function (response) {
+                         sessionStorage.setItem('ViewedMeProfiles', JSON.stringify(response));
+                     });
+                     ServiceUserChamber.getInterestedInMeProfilesJSON().then(function (response) {
+                         sessionStorage.setItem('InterestedInMeProfiles', JSON.stringify(response));
+                     });*/
+                     if (loadAll !== undefined) {
+                         $timeout.cancel(loadAll);
+                     }
+                     //Will load all the rest of data after 1.5s
+                     loadAll = $timeout(function () {
+                         loadAllProfiles(ServiceUserChamber);
+                     }, 10000);
+                 }
+                 catch (err) {
+                     toastr.error(err.message);
+                 }
+             };
 
+            
 
              /*============================================SEARCH GLOBAL FILTER PANEL=================================*/
              //http://stackoverflow.com/questions/14514461/how-to-bind-to-list-of-checkbox-values-with-angularjs
@@ -105,6 +141,46 @@ var MugurthamController = angular.module('MugurthamApp').
 
          }])
 
+
+
+function loadAllProfilesSliced(ServiceUserChamber) {
+    var objAllProfilesJSON;
+    try {        
+        if (sessionStorage.getItem('AllProfiles')) {
+        }
+        else {
+            ServiceUserChamber.geAllProfilesSlicedJSON().then(function (response) {
+                objAllProfilesJSON = response;
+                sessionStorage.removeItem('AllProfiles');
+                sessionStorage.setItem('AllProfiles', JSON.stringify(response));
+                ServiceUserChamber.geAllProfilesPhotosSlicedJSON().then(function (response) {
+                    sessionStorage.setItem('AllProfilesPhotos', JSON.stringify(response));
+                });
+            });
+        }
+    }
+    catch (err) {
+        toastr.error(err.message);
+    }
+}
+function loadAllProfiles(ServiceUserChamber) {
+    try {       
+        ServiceUserChamber.geAllProfilesJSON().then(function (response) {
+            objAllProfilesJSON = response;
+            sessionStorage.removeItem('AllProfiles');
+            sessionStorage.setItem('AllProfiles', JSON.stringify(response));
+            ServiceUserChamber.geAllProfilesPhotosJSON().then(function (response) {
+                sessionStorage.removeItem('AllProfilesPhotos');
+                sessionStorage.setItem('AllProfilesPhotos', JSON.stringify(response));
+            });
+        });
+    }
+    catch (err) {
+        toastr.error(err.message);
+    }
+}
+
+ 
 
 function setUserStyleLocale(themeID) {
     // Set loggedin user style
