@@ -43,10 +43,10 @@ var ControllerSearchGeneral = angular.module('MugurthamApp').controller('Control
                     method: "GET", url: strGetURL
                 }).
             success(function (data, status, headers, config) {
-                $scope.getAllGeneralSearchProfiles();
                 $scope.arrSangamID = data.SangamCoreEntity;
                 $scope.arrRoleID = data.RoleCoreEntity;
                 $('#ddlSangam').empty();
+                $scope.getAllGeneralSearchProfiles();
                 getUserByID();
             }).
             error(function (data, status, headers, config) {
@@ -91,8 +91,8 @@ var ControllerSearchGeneral = angular.module('MugurthamApp').controller('Control
             $scope.initData = function () {
                 $scope.currentPage = 1;
                 $scope.pageSize = 15;
-                $scope.SearchedProfiles = JSON.parse(sessionStorage.getItem('AllProfiles'));
-                $scope.profilePhotos = JSON.parse(sessionStorage.getItem('AllProfilesPhoto'));
+                $scope.SearchedProfiles = JSON.parse(sessionStorage.getItem('AllProfiles')).data;
+                $scope.profilePhotos = JSON.parse(sessionStorage.getItem('AllProfilesPhotosSearch')).data;
                 $scope.pageChangeHandler = function (num) {
                     $("html, body").animate({ scrollTop: 220 }, "slow");
                     setTimeout(displayThumbnailSlider, 10);

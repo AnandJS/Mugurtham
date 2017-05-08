@@ -67,8 +67,8 @@ var ControllerSearchOccupation = angular.module('MugurthamApp').controller('Cont
                 //$scope.AllProfiles = $.parseJSON(sessionStorage.getItem('AllProfiles'));
                 $scope.currentPage = 1;
                 $scope.pageSize = 15;
-                $scope.SearchedProfiles = JSON.parse(sessionStorage.getItem('AllProfiles'));
-                $scope.profilePhotos = JSON.parse(sessionStorage.getItem('AllProfilesPhoto'));
+                $scope.SearchedProfiles = JSON.parse(sessionStorage.getItem('AllProfiles')).data;
+                $scope.profilePhotos = JSON.parse(sessionStorage.getItem('AllProfilesPhotosSearch')).data;
                 //$scope.lazyLoadData($scope.AllProfiles);
             }
 

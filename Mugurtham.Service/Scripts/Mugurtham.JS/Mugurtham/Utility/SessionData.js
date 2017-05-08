@@ -113,4 +113,7 @@ function removeSessionData() {
     sessionStorage.removeItem('LoggedInUserID');
     sessionStorage.removeItem('AstrologicalMatchers');
     sessionStorage.removeItem('MyMatchingProfilesBadgeCount');
+    sessionStorage.removeItem('AllProfilesPhotosSearch');
+
+    //AllProfilesPhotosSearch
 };

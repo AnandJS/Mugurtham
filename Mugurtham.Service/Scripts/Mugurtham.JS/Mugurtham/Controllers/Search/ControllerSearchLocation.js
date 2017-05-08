@@ -28,8 +28,8 @@ var ControllerSearchLocation = angular.module('MugurthamApp').controller('Contro
             $scope.initData = function () {
                 $scope.currentPage = 1;
                 $scope.pageSize = 15;
-                $scope.SearchedProfiles = JSON.parse(sessionStorage.getItem('AllProfiles'));
-                $scope.profilePhotos = JSON.parse(sessionStorage.getItem('AllProfilesPhoto'));
+                $scope.SearchedProfiles = JSON.parse(sessionStorage.getItem('AllProfiles')).data;
+                $scope.profilePhotos = JSON.parse(sessionStorage.getItem('AllProfilesPhotosSearch')).data;
                 $scope.pageChangeHandler = function (num) {
                     $("html, body").animate({ scrollTop: 220 }, "slow");
                     setTimeout(displayThumbnailSlider, 10);

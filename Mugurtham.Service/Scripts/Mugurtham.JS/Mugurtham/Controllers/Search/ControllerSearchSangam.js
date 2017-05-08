@@ -27,11 +27,11 @@ var ControllerSearchSangam = angular.module('MugurthamApp').controller('Controll
                 $http({
                     method: "GET", url: strGetURL
                 }).
-            success(function (data, status, headers, config) {
-                $scope.getAllSangamProfiles();
+            success(function (data, status, headers, config) {           
                 $scope.arrSangamID = data.SangamCoreEntity;
                 $scope.arrRoleID = data.RoleCoreEntity;
-                $('#ddlSangam').empty();                
+                $('#ddlSangam').empty();
+                $scope.getAllSangamProfiles();
             }).
             error(function (data, status, headers, config) {
                 NotifyStatus('2');
@@ -76,8 +76,8 @@ var ControllerSearchSangam = angular.module('MugurthamApp').controller('Controll
             $scope.initData = function () {
                 $scope.currentPage = 1;
                 $scope.pageSize = 15;
-                $scope.SearchedProfiles = JSON.parse(sessionStorage.getItem('AllProfiles'));
-                $scope.profilePhotos = JSON.parse(sessionStorage.getItem('AllProfilesPhoto'));
+                $scope.SearchedProfiles = JSON.parse(sessionStorage.getItem('AllProfiles')).data;
+                $scope.profilePhotos = JSON.parse(sessionStorage.getItem('AllProfilesPhotosSearch')).data;
                 $scope.pageChangeHandler = function (num) {
                     $("html, body").animate({ scrollTop: 220 }, "slow");
                     setTimeout(displayThumbnailSlider, 10);

@@ -31,7 +31,6 @@ var ControllerHighlightedProfiles = angular.module('MugurthamApp').controller('C
                     else {
                         ServiceUserChamber.getHighlightedProfilesJSON().then(function (response) {
                             sessionStorage.setItem('HiglightedProfiles', JSON.stringify(response));
-                            toastr.success('Highlighted Profiles loaded Successfully');
                             $scope.initData(response.data);
                         })
                     }
@@ -55,6 +54,7 @@ var ControllerHighlightedProfiles = angular.module('MugurthamApp').controller('C
                     console.log('Profiles page changed to ' + num);
                 };
                 setTimeout(displayThumbnailSlider, 10);
+                toastr.success('Highlighted Profiles loaded Successfully');
             }
 
         }])

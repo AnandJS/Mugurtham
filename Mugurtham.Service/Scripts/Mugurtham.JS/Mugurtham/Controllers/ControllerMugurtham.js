@@ -152,8 +152,10 @@ function loadAllProfilesSliced(ServiceUserChamber) {
             ServiceUserChamber.geAllProfilesSlicedJSON().then(function (response) {
                 objAllProfilesJSON = response;
                 sessionStorage.removeItem('AllProfiles');
+                sessionStorage.removeItem('AllProfilesPhotosSearch');
                 sessionStorage.setItem('AllProfiles', JSON.stringify(response));
                 ServiceUserChamber.geAllProfilesPhotosSlicedJSON().then(function (response) {
+                    sessionStorage.setItem('AllProfilesPhotosSearch', JSON.stringify(response));
                     sessionStorage.setItem('AllProfilesPhotos', JSON.stringify(response));
                 });
             });
@@ -168,10 +170,12 @@ function loadAllProfiles(ServiceUserChamber) {
         ServiceUserChamber.geAllProfilesJSON().then(function (response) {
             objAllProfilesJSON = response;
             sessionStorage.removeItem('AllProfiles');
+            sessionStorage.removeItem('AllProfilesPhotosSearch');
             sessionStorage.setItem('AllProfiles', JSON.stringify(response));
             ServiceUserChamber.geAllProfilesPhotosJSON().then(function (response) {
                 sessionStorage.removeItem('AllProfilesPhotos');
                 sessionStorage.setItem('AllProfilesPhotos', JSON.stringify(response));
+                sessionStorage.setItem('AllProfilesPhotosSearch', JSON.stringify(response));
             });
         });
     }

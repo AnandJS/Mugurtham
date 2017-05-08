@@ -23,49 +23,21 @@ var ControllerSearchEducation = angular.module('MugurthamApp').controller('Contr
             //AJAX GET REQUEST - GETTING ALL PROFILES AND THEN FILTER ON Education THROUGH VIEW SMART SEARCH
             //===============================================================================================
             $scope.getAllProfiles = function () {
-              /*  if (typeof (Storage) !== "undefined") {
-                    if ((!sessionStorage.getItem('AllProfiles')))
-                        $scope.getAllProfilesfromAPI();
-                    else
-                        $scope.getAllProfilesfromSession();
-                }
-                else
-                    $scope.getAllProfilesfromAPI();*/
                 $scope.initData();
-            }
-
-            $scope.getAllProfilesfromSession = function () {
-                if ((sessionStorage.getItem('AllProfiles')))
-                    $scope.initData(JSON.parse(sessionStorage.getItem('AllProfiles')));
-            }
-            $scope.getAllProfilesfromAPI = function () {
-                var strGetURL = "Search/Search/getAllProfiles";
-                $("#divContainer").mask("Searching profiles please wait...");
-                $http({
-                    method: "GET", url: strGetURL
-                }).
-            success(function (data, status, headers, config) {
-                $("#divContainer").unmask();
-                initData(data);
-            }).
-                error(function (data, status, headers, config) {
-                    $("#divContainer").unmask();
-                    NotifyStatus('2');
-                });
-            }
+            };
 
             $scope.initData = function () {
                 $scope.currentPage = 1;
                 $scope.pageSize = 15;
-                $scope.SearchedProfiles = JSON.parse(sessionStorage.getItem('AllProfiles'));
-                $scope.profilePhotos = JSON.parse(sessionStorage.getItem('AllProfilesPhoto'));
+                $scope.SearchedProfiles = JSON.parse(sessionStorage.getItem('AllProfiles')).data;
+                $scope.profilePhotos = JSON.parse(sessionStorage.getItem('AllProfilesPhotosSearch')).data;
                 $scope.pageChangeHandler = function (num) {
                     $("html, body").animate({ scrollTop: 220 }, "slow");
                     setTimeout(displayThumbnailSlider, 10);
                     console.log('Profiles page changed to ' + num);
                 };
                 setTimeout(displayThumbnailSlider, 10);
-            }
+            };
 
         }])
 

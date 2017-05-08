@@ -56,10 +56,17 @@ var ControllerSearchAllProfiles = angular.module('MugurthamApp').controller('Con
 
             $scope.initData = function () {
                 //$scope.AllProfiles = data;
-                $scope.currentPage = 1;
-                $scope.pageSize = 15;
-                $scope.SearchedProfiles = JSON.parse(sessionStorage.getItem('AllProfiles'));
-                $scope.profilePhotos = JSON.parse(sessionStorage.getItem('AllProfilesPhoto'));
+                try
+                {
+                    $scope.currentPage = 1;
+                    $scope.pageSize = 15;
+                    $scope.SearchedProfiles = JSON.parse(sessionStorage.getItem('AllProfiles')).data;
+                    $scope.profilePhotos = JSON.parse(sessionStorage.getItem('AllProfilesPhotosSearch')).data;
+                }
+                catch(err)
+                {
+                    toastr.error(err.message);
+                }
                // $scope.lazyLoadData(data);
             }
 

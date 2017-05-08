@@ -58,7 +58,6 @@ var ControllerAstrologicalMatchers = angular.module('MugurthamApp').
                                                              ServiceUserChamber.geAllProfilesPhotosJSON().then(function (responseAllProfilesPhotos) {
                                                                  sessionStorage.setItem('AllProfilesPhotos', JSON.stringify(responseAllProfilesPhotos));
                                                                  $scope.displayProfile(responseAllProfiles, responseAllProfilesPhotos);
-                                                                 toastr.success('My Matching Profiles loaded Successfully');
                                                              });
                                                          });
                                                      }
@@ -78,6 +77,8 @@ var ControllerAstrologicalMatchers = angular.module('MugurthamApp').
                                                      $scope.AllProfiles = FactoryAstrologicalMatchers.AllProfiles;
                                                      $scope.SearchedProfiles = FactoryAstrologicalMatchers.SearchedProfiles;
                                                      $scope.profilePhotos = FactoryAstrologicalMatchers.profilePhotos;
+                                                     toastr.success('My Matching Profiles loaded Successfully');
+                                                     setTimeout(displayThumbnailSlider, 10);
                                                  }
 
                                                  $scope.pageChangeHandler = function (num) {
