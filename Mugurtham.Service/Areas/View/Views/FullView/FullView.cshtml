@@ -753,7 +753,7 @@
 <div class="page-header"><h1>Similar profiles by Star you may be interested in</h1></div>
 <div class="flexslider">
     <ul class="slides">
-        <li ng-repeat="SimilarProfile in SearchedProfiles | filter: { Star: SearchedProfiles.BasicInfoCoreEntity.Star }  ">
+        <li ng-repeat="SimilarProfile in SearchedProfiles | filter: { Star: SearchedProfiles.BasicInfoCoreEntity.Star } |limitTo:500 ">
             <div class="container">
                 <div class="col-sm-2">
                     <div class="col-item">
