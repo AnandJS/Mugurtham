@@ -753,11 +753,11 @@
 <div class="page-header"><h1>Similar profiles by Star you may be interested in</h1></div>
 <div class="flexslider">
     <ul class="slides">
-        <li ng-repeat="SimilarProfile in SimilarProfiles | filter: { Star: AllProfiles.BasicInfoCoreEntity.Star }  ">
+        <li ng-repeat="SimilarProfile in SearchedProfiles | filter: { Star: SearchedProfiles.BasicInfoCoreEntity.Star }  ">
             <div class="container">
                 <div class="col-sm-2">
                     <div class="col-item">
-                        <div class="photo" ng-repeat="SimilarProfilePhoto in SimilarProfilePhotos | filter: {ProfileID: SimilarProfile.MugurthamProfileID} |limitTo:1">
+                        <div class="photo" ng-repeat="SimilarProfilePhoto in profilePhotos | filter: {ProfileID: SimilarProfile.MugurthamProfileID} |limitTo:1">
                             <img src="{{SimilarProfilePhoto.PhotoPath}}" class="img-responsive" alt="{{SimilarProfile.Name}}" />
                         </div>
                         <div class="info">

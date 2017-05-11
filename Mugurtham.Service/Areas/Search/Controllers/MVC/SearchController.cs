@@ -91,7 +91,12 @@ namespace Mugurtham.Service.Areas.Search.Controllers
                 objProfileCore.GetAll(ref objProfileCoreList, strGender, objLoggedIn.sangamID);
             objProfileCore = null;*/
             //Response.AddHeader("Content-Encoding", "gzip");
-            return this.Json(objProfileBasicViewEntity.ProfileBasicInfoViewCoreEntityList, JsonRequestBehavior.AllowGet);
+
+            var jsonResult = this.Json(objProfileBasicViewEntity.ProfileBasicInfoViewCoreEntityList, JsonRequestBehavior.AllowGet);
+            jsonResult.MaxJsonLength = int.MaxValue;
+
+            return jsonResult;
+            //return this.Json(objProfileBasicViewEntity.ProfileBasicInfoViewCoreEntityList, JsonRequestBehavior.AllowGet);
         }
         [HttpGet]
         public ActionResult getAllProfilesPhoto(bool lazyLoad = false)
@@ -127,7 +132,12 @@ namespace Mugurtham.Service.Areas.Search.Controllers
                 objProfileCore.GetAll(ref objProfileCoreList, strGender, objLoggedIn.sangamID);
             objProfileCore = null;*/
             //Response.AddHeader("Content-Encoding", "gzip");
-            return this.Json(objProfileBasicViewEntity.PhotoCoreEntityList, JsonRequestBehavior.AllowGet);
+
+            var jsonResult = this.Json(objProfileBasicViewEntity.PhotoCoreEntityList, JsonRequestBehavior.AllowGet);
+            jsonResult.MaxJsonLength = int.MaxValue;
+            return jsonResult;
+
+            //return this.Json(objProfileBasicViewEntity.PhotoCoreEntityList, JsonRequestBehavior.AllowGet);
         }
         [HttpGet]
         public ActionResult GetRecentlyJoinedProfiles()
