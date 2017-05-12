@@ -18,6 +18,40 @@ namespace Mugurtham.Common.Utilities
         private static readonly string strLogilePath = ConfigurationManager.AppSettings[AppKeyLogFilePath] + "Log_" + DateTime.Now.ToShortDateString().Replace('/', '-') + ".log";
         private static readonly string strConnectionstring = System.Configuration.ConfigurationManager.ConnectionStrings[AppKeyConnectionstring].ConnectionString;
 
+        /*
+        //Centralizing to domain by avoiding multiple subdomains
+        private static string strConnectionstring = string.Empty;
+        private static string strCommunity = string.Empty;
+        /// <summary>
+        /// Gets the ConnectionString of the Mugurtham Database
+        /// </summary>
+        public static string ConnectionString
+        {
+            get
+            {
+                return strConnectionstring;
+            }
+            set
+            {
+                strConnectionstring = value;
+            }
+
+        }
+        /// <summary>
+        /// Gets the Community for the loggedin user
+        /// </summary>
+        public static string Community
+        {
+            get
+            {
+                return strCommunity;
+            }
+            set
+            {
+                strCommunity = value;
+            }
+
+        }*/
         public static string LogFilePath
         {
             get

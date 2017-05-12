@@ -69,6 +69,7 @@ namespace Mugurtham.Service.Areas.Profile.Controllers.MVC
                         Mugurtham.Core.BasicInfo.BasicInfoCoreEntity objBasicInfoCoreEntity = new Core.BasicInfo.BasicInfoCoreEntity();
                         using (objBasicInfoCoreEntity as IDisposable)
                         {
+                            
                             objBasicInfoCoreEntity = objBasicInfoCore.GetByProfileID(ProfileID);
                             objBasicInfoCoreEntity.PhotoPath = "/Areas/Profile/Images/ProfilePhoto/" + ProfileID + Path.GetExtension(Path.GetFileName(file.FileName));
                             string strFilePath = Path.Combine(Server.MapPath("~/Areas/Profile/Images/ProfilePhoto"),
