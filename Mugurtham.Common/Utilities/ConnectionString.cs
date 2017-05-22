@@ -28,20 +28,20 @@ namespace Mugurtham.Common.Utilities
             {
                 if (_CommunityID == "1")
                 {
-                    _CommunityName = "vishwakarma";
-                    _AppKeyConnectionstring = "vishwakarma";
+                    _CommunityName = "udayar";
+                    _AppKeyConnectionstring = "udayar";
                     _Connectionstring = System.Configuration.ConfigurationManager.ConnectionStrings[_AppKeyConnectionstring].ConnectionString;
                 }
                 else if (_CommunityID == "2")
                 {
-                    _CommunityName = "naidu";
-                    _AppKeyConnectionstring = "naidu";
+                    _CommunityName = "pillai";
+                    _AppKeyConnectionstring = "pillai";
                     _Connectionstring = System.Configuration.ConfigurationManager.ConnectionStrings[_AppKeyConnectionstring].ConnectionString;
                 }
                 else if (_CommunityID == "3")
                 {
-                    _CommunityName = "mudaliyar";
-                    _AppKeyConnectionstring = "mudaliyar";
+                    _CommunityName = "thevar";
+                    _AppKeyConnectionstring = "thevar";
                     _Connectionstring = System.Configuration.ConfigurationManager.ConnectionStrings[_AppKeyConnectionstring].ConnectionString;
                 }
             }

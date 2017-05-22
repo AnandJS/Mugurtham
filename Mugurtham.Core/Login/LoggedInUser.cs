@@ -33,9 +33,15 @@ namespace Mugurtham.Core.Login
         {
             try
             {
-                if(CommunityID == "1")
-                ConnectionStringAppKey = "vishwakarma";
-                ConnectionString = "";
+                Mugurtham.Common.Utilities.ConnectionString objConnectionString = new Mugurtham.Common.Utilities.ConnectionString(CommunityID);
+                using (objConnectionString as IDisposable)
+                {
+                    this.CommunityID = objConnectionString.CommunityID;
+                    this.CommunityName = objConnectionString.CommunityName;
+                    this.ConnectionStringAppKey = objConnectionString.AppKeyConnectionString;
+                    this.ConnectionString = objConnectionString.AppConnectionString;
+                }
+                objConnectionString = null;
             }
             catch (Exception objEx)
             { 
@@ -48,7 +54,7 @@ namespace Mugurtham.Core.Login
         {
             try
             {
-                Core.User.UserCore objUserCore = new Core.User.UserCore(this.ConnectionStringAppKey);
+                Core.User.UserCore objUserCore = new Core.User.UserCore(ConnectionStringAppKey);
                 using (objUserCore as IDisposable)
                 {
                     objUserCoreEntity = objUserCore.GetByLoginID(_strLoggedInID);
