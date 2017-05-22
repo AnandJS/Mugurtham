@@ -39,7 +39,9 @@ var ControllerProfilePhoto = angular.module('MugurthamApp').controller('Controll
                     method: "GET", url: '/SearchAPI/AllProfilesAPI/getByProfileID/' + $rootScope.globalProfileID,
                     params: { "MugurthamUserToken": getLoggedInUserID() },
                     headers: {
-                        "MugurthamUserToken": getLoggedInUserID()
+                        'content-Type': 'application/x-www-form-urlencoded',
+                        "MugurthamUserToken": getLoggedInUserID(),
+                        "CommunityID": getLoggedInUserCommunityID()
                     }
                 }).
 success(function (data, status, headers, config) {
@@ -95,7 +97,8 @@ success(function (data, status, headers, config) {
                     }),
                     headers: {
                         'content-Type': 'application/x-www-form-urlencoded',
-                        "MugurthamUserToken": getLoggedInUserID()
+                        "MugurthamUserToken": getLoggedInUserID(),
+                        "CommunityID": getLoggedInUserCommunityID()
                     }
                 }).
             success(function (data, status, headers, config) {
@@ -115,7 +118,10 @@ success(function (data, status, headers, config) {
                 $http({
                     method: "GET", url: '/Profile/Profile/RemoveProfilePic/' + strPhotoID,
                     headers: {
-                        "MugurthamUserToken": getLoggedInUserID()
+
+                        'content-Type': 'application/x-www-form-urlencoded',
+                        "MugurthamUserToken": getLoggedInUserID(),
+                        "CommunityID": getLoggedInUserCommunityID()
                     }
                 }).
 success(function (data, status, headers, config) {

@@ -10,12 +10,19 @@ namespace Mugurtham.Core.Sangam
 {
     public class SangamCore
     {
+        private string _ConnectionStringAppKey = string.Empty;
+
+        public SangamCore(string ConnectionStringAppKey)
+        {
+            _ConnectionStringAppKey = ConnectionStringAppKey;
+        }
+
         public int Add(ref Mugurtham.Core.Sangam.SangamCoreEntity objSangamCoreEntity, out string strSangamID)
         {
             strSangamID = Helpers.primaryKey;
             try
             {
-                IUnitOfWork objIUnitOfWork = new UnitOfWork();
+                IUnitOfWork objIUnitOfWork = new UnitOfWork(_ConnectionStringAppKey);
                 using (objIUnitOfWork as IDisposable)
                 {
                     Mugurtham.DTO.Sangam.Sangam objDTOSangam = new DTO.Sangam.Sangam();
@@ -43,7 +50,7 @@ namespace Mugurtham.Core.Sangam
         {
             try
             {
-                IUnitOfWork objIUnitOfWork = new UnitOfWork();
+                IUnitOfWork objIUnitOfWork = new UnitOfWork(_ConnectionStringAppKey);
                 using (objIUnitOfWork as IDisposable)
                 {
                     Mugurtham.DTO.Sangam.Sangam objDTOSangam = new DTO.Sangam.Sangam();
@@ -70,7 +77,7 @@ namespace Mugurtham.Core.Sangam
             try
             {
                 Mugurtham.DTO.Sangam.Sangam objSangam = new Mugurtham.DTO.Sangam.Sangam();
-                IUnitOfWork objUOW = new UnitOfWork();
+                IUnitOfWork objUOW = new UnitOfWork(_ConnectionStringAppKey);
                 using (objUOW as IDisposable)
                     objSangam = objUOW.RepositorySangam.GetAll().ToList().Where(p => p.ID.Trim().ToLower() == strID.Trim().ToLower()).FirstOrDefault();
                 objUOW = null;
@@ -94,7 +101,7 @@ namespace Mugurtham.Core.Sangam
         {
             try
             {
-                IUnitOfWork objIUnitOfWork = new UnitOfWork();
+                IUnitOfWork objIUnitOfWork = new UnitOfWork(_ConnectionStringAppKey);
                 using (objIUnitOfWork as IDisposable)
                 {
                     foreach (Mugurtham.DTO.Sangam.Sangam objSangam in objIUnitOfWork.RepositorySangam.GetAll().Where(p => p.IsActivated == "1").ToList().OrderBy(x => x.Name))
@@ -124,7 +131,7 @@ namespace Mugurtham.Core.Sangam
         {
             try
             {
-                IUnitOfWork objIUnitOfWork = new UnitOfWork();
+                IUnitOfWork objIUnitOfWork = new UnitOfWork(_ConnectionStringAppKey);
                 using (objIUnitOfWork as IDisposable)
                 {
                     foreach (Mugurtham.DTO.Sangam.Sangam objSangam in objIUnitOfWork.RepositorySangam.GetAll().ToList())

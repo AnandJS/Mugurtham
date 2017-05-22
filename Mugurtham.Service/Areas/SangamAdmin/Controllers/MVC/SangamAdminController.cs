@@ -39,7 +39,7 @@ namespace Mugurtham.Service.Areas.SangamAdmin.Controllers.MVC
                     string path = Path.Combine(Server.MapPath("~/Images/Mugurtham/Sangam/Logo"),
                                               objLoggedIn.sangamID + Path.GetExtension(Path.GetFileName(file.FileName)));
                     file.SaveAs(path);
-                    Mugurtham.Core.Sangam.SangamCore objSangamCore = new Core.Sangam.SangamCore();
+                    Mugurtham.Core.Sangam.SangamCore objSangamCore = new Core.Sangam.SangamCore(objLoggedIn.ConnectionStringAppKey);
                     using (objSangamCore as IDisposable)
                     {
                         Mugurtham.Core.Sangam.SangamCoreEntity objSangamCoreEntity = new Core.Sangam.SangamCoreEntity();
@@ -74,7 +74,7 @@ namespace Mugurtham.Service.Areas.SangamAdmin.Controllers.MVC
                     string path = Path.Combine(Server.MapPath("~/Images/Mugurtham/Sangam/Banner"),
                                                objLoggedIn.sangamID + Path.GetExtension(Path.GetFileName(file.FileName)));
                     file.SaveAs(path);
-                    Mugurtham.Core.Sangam.SangamCore objSangamCore = new Core.Sangam.SangamCore();
+                    Mugurtham.Core.Sangam.SangamCore objSangamCore = new Core.Sangam.SangamCore(objLoggedIn.ConnectionStringAppKey);
                     using (objSangamCore as IDisposable)
                     {
                         Mugurtham.Core.Sangam.SangamCoreEntity objSangamCoreEntity = new Core.Sangam.SangamCoreEntity();
@@ -104,10 +104,10 @@ namespace Mugurtham.Service.Areas.SangamAdmin.Controllers.MVC
         {
             Mugurtham.Core.Login.LoggedInUser objLoggedIn = (Mugurtham.Core.Login.LoggedInUser)Session["LoggedInUser"];
             Core.Sangam.SangamDashboardEntity objSangamDashboardEntity = new Core.Sangam.SangamDashboardEntity();
-            SangamDashboardCore objSangamDashboardCore = new SangamDashboardCore();
+            SangamDashboardCore objSangamDashboardCore = new SangamDashboardCore(ref objLoggedIn);
             using (objSangamDashboardCore as IDisposable)
             {
-                objSangamDashboardCore.GetSangamDashboardData(Helpers.ConnectionString, objLoggedIn.sangamID, ref objSangamDashboardEntity);
+                objSangamDashboardCore.GetSangamDashboardData(objLoggedIn.ConnectionString, objLoggedIn.sangamID, ref objSangamDashboardEntity);
             }
             objSangamDashboardCore = null;
             return this.Json(objSangamDashboardEntity, JsonRequestBehavior.AllowGet);

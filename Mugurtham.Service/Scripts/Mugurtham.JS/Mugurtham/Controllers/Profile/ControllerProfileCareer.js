@@ -75,7 +75,8 @@ var ControllerProfileCareer = angular.module('MugurthamApp').controller('Control
                     }),
                     headers: {
                         'content-Type': 'application/x-www-form-urlencoded',
-                        "MugurthamUserToken": getLoggedInUserID()
+                        "MugurthamUserToken": getLoggedInUserID(),
+                        "CommunityID": getLoggedInUserCommunityID()
                     }
                 }).
             success(function (data, status, headers, config) {
@@ -103,7 +104,8 @@ var ControllerProfileCareer = angular.module('MugurthamApp').controller('Control
                     }),
                     headers: {
                         'content-Type': 'application/x-www-form-urlencoded',
-                        "MugurthamUserToken": getLoggedInUserID()
+                        "MugurthamUserToken": getLoggedInUserID(),
+                        "CommunityID": getLoggedInUserCommunityID()
                     }
                 }).
             success(function (data, status, headers, config) {
@@ -122,7 +124,8 @@ var ControllerProfileCareer = angular.module('MugurthamApp').controller('Control
                 $http({
                     method: "GET", url: strGetURL,
                     headers: {
-                        "MugurthamUserToken": getLoggedInUserID()
+                        "MugurthamUserToken": getLoggedInUserID(),
+                        "CommunityID": getLoggedInUserCommunityID()
                     }
                 }).
             success(function (data, status, headers, config) {

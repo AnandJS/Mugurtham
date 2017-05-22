@@ -10,11 +10,18 @@ namespace Mugurtham.Core.Profile.Photo
 {
     public class PhotoCore
     {
+        private Mugurtham.Core.Login.LoggedInUser _objLoggedInUser = null;
+
+        public PhotoCore(ref Mugurtham.Core.Login.LoggedInUser objLoggedInUser)
+        {
+            _objLoggedInUser = objLoggedInUser;
+        }
+
         public int Add(ref Mugurtham.Core.Profile.Photo.PhotoCoreEntity objPhotoCoreEntity)
         {
             try
             {
-                IUnitOfWork objIUnitOfWork = new UnitOfWork();
+                IUnitOfWork objIUnitOfWork = new UnitOfWork(_objLoggedInUser.ConnectionStringAppKey);
                 using (objIUnitOfWork as IDisposable)
                 {
                     Mugurtham.DTO.Profile.Photo objDTOPhoto = new DTO.Profile.Photo();
@@ -40,7 +47,7 @@ namespace Mugurtham.Core.Profile.Photo
             objDTOPhotoList = null;
             try
             {
-                IUnitOfWork objIUnitOfWork = new UnitOfWork();
+                IUnitOfWork objIUnitOfWork = new UnitOfWork(_objLoggedInUser.ConnectionStringAppKey);
                 using (objIUnitOfWork as IDisposable)
                     objDTOPhotoList = objIUnitOfWork.RepositoryPhoto.getProfilePhotos(strProfileID);
                 objIUnitOfWork.commit();
@@ -85,7 +92,7 @@ namespace Mugurtham.Core.Profile.Photo
         {
             try
             {
-                IUnitOfWork objIUnitOfWork = new UnitOfWork();
+                IUnitOfWork objIUnitOfWork = new UnitOfWork(_objLoggedInUser.ConnectionStringAppKey);
                 using (objIUnitOfWork as IDisposable)
                 {
                     Mugurtham.DTO.Profile.Photo objPhoto = new DTO.Profile.Photo();
@@ -93,7 +100,7 @@ namespace Mugurtham.Core.Profile.Photo
                         objPhoto = objIUnitOfWork.RepositoryPhoto.GetAll().ToList().Where(p => p.ID == strID).FirstOrDefault();
                     if (objPhoto != null)
                     {
-                        IUnitOfWork objIUnitOfWorkDeletePic = new UnitOfWork();
+                        IUnitOfWork objIUnitOfWorkDeletePic = new UnitOfWork(_objLoggedInUser.ConnectionStringAppKey);
                         using (objIUnitOfWorkDeletePic as IDisposable)
                         {
                             objIUnitOfWorkDeletePic.RepositoryPhoto.Delete(objPhoto);

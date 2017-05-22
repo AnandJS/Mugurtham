@@ -18,7 +18,9 @@ namespace Mugurtham.Service.Areas.MugurthamAdmin.Controllers.API
         public HttpResponseMessage Add([FromBody]UserCoreEntity objUserCoreEntity)
         {
             string strUserID = string.Empty;
-            UserCore objUserCore = new UserCore();
+            Mugurtham.Core.Login.LoggedInUser objLoggedIn = new Core.Login.LoggedInUser(Request.Headers.GetValues("MugurthamUserToken").FirstOrDefault(),
+           Request.Headers.GetValues("CommunityID").FirstOrDefault());
+            UserCore objUserCore = new UserCore(objLoggedIn.ConnectionStringAppKey);
             using (objUserCore as IDisposable)
             {
                 objUserCoreEntity.RoleID = Mugurtham.Core.Constants.RoleIDForSangamAdmin;
@@ -33,7 +35,9 @@ namespace Mugurtham.Service.Areas.MugurthamAdmin.Controllers.API
         [ActionName("Get")]
         public HttpResponseMessage Get(string ID)
         {
-            return Request.CreateResponse(HttpStatusCode.OK, new UserCore().GetByID(ID), Configuration.Formatters.JsonFormatter);
+            Mugurtham.Core.Login.LoggedInUser objLoggedIn = new Core.Login.LoggedInUser(Request.Headers.GetValues("MugurthamUserToken").FirstOrDefault(),
+           Request.Headers.GetValues("CommunityID").FirstOrDefault());
+            return Request.CreateResponse(HttpStatusCode.OK, new UserCore(objLoggedIn.ConnectionStringAppKey).GetByID(ID), Configuration.Formatters.JsonFormatter);
         }
 
         [HttpGet]
@@ -41,7 +45,9 @@ namespace Mugurtham.Service.Areas.MugurthamAdmin.Controllers.API
         public HttpResponseMessage GetLookupDTO()
         {
             List<Mugurtham.Core.Sangam.SangamCoreEntity> objSangamCoreEntityList = new List<Core.Sangam.SangamCoreEntity>();
-            Mugurtham.Core.Sangam.SangamCore objSangamCore = new Core.Sangam.SangamCore();
+            Mugurtham.Core.Login.LoggedInUser objLoggedIn = new Core.Login.LoggedInUser(Request.Headers.GetValues("MugurthamUserToken").FirstOrDefault(),
+           Request.Headers.GetValues("CommunityID").FirstOrDefault());
+            Mugurtham.Core.Sangam.SangamCore objSangamCore = new Core.Sangam.SangamCore(objLoggedIn.ConnectionStringAppKey);
             using (objSangamCore as IDisposable)
                 objSangamCore.GetAll(ref objSangamCoreEntityList);
             return Request.CreateResponse(HttpStatusCode.OK, objSangamCoreEntityList, Configuration.Formatters.JsonFormatter);
@@ -52,7 +58,9 @@ namespace Mugurtham.Service.Areas.MugurthamAdmin.Controllers.API
         public HttpResponseMessage GetAll()
         {
             List<UserCoreEntity> objSangamCoreEntityList = new List<UserCoreEntity>();
-            UserCore objUserCore = new UserCore();
+            Mugurtham.Core.Login.LoggedInUser objLoggedIn = new Core.Login.LoggedInUser(Request.Headers.GetValues("MugurthamUserToken").FirstOrDefault(),
+           Request.Headers.GetValues("CommunityID").FirstOrDefault());
+            UserCore objUserCore = new UserCore(objLoggedIn.ConnectionStringAppKey);
             using (objUserCore as IDisposable)
                 objUserCore.GetAll(ref objSangamCoreEntityList);
             objUserCore = null;
@@ -66,7 +74,9 @@ namespace Mugurtham.Service.Areas.MugurthamAdmin.Controllers.API
             List<UserCoreEntity> objSangamCoreEntityList = new List<UserCoreEntity>();
             if (!string.IsNullOrWhiteSpace(ID))
             {
-                UserCore objUserCore = new UserCore();
+                Mugurtham.Core.Login.LoggedInUser objLoggedIn = new Core.Login.LoggedInUser(Request.Headers.GetValues("MugurthamUserToken").FirstOrDefault(),
+           Request.Headers.GetValues("CommunityID").FirstOrDefault());
+                UserCore objUserCore = new UserCore(objLoggedIn.ConnectionStringAppKey);
                 using (objUserCore as IDisposable)
                     objUserCore.GetAllSangamUsers(ref objSangamCoreEntityList, ID);
                 objUserCore = null;
@@ -78,7 +88,9 @@ namespace Mugurtham.Service.Areas.MugurthamAdmin.Controllers.API
         [HttpPut]
         public void Put([FromBody]UserCoreEntity objUserCoreEntity)
         {
-                UserCore objUserCore = new UserCore();
+            Mugurtham.Core.Login.LoggedInUser objLoggedIn = new Core.Login.LoggedInUser(Request.Headers.GetValues("MugurthamUserToken").FirstOrDefault(),
+           Request.Headers.GetValues("CommunityID").FirstOrDefault());
+            UserCore objUserCore = new UserCore(objLoggedIn.ConnectionStringAppKey);
                 using (objUserCore as IDisposable)
                 {
                     objUserCore.Edit(ref objUserCoreEntity);

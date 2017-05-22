@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Mugurtham.Common.Utilities;
+using System.Configuration;
 
 namespace Mugurtham.Core.Login
 {
@@ -14,30 +15,53 @@ namespace Mugurtham.Core.Login
         private Core.Sangam.SangamCoreEntity objSangamCoreEntity = null;
         private Core.BasicInfo.BasicInfoCoreEntity objBasicInfoCoreEntity = null;
         string _strLoggedInID = string.Empty;
+        private string _ConnectionString = string.Empty;
+        private string _ConnectionStringAppKey = string.Empty;
+        private string _CommunityID = string.Empty;
+        private string _CommunityNanme = string.Empty;
+        private LoggedInUser _objLoggedInUser = null;
 
-        public LoggedInUser(string strLoggedInID)
+        public LoggedInUser(string strLoggedInID, string CommunityID)
         {
-            _strLoggedInID = strLoggedInID;
+            _strLoggedInID = strLoggedInID;            
+            initalizeConnectionString(CommunityID);
+            _objLoggedInUser = this;
             initializeUser();
+        }
+
+        private int initalizeConnectionString(string CommunityID)
+        {
+            try
+            {
+                if(CommunityID == "1")
+                ConnectionStringAppKey = "vishwakarma";
+                ConnectionString = "";
+            }
+            catch (Exception objEx)
+            { 
+                Helpers.LogExceptionInFlatFile(objEx);
+            }
+            return 0;
         }
 
         private int initializeUser()
         {
             try
             {
-                Core.User.UserCore objUserCore = new Core.User.UserCore();
+                Core.User.UserCore objUserCore = new Core.User.UserCore(this.ConnectionStringAppKey);
                 using (objUserCore as IDisposable)
                 {
                     objUserCoreEntity = objUserCore.GetByLoginID(_strLoggedInID);
                 }
                 objUserCore = null;
-                Core.BasicInfo.BasicInfoCore objBasicInfoCore = new BasicInfo.BasicInfoCore();
+                _objLoggedInUser = this;
+                Core.BasicInfo.BasicInfoCore objBasicInfoCore = new BasicInfo.BasicInfoCore(ref _objLoggedInUser);
                 using (objBasicInfoCore as IDisposable)
                     objBasicInfoCoreEntity = objBasicInfoCore.GetByProfileID(_strLoggedInID);
                 objBasicInfoCore = null;
                 if (objUserCoreEntity.SangamID != null)
                 {
-                    Core.Sangam.SangamCore objSangamCore = new Sangam.SangamCore();
+                    Core.Sangam.SangamCore objSangamCore = new Sangam.SangamCore(this.ConnectionStringAppKey);
                     using (objSangamCore as IDisposable)
                     {
                         objSangamCoreEntity = objSangamCore.GetByID(objUserCoreEntity.SangamID);
@@ -174,6 +198,52 @@ namespace Mugurtham.Core.Login
                 return objSangamCoreEntity.BannerPath;
             }
         }
+        public string CommunityID
+        {
+            get
+            {
+                return _CommunityID;
+            }
+            set 
+            {
+                _CommunityID = value;
+            }
+        }
+        public string CommunityName
+        {
+            get
+            {
+                return _CommunityNanme;
+            }
+            set
+            {
+                _CommunityNanme = value;
+            }
+        }
+        public string ConnectionString
+        {
+            get
+            {
+                return _ConnectionString;
+            }
+            set
+            {
+                _ConnectionString = value;
+            }
+        }
+        public string ConnectionStringAppKey
+        {
+            get
+            {
+                return _ConnectionStringAppKey;
+            }
+            set
+            {
+                _ConnectionStringAppKey = value;
+            }
+        }
+
+
         public Core.BasicInfo.BasicInfoCoreEntity BasicInfoCoreEntity
         {
             get

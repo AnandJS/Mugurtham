@@ -39,7 +39,12 @@ var ControllerViewFullView = angular.module('MugurthamApp').controller('Controll
                   $("#divFullViewLimitation").hide();
                   divSangamInfomration
                   $http({
-                      method: "GET", url: '/View/FullView/getProfileByProfileID/' + $scope.globalProfileID
+                      method: "GET", url: '/View/FullView/getProfileByProfileID/' + $scope.globalProfileID,
+                      params: {
+                          'content-Type': 'application/x-www-form-urlencoded',
+                          "MugurthamUserToken": getLoggedInUserID(),
+                          "CommunityID": getLoggedInUserCommunityID()
+                      }
                   }).
                       success(function (data, status, headers, config) {
                           //By default hide the confidetial information

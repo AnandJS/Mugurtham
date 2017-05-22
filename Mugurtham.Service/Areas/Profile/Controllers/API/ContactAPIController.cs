@@ -19,29 +19,41 @@ namespace Mugurtham.Service.Areas.Profile.Controllers.API
         [HttpPost]
         public void Post([FromBody]ContactCoreEntity objContactCoreEntity)
         {
-            ContactCore objContactCore = new ContactCore();
-            using (objContactCore as IDisposable)
+            Mugurtham.Core.Login.LoggedInUser objLoggedIn = new Core.Login.LoggedInUser(Request.Headers.GetValues("MugurthamUserToken").FirstOrDefault(),
+           Request.Headers.GetValues("CommunityID").FirstOrDefault());
+            using (objLoggedIn as IDisposable)
             {
-                objContactCore.Add(ref objContactCoreEntity);
+                ContactCore objContactCore = new ContactCore(ref objLoggedIn);
+                using (objContactCore as IDisposable)
+                {
+                    objContactCore.Add(ref objContactCoreEntity);
+                }
+                objContactCore = null;
             }
-            objContactCore = null;
         }
 
         [HttpPut]
         public void Put([FromBody]ContactCoreEntity objContactCoreEntity)
         {
-            ContactCore objContactCore = new ContactCore();
-            using (objContactCore as IDisposable)
+            Mugurtham.Core.Login.LoggedInUser objLoggedIn = new Core.Login.LoggedInUser(Request.Headers.GetValues("MugurthamUserToken").FirstOrDefault(),
+           Request.Headers.GetValues("CommunityID").FirstOrDefault());
+            using (objLoggedIn as IDisposable)
             {
-                objContactCore.Edit(ref objContactCoreEntity);
+                ContactCore objContactCore = new ContactCore(ref objLoggedIn);
+                using (objContactCore as IDisposable)
+                {
+                    objContactCore.Edit(ref objContactCoreEntity);
+                }
+                objContactCore = null;
             }
-            objContactCore = null;
         }
 
         [HttpGet]
         public HttpResponseMessage Get(string ID, string MugurthamUserToken = null)
         {
-            return Request.CreateResponse(HttpStatusCode.OK, new ContactCore().GetByProfileID(ID, MugurthamUserToken), Configuration.Formatters.JsonFormatter);
+            Mugurtham.Core.Login.LoggedInUser objLoggedIn = new Core.Login.LoggedInUser(Request.Headers.GetValues("MugurthamUserToken").FirstOrDefault(),
+           Request.Headers.GetValues("CommunityID").FirstOrDefault());
+            return Request.CreateResponse(HttpStatusCode.OK, new ContactCore(ref objLoggedIn).GetByProfileID(ID, MugurthamUserToken), Configuration.Formatters.JsonFormatter);
         }
 
     }

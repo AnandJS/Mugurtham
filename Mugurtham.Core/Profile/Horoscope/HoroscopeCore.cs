@@ -12,11 +12,17 @@ namespace Mugurtham.Core.Profile.Horoscope
 {
     public class HoroscopeCore
     {
+        private Mugurtham.Core.Login.LoggedInUser _objLoggedInUser = null;
+        public HoroscopeCore(ref Mugurtham.Core.Login.LoggedInUser objLoggedInUser)
+        {
+            _objLoggedInUser = objLoggedInUser;
+        }
+
         public int Edit(ref HoroscopeCoreEntity objHoroscopeCoreEntity)
         {
             try
             {
-                IUnitOfWork objIUnitOfWork = new UnitOfWork();
+                IUnitOfWork objIUnitOfWork = new UnitOfWork(_objLoggedInUser.ConnectionStringAppKey);
                 using (objIUnitOfWork as IDisposable)
                 {
                     // Save Data to Raasi
@@ -39,7 +45,7 @@ namespace Mugurtham.Core.Profile.Horoscope
                         Mugurtham.DTO.Profile.Raasi objDTORaasi = new DTO.Profile.Raasi();
                         using (objDTORaasi as IDisposable)
                         {
-                            RaasiCore objRaasiCore = new RaasiCore();
+                            RaasiCore objRaasiCore = new RaasiCore(ref _objLoggedInUser);
                             using (objRaasiCore as IDisposable)
                                 objRaasiCore.AssignDTOFromEntity(ref objDTORaasi, ref objRaasiCoreEntity);
                             objRaasiCore = null;
@@ -68,7 +74,7 @@ namespace Mugurtham.Core.Profile.Horoscope
                         Mugurtham.DTO.Profile.Amsam objDTOAmsam = new DTO.Profile.Amsam();
                         using (objDTOAmsam as IDisposable)
                         {
-                            AmsamCore objAmsamCore = new AmsamCore();
+                            AmsamCore objAmsamCore = new AmsamCore(ref _objLoggedInUser);
                             using (objAmsamCore as IDisposable)
                                 objAmsamCore.AssignDTOFromEntity(ref objDTOAmsam, ref objAmsamCoreEntity);
                             objAmsamCore = null;
@@ -97,7 +103,7 @@ namespace Mugurtham.Core.Profile.Horoscope
             int status = -1;
             try
             {
-                IUnitOfWork objIUnitOfWork = new UnitOfWork();
+                IUnitOfWork objIUnitOfWork = new UnitOfWork(_objLoggedInUser.ConnectionStringAppKey);
                 using (objIUnitOfWork as IDisposable)
                 {
                     Mugurtham.DTO.Profile.Horoscope objDTOHoroscope = new DTO.Profile.Horoscope();
@@ -127,7 +133,7 @@ namespace Mugurtham.Core.Profile.Horoscope
                 Mugurtham.DTO.Profile.Horoscope objDTOHoroscope = new DTO.Profile.Horoscope();
                 using (objDTOHoroscope as IDisposable)
                 {
-                    IUnitOfWork objIUnitOfWork = new UnitOfWork();
+                    IUnitOfWork objIUnitOfWork = new UnitOfWork(_objLoggedInUser.ConnectionStringAppKey);
                     using (objIUnitOfWork as IDisposable)
                     {
                         objDTOHoroscope.ProfileID = objHoroscopeCoreEntity.ProfileID;
@@ -156,7 +162,7 @@ namespace Mugurtham.Core.Profile.Horoscope
 
         public HoroscopeCoreEntity GetByProfileID(string strProfileID, string strLoggedInUserID)
         {
-            Profile.ProfileSecurity objProfileSecurity = new Profile.ProfileSecurity();
+            Profile.ProfileSecurity objProfileSecurity = new Profile.ProfileSecurity(ref _objLoggedInUser);
             using (objProfileSecurity as IDisposable)
             {
                 if (!string.IsNullOrEmpty(strLoggedInUserID))
@@ -180,7 +186,7 @@ namespace Mugurtham.Core.Profile.Horoscope
             try
             {
 
-                IUnitOfWork objUOW = new UnitOfWork();
+                IUnitOfWork objUOW = new UnitOfWork(_objLoggedInUser.ConnectionStringAppKey);
                 using (objUOW as IDisposable)
                 {
                     objRaasi = objUOW.RepositoryRaasi.GetAll().ToList().Where(p => p.ProfileID.Trim().ToLower() == strProfileID.Trim().ToLower()).FirstOrDefault();
@@ -196,7 +202,7 @@ namespace Mugurtham.Core.Profile.Horoscope
                         RaasiCoreEntity objRaasiCoreEntity = new RaasiCoreEntity();
                         using (objRaasiCoreEntity as IDisposable)
                         {
-                            RaasiCore objRaasiCore = new RaasiCore();
+                            RaasiCore objRaasiCore = new RaasiCore(ref _objLoggedInUser);
                             using (objRaasiCore as IDisposable)
                                 objRaasiCore.AssignEntityFromDTO(ref objRaasi, ref objRaasiCoreEntity);
                             objRaasiCore = null;
@@ -226,7 +232,7 @@ namespace Mugurtham.Core.Profile.Horoscope
                         AmsamCoreEntity objAmsamCoreEntity = new AmsamCoreEntity();
                         using (objAmsamCoreEntity as IDisposable)
                         {
-                            AmsamCore objAmsamCore = new AmsamCore();
+                            AmsamCore objAmsamCore = new AmsamCore(ref _objLoggedInUser);
                             using (objAmsamCore as IDisposable)
                                 objAmsamCore.AssignEntityFromDTO(ref objAmsam, ref objAmsamCoreEntity);
                             objAmsamCore = null;

@@ -10,6 +10,13 @@ namespace Mugurtham.Core.ProfileViewed
 {
     public class ProfileViewedCore
     {
+        private Mugurtham.Core.Login.LoggedInUser _objLoggedInUser = null;
+
+        public ProfileViewedCore(ref Mugurtham.Core.Login.LoggedInUser objLoggedInUser)
+        {
+            _objLoggedInUser = objLoggedInUser;
+        }
+
         public int Add(ref Mugurtham.Core.ProfileViewed.ProfileViewedCoreEntity objProfileViewedCoreEntity)
         {
             try
@@ -17,7 +24,7 @@ namespace Mugurtham.Core.ProfileViewed
                 string strMappingID = string.Empty;
                 string strViewerID = objProfileViewedCoreEntity.ViewerID;
                 string strViewedID = objProfileViewedCoreEntity.ViewedID;
-                IUnitOfWork objIUnitOfWork = new UnitOfWork();
+                IUnitOfWork objIUnitOfWork = new UnitOfWork(_objLoggedInUser.ConnectionStringAppKey);
                 using (objIUnitOfWork as IDisposable)
                 {
                     Mugurtham.DTO.ProfileViewed.ProfileViewed objDTOProfileViewed = new DTO.ProfileViewed.ProfileViewed();
@@ -40,7 +47,7 @@ namespace Mugurtham.Core.ProfileViewed
                     }
                     if (objProfileViewed.Count == 0)
                     {
-                        IUnitOfWork objIUnitOfWorkAdd = new UnitOfWork();
+                        IUnitOfWork objIUnitOfWorkAdd = new UnitOfWork(_objLoggedInUser.ConnectionStringAppKey);
                         using (objIUnitOfWorkAdd as IDisposable)
                         {
                             objIUnitOfWorkAdd.RepositoryProfileViewed.Add(objDTOProfileViewed);

@@ -18,7 +18,9 @@ namespace Mugurtham.Service.Areas.MugurthamAdmin.Controllers.API
         public HttpResponseMessage Add([FromBody]SangamCoreEntity objSangamCoreEntity)
         {
             string strSangamID = string.Empty;
-            SangamCore objSangamCore = new SangamCore();
+            Mugurtham.Core.Login.LoggedInUser objLoggedIn = new Core.Login.LoggedInUser(Request.Headers.GetValues("MugurthamUserToken").FirstOrDefault(),
+           Request.Headers.GetValues("CommunityID").FirstOrDefault());
+            SangamCore objSangamCore = new SangamCore(objLoggedIn.ConnectionStringAppKey);
             using (objSangamCore as IDisposable)
             {
                 objSangamCore.Add(ref objSangamCoreEntity, out strSangamID);
@@ -31,14 +33,18 @@ namespace Mugurtham.Service.Areas.MugurthamAdmin.Controllers.API
         [HttpGet]
         public HttpResponseMessage Get(string ID)
         {
-            return Request.CreateResponse(HttpStatusCode.OK, new SangamCore().GetByID(ID), Configuration.Formatters.JsonFormatter);
+            Mugurtham.Core.Login.LoggedInUser objLoggedIn = new Core.Login.LoggedInUser(Request.Headers.GetValues("MugurthamUserToken").FirstOrDefault(),
+           Request.Headers.GetValues("CommunityID").FirstOrDefault());
+            return Request.CreateResponse(HttpStatusCode.OK, new SangamCore(objLoggedIn.ConnectionStringAppKey).GetByID(ID), Configuration.Formatters.JsonFormatter);
         }
 
         [HttpGet]
         public HttpResponseMessage GetAll()
         {
             List<SangamCoreEntity> objSangamCoreEntityList = new List<SangamCoreEntity>();
-            SangamCore objSangamCore = new SangamCore();
+            Mugurtham.Core.Login.LoggedInUser objLoggedIn = new Core.Login.LoggedInUser(Request.Headers.GetValues("MugurthamUserToken").FirstOrDefault(),
+           Request.Headers.GetValues("CommunityID").FirstOrDefault());
+            SangamCore objSangamCore = new SangamCore(objLoggedIn.ConnectionStringAppKey);
             using (objSangamCore as IDisposable)
                 objSangamCore.GetAll(ref objSangamCoreEntityList);
             objSangamCore = null;
@@ -50,7 +56,9 @@ namespace Mugurtham.Service.Areas.MugurthamAdmin.Controllers.API
         public HttpResponseMessage GetAllWithoutRestrictions()
         {
             List<SangamCoreEntity> objSangamCoreEntityList = new List<SangamCoreEntity>();
-            SangamCore objSangamCore = new SangamCore();
+            Mugurtham.Core.Login.LoggedInUser objLoggedIn = new Core.Login.LoggedInUser(Request.Headers.GetValues("MugurthamUserToken").FirstOrDefault(),
+           Request.Headers.GetValues("CommunityID").FirstOrDefault());
+            SangamCore objSangamCore = new SangamCore(objLoggedIn.ConnectionStringAppKey);
             using (objSangamCore as IDisposable)
                 objSangamCore.GetAllWithoutRestrictions(ref objSangamCoreEntityList);
             objSangamCore = null;
@@ -62,7 +70,9 @@ namespace Mugurtham.Service.Areas.MugurthamAdmin.Controllers.API
         public void Put([FromBody]SangamCoreEntity objSangamCoreEntity)
         {
             decimal? lastProfileIDNo = 0;
-            SangamCore objSangamCore = new SangamCore();
+            Mugurtham.Core.Login.LoggedInUser objLoggedIn = new Core.Login.LoggedInUser(Request.Headers.GetValues("MugurthamUserToken").FirstOrDefault(),
+           Request.Headers.GetValues("CommunityID").FirstOrDefault());
+            SangamCore objSangamCore = new SangamCore(objLoggedIn.ConnectionStringAppKey);
             using (objSangamCore as IDisposable)
             {
                 if (!string.IsNullOrWhiteSpace(objSangamCore.GetByID(objSangamCoreEntity.ID).LastProfileIDNo.ToString()))

@@ -19,16 +19,21 @@ namespace Mugurtham.Service.Areas.Profile.Controllers.API
         [HttpPost]
         public void Add([FromBody]BasicInfoCoreEntity objBasicInfoCoreEntity)
         {
-            BasicInfoCore objBasicInfoCore = new BasicInfoCore();
-            using (objBasicInfoCore as IDisposable)
+            Mugurtham.Core.Login.LoggedInUser objLoggedIn = new Core.Login.LoggedInUser(Request.Headers.GetValues("MugurthamUserToken").FirstOrDefault(),
+                Request.Headers.GetValues("CommunityID").FirstOrDefault());
+            using (objLoggedIn as IDisposable)
             {
-                string LoggedInUserID = string.Empty;
-                IEnumerable<string> headerValues = Request.Headers.GetValues("MugurthamUserToken");
-                LoggedInUserID = headerValues.FirstOrDefault();
-                objBasicInfoCore.Add(ref objBasicInfoCoreEntity, LoggedInUserID);
+                BasicInfoCore objBasicInfoCore = new BasicInfoCore(ref objLoggedIn);
+                using (objBasicInfoCore as IDisposable)
+                {
+                    string LoggedInUserID = string.Empty;
+                    IEnumerable<string> headerValues = Request.Headers.GetValues("MugurthamUserToken");
+                    LoggedInUserID = headerValues.FirstOrDefault();
+                    objBasicInfoCore.Add(ref objBasicInfoCoreEntity, LoggedInUserID);
+                }
+                objBasicInfoCore = null;
             }
-            objBasicInfoCore = null;
-
+            objLoggedIn = null;
         }
         /// <summary>
         /// 
@@ -43,7 +48,9 @@ namespace Mugurtham.Service.Areas.Profile.Controllers.API
             IEnumerable<string> headerValues = Request.Headers.GetValues("MugurthamUserToken");
             string token = headerValues.FirstOrDefault();
             Helpers.LogMessageInFlatFile(token + "=====MugurthamUserToken");*/
-            return Request.CreateResponse(HttpStatusCode.OK, new BasicInfoCore().GetByProfileID(ID, MugurthamUserToken), Configuration.Formatters.JsonFormatter);
+            Mugurtham.Core.Login.LoggedInUser objLoggedIn = new Core.Login.LoggedInUser(Request.Headers.GetValues("MugurthamUserToken").FirstOrDefault(),
+           Request.Headers.GetValues("CommunityID").FirstOrDefault());
+            return Request.CreateResponse(HttpStatusCode.OK, new BasicInfoCore(ref objLoggedIn).GetByProfileID(ID, MugurthamUserToken), Configuration.Formatters.JsonFormatter);
         }
 
         [HttpPut]
@@ -53,10 +60,16 @@ namespace Mugurtham.Service.Areas.Profile.Controllers.API
             IEnumerable<string> headerValues = Request.Headers.GetValues("MugurthamUserToken");
             strLoggedInUserID = headerValues.FirstOrDefault();
 
-            BasicInfoCore objBasicInfoCore = new BasicInfoCore();
-            using (objBasicInfoCore as IDisposable)
-                objBasicInfoCore.Edit(ref objBasicInfoCoreEntity);
-            objBasicInfoCore = null;
+            Mugurtham.Core.Login.LoggedInUser objLoggedIn = new Core.Login.LoggedInUser(Request.Headers.GetValues("MugurthamUserToken").FirstOrDefault(),
+           Request.Headers.GetValues("CommunityID").FirstOrDefault());
+            using (objLoggedIn as IDisposable)
+            {
+                BasicInfoCore objBasicInfoCore = new BasicInfoCore(ref objLoggedIn);
+                using (objBasicInfoCore as IDisposable)
+                    objBasicInfoCore.Edit(ref objBasicInfoCoreEntity);
+                objBasicInfoCore = null;
+            }
+            objLoggedIn = null;
         }
     }
 }

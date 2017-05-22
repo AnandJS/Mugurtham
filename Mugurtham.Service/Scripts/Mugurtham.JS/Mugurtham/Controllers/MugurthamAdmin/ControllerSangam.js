@@ -87,9 +87,13 @@ var ControllerSangam = angular.module('MugurthamApp').controller('ControllerSang
                         ShowContactDetails: getShowContactDetails(),
                         MugurthamSPOC: $scope.frmData[0].MugurthamSPOC
                     }),
-                    headers: { 'content-Type': 'application/x-www-form-urlencoded' }
+                    headers: {
+                        'content-Type': 'application/x-www-form-urlencoded',
+                        "MugurthamUserToken": getLoggedInUserID(),
+                        "CommunityID": getLoggedInUserCommunityID()
+                    }
                 }).
-            success(function (data, status, headers, config) {               
+            success(function (data, status, headers, config) {
                 NotifySuccessStatus('13');
             }).
             error(function (data, status, headers, config) {
@@ -106,7 +110,12 @@ var ControllerSangam = angular.module('MugurthamApp').controller('ControllerSang
                     return;
                 var strGetURL = '/Sangam/SangamAPI/' + $scope.globalSangamID;
                 $http({
-                    method: "GET", url: strGetURL
+                    method: "GET", url: strGetURL,
+                    headers: {
+                        'content-Type': 'application/x-www-form-urlencoded',
+                        "MugurthamUserToken": getLoggedInUserID(),
+                        "CommunityID": getLoggedInUserCommunityID()
+                    }
                 }).
             success(function (data, status, headers, config) {
                 $scope.frmData.push({
@@ -132,7 +141,7 @@ var ControllerSangam = angular.module('MugurthamApp').controller('ControllerSang
             //===================================================
             //AJAX PUT REQUEST - EDIT SANGAM
             //===================================================
-            $scope.Edit = function () {                
+            $scope.Edit = function () {
                 $http({
                     method: "PUT", url: '/Sangam/SangamAPI', data: $.param({
                         Name: $scope.frmData[0].Name,
@@ -148,7 +157,11 @@ var ControllerSangam = angular.module('MugurthamApp').controller('ControllerSang
                         ShowContactDetails: getShowContactDetails(),
                         MugurthamSPOC: $scope.frmData[0].MugurthamSPOC
                     }),
-                    headers: { 'content-Type': 'application/x-www-form-urlencoded' }
+                    headers: {
+                        'content-Type': 'application/x-www-form-urlencoded',
+                        "MugurthamUserToken": getLoggedInUserID(),
+                        "CommunityID": getLoggedInUserCommunityID()
+                    }
                 }).
             success(function (data, status, headers, config) {
                 NotifySuccessStatus('14');
@@ -164,7 +177,12 @@ var ControllerSangam = angular.module('MugurthamApp').controller('ControllerSang
             $scope.getAllSangams = function () {
                 $("#divContainer").mask("Loading all sangams please wait...");
                 $http({
-                    method: "GET", url: '/SangamAPI/SangamAPI/GetAllWithoutRestrictions'
+                    method: "GET", url: '/SangamAPI/SangamAPI/GetAllWithoutRestrictions',
+                    headers: {
+                        'content-Type': 'application/x-www-form-urlencoded',
+                        "MugurthamUserToken": getLoggedInUserID(),
+                        "CommunityID": getLoggedInUserCommunityID()
+                    }
                 }).
             success(function (data, status, headers, config) {
                 $("#divContainer").unmask();

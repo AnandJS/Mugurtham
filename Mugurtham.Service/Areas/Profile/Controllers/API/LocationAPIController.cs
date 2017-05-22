@@ -19,12 +19,18 @@ namespace Mugurtham.Service.Areas.Profile.Controllers.API
         [HttpPost]
         public void Post([FromBody]LocationCoreEntity objLocationCoreEntity)
         {
-            LocationCore objLocationCore = new LocationCore();
-            using (objLocationCore as IDisposable)
+            Mugurtham.Core.Login.LoggedInUser objLoggedIn = new Core.Login.LoggedInUser(Request.Headers.GetValues("MugurthamUserToken").FirstOrDefault(),
+           Request.Headers.GetValues("CommunityID").FirstOrDefault());
+            using (objLoggedIn as IDisposable)
             {
-                objLocationCore.Add(ref objLocationCoreEntity);
+                LocationCore objLocationCore = new LocationCore(ref objLoggedIn);
+                using (objLocationCore as IDisposable)
+                {
+                    objLocationCore.Add(ref objLocationCoreEntity);
+                }
+                objLocationCore = null;
             }
-            objLocationCore = null;
+            objLoggedIn = null;
         }
 
         [HttpGet]
@@ -33,19 +39,26 @@ namespace Mugurtham.Service.Areas.Profile.Controllers.API
             string LoggedInUserID = string.Empty;
             IEnumerable<string> headerValues = Request.Headers.GetValues("MugurthamUserToken");
             LoggedInUserID = headerValues.FirstOrDefault();
-
-            return Request.CreateResponse(HttpStatusCode.OK, new LocationCore().GetByProfileID(ID, LoggedInUserID), Configuration.Formatters.JsonFormatter);
+            Mugurtham.Core.Login.LoggedInUser objLoggedIn = new Core.Login.LoggedInUser(Request.Headers.GetValues("MugurthamUserToken").FirstOrDefault(),
+           Request.Headers.GetValues("CommunityID").FirstOrDefault());
+            return Request.CreateResponse(HttpStatusCode.OK, new LocationCore(ref objLoggedIn).GetByProfileID(ID, LoggedInUserID), Configuration.Formatters.JsonFormatter);
         }
 
         [HttpPut]
         public void Put([FromBody]LocationCoreEntity objLocationCoreEntity)
         {
-            LocationCore objLocationCore = new LocationCore();
-            using (objLocationCore as IDisposable)
+            Mugurtham.Core.Login.LoggedInUser objLoggedIn = new Core.Login.LoggedInUser(Request.Headers.GetValues("MugurthamUserToken").FirstOrDefault(),
+            Request.Headers.GetValues("CommunityID").FirstOrDefault());
+            using (objLoggedIn as IDisposable)
             {
-                objLocationCore.Edit(ref objLocationCoreEntity);
+                LocationCore objLocationCore = new LocationCore(ref objLoggedIn);
+                using (objLocationCore as IDisposable)
+                {
+                    objLocationCore.Edit(ref objLocationCoreEntity);
+                }
+                objLocationCore = null;
             }
-            objLocationCore = null;
+            objLoggedIn = null;
         }
 
     }

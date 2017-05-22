@@ -12,12 +12,18 @@ namespace Mugurtham.Core.User
 {
     public class UserCore
     {
+        private string _ConnectionStringAppKey = string.Empty;
+        public UserCore(string ConnectionStringAppKey)
+        {
+            _ConnectionStringAppKey = ConnectionStringAppKey;
+        }     
         public int Add(ref Mugurtham.Core.User.UserCoreEntity objUserCoreEntity, out string strUserID)
         {
             strUserID = Helpers.primaryKey;
             try
             {
-                IUnitOfWork objIUnitOfWork = new UnitOfWork(); using (objIUnitOfWork as IDisposable)
+                IUnitOfWork objIUnitOfWork = new UnitOfWork(_ConnectionStringAppKey);
+                using (objIUnitOfWork as IDisposable)
                 {
                     Mugurtham.DTO.User.User objDTOUser = new DTO.User.User();
                     using (objDTOUser as IDisposable)
@@ -42,7 +48,7 @@ namespace Mugurtham.Core.User
         {
             try
             {
-                IUnitOfWork objIUnitOfWork = new UnitOfWork();
+                IUnitOfWork objIUnitOfWork = new UnitOfWork(_ConnectionStringAppKey);
                 using (objIUnitOfWork as IDisposable)
                 {
                     Mugurtham.DTO.User.User objDTOUser = new DTO.User.User();
@@ -69,7 +75,7 @@ namespace Mugurtham.Core.User
             try
             {
                 Mugurtham.DTO.User.User objUser = new Mugurtham.DTO.User.User();
-                IUnitOfWork objUOW = new UnitOfWork();
+                IUnitOfWork objUOW = new UnitOfWork(_ConnectionStringAppKey);
                 using (objUOW as IDisposable)
                     objUser = objUOW.RepositoryUser.GetAll().ToList().Where(p => p.ID.Trim().ToLower() == strID.Trim().ToLower()).FirstOrDefault();
                 objUOW = null;
@@ -94,7 +100,7 @@ namespace Mugurtham.Core.User
             try
             {
                 Mugurtham.DTO.User.User objSangam = new Mugurtham.DTO.User.User();
-                IUnitOfWork objUOW = new UnitOfWork();
+                IUnitOfWork objUOW = new UnitOfWork(_ConnectionStringAppKey);
                 using (objUOW as IDisposable)
                     objSangam = objUOW.RepositoryUser.GetAll().ToList().Where(p => p.LoginID.Trim().ToLower() == strID.Trim().ToLower()).FirstOrDefault();
                 objUOW = null;
@@ -116,7 +122,7 @@ namespace Mugurtham.Core.User
         }
         public int GetAll(ref List<UserCoreEntity> objUserCoreEntityList)
         {
-            IUnitOfWork objIUnitOfWork = new UnitOfWork();
+            IUnitOfWork objIUnitOfWork = new UnitOfWork(_ConnectionStringAppKey);
             try
             {
                 using (objIUnitOfWork as IDisposable)
@@ -130,7 +136,7 @@ namespace Mugurtham.Core.User
                             using (objUserCoreEntity as IDisposable)
                             {
                                 AssignEntityFromDTO(ref _objSangam, ref objUserCoreEntity);
-                                Sangam.SangamCore objSangamCore = new Sangam.SangamCore();
+                                Sangam.SangamCore objSangamCore = new Sangam.SangamCore(_ConnectionStringAppKey);
                                 using (objSangamCore as IDisposable)
                                 {
                                     Sangam.SangamCoreEntity objSangamCoreEntity = new Sangam.SangamCoreEntity();
@@ -160,7 +166,7 @@ namespace Mugurtham.Core.User
         {
             try
             {
-                IUnitOfWork objIUnitOfWork = new UnitOfWork();
+                IUnitOfWork objIUnitOfWork = new UnitOfWork(_ConnectionStringAppKey);
                 using (objIUnitOfWork as IDisposable)
                 {
                     foreach (Mugurtham.DTO.User.User objSangam in objIUnitOfWork.RepositoryUser.GetAll().Where(p => p.SangamID == strSangamID).ToList())
@@ -172,7 +178,7 @@ namespace Mugurtham.Core.User
                             using (objUserCoreEntity as IDisposable)
                             {
                                 AssignEntityFromDTO(ref _objSangam, ref objUserCoreEntity);
-                                Sangam.SangamCore objSangamCore = new Sangam.SangamCore();
+                                Sangam.SangamCore objSangamCore = new Sangam.SangamCore(_ConnectionStringAppKey);
                                 using (objSangamCore as IDisposable)
                                 {
                                     Sangam.SangamCoreEntity objSangamCoreEntity = new Sangam.SangamCoreEntity();
@@ -278,6 +284,7 @@ namespace Mugurtham.Core.User
             {
                 Mugurtham.Core.User.UserCoreEntity _objUserCoreEntity = null;
                 _objUserCoreEntity = GetByLoginID(objUserCoreEntity.LoginID);
+                _objUserCoreEntity.CommunityID = objUserCoreEntity.CommunityID;
                 if (_objUserCoreEntity.PaymentDate != null)
                 {
                     if (DateTime.Today >= _objUserCoreEntity.PaymentDate.Value.AddMonths(6))
@@ -301,7 +308,7 @@ namespace Mugurtham.Core.User
                     return intLoginStatus;
                 }
                 // Validate if Sangam is activated
-                Sangam.SangamCore objSangamCore = new Sangam.SangamCore();
+                Sangam.SangamCore objSangamCore = new Sangam.SangamCore(_ConnectionStringAppKey);
                 using (objSangamCore as IDisposable)
                 {
                     Sangam.SangamCoreEntity objSangamCoreEntity = new Sangam.SangamCoreEntity();
@@ -381,14 +388,15 @@ namespace Mugurtham.Core.User
         public int createSession(
                                     string SessionID,
                                     string UserID,
-                                    string LoggedInClientIP
+                                    string LoggedInClientIP,
+                                    string Connectionstring
                                 )
         {
             try
             {
                 // Need to call through the ADO wrapper or UOW pattern class. Please replace asap.
                 string strSql = string.Empty;
-                SqlConnection objConnection = new SqlConnection(Helpers.ConnectionString);
+                SqlConnection objConnection = new SqlConnection(Connectionstring);
                 using (objConnection as IDisposable)
                 {
                     objConnection.Open();

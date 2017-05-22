@@ -25,7 +25,9 @@ namespace Mugurtham.Service.Areas.Profile.Controllers.API
             string LoggedInUserID = string.Empty;
             IEnumerable<string> headerValues = Request.Headers.GetValues("MugurthamUserToken");
             LoggedInUserID = headerValues.FirstOrDefault();
-            return Request.CreateResponse(HttpStatusCode.OK, new BasicInfoCore().GetByProfileID(ID, LoggedInUserID), Configuration.Formatters.JsonFormatter);
+            Mugurtham.Core.Login.LoggedInUser objLoggedIn = new Core.Login.LoggedInUser(Request.Headers.GetValues("MugurthamUserToken").FirstOrDefault(),
+            Request.Headers.GetValues("CommunityID").FirstOrDefault());
+            return Request.CreateResponse(HttpStatusCode.OK, new BasicInfoCore(ref objLoggedIn).GetByProfileID(ID, LoggedInUserID), Configuration.Formatters.JsonFormatter);
         }
 
     }

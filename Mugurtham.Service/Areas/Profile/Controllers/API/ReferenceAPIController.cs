@@ -19,32 +19,44 @@ namespace Mugurtham.Service.Areas.Profile.Controllers.API
         [HttpPost]
         public void Post([FromBody]ReferenceCoreEntity objReferenceCoreEntity)
         {
-            ReferenceCore objReferenceCore = new ReferenceCore();
-            using (objReferenceCore as IDisposable)
+            Mugurtham.Core.Login.LoggedInUser objLoggedIn = new Core.Login.LoggedInUser(Request.Headers.GetValues("MugurthamUserToken").FirstOrDefault(),
+                Request.Headers.GetValues("CommunityID").FirstOrDefault());
+            using (objLoggedIn as IDisposable)
             {
-                objReferenceCore.Add(ref objReferenceCoreEntity);
+                ReferenceCore objReferenceCore = new ReferenceCore(ref objLoggedIn);
+                using (objReferenceCore as IDisposable)
+                {
+                    objReferenceCore.Add(ref objReferenceCoreEntity);
+                }
+                objReferenceCore = null;
             }
-            objReferenceCore = null;
         }
 
         [HttpGet]
         public HttpResponseMessage Get(string ID)
         {
+            Mugurtham.Core.Login.LoggedInUser objLoggedIn = new Core.Login.LoggedInUser(Request.Headers.GetValues("MugurthamUserToken").FirstOrDefault(),
+                Request.Headers.GetValues("CommunityID").FirstOrDefault());
             string LoggedInUserID = string.Empty;
             IEnumerable<string> headerValues = Request.Headers.GetValues("MugurthamUserToken");
             LoggedInUserID = headerValues.FirstOrDefault();
-            return Request.CreateResponse(HttpStatusCode.OK, new ReferenceCore().GetByProfileID(ID, LoggedInUserID), Configuration.Formatters.JsonFormatter);
+            return Request.CreateResponse(HttpStatusCode.OK, new ReferenceCore(ref objLoggedIn).GetByProfileID(ID, LoggedInUserID), Configuration.Formatters.JsonFormatter);
         }
 
         [HttpPut]
         public void Put([FromBody]ReferenceCoreEntity objReferenceCoreEntity)
         {
-            ReferenceCore objReferenceCore = new ReferenceCore();
-            using (objReferenceCore as IDisposable)
+            Mugurtham.Core.Login.LoggedInUser objLoggedIn = new Core.Login.LoggedInUser(Request.Headers.GetValues("MugurthamUserToken").FirstOrDefault(),
+                Request.Headers.GetValues("CommunityID").FirstOrDefault());
+            using (objLoggedIn as IDisposable)
             {
-                objReferenceCore.Edit(ref objReferenceCoreEntity);
+                ReferenceCore objReferenceCore = new ReferenceCore(ref objLoggedIn);
+                using (objReferenceCore as IDisposable)
+                {
+                    objReferenceCore.Edit(ref objReferenceCoreEntity);
+                }
+                objReferenceCore = null;
             }
-            objReferenceCore = null;
         }
 
     }

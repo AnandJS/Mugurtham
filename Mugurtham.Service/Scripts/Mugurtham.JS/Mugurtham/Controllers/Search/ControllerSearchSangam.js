@@ -18,16 +18,21 @@ THIS CONTROLLER IS SPECIFICALLY FOR ALL-PROFILES PAGE ON SEARCH MODULE
 var ControllerSearchSangam = angular.module('MugurthamApp').controller('ControllerSearchSangam',
         ['$http', '$scope', function ($http, $scope) {
 
-            $scope.ControllerName = 'ControllerSearchSangam';           
+            $scope.ControllerName = 'ControllerSearchSangam';
             //===================================================
             //AJAX GET REQUEST - GETTING LOOKUP DTO
             //===================================================
             $scope.getLookup = function () {
                 var strGetURL = '/Lookup/LookupAPI';
                 $http({
-                    method: "GET", url: strGetURL
+                    method: "GET", url: strGetURL,
+                    headers: {
+                        'content-Type': 'application/x-www-form-urlencoded',
+                        "MugurthamUserToken": getLoggedInUserID(),
+                        "CommunityID": getLoggedInUserCommunityID()
+                    }
                 }).
-            success(function (data, status, headers, config) {           
+            success(function (data, status, headers, config) {
                 $scope.arrSangamID = data.SangamCoreEntity;
                 $scope.arrRoleID = data.RoleCoreEntity;
                 $('#ddlSangam').empty();

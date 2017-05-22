@@ -10,6 +10,13 @@ namespace Mugurtham.Core.Profile
 {
     public class ProfileSecurity
     {
+        private Mugurtham.Core.Login.LoggedInUser _objLoggedInUser = null;
+
+        public ProfileSecurity(ref Mugurtham.Core.Login.LoggedInUser objLoggedInUser)
+        {
+            _objLoggedInUser = objLoggedInUser;
+        }
+
         /// <summary>
         /// Validates based on the below conditions
         /// 1. I can view my profile
@@ -18,7 +25,7 @@ namespace Mugurtham.Core.Profile
         /// </summary>
         /// <param name="profileID"></param>
         /// <param name="loggedInUserID"></param>
-        /// <returns></returns>
+        /// <returns></returns>                 
         public bool validateProfileViewAccess(string profileID, string loggedInUserID)
         {
             bool validateProfileViewAccess = false;
@@ -34,7 +41,7 @@ namespace Mugurtham.Core.Profile
                 string ProfileSangamAdminID = string.Empty;
                 string LoggedInUserSangamAdminID = string.Empty;
                 string LoggedInUserRole = string.Empty;
-                UserCore objUserCore = new UserCore();
+                UserCore objUserCore = new UserCore(_objLoggedInUser.ConnectionStringAppKey);
                 using (objUserCore as IDisposable)
                 {
                     UserCoreEntity objUserCoreEntity = new UserCoreEntity();
@@ -48,7 +55,7 @@ namespace Mugurtham.Core.Profile
                 objUserCore = null;
 
 
-                UserCore objLoggedInUserCore = new UserCore();
+                UserCore objLoggedInUserCore = new UserCore(_objLoggedInUser.ConnectionStringAppKey);
                 using (objLoggedInUserCore as IDisposable)
                 {
                     UserCoreEntity objLoggedInUserCoreEntity = new UserCoreEntity();
@@ -95,7 +102,7 @@ namespace Mugurtham.Core.Profile
         public bool IsSangamAdmin(string profileID)
         {
             bool IsSangamAdmin = false;
-            UserCore objUserCore = new UserCore();
+            UserCore objUserCore = new UserCore(_objLoggedInUser.ConnectionStringAppKey);
             using (objUserCore as IDisposable)
             {
                 UserCoreEntity objUserCoreEntity = new UserCoreEntity();

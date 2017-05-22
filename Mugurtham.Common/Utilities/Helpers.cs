@@ -13,10 +13,12 @@ namespace Mugurtham.Common.Utilities
     public static class Helpers
     {
         private static readonly string AppKeyLogFilePath = "LogFilePath";
-        private static readonly string AppKeyConnectionstring = "MugurthamConnectionString";
 
         private static readonly string strLogilePath = ConfigurationManager.AppSettings[AppKeyLogFilePath] + "Log_" + DateTime.Now.ToShortDateString().Replace('/', '-') + ".log";
-        private static readonly string strConnectionstring = System.Configuration.ConfigurationManager.ConnectionStrings[AppKeyConnectionstring].ConnectionString;
+
+        //private static readonly string AppKeyConnectionstring = "MugurthamConnectionString";
+        //private static readonly string strConnectionstring = System.Configuration.ConfigurationManager.ConnectionStrings[AppKeyConnectionstring].ConnectionString;
+
 
         /*
         //Centralizing to domain by avoiding multiple subdomains
@@ -59,16 +61,17 @@ namespace Mugurtham.Common.Utilities
                 return strLogilePath;
             }
         }
+       
         /// <summary>
         /// Gets the ConnectionString of the Mugurtham Database
         /// </summary>
-        public static string ConnectionString
+        /*public static string ConnectionString
         {
             get
             {
                 return strConnectionstring;
             }
-        }
+        }*/
 
         public static string primaryKey
         {

@@ -107,7 +107,11 @@ var ControllerUser = angular.module('MugurthamApp').controller('ControllerUser',
                         PaymentDate: $scope.userFormData[0].PaymentDate
 
                     }),
-                    headers: { 'content-Type': 'application/x-www-form-urlencoded' }
+                    headers: {
+                        'content-Type': 'application/x-www-form-urlencoded',
+                        "MugurthamUserToken": getLoggedInUserID(),
+                        "CommunityID": getLoggedInUserCommunityID()
+                    }
                 }).
             success(function (data, status, headers, config) {
                 NotifySuccessStatus('9');
@@ -129,7 +133,12 @@ var ControllerUser = angular.module('MugurthamApp').controller('ControllerUser',
                 if ($scope.globalUserID != '') {
                     var strGetURL = '/MugurthamUserLookup/UserAPI/Get/' + $scope.globalUserID;
                     $http({
-                        method: "GET", url: strGetURL
+                        method: "GET", url: strGetURL,
+                        headers: {
+                            'content-Type': 'application/x-www-form-urlencoded',
+                            "MugurthamUserToken": getLoggedInUserID(),
+                            "CommunityID": getLoggedInUserCommunityID()
+                        }
                     }).
                 success(function (data, status, headers, config) {
 
@@ -169,7 +178,7 @@ var ControllerUser = angular.module('MugurthamApp').controller('ControllerUser',
             //===================================================
             //AJAX PUT REQUEST - EDIT User
             //===================================================
-            $scope.Edit = function () {                
+            $scope.Edit = function () {
                 var strsangamID = '';
                 var strRoleID = '';
                 if (typeof $('#ddlSangams').val() === "undefined") {
@@ -198,7 +207,11 @@ var ControllerUser = angular.module('MugurthamApp').controller('ControllerUser',
                         IsMarried: geActivation('userMarriedCheckbox'),
                         PaymentDate: $scope.PaymentDate
                     }),
-                    headers: { 'content-Type': 'application/x-www-form-urlencoded' }
+                    headers: {
+                        'content-Type': 'application/x-www-form-urlencoded',
+                        "MugurthamUserToken": getLoggedInUserID(),
+                        "CommunityID": getLoggedInUserCommunityID()
+                    }
                 }).
             success(function (data, status, headers, config) {
                 NotifySuccessStatus('10');
@@ -214,7 +227,12 @@ var ControllerUser = angular.module('MugurthamApp').controller('ControllerUser',
             $scope.getAllUsers = function () {
                 $("#divContainer").mask("Loading all users please wait...");
                 $http({
-                    method: "GET", url: '/MugurthamUserLookup/UserAPI/GetAll'
+                    method: "GET", url: '/MugurthamUserLookup/UserAPI/GetAll',
+                    headers: {
+                        'content-Type': 'application/x-www-form-urlencoded',
+                        "MugurthamUserToken": getLoggedInUserID(),
+                        "CommunityID": getLoggedInUserCommunityID()
+                    }
                 }).
             success(function (data, status, headers, config) {
                 $("#divContainer").unmask();
@@ -231,7 +249,12 @@ var ControllerUser = angular.module('MugurthamApp').controller('ControllerUser',
             $scope.getAllSangamUsers = function (strSangamID) {
                 $("#divContainer").mask("Loading all users please wait...");
                 $http({
-                    method: "GET", url: '/MugurthamUserLookup/UserAPI/GetAllSangamUsers/' + strSangamID
+                    method: "GET", url: '/MugurthamUserLookup/UserAPI/GetAllSangamUsers/' + strSangamID,
+                    headers: {
+                        'content-Type': 'application/x-www-form-urlencoded',
+                        "MugurthamUserToken": getLoggedInUserID(),
+                        "CommunityID": getLoggedInUserCommunityID()
+                    }
                 }).
             success(function (data, status, headers, config) {
                 $("#divContainer").unmask();
@@ -248,7 +271,12 @@ var ControllerUser = angular.module('MugurthamApp').controller('ControllerUser',
             $scope.getLookup = function () {
                 var strGetURL = '/Lookup/LookupAPI';
                 $http({
-                    method: "GET", url: strGetURL
+                    method: "GET", url: strGetURL,
+                    headers: {
+                        'content-Type': 'application/x-www-form-urlencoded',
+                        "MugurthamUserToken": getLoggedInUserID(),
+                        "CommunityID": getLoggedInUserCommunityID()
+                    }
                 }).
             success(function (data, status, headers, config) {
                 $scope.arrSangamID = data.SangamCoreEntity;
@@ -282,7 +310,11 @@ var ControllerUser = angular.module('MugurthamApp').controller('ControllerUser',
                         ShowHoroscope: $scope.userFormData[0].ShowHoroscope,
                         PaymentDate: $scope.userFormData[0].PaymentDate
                     }),
-                    headers: { 'content-Type': 'application/x-www-form-urlencoded' }
+                    headers: {
+                        'content-Type': 'application/x-www-form-urlencoded',
+                        "MugurthamUserToken": getLoggedInUserID(),
+                        "CommunityID": getLoggedInUserCommunityID()
+                    }
                 }).
             success(function (data, status, headers, config) {
                 NotifySuccessStatus('10');
@@ -298,7 +330,12 @@ var ControllerUser = angular.module('MugurthamApp').controller('ControllerUser',
                 $scope.userFormData = [];
                 var strGetURL = '/MugurthamUserLookup/UserAPI/Get/' + loginID;
                 $http({
-                    method: "GET", url: strGetURL
+                    method: "GET", url: strGetURL,
+                    headers: {
+                        'content-Type': 'application/x-www-form-urlencoded',
+                        "MugurthamUserToken": getLoggedInUserID(),
+                        "CommunityID": getLoggedInUserCommunityID()
+                    }
                 }).
             success(function (data, status, headers, config) {
                 $('#ddlUserLocale').val(data.LocaleID);

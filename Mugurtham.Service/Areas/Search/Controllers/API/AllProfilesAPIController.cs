@@ -27,11 +27,12 @@ namespace Mugurtham.Service.Areas.Search.Controllers.API
                 IEnumerable<string> headerValues = Request.Headers.GetValues("MugurthamUserToken");
                 strLoggedInUserID = headerValues.FirstOrDefault();
 
-                Mugurtham.Core.Login.LoggedInUser objLoggedIn = new Core.Login.LoggedInUser(strLoggedInUserID);
+                Mugurtham.Core.Login.LoggedInUser objLoggedIn = new Core.Login.LoggedInUser(strLoggedInUserID,
+                    Request.Headers.GetValues("CommunityID").FirstOrDefault());
                 using (objLoggedIn as IDisposable)
                 {
                     // Destroy this objLoggedIn object 
-                    ProfileCore objProfileCore = new ProfileCore();
+                    ProfileCore objProfileCore = new ProfileCore(ref objLoggedIn);
                     using (objProfileCore as IDisposable)
                         objProfileCore.GetByProfileID(ID, out objProfCore, objLoggedIn);
                     objProfileCore = null;

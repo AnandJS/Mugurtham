@@ -283,6 +283,21 @@ function getLoggedInUserID() {
     return LoggedInUserID;
 }
 
+// Global Function to retrieve the loggedIn user from the client side
+function getLoggedInUserCommunityID() {
+    var CommunityID;
+    if (typeof (Storage) !== "undefined") {
+        if (localStorage.getItem("CommunityID")) {
+            CommunityID = localStorage.getItem("CommunityID");
+        }
+    }
+    else {
+        toastr.error("Sorry, your browser does not support web storage...");
+    }
+    return CommunityID;
+}
+
+
 
 // Global Function to retrieve the loggedIn user information from the client side
 function getLoggedInUserInfo($http) {

@@ -10,11 +10,18 @@ namespace Mugurtham.Core.Location
 {
     public class LocationCore
     {
+        private Mugurtham.Core.Login.LoggedInUser _objLoggedInUser = null;
+
+        public LocationCore(ref Mugurtham.Core.Login.LoggedInUser objLoggedInUser)
+        {
+            _objLoggedInUser = objLoggedInUser;
+        }
+
         public int Add(ref Mugurtham.Core.Location.LocationCoreEntity objLocationCoreEntity)
         {
             try
             {
-                IUnitOfWork objIUnitOfWork = new UnitOfWork();
+                IUnitOfWork objIUnitOfWork = new UnitOfWork(_objLoggedInUser.ConnectionStringAppKey);
                 using (objIUnitOfWork as IDisposable)
                 {
                     Mugurtham.DTO.Profile.Location objDTOLocation = new DTO.Profile.Location();
@@ -39,7 +46,7 @@ namespace Mugurtham.Core.Location
         {
             try
             {
-                IUnitOfWork objIUnitOfWork = new UnitOfWork();
+                IUnitOfWork objIUnitOfWork = new UnitOfWork(_objLoggedInUser.ConnectionStringAppKey);
                 using (objIUnitOfWork as IDisposable)
                 {
                     Mugurtham.DTO.Profile.Location objDTOLocation = new DTO.Profile.Location();
@@ -63,7 +70,7 @@ namespace Mugurtham.Core.Location
 
         public LocationCoreEntity GetByProfileID(string strProfileID, string strLoggedInUserID)
         {
-            Profile.ProfileSecurity objProfileSecurity = new Profile.ProfileSecurity();
+            Profile.ProfileSecurity objProfileSecurity = new Profile.ProfileSecurity(ref _objLoggedInUser);
             using (objProfileSecurity as IDisposable)
             {
                 if (!string.IsNullOrEmpty(strLoggedInUserID))
@@ -84,7 +91,7 @@ namespace Mugurtham.Core.Location
             try
             {
                 Mugurtham.DTO.Profile.Location objLocation = new Mugurtham.DTO.Profile.Location();
-                IUnitOfWork objUOW = new UnitOfWork();
+                IUnitOfWork objUOW = new UnitOfWork(_objLoggedInUser.ConnectionStringAppKey);
                 using (objUOW as IDisposable)
                     objLocation = objUOW.RepositoryLocation.GetAll().ToList().Where(p => p.ProfileID.Trim().ToLower() == strProfileID.Trim().ToLower()).FirstOrDefault();
                 objUOW = null;

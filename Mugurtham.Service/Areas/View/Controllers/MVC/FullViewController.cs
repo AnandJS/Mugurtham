@@ -22,7 +22,7 @@ namespace Mugurtham.Service.Areas.View.Controllers
         {
             Mugurtham.Core.Login.LoggedInUser objLoggedIn = (Mugurtham.Core.Login.LoggedInUser)Session["LoggedInUser"];
             Mugurtham.Core.Profile.API.ProfileCore objProfileCoreForView = null;
-            Mugurtham.Core.Profile.API.ProfileCore objProfileCore = new Mugurtham.Core.Profile.API.ProfileCore();
+            Mugurtham.Core.Profile.API.ProfileCore objProfileCore = new Mugurtham.Core.Profile.API.ProfileCore(ref objLoggedIn);
             using (objProfileCore as IDisposable)
                 objProfileCore.GetByProfileID(ID, out objProfileCoreForView, objLoggedIn);
             objProfileCore = null;
@@ -35,7 +35,7 @@ namespace Mugurtham.Service.Areas.View.Controllers
             bool isInterestedProfile = false;
             int intInterestedProfile = 0; // 0 -> Not an interested Profile; 1 -> is an interested profile
             Mugurtham.Core.Login.LoggedInUser objLoggedIn = (Mugurtham.Core.Login.LoggedInUser)Session["LoggedInUser"];
-            Mugurtham.Core.ProfileInterested.ProfileInterestedCore objProfileInterestedCore = new Core.ProfileInterested.ProfileInterestedCore();
+            Mugurtham.Core.ProfileInterested.ProfileInterestedCore objProfileInterestedCore = new Core.ProfileInterested.ProfileInterestedCore(ref objLoggedIn);
             using (objProfileInterestedCore as IDisposable)
                 isInterestedProfile = objProfileInterestedCore.isInterestedProfile(objLoggedIn.LoginID, ID);
             objProfileInterestedCore = null;

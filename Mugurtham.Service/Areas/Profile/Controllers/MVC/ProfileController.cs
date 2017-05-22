@@ -63,15 +63,15 @@ namespace Mugurtham.Service.Areas.Profile.Controllers.MVC
                 try
                 {
                     Mugurtham.Core.Login.LoggedInUser objLoggedIn = (Mugurtham.Core.Login.LoggedInUser)Session["LoggedInUser"];
-                    Mugurtham.Core.BasicInfo.BasicInfoCore objBasicInfoCore = new Core.BasicInfo.BasicInfoCore();
+                    Mugurtham.Core.BasicInfo.BasicInfoCore objBasicInfoCore = new Core.BasicInfo.BasicInfoCore(ref objLoggedIn);
                     using (objBasicInfoCore as IDisposable)
                     {
                         Mugurtham.Core.BasicInfo.BasicInfoCoreEntity objBasicInfoCoreEntity = new Core.BasicInfo.BasicInfoCoreEntity();
                         using (objBasicInfoCoreEntity as IDisposable)
                         {
-                            
+
                             objBasicInfoCoreEntity = objBasicInfoCore.GetByProfileID(ProfileID);
-                            objBasicInfoCoreEntity.PhotoPath = "/Areas/Profile/Images/ProfilePhoto/" + ProfileID + Path.GetExtension(Path.GetFileName(file.FileName));
+                            objBasicInfoCoreEntity.PhotoPath = "/Areas/Profile/Images/ProfilePhoto/" + objLoggedIn.CommunityName + "/" + ProfileID + Path.GetExtension(Path.GetFileName(file.FileName));
                             string strFilePath = Path.Combine(Server.MapPath("~/Areas/Profile/Images/ProfilePhoto"),
                                               ProfileID + Path.GetExtension(Path.GetFileName(file.FileName)));
                             file.SaveAs(strFilePath);
@@ -96,7 +96,7 @@ namespace Mugurtham.Service.Areas.Profile.Controllers.MVC
         {
             Mugurtham.Core.Login.LoggedInUser objLoggedIn = (Mugurtham.Core.Login.LoggedInUser)Session["LoggedInUser"];
             string strProfileID = string.Empty;
-            Mugurtham.Core.Profile.API.ProfileCore objProfileCore = new Mugurtham.Core.Profile.API.ProfileCore();
+            Mugurtham.Core.Profile.API.ProfileCore objProfileCore = new Mugurtham.Core.Profile.API.ProfileCore(ref objLoggedIn);
             using (objProfileCore as IDisposable)
             {
                 objProfileCore.Add(ref objBasicInfoCoreEntity, out strProfileID, objLoggedIn);
@@ -112,7 +112,8 @@ namespace Mugurtham.Service.Areas.Profile.Controllers.MVC
             string strProfilePhotoPath = string.Empty;
             int intProfilePhotoIndex = 1;
             // Create if profile directory does not exsist
-            string strProfileFolderPath = Path.Combine(Server.MapPath("~/Areas/Profile/Images/ProfilePhoto/" + ProfileID));
+            Mugurtham.Core.Login.LoggedInUser objLoggedIn = (Mugurtham.Core.Login.LoggedInUser)Session["LoggedInUser"];
+            string strProfileFolderPath = Path.Combine(Server.MapPath("~/Areas/Profile/Images/ProfilePhoto/" + objLoggedIn.CommunityName + " / " + ProfileID));
             if (!Directory.Exists(strProfileFolderPath))
                 Directory.CreateDirectory(strProfileFolderPath);
             foreach (HttpPostedFileBase item in file)
@@ -120,7 +121,7 @@ namespace Mugurtham.Service.Areas.Profile.Controllers.MVC
                 if (item != null)
                 {
                     strFileName = Helpers.primaryKey;
-                    strProfilePhotoPath = "/Areas/Profile/Images/ProfilePhoto/" + ProfileID + "/" + strFileName + Path.GetExtension(Path.GetFileName(item.FileName));
+                    strProfilePhotoPath = "/Areas/Profile/Images/ProfilePhoto/" + objLoggedIn.CommunityName + " / " +  ProfileID + "/" + strFileName + Path.GetExtension(Path.GetFileName(item.FileName));
                 }
                 //if (Array.Exists(model.FilesToBeUploaded.Split(','), s => s.Equals(item.FileName)))                
                 if (
@@ -132,8 +133,7 @@ namespace Mugurtham.Service.Areas.Profile.Controllers.MVC
                 {
                     try
                     {
-                        Mugurtham.Core.Login.LoggedInUser objLoggedIn = (Mugurtham.Core.Login.LoggedInUser)Session["LoggedInUser"];
-                        Mugurtham.Core.BasicInfo.BasicInfoCore objBasicInfoCore = new Core.BasicInfo.BasicInfoCore();
+                        Mugurtham.Core.BasicInfo.BasicInfoCore objBasicInfoCore = new Core.BasicInfo.BasicInfoCore(ref objLoggedIn);
                         using (objBasicInfoCore as IDisposable)
                         {
                             Mugurtham.Core.BasicInfo.BasicInfoCoreEntity objBasicInfoCoreEntity = new Core.BasicInfo.BasicInfoCoreEntity();
@@ -141,7 +141,7 @@ namespace Mugurtham.Service.Areas.Profile.Controllers.MVC
                             {
                                 objBasicInfoCoreEntity = objBasicInfoCore.GetByProfileID(ProfileID);
                                 objBasicInfoCoreEntity.PhotoPath = strProfilePhotoPath;
-                                string strFilePath = Path.Combine(Server.MapPath("~/Areas/Profile/Images/ProfilePhoto/" + ProfileID),
+                                string strFilePath = Path.Combine(Server.MapPath("~/Areas/Profile/Images/ProfilePhoto/" + objLoggedIn.CommunityName + " / " + ProfileID),
                                                   strFileName + Path.GetExtension(Path.GetFileName(item.FileName)));
                                 item.SaveAs(strFilePath);
                                 savePhotoToFolder(strProfilePhotoPath, ProfileID);
@@ -163,7 +163,8 @@ namespace Mugurtham.Service.Areas.Profile.Controllers.MVC
         }
         private int savePhotoToFolder(string strPhotoPath, string strProfileID)
         {
-            Mugurtham.Core.Profile.Photo.PhotoCore objPhotoCore = new Core.Profile.Photo.PhotoCore();
+            Mugurtham.Core.Login.LoggedInUser objLoggedIn = (Mugurtham.Core.Login.LoggedInUser)Session["LoggedInUser"];
+            Mugurtham.Core.Profile.Photo.PhotoCore objPhotoCore = new Core.Profile.Photo.PhotoCore(ref objLoggedIn);
             using (objPhotoCore as IDisposable)
             {
                 Mugurtham.Core.Profile.Photo.PhotoCoreEntity objPhotoCoreEntity = new Core.Profile.Photo.PhotoCoreEntity();
@@ -183,7 +184,7 @@ namespace Mugurtham.Service.Areas.Profile.Controllers.MVC
         {
             Mugurtham.Core.Login.LoggedInUser objLoggedIn = (Mugurtham.Core.Login.LoggedInUser)Session["LoggedInUser"];
             string strUserID = string.Empty;
-            PhotoCore objPhotoCore = new PhotoCore();
+            PhotoCore objPhotoCore = new PhotoCore(ref objLoggedIn);
             using (objPhotoCore as IDisposable)
                 objPhotoCore.Delete(ID);
             objPhotoCore = null;
@@ -196,7 +197,7 @@ namespace Mugurtham.Service.Areas.Profile.Controllers.MVC
             if (file != null && file.ContentLength > 0)
                 try
                 {
-                    string strProfileHoroFolderPath = Path.Combine(Server.MapPath("~/Areas/Profile/Images/ProfilePhoto/" + ProfileID + "/Horoscope"));
+                    string strProfileHoroFolderPath = Path.Combine(Server.MapPath("~/Areas/Profile/Images/ProfilePhoto/" + objLoggedIn.CommunityName + " / " + ProfileID + "/Horoscope"));
 
                     if (!Directory.Exists(strProfileHoroFolderPath))
                         Directory.CreateDirectory(strProfileHoroFolderPath);
@@ -211,8 +212,8 @@ namespace Mugurtham.Service.Areas.Profile.Controllers.MVC
                     {
                         objDir.Delete(true);
                     }
-                    string path = Path.Combine(Server.MapPath("~/Areas/Profile/Images/ProfilePhoto/" + ProfileID + "/Horoscope/" + ProfileID + Path.GetExtension(Path.GetFileName(file.FileName))));
-                    string strProfileHoroPath = "/Areas/Profile/Images/ProfilePhoto/" + ProfileID + "/Horoscope/" + ProfileID + Path.GetExtension(Path.GetFileName(file.FileName));
+                    string path = Path.Combine(Server.MapPath("~/Areas/Profile/Images/ProfilePhoto/" + objLoggedIn.CommunityName + " / " + ProfileID + "/Horoscope/" + ProfileID + Path.GetExtension(Path.GetFileName(file.FileName))));
+                    string strProfileHoroPath = "/Areas/Profile/Images/ProfilePhoto/" + objLoggedIn.CommunityName + " / " + ProfileID + "/Horoscope/" + ProfileID + Path.GetExtension(Path.GetFileName(file.FileName));
                     if (
                     Path.GetExtension(Path.GetFileName(file.FileName)).ToString().ToLower() == ".jpg".ToString().ToLower() ||
                     Path.GetExtension(Path.GetFileName(file.FileName)).ToString().ToLower() == ".jpeg".ToString().ToLower() ||
@@ -221,7 +222,7 @@ namespace Mugurtham.Service.Areas.Profile.Controllers.MVC
                     )
                     {
                         file.SaveAs(path);
-                        Mugurtham.Core.Profile.Horoscope.HoroscopeCore objHoroscopeCore = new Core.Profile.Horoscope.HoroscopeCore();
+                        Mugurtham.Core.Profile.Horoscope.HoroscopeCore objHoroscopeCore = new Core.Profile.Horoscope.HoroscopeCore(ref objLoggedIn);
                         using (objHoroscopeCore as IDisposable)
                         {
                             Mugurtham.Core.Profile.Horoscope.HoroscopeCoreEntity objHoroscopeCoreEntity = new Core.Profile.Horoscope.HoroscopeCoreEntity();

@@ -32,6 +32,8 @@ namespace Mugurtham.Core.User
         //must not be used for other purpose please
         public string LoginStatus { get; set; }
         public string SangamName { get; set; }
+        public string CommunityID { get; set; }
+        public string CommunityName { get; set; }
 
     }
 }

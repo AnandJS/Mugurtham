@@ -60,24 +60,29 @@ app.factory('FactoryAstrologicalMatchers', ['$http', 'ConstantMatchingStarsForGr
         };
 
         function getAstrologicalMatchingProfiles(data, _star, objConstantMatchingStar) {
-            var matchingProfiles = [];
-            var itrIndex = 0;
-            $.each(objConstantMatchingStar, function (key, value) {
-                if (key === _star) {
-                    $.each(value, function (index, object) {
-                        $.each(data, function (profilekey, profilevalue) {
-                            if (object.Star === profilevalue.Star) {
-                                matchingProfiles[itrIndex] = data[profilekey];
-                                itrIndex += 1;
-                            }
+            try {
+                var matchingProfiles = [];
+                var itrIndex = 0;
+                $.each(objConstantMatchingStar, function (key, value) {
+                    if (key === _star) {
+                        $.each(value, function (index, object) {
+                            $.each(data, function (profilekey, profilevalue) {
+                                if (object.Star === profilevalue.Star) {
+                                    matchingProfiles[itrIndex] = data[profilekey];
+                                    itrIndex += 1;
+                                }
+                            });
                         });
-                    });
-                }
-            });
-            sessionStorage.setItem("MyMatchingProfilesBadgeCount", (matchingProfiles.length));
-            $('#badgeMyMactchingProfiles').text(matchingProfiles.length);
-            $('#badgeMyMactchingProfilesInGblNav').text(matchingProfiles.length);
-            return matchingProfiles;
+                    }
+                });
+                sessionStorage.setItem("MyMatchingProfilesBadgeCount", (matchingProfiles.length));
+                $('#badgeMyMactchingProfiles').text(matchingProfiles.length);
+                $('#badgeMyMactchingProfilesInGblNav').text(matchingProfiles.length);
+                return matchingProfiles;
+            }
+            catch (err) {
+                toastr.error(err);
+            }
         }
         /*========================================= E-Commerce Filter Section ======================================================*/
         //Item Count

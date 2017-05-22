@@ -19,23 +19,33 @@ namespace Mugurtham.Service.Areas.Profile.Controllers.API
         [HttpPost]
         public void Post([FromBody]FamilyCoreEntity objFamilyCoreEntity)
         {
-            FamilyCore objFamilyCore = new FamilyCore();
-            using (objFamilyCore as IDisposable)
+            Mugurtham.Core.Login.LoggedInUser objLoggedIn = new Core.Login.LoggedInUser(Request.Headers.GetValues("MugurthamUserToken").FirstOrDefault(),
+           Request.Headers.GetValues("CommunityID").FirstOrDefault());
+            using (objLoggedIn as IDisposable)
             {
-                objFamilyCore.Add(ref objFamilyCoreEntity);
+                FamilyCore objFamilyCore = new FamilyCore(ref objLoggedIn);
+                using (objFamilyCore as IDisposable)
+                {
+                    objFamilyCore.Add(ref objFamilyCoreEntity);
+                }
+                objFamilyCore = null;
             }
-            objFamilyCore = null;
         }
 
         [HttpPut]
         public void Put([FromBody]FamilyCoreEntity objFamilyCoreEntity)
         {
-            FamilyCore objFamilyCore = new FamilyCore();
-            using (objFamilyCore as IDisposable)
+            Mugurtham.Core.Login.LoggedInUser objLoggedIn = new Core.Login.LoggedInUser(Request.Headers.GetValues("MugurthamUserToken").FirstOrDefault(),
+           Request.Headers.GetValues("CommunityID").FirstOrDefault());
+            using (objLoggedIn as IDisposable)
             {
-                objFamilyCore.Edit(ref objFamilyCoreEntity);
+                FamilyCore objFamilyCore = new FamilyCore(ref objLoggedIn);
+                using (objFamilyCore as IDisposable)
+                {
+                    objFamilyCore.Edit(ref objFamilyCoreEntity);
+                }
+                objFamilyCore = null;
             }
-            objFamilyCore = null;
         }
 
         [HttpGet]
@@ -44,7 +54,9 @@ namespace Mugurtham.Service.Areas.Profile.Controllers.API
             string LoggedInUserID = string.Empty;
             IEnumerable<string> headerValues = Request.Headers.GetValues("MugurthamUserToken");
             LoggedInUserID = headerValues.FirstOrDefault();
-            return Request.CreateResponse(HttpStatusCode.OK, new FamilyCore().GetByProfileID(ID, LoggedInUserID), Configuration.Formatters.JsonFormatter);
+            Mugurtham.Core.Login.LoggedInUser objLoggedIn = new Core.Login.LoggedInUser(Request.Headers.GetValues("MugurthamUserToken").FirstOrDefault(),
+           Request.Headers.GetValues("CommunityID").FirstOrDefault());
+            return Request.CreateResponse(HttpStatusCode.OK, new FamilyCore(ref objLoggedIn).GetByProfileID(ID, LoggedInUserID), Configuration.Formatters.JsonFormatter);
         }
     }
 }

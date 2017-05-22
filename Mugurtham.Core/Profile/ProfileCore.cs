@@ -62,7 +62,12 @@ namespace Mugurtham.Core.Profile.API
         // Fullview - Display Contact Configuration
         public bool isLoggedInUserProfilesSangam { get; set; }
 
+        private Mugurtham.Core.Login.LoggedInUser _objLoggedInUser = null;
 
+        public ProfileCore(ref Mugurtham.Core.Login.LoggedInUser objLoggedInUser)
+        {
+            _objLoggedInUser = objLoggedInUser;
+        }
 
         /// <summary>
         /// Creates a new row in all profile registration table for the passed profileID
@@ -73,7 +78,7 @@ namespace Mugurtham.Core.Profile.API
         {
             strProfileID = string.Empty;
             string strUserID = string.Empty;
-            SangamCore objSangamCore = new SangamCore();
+            SangamCore objSangamCore = new SangamCore(_objLoggedInUser.ConnectionStringAppKey);
             try
             {
                 using (objSangamCore as IDisposable)
@@ -92,7 +97,7 @@ namespace Mugurtham.Core.Profile.API
                 }
                 objSangamCore = null;
 
-                User.UserCore objUserCore = new User.UserCore();
+                User.UserCore objUserCore = new User.UserCore(_objLoggedInUser.ConnectionStringAppKey);
                 using (objUserCore as IDisposable)
                 {
                     User.UserCoreEntity objUserCoreEntity = new User.UserCoreEntity();
@@ -114,7 +119,7 @@ namespace Mugurtham.Core.Profile.API
                 }
                 objUserCore = null;
 
-                BasicInfoCore objBasicInfoCore = new BasicInfoCore();
+                BasicInfoCore objBasicInfoCore = new BasicInfoCore(ref _objLoggedInUser);
                 using (objBasicInfoCore as IDisposable)
                 {
                     objBasicInfoCoreEntity.ProfileID = strProfileID;
@@ -124,7 +129,7 @@ namespace Mugurtham.Core.Profile.API
                 }
                 objBasicInfoCore = null;
 
-                CareerCore objCareerCore = new CareerCore();
+                CareerCore objCareerCore = new CareerCore(ref _objLoggedInUser);
                 using (objCareerCore as IDisposable)
                 {
                     CareerCoreEntity objCareerCoreEntity = new CareerCoreEntity();
@@ -137,7 +142,7 @@ namespace Mugurtham.Core.Profile.API
                 }
                 objCareerCore = null;
 
-                ContactCore objContactCore = new ContactCore();
+                ContactCore objContactCore = new ContactCore(ref _objLoggedInUser);
                 using (objContactCore as IDisposable)
                 {
                     ContactCoreEntity objContactCoreEntity = new ContactCoreEntity();
@@ -150,7 +155,7 @@ namespace Mugurtham.Core.Profile.API
                 }
                 objContactCore = null;
 
-                FamilyCore objFamilyCore = new FamilyCore();
+                FamilyCore objFamilyCore = new FamilyCore(ref _objLoggedInUser);
                 using (objFamilyCore as IDisposable)
                 {
                     FamilyCoreEntity objFamilyCoreEntity = new FamilyCoreEntity();
@@ -163,7 +168,7 @@ namespace Mugurtham.Core.Profile.API
                 }
                 objFamilyCore = null;
 
-                LocationCore objLocationCore = new LocationCore();
+                LocationCore objLocationCore = new LocationCore(ref _objLoggedInUser);
                 using (objLocationCore as IDisposable)
                 {
                     LocationCoreEntity objLocationCoreEntity = new LocationCoreEntity();
@@ -176,7 +181,7 @@ namespace Mugurtham.Core.Profile.API
                 }
                 objLocationCore = null;
 
-                ReferenceCore objReferenceCore = new ReferenceCore();
+                ReferenceCore objReferenceCore = new ReferenceCore(ref _objLoggedInUser);
                 using (objReferenceCore as IDisposable)
                 {
                     ReferenceCoreEntity objReferenceCoreEntity = new ReferenceCoreEntity();
@@ -188,7 +193,7 @@ namespace Mugurtham.Core.Profile.API
                     objReferenceCoreEntity = null;
                 }
                 objReferenceCore = null;
-                RaasiCore objRaasiCore = new RaasiCore();
+                RaasiCore objRaasiCore = new RaasiCore(ref _objLoggedInUser);
                 using (objRaasiCore as IDisposable)
                 {
                     RaasiCoreEntity objRaasiCoreEntity = new RaasiCoreEntity();
@@ -200,7 +205,7 @@ namespace Mugurtham.Core.Profile.API
                     objRaasiCoreEntity = null;
                 }
                 objRaasiCore = null;
-                AmsamCore objAmsamCore = new AmsamCore();
+                AmsamCore objAmsamCore = new AmsamCore(ref _objLoggedInUser);
                 using (objAmsamCore as IDisposable)
                 {
                     AmsamCoreEntity objAmsamCoreEntity = new AmsamCoreEntity();
@@ -212,7 +217,7 @@ namespace Mugurtham.Core.Profile.API
                     objAmsamCoreEntity = null;
                 }
                 objAmsamCore = null;
-                HoroscopeCore objHoroscopeCore = new HoroscopeCore();
+                HoroscopeCore objHoroscopeCore = new HoroscopeCore(ref _objLoggedInUser);
                 using (objHoroscopeCore as IDisposable)
                 {
                     HoroscopeCoreEntity objHoroscopeCoreEntity = new HoroscopeCoreEntity();
@@ -240,13 +245,13 @@ namespace Mugurtham.Core.Profile.API
         /// <param name="objLoggedIn"></param>
         /// <param name="boolAddAllEntities">Optional argument to add all profile entities to the prfoilecore object -- added to consider performance optimization</param>
         /// <returns></returns>
-        public int GetByProfileID(string strProfileID, out ProfileCore objProfileCore, Mugurtham.Core.Login.LoggedInUser objLoggedIn = null, bool boolAddAllEntities = false)
+        public int GetByProfileID(string strProfileID, out ProfileCore objProfileCore, Mugurtham.Core.Login.LoggedInUser objLoggedIn, bool boolAddAllEntities = false)
         {
             objProfileCore = null;
             string displayProfileContact = "0";
             try
             {
-                objProfileCore = new ProfileCore();
+                objProfileCore = new ProfileCore(ref _objLoggedInUser);
                 objProfileCore.isLoggedInUserProfilesSangam = false;
                 if (string.IsNullOrWhiteSpace(strProfileID))
                     return -1;
@@ -258,10 +263,10 @@ namespace Mugurtham.Core.Profile.API
                     // Validation for Fullview access
                     validateUserAccessToThisProfile(strProfileID, ref objProfileCore, objLoggedIn);
                     // Validation on Profile View Limitation for Security
-                    objProfileCore.ProfileViewLimitation = GetViewedProfilesToday(Helpers.ConnectionString, ref objLoggedIn);
+                    objProfileCore.ProfileViewLimitation = GetViewedProfilesToday(objLoggedIn.ConnectionString, ref objLoggedIn);
                     if (objProfileCore.ProfileViewLimitation > 10)
                         objProfileCore.validateFullViewAccess = false;
-                    SangamCore objSangamCore = new SangamCore();
+                    SangamCore objSangamCore = new SangamCore(_objLoggedInUser.ConnectionStringAppKey);
                     using (objSangamCore as IDisposable)
                     {
                         objProfileCore.SangamCoreEntity = objSangamCore.GetByID(objProfileCore.UserCoreEntity.SangamID);
@@ -270,13 +275,13 @@ namespace Mugurtham.Core.Profile.API
                     objSangamCore = null;
                     if (objProfileCore.validateFullViewAccess)
                     {
-                        BasicInfoCore objBICore = new BasicInfoCore();
+                        BasicInfoCore objBICore = new BasicInfoCore(ref _objLoggedInUser);
                         using (objBICore as IDisposable)
                         {
                             //Check profile restrictions
                             // if allowed then process the rest of the code
                             // else return error code
-                            IUnitOfWork objIUnitOfWork = new UnitOfWork();
+                            IUnitOfWork objIUnitOfWork = new UnitOfWork(_objLoggedInUser.ConnectionStringAppKey);
                             using (objIUnitOfWork as IDisposable)
                             {
                                 BasicInfoCoreEntity objBasicInfoCoreEntity = new BasicInfo.BasicInfoCoreEntity();
@@ -306,7 +311,7 @@ namespace Mugurtham.Core.Profile.API
                         }
                         objBICore = null;
 
-                        Photo.PhotoCore objPhotoCore = new Photo.PhotoCore();
+                        Photo.PhotoCore objPhotoCore = new Photo.PhotoCore(ref _objLoggedInUser);
                         using (objPhotoCore as IDisposable)
                         {
                             List<Mugurtham.Core.Profile.Photo.PhotoCoreEntity> objPhotoCoreEntityList = new List<Mugurtham.Core.Profile.Photo.PhotoCoreEntity>();
@@ -314,15 +319,15 @@ namespace Mugurtham.Core.Profile.API
                             objProfileCore.PhotoCoreEntityList = objPhotoCoreEntityList;
                         }
                         objPhotoCore = null;
-                        CareerCore objCareerCore = new CareerCore();
+                        CareerCore objCareerCore = new CareerCore(ref _objLoggedInUser);
                         using (objCareerCore as IDisposable)
                             objProfileCore.CareerCoreEntity = objCareerCore.GetByProfileID(strProfileID, string.Empty);
                         objCareerCore = null;
-                        LocationCore objLocationCore = new LocationCore();
+                        LocationCore objLocationCore = new LocationCore(ref _objLoggedInUser);
                         using (objLocationCore as IDisposable)
                             objProfileCore.LocationCoreEntity = objLocationCore.GetByProfileID(strProfileID, string.Empty);
                         objLocationCore = null;
-                        ContactCore objContactCore = new ContactCore();
+                        ContactCore objContactCore = new ContactCore(ref _objLoggedInUser);
                         using (objContactCore as IDisposable)
                         {
                             objProfileCore.ContactCoreEntity = objContactCore.GetByProfileID(strProfileID, string.Empty);
@@ -334,11 +339,11 @@ namespace Mugurtham.Core.Profile.API
                                 objProfileCore.isLoggedInUserProfilesSangam = true;
                         }
                         objContactCore = null;
-                        FamilyCore objFamilyCore = new FamilyCore();
+                        FamilyCore objFamilyCore = new FamilyCore(ref _objLoggedInUser);
                         using (objFamilyCore as IDisposable)
                             objProfileCore.FamilyCoreEntity = objFamilyCore.GetByProfileID(strProfileID, string.Empty);
                         objFamilyCore = null;
-                        ReferenceCore objReferenceCore = new ReferenceCore();
+                        ReferenceCore objReferenceCore = new ReferenceCore(ref _objLoggedInUser);
                         using (objReferenceCore as IDisposable)
                         {
                             objProfileCore.ReferenceCoreEntity = objReferenceCore.GetByProfileID(strProfileID);
@@ -348,15 +353,15 @@ namespace Mugurtham.Core.Profile.API
                                 objReferenceCore.AssignEntityToEmpty(objProfileCore.ReferenceCoreEntity);
                         }
                         objReferenceCore = null;
-                        RaasiCore objRaasiCore = new RaasiCore();
+                        RaasiCore objRaasiCore = new RaasiCore(ref _objLoggedInUser);
                         using (objRaasiCore as IDisposable)
                             objProfileCore.RaasiCoreEntity = objRaasiCore.GetByProfileID(strProfileID);
                         objRaasiCore = null;
-                        AmsamCore objAmsamCore = new AmsamCore();
+                        AmsamCore objAmsamCore = new AmsamCore(ref _objLoggedInUser);
                         using (objAmsamCore as IDisposable)
                             objProfileCore.AmsamCoreEntity = objAmsamCore.GetByProfileID(strProfileID);
                         objRaasiCore = null;
-                        HoroscopeCore objHoroscopeCore = new HoroscopeCore();
+                        HoroscopeCore objHoroscopeCore = new HoroscopeCore(ref _objLoggedInUser);
                         using (objHoroscopeCore as IDisposable)
                             objProfileCore.HoroscopeCoreEntity = objHoroscopeCore.GetByProfileID(strProfileID, string.Empty);
                         objHoroscopeCore = null;
@@ -430,15 +435,15 @@ namespace Mugurtham.Core.Profile.API
             }
             return 0;
         }
-        public int GetAll(ref List<ProfileCore> objProfileCoreList, string strGender, string strSangamID)
+        private int GetAll(ref List<ProfileCore> objProfileCoreList, string strGender, string strSangamID)
         {
             try
             {
-                BasicInfoCore objBasicInfoCore = new BasicInfoCore();
+                BasicInfoCore objBasicInfoCore = new BasicInfoCore(ref _objLoggedInUser);
                 using (objBasicInfoCore as IDisposable)
                 {
                     List<BasicInfoCoreEntity> objBasicInfoCoreEntityList = new List<BasicInfoCoreEntity>();
-                    IUnitOfWork objIUnitOfWork = new UnitOfWork();
+                    IUnitOfWork objIUnitOfWork = new UnitOfWork(_objLoggedInUser.ConnectionStringAppKey);
                     using (objIUnitOfWork as IDisposable)
                     {
                         if ((objIUnitOfWork.RepositoryBasicInfo.getAllProfiles(strGender, strSangamID) != null) &&
@@ -467,8 +472,11 @@ namespace Mugurtham.Core.Profile.API
                     objIUnitOfWork = null;
                     foreach (BasicInfoCoreEntity objBasicInfoCoreEntity in objBasicInfoCoreEntityList)
                     {
-                        ProfileCore objProfileCore = null;
-                        GetByProfileID(objBasicInfoCoreEntity.ProfileID, out objProfileCore);
+                        ProfileCore objProfileCore = null;                        
+                        //May 13 2017 -- commented as this function is not used anywhere
+                        // and loggedin  parameter is made as required in the below function
+                        //Analyze more please
+                        //GetByProfileID(objBasicInfoCoreEntity.ProfileID, out objProfileCore);
                         objProfileCoreList.Add(objProfileCore);
                         using (objProfileCore as IDisposable) { }
                         objProfileCore = null;
@@ -880,7 +888,7 @@ namespace Mugurtham.Core.Profile.API
             try
             {
                 IQueryable<DTO.Profile.Photo> objIQPhoto;
-                Profile.Photo.PhotoCore objPhotoCore = new Photo.PhotoCore();
+                Profile.Photo.PhotoCore objPhotoCore = new Photo.PhotoCore(ref _objLoggedInUser);
                 using (objPhotoCore as IDisposable)
                     objPhotoCore.getProfilePhotos(strProfileID, out objIQPhoto);
                 objPhotoCore = null;
@@ -912,7 +920,7 @@ namespace Mugurtham.Core.Profile.API
             Mugurtham.Core.User.UserCoreEntity objUserCoreEntity = null;
             try
             {
-                Mugurtham.Core.User.UserCore objUserCore = new Mugurtham.Core.User.UserCore();
+                Mugurtham.Core.User.UserCore objUserCore = new Mugurtham.Core.User.UserCore(_objLoggedInUser.ConnectionStringAppKey);
                 using (objUserCore as IDisposable)
                 {
                     objUserCoreEntity = new Mugurtham.Core.User.UserCoreEntity();

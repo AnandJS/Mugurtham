@@ -22,15 +22,22 @@ namespace Mugurtham.Service.Areas.Profile.Controllers.API
             string LoggedInUserID = string.Empty;
             IEnumerable<string> headerValues = Request.Headers.GetValues("MugurthamUserToken");
             LoggedInUserID = headerValues.FirstOrDefault();
-            return Request.CreateResponse(HttpStatusCode.OK, new HoroscopeCore().GetByProfileID(ID, LoggedInUserID), Configuration.Formatters.JsonFormatter);
+            Mugurtham.Core.Login.LoggedInUser objLoggedIn = new Core.Login.LoggedInUser(Request.Headers.GetValues("MugurthamUserToken").FirstOrDefault(),
+           Request.Headers.GetValues("CommunityID").FirstOrDefault());
+            return Request.CreateResponse(HttpStatusCode.OK, new HoroscopeCore(ref objLoggedIn).GetByProfileID(ID, LoggedInUserID), Configuration.Formatters.JsonFormatter);
         }
         [HttpPut]
         public void Put([FromBody]HoroscopeCoreEntity objHoroscopeCoreEntity)
         {
-            HoroscopeCore objHoroscopeCore = new HoroscopeCore();
-            using (objHoroscopeCore as IDisposable)
-                objHoroscopeCore.Edit(ref objHoroscopeCoreEntity);
-            objHoroscopeCore = null;
+            Mugurtham.Core.Login.LoggedInUser objLoggedIn = new Core.Login.LoggedInUser(Request.Headers.GetValues("MugurthamUserToken").FirstOrDefault(),
+           Request.Headers.GetValues("CommunityID").FirstOrDefault());
+            using (objLoggedIn as IDisposable)
+            {
+                HoroscopeCore objHoroscopeCore = new HoroscopeCore(ref objLoggedIn);
+                using (objHoroscopeCore as IDisposable)
+                    objHoroscopeCore.Edit(ref objHoroscopeCoreEntity);
+                objHoroscopeCore = null;
+            }
         }
     }
 }

@@ -33,15 +33,7 @@ var ControllerAstrologicalMatchers = angular.module('MugurthamApp').
 
                                                  $scope.getAstrologicalMatchers = function () {
                                                      try {
-                                                         var loadAll;
                                                          $scope.loadAastrologicalMatchingProfiles();
-                                                         if (loadAll !== undefined) {
-                                                             $timeout.cancel(loadAll);
-                                                         }
-                                                         //Will load all the rest of data after 1.5s
-                                                         loadAll = $timeout(function () {
-                                                             $scope.loadAastrologicalMatchingProfiles();
-                                                         }, 40000)
                                                      }
                                                      catch (err) {
                                                          toastr.error(err.message);

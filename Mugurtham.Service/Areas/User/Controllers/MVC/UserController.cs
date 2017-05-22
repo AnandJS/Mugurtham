@@ -71,7 +71,7 @@ namespace Mugurtham.Service.Areas.User.Controllers.MVC
         {
             Mugurtham.Core.Login.LoggedInUser objLoggedIn = (Mugurtham.Core.Login.LoggedInUser)Session["LoggedInUser"];
             string strUserID = string.Empty;
-            ProfileViewedCore objProfileViewedCore = new ProfileViewedCore();
+            ProfileViewedCore objProfileViewedCore = new ProfileViewedCore(ref objLoggedIn);
             using (objProfileViewedCore as IDisposable)
             {
                 ProfileViewedCoreEntity objProfileViewedCoreEntity = new ProfileViewedCoreEntity();
@@ -90,7 +90,7 @@ namespace Mugurtham.Service.Areas.User.Controllers.MVC
         {
             Mugurtham.Core.Login.LoggedInUser objLoggedIn = (Mugurtham.Core.Login.LoggedInUser)Session["LoggedInUser"];
             string strUserID = string.Empty;
-            ProfileInterestedCore objProfileInterestedCore = new ProfileInterestedCore();
+            ProfileInterestedCore objProfileInterestedCore = new ProfileInterestedCore(ref objLoggedIn);
             using (objProfileInterestedCore as IDisposable)
             {
                 ProfileInterestedCoreEntity objProfileInterestedCoreEntity = new ProfileInterestedCoreEntity();
@@ -109,7 +109,7 @@ namespace Mugurtham.Service.Areas.User.Controllers.MVC
         {
             Mugurtham.Core.Login.LoggedInUser objLoggedIn = (Mugurtham.Core.Login.LoggedInUser)Session["LoggedInUser"];
             string strUserID = string.Empty;
-            ProfileInterestedCore objProfileInterestedCore = new ProfileInterestedCore();
+            ProfileInterestedCore objProfileInterestedCore = new ProfileInterestedCore(ref objLoggedIn);
             using (objProfileInterestedCore as IDisposable)
             {
                 ProfileInterestedCoreEntity objProfileInterestedCoreEntity = new ProfileInterestedCoreEntity();
@@ -137,7 +137,7 @@ namespace Mugurtham.Service.Areas.User.Controllers.MVC
                 }
             }
             ProfileBasicViewEntity objProfileBasicViewEntity = new ProfileBasicViewEntity();
-            ProfileInterestedCore objProfileInterestedCore = new ProfileInterestedCore();
+            ProfileInterestedCore objProfileInterestedCore = new ProfileInterestedCore(ref objLoggedIn);
             using (objProfileInterestedCore as IDisposable)
             {
                 objProfileInterestedCore.GetInterestedProfiles(Utility.connectionString(), strGender,
@@ -165,7 +165,7 @@ namespace Mugurtham.Service.Areas.User.Controllers.MVC
                 }
             }
             ProfileBasicViewEntity objProfileBasicViewEntity = new ProfileBasicViewEntity();
-            ProfileInterestedCore objProfileInterestedCore = new ProfileInterestedCore();
+            ProfileInterestedCore objProfileInterestedCore = new ProfileInterestedCore(ref objLoggedIn);
             using (objProfileInterestedCore as IDisposable)
             {
                 objProfileInterestedCore.GetInterestedInMeProfiles(Utility.connectionString(), strGender,

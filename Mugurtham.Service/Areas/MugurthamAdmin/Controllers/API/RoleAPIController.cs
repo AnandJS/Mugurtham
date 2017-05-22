@@ -16,9 +16,11 @@ namespace Mugurtham.Service.Areas.MugurthamAdmin.Controllers.API
     {
         [HttpPost]
         public HttpResponseMessage Add([FromBody]RoleCoreEntity objRoleCoreEntity)
-        {            
+        {
             string strRoleID = string.Empty;
-            RoleCore objRoleCore = new RoleCore();
+            Mugurtham.Core.Login.LoggedInUser objLoggedIn = new Core.Login.LoggedInUser(Request.Headers.GetValues("MugurthamUserToken").FirstOrDefault(),
+           Request.Headers.GetValues("CommunityID").FirstOrDefault());
+            RoleCore objRoleCore = new RoleCore(ref objLoggedIn);
             using (objRoleCore as IDisposable)
             {
                 objRoleCore.Add(ref objRoleCoreEntity, out strRoleID);
@@ -31,17 +33,25 @@ namespace Mugurtham.Service.Areas.MugurthamAdmin.Controllers.API
         [HttpGet]
         public HttpResponseMessage Get(string ID)
         {
-            return Request.CreateResponse(HttpStatusCode.OK, new RoleCore().GetByID(ID), Configuration.Formatters.JsonFormatter);
+            Mugurtham.Core.Login.LoggedInUser objLoggedIn = new Core.Login.LoggedInUser(Request.Headers.GetValues("MugurthamUserToken").FirstOrDefault(),
+           Request.Headers.GetValues("CommunityID").FirstOrDefault());
+            return Request.CreateResponse(HttpStatusCode.OK, new RoleCore(ref objLoggedIn).GetByID(ID), Configuration.Formatters.JsonFormatter);
         }
-        
+
         [HttpGet]
         public HttpResponseMessage GetAll()
         {
             List<RoleCoreEntity> objSangamCoreEntityList = new List<RoleCoreEntity>();
-            RoleCore objRoleCore = new RoleCore();
-            using (objRoleCore as IDisposable)
-                objRoleCore.GetAll(ref objSangamCoreEntityList);
-            objRoleCore = null;
+            Mugurtham.Core.Login.LoggedInUser objLoggedIn = new Core.Login.LoggedInUser(Request.Headers.GetValues("MugurthamUserToken").FirstOrDefault(),
+           Request.Headers.GetValues("CommunityID").FirstOrDefault());
+            using (objLoggedIn as IDisposable)
+            {
+                RoleCore objRoleCore = new RoleCore(ref objLoggedIn);
+                using (objRoleCore as IDisposable)
+                    objRoleCore.GetAll(ref objSangamCoreEntityList);
+                objRoleCore = null;
+            }
+            objLoggedIn = null;
             return Request.CreateResponse(HttpStatusCode.OK, objSangamCoreEntityList,
               Configuration.Formatters.JsonFormatter);
         }
@@ -49,12 +59,18 @@ namespace Mugurtham.Service.Areas.MugurthamAdmin.Controllers.API
         [HttpPut]
         public void Put([FromBody]RoleCoreEntity objRoleCoreEntity)
         {
-            RoleCore objRoleCore = new RoleCore();
-            using (objRoleCore as IDisposable)
+            Mugurtham.Core.Login.LoggedInUser objLoggedIn = new Core.Login.LoggedInUser(Request.Headers.GetValues("MugurthamUserToken").FirstOrDefault(),
+           Request.Headers.GetValues("CommunityID").FirstOrDefault());
+            using (objLoggedIn as IDisposable)
             {
-                objRoleCore.Edit(ref objRoleCoreEntity);
+                RoleCore objRoleCore = new RoleCore(ref objLoggedIn);
+                using (objRoleCore as IDisposable)
+                {
+                    objRoleCore.Edit(ref objRoleCoreEntity);
+                }
+                objRoleCore = null;
             }
-            objRoleCore = null;
+            objLoggedIn = null;
         }
     }
 }

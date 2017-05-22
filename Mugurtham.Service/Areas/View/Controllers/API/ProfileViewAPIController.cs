@@ -20,10 +20,18 @@ namespace Mugurtham.Service.Areas.View.Controllers.API
         public HttpResponseMessage getProfileByProfileID(string ID)
         {
             ProfileCore objProfileCoreForView = null;
-            ProfileCore objProfileCore = new ProfileCore();
-            using (objProfileCore as IDisposable)
-                objProfileCore.GetByProfileID(ID, out objProfileCoreForView);
-            objProfileCore = null;
+            Mugurtham.Core.Login.LoggedInUser objLoggedIn = new Core.Login.LoggedInUser(Request.Headers.GetValues("MugurthamUserToken").FirstOrDefault(),
+               Request.Headers.GetValues("CommunityID").FirstOrDefault());
+            using (objLoggedIn as IDisposable)
+            {
+                ProfileCore objProfileCore = new ProfileCore(ref objLoggedIn);
+                using (objProfileCore as IDisposable)
+                {
+                    objProfileCore.GetByProfileID(ID, out objProfileCoreForView, objLoggedIn);
+                }
+                objProfileCore = null;
+            }
+            objLoggedIn = null;
             return Request.CreateResponse(HttpStatusCode.OK, objProfileCoreForView,
               Configuration.Formatters.JsonFormatter);
         }

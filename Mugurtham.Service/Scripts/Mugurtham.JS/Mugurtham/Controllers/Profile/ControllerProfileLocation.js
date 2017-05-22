@@ -73,7 +73,11 @@ var ControllerProfileLocation = angular.module('MugurthamApp').controller('Contr
                         ResidingState: $scope.ResidentState,
                         ResidingCity: $scope.ResidentCity
                     }),
-                    headers: { 'content-Type': 'application/x-www-form-urlencoded' }
+                    headers: {
+                        'content-Type': 'application/x-www-form-urlencoded',
+                        "MugurthamUserToken": getLoggedInUserID(),
+                        "CommunityID": getLoggedInUserCommunityID()
+                    }
                 }).
             success(function (data, status, headers, config) {
                 NotifyStatus('1');
@@ -98,7 +102,11 @@ var ControllerProfileLocation = angular.module('MugurthamApp').controller('Contr
                         ResidingState: $scope.ResidentState,
                         ResidingCity: $scope.ResidentCity
                     }),
-                    headers: { 'content-Type': 'application/x-www-form-urlencoded' }
+                    headers: {
+                        'content-Type': 'application/x-www-form-urlencoded',
+                        "MugurthamUserToken": getLoggedInUserID(),
+                        "CommunityID": getLoggedInUserCommunityID()
+                    }
                 }).
             success(function (data, status, headers, config) {
                 NotifySuccessStatus('7');
@@ -116,7 +124,9 @@ var ControllerProfileLocation = angular.module('MugurthamApp').controller('Contr
                 $http({
                     method: "GET", url: strGetURL,
                     headers: {
-                        "MugurthamUserToken": getLoggedInUserID()
+                        'content-Type': 'application/x-www-form-urlencoded',
+                        "MugurthamUserToken": getLoggedInUserID(),
+                        "CommunityID": getLoggedInUserCommunityID()
                     }
                 }).
             success(function (data, status, headers, config) {

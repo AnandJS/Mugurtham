@@ -77,7 +77,8 @@ var ControllerProfileContact = angular.module('MugurthamApp').controller('Contro
                     }),
                     headers: {
                         'content-Type': 'application/x-www-form-urlencoded',
-                        "MugurthamUserToken": getLoggedInUserID()
+                        "MugurthamUserToken": getLoggedInUserID(),
+                        "CommunityID": getLoggedInUserCommunityID()
                     }
                 }).
             success(function (data, status, headers, config) {
@@ -105,7 +106,8 @@ var ControllerProfileContact = angular.module('MugurthamApp').controller('Contro
                     }),
                     headers: {
                         'content-Type': 'application/x-www-form-urlencoded',
-                        "MugurthamUserToken": getLoggedInUserID()
+                        "MugurthamUserToken": getLoggedInUserID(),
+                        "CommunityID": getLoggedInUserCommunityID()
                     }
                 }).
             success(function (data, status, headers, config) {
@@ -125,7 +127,8 @@ var ControllerProfileContact = angular.module('MugurthamApp').controller('Contro
                 $http({
                     method: "GET", url: strGetURL,
                     headers: {
-                        "MugurthamUserToken": getLoggedInUserID()
+                        "MugurthamUserToken": getLoggedInUserID(),
+                        "CommunityID": getLoggedInUserCommunityID()
                     },
                     params:
                         { "MugurthamUserToken": MugurthamUserToken }

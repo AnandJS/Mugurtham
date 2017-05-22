@@ -10,11 +10,18 @@ namespace Mugurtham.Core.Reference
 {
     public class ReferenceCore
     {
+        private Mugurtham.Core.Login.LoggedInUser _objLoggedInUser = null;
+
+        public ReferenceCore(ref Mugurtham.Core.Login.LoggedInUser objLoggedInUser)
+        {
+            _objLoggedInUser = objLoggedInUser;
+        }
+
         public int Add(ref Mugurtham.Core.Reference.ReferenceCoreEntity objReferenceCoreEntity)
         {
             try
             {
-                IUnitOfWork objIUnitOfWork = new UnitOfWork();
+                IUnitOfWork objIUnitOfWork = new UnitOfWork(_objLoggedInUser.ConnectionStringAppKey);
                 using (objIUnitOfWork as IDisposable)
                 {
                     Mugurtham.DTO.Profile.Reference objDTOReference = new DTO.Profile.Reference();
@@ -39,7 +46,7 @@ namespace Mugurtham.Core.Reference
         {
             try
             {
-                IUnitOfWork objIUnitOfWork = new UnitOfWork();
+                IUnitOfWork objIUnitOfWork = new UnitOfWork(_objLoggedInUser.ConnectionStringAppKey);
                 using (objIUnitOfWork as IDisposable)
                 {
                     Mugurtham.DTO.Profile.Reference objDTOReference = new DTO.Profile.Reference();
@@ -63,7 +70,7 @@ namespace Mugurtham.Core.Reference
 
         public ReferenceCoreEntity GetByProfileID(string strProfileID, string strLoggedInUserID)
         {
-            Profile.ProfileSecurity objProfileSecurity = new Profile.ProfileSecurity();
+            Profile.ProfileSecurity objProfileSecurity = new Profile.ProfileSecurity(ref _objLoggedInUser);
             using (objProfileSecurity as IDisposable)
             {
                 if (!string.IsNullOrEmpty(strLoggedInUserID))
@@ -84,7 +91,7 @@ namespace Mugurtham.Core.Reference
             try
             {
                 Mugurtham.DTO.Profile.Reference objReference = new Mugurtham.DTO.Profile.Reference();
-                IUnitOfWork objUOW = new UnitOfWork();
+                IUnitOfWork objUOW = new UnitOfWork(_objLoggedInUser.ConnectionStringAppKey);
                 using (objUOW as IDisposable)
                     objReference = objUOW.RepositoryReference.GetAll().ToList().Where(p => p.ProfileID.Trim().ToLower() == strProfileID.Trim().ToLower()).FirstOrDefault();
                 objUOW = null;

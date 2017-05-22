@@ -154,7 +154,7 @@ namespace Mugurtham.Service.Areas.Search.Controllers
                         strGender = "male";
                 }
             }
-            ProfileCore objProfileCore = new ProfileCore();
+            ProfileCore objProfileCore = new ProfileCore(ref objLoggedIn);
             ProfileBasicViewEntity objProfileBasicViewEntity = new ProfileBasicViewEntity();
             using (objProfileCore as IDisposable)
                 objProfileCore.GetRecentlyJoinedProfiles(Utility.connectionString(), strGender,
@@ -180,11 +180,11 @@ namespace Mugurtham.Service.Areas.Search.Controllers
                         strGender = "male";
                 }
             }
-            ProfileCore objProfileCore = new ProfileCore();
+            ProfileCore objProfileCore = new ProfileCore(ref objLoggedIn);
             ProfileBasicViewEntity objProfileBasicViewEntity = new ProfileBasicViewEntity();
             using (objProfileCore as IDisposable)
-            {
-                objProfileCore.GetHighlightedProfiles(Utility.connectionString(), strGender,
+            {                
+                objProfileCore.GetHighlightedProfiles(objLoggedIn.ConnectionString, strGender,
                     objLoggedIn.sangamID,
                     ref objProfileBasicViewEntity,
                     ref objLoggedIn
@@ -208,7 +208,7 @@ namespace Mugurtham.Service.Areas.Search.Controllers
                         strGender = "male";
                 }
             }
-            ProfileCore objProfileCore = new ProfileCore();
+            ProfileCore objProfileCore = new ProfileCore(ref objLoggedIn);
             ProfileBasicViewEntity objProfileBasicViewEntity = new ProfileBasicViewEntity();
             using (objProfileCore as IDisposable)
             {
@@ -236,7 +236,7 @@ namespace Mugurtham.Service.Areas.Search.Controllers
                         strGender = "male";
                 }
             }
-            ProfileCore objProfileCore = new ProfileCore();
+            ProfileCore objProfileCore = new ProfileCore(ref objLoggedIn);
             ProfileBasicViewEntity objProfileBasicViewEntity = new ProfileBasicViewEntity();
             using (objProfileCore as IDisposable)
             {
@@ -254,7 +254,7 @@ namespace Mugurtham.Service.Areas.Search.Controllers
         {
             Mugurtham.Core.Login.LoggedInUser objLoggedIn = (Mugurtham.Core.Login.LoggedInUser)Session["LoggedInUser"];
             List<Mugurtham.Core.Profile.Photo.PhotoCoreEntity> objPhotoCoreEntityList = new List<Mugurtham.Core.Profile.Photo.PhotoCoreEntity>();
-            ProfileCore objProfileCore = new ProfileCore();
+            ProfileCore objProfileCore = new ProfileCore(ref objLoggedIn);
             using (objProfileCore as IDisposable)
                 objProfileCore.GetProfilePhotos(ref objPhotoCoreEntityList, objLoggedIn.LoginID);
             objProfileCore = null;
@@ -306,11 +306,12 @@ namespace Mugurtham.Service.Areas.Search.Controllers
         [HttpGet]
         public ActionResult getByProfileID(string ProfileID)
         {
-            ProfileCore objProfileCoreReturn = new ProfileCore();
-            ProfileCore objProfileCore = new ProfileCore();
+            Mugurtham.Core.Login.LoggedInUser objLoggedIn = (Mugurtham.Core.Login.LoggedInUser)Session["LoggedInUser"];
+            ProfileCore objProfileCoreReturn = new ProfileCore(ref objLoggedIn);
+            ProfileCore objProfileCore = new ProfileCore(ref objLoggedIn);
             using (objProfileCore as IDisposable)
             {
-                objProfileCore.GetByProfileID(ProfileID, out objProfileCoreReturn);
+                objProfileCore.GetByProfileID(ProfileID, out objProfileCoreReturn, objLoggedIn);
             }
             objProfileCore = null;
             return this.Json(objProfileCoreReturn, JsonRequestBehavior.AllowGet);

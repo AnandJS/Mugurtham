@@ -10,11 +10,16 @@ namespace Mugurtham.Core.Raasi
 {
     public class RaasiCore
     {
-        public int Add(ref Mugurtham.Core.Raasi.RaasiCoreEntity objRaasiCoreEntity)
+        private Mugurtham.Core.Login.LoggedInUser _objLoggedInUser = null;
+        public RaasiCore(ref Mugurtham.Core.Login.LoggedInUser objLoggedInUser)
+        {
+            _objLoggedInUser = objLoggedInUser;
+        }
+                public int Add(ref Mugurtham.Core.Raasi.RaasiCoreEntity objRaasiCoreEntity)
         {
             try
             {
-                IUnitOfWork objIUnitOfWork = new UnitOfWork();
+                IUnitOfWork objIUnitOfWork = new UnitOfWork(_objLoggedInUser.ConnectionStringAppKey);
                 using (objIUnitOfWork as IDisposable)
                 {
                     Mugurtham.DTO.Profile.Raasi objDTORaasi = new DTO.Profile.Raasi();
@@ -39,7 +44,7 @@ namespace Mugurtham.Core.Raasi
         {
             try
             {
-                IUnitOfWork objIUnitOfWork = new UnitOfWork();
+                IUnitOfWork objIUnitOfWork = new UnitOfWork(_objLoggedInUser.ConnectionStringAppKey);
                 using (objIUnitOfWork as IDisposable)
                 {
                     Mugurtham.DTO.Profile.Raasi objDTORaasi = new DTO.Profile.Raasi();
@@ -66,7 +71,7 @@ namespace Mugurtham.Core.Raasi
             try
             {
                 Mugurtham.DTO.Profile.Raasi objRaasi = new Mugurtham.DTO.Profile.Raasi();
-                IUnitOfWork objUOW = new UnitOfWork();
+                IUnitOfWork objUOW = new UnitOfWork(_objLoggedInUser.ConnectionStringAppKey);
                 using (objUOW as IDisposable)
                     objRaasi = objUOW.RepositoryRaasi.GetAll().ToList().Where(p => p.ProfileID.Trim().ToLower() == strProfileID.Trim().ToLower()).FirstOrDefault();
                 objUOW = null;

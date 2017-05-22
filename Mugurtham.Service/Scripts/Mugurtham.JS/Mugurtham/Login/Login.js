@@ -23,7 +23,9 @@
         $.post("/Home/validateLogin",
 {
     LoginID: $('#LoginID').val(),
-    Password: $('#Password').val()
+    Password: $('#Password').val(),
+    CommunityID: $('#CommunityID').val()
+
 },
 function (data, status) {
     $("#container").unmask();
@@ -34,6 +36,7 @@ function (data, status) {
         if (typeof (Storage) !== "undefined") {
             localStorage.setItem("landingFirstTimeCount", "0");
             localStorage.setItem("LoggedInUserID", $('#LoginID').val());
+            localStorage.setItem("CommunityID", $('#CommunityID').val());
         }
         else {
             toastr.error("Sorry, your browser does not support web storage...");

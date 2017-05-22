@@ -31,9 +31,9 @@ namespace Mugurtham.UOW
         private Mugurtham.Repository.Profile.Photo.IPhoto _IPhoto;
         private Mugurtham.Repository.Profile.Horoscope.IHoroscope _IHoroscope;
 
-        public UnitOfWork()
+        public UnitOfWork(string ConnectionStringAppKey)
         {
-            CreateDbContext();
+            CreateDbContext(ConnectionStringAppKey);
         }
 
         public void commit()
@@ -41,9 +41,9 @@ namespace Mugurtham.UOW
             _DbContext.SaveChanges();
         }
 
-        protected void CreateDbContext()
+        protected void CreateDbContext(string ConnectionStringAppKey)
         {
-            _DbContext = new MugurthamDBContext();
+            _DbContext = new MugurthamDBContext(ConnectionStringAppKey);
 
             // Do NOT enable proxied entities, else serialization fails.
             //if false it will not get the associated certification and skills when we

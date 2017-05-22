@@ -23,8 +23,8 @@ namespace Mugurtham.DAL
          Production Server: data source=(local);initial catalog=VishwakarmaMugurtham;user id=VishwakarmaMugurthamAdmin;password=Swingsys@!1
          */
 
-        public MugurthamDBContext()
-            : base("name=MugurthamConnectionString")
+        public MugurthamDBContext(string ConnectionStringAppKey)
+            : base("name=" + ConnectionStringAppKey)
         {
             Database.SetInitializer<MugurthamDBContext>(null);
         }
@@ -44,7 +44,7 @@ namespace Mugurtham.DAL
         public DbSet<ProfileInterested> ProfileInterested { get; set; }
         public DbSet<Photo> Photo { get; set; }
         public DbSet<Horoscope> Horoscope { get; set; }
-        
+
 
     }
 }

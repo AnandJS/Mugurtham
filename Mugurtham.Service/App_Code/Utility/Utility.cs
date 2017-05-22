@@ -12,7 +12,8 @@ namespace Mugurtham.Service.App_Code.Utility
         {
             /*www.codeproject.com/Articles/420217/DataSet-vs-DataReader*/
             string strConnectionString = string.Empty;
-            strConnectionString = Helpers.ConnectionString;
+            Mugurtham.Core.Login.LoggedInUser objLoggedIn = (Mugurtham.Core.Login.LoggedInUser)HttpContext.Current.Session["LoggedInUser"];
+            strConnectionString = objLoggedIn.ConnectionString;
             return strConnectionString;
         }
 

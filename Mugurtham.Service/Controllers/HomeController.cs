@@ -96,26 +96,37 @@ namespace Mugurtham.Service.Controllers
         {
             int inLoginStatus = 0;
             bool boolLogin = false;
-
-            Mugurtham.Core.User.UserCore objUserCore = new Mugurtham.Core.User.UserCore();
-            using (objUserCore as IDisposable)
+            ConnectionString objConnectionString = new ConnectionString(objUserCoreEntity.CommunityID);
+            using (objConnectionString as IDisposable)
             {
-                inLoginStatus = objUserCore.validateLogin(ref objUserCoreEntity, out boolLogin);
-                if (inLoginStatus == 1)
+                Mugurtham.Core.User.UserCore objUserCore = new Mugurtham.Core.User.UserCore(objConnectionString.AppKeyConnectionString);
+                using (objUserCore as IDisposable)
                 {
-                    objUserCore.createSession(Helpers.primaryKey, objUserCoreEntity.LoginID,
-                                              Request.ServerVariables["REMOTE_ADDR"].ToString());
-                    FormsAuthentication.SetAuthCookie(objUserCoreEntity.LoginID, false);
-                    Session.Timeout = 60;
-                    LoggedInUser objLoggedIn = new LoggedInUser(objUserCoreEntity.LoginID);
-                    Session["LoggedInUser"] = objLoggedIn;
+                    inLoginStatus = objUserCore.validateLogin(ref objUserCoreEntity, out boolLogin);
+                    if (inLoginStatus == 1)
+                    {
+
+                        FormsAuthentication.SetAuthCookie(objUserCoreEntity.LoginID, false);
+                        Session.Timeout = 60;
+                        LoggedInUser objLoggedIn = new LoggedInUser(objUserCoreEntity.LoginID, objUserCoreEntity.CommunityID);
+                        objLoggedIn.CommunityID = objConnectionString.CommunityID;
+                        objLoggedIn.CommunityName = objConnectionString.CommunityName;
+                        objLoggedIn.ConnectionStringAppKey = objConnectionString.AppKeyConnectionString;
+                        objLoggedIn.ConnectionString = objConnectionString.AppConnectionString;
+
+                        Session["LoggedInUser"] = objLoggedIn;
+                        objUserCore.createSession(Helpers.primaryKey, objUserCoreEntity.LoginID,
+                                                  Request.ServerVariables["REMOTE_ADDR"].ToString(),
+                                                  objLoggedIn.ConnectionString);
+                    }
+                    else if (inLoginStatus == 6) // Connection Timed Out
+                    {
+                        objUserCoreEntity.LoginStatus = "6";
+                    }
                 }
-                else if (inLoginStatus == 6) // Connection Timed Out
-                {
-                    objUserCoreEntity.LoginStatus = "6";
-                }
+                objUserCore = null;
             }
-            objUserCore = null;
+            objConnectionString = null;
             return this.Json(objUserCoreEntity);
         }
         [HttpGet]
@@ -123,7 +134,7 @@ namespace Mugurtham.Service.Controllers
         {
             Mugurtham.Core.Login.LoggedInUser objLoggedIn = (Mugurtham.Core.Login.LoggedInUser)Session["LoggedInUser"];
             List<Mugurtham.Core.Dashboard.Sangam.SangamDashboardCoreEntity> objListSangamDashboardCoreEntity = new List<Core.Dashboard.Sangam.SangamDashboardCoreEntity>();
-            SangamDashboardCore objSangamDashboardCore = new SangamDashboardCore();
+            SangamDashboardCore objSangamDashboardCore = new SangamDashboardCore(ref objLoggedIn);
             using (objSangamDashboardCore as IDisposable)
                 objListSangamDashboardCoreEntity = objSangamDashboardCore.GetAll(objLoggedIn.sangamID);
             objSangamDashboardCore = null;

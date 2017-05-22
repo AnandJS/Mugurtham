@@ -19,12 +19,17 @@ namespace Mugurtham.Service.Areas.Profile.Controllers.API
         [HttpPost]
         public void Post([FromBody]CareerCoreEntity objCareerCoreEntity)
         {
-            CareerCore objCareerCore = new CareerCore();
-            using (objCareerCore as IDisposable)
+            Mugurtham.Core.Login.LoggedInUser objLoggedIn = new Core.Login.LoggedInUser(Request.Headers.GetValues("MugurthamUserToken").FirstOrDefault(),
+           Request.Headers.GetValues("CommunityID").FirstOrDefault());
+            using (objLoggedIn as IDisposable)
             {
-                objCareerCore.Add(ref objCareerCoreEntity);
+                CareerCore objCareerCore = new CareerCore(ref objLoggedIn);
+                using (objCareerCore as IDisposable)
+                {
+                    objCareerCore.Add(ref objCareerCoreEntity);
+                }
+                objCareerCore = null;
             }
-            objCareerCore = null;
         }
 
         [HttpGet]
@@ -33,18 +38,25 @@ namespace Mugurtham.Service.Areas.Profile.Controllers.API
             string LoggedInUserID = string.Empty;
             IEnumerable<string> headerValues = Request.Headers.GetValues("MugurthamUserToken");
             LoggedInUserID = headerValues.FirstOrDefault();
-            return Request.CreateResponse(HttpStatusCode.OK, new CareerCore().GetByProfileID(ID, LoggedInUserID), Configuration.Formatters.JsonFormatter);
+            Mugurtham.Core.Login.LoggedInUser objLoggedIn = new Core.Login.LoggedInUser(Request.Headers.GetValues("MugurthamUserToken").FirstOrDefault(),
+           Request.Headers.GetValues("CommunityID").FirstOrDefault());
+            return Request.CreateResponse(HttpStatusCode.OK, new CareerCore(ref objLoggedIn).GetByProfileID(ID, LoggedInUserID), Configuration.Formatters.JsonFormatter);
         }
 
         [HttpPut]
         public void Put([FromBody]CareerCoreEntity objCareerCoreEntity)
         {
-            CareerCore objCareerCore = new CareerCore();
-            using (objCareerCore as IDisposable)
+            Mugurtham.Core.Login.LoggedInUser objLoggedIn = new Core.Login.LoggedInUser(Request.Headers.GetValues("MugurthamUserToken").FirstOrDefault(),
+           Request.Headers.GetValues("CommunityID").FirstOrDefault());
+            using (objLoggedIn as IDisposable)
             {
-                objCareerCore.Edit(ref objCareerCoreEntity);
+                CareerCore objCareerCore = new CareerCore(ref objLoggedIn);
+                using (objCareerCore as IDisposable)
+                {
+                    objCareerCore.Edit(ref objCareerCoreEntity);
+                }
+                objCareerCore = null;
             }
-            objCareerCore = null;
         }
     }
 }

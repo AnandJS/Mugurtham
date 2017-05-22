@@ -28,7 +28,12 @@ var ControllerSearchAllProfiles = angular.module('MugurthamApp').controller('Con
                 var strGetURL = "Search/Search/getAllProfilesBySangam";
                 $("#divContainer").mask("Searching profiles please wait...");
                 $http({
-                    method: "GET", url: strGetURL
+                    method: "GET", url: strGetURL,
+                    headers: {
+                        'content-Type': 'application/x-www-form-urlencoded',
+                        "MugurthamUserToken": getLoggedInUserID(),
+                        "CommunityID": getLoggedInUserCommunityID()
+                    }
                 }).
             success(function (data, status, headers, config) {
                 $("#divContainer").unmask();

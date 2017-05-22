@@ -17,10 +17,15 @@ namespace Mugurtham.Service.Controllers
         public HttpResponseMessage Get()
         {
             Mugurtham.Core.Lookup.LookupEntity objLookupEntity = new Core.Lookup.LookupEntity();
-            Mugurtham.Core.Lookup.LookupCore objLookupCore = new Core.Lookup.LookupCore();
-            using (objLookupCore as IDisposable)
-                objLookupCore.getLookup(ref objLookupEntity);
-            objLookupCore = null;
+            Mugurtham.Core.Login.LoggedInUser objLoggedIn = new Core.Login.LoggedInUser(Request.Headers.GetValues("MugurthamUserToken").FirstOrDefault(),
+                Request.Headers.GetValues("CommunityID").FirstOrDefault());
+            using (objLoggedIn as IDisposable)
+            {
+                Mugurtham.Core.Lookup.LookupCore objLookupCore = new Core.Lookup.LookupCore(ref objLoggedIn);
+                using (objLookupCore as IDisposable)
+                    objLookupCore.getLookup(ref objLookupEntity);
+                objLookupCore = null;
+            }
             return Request.CreateResponse(HttpStatusCode.OK, objLookupEntity, Configuration.Formatters.JsonFormatter);
         }
     }

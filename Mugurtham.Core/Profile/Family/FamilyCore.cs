@@ -10,11 +10,18 @@ namespace Mugurtham.Core.Family
 {
     public class FamilyCore
     {
+        private Mugurtham.Core.Login.LoggedInUser _objLoggedInUser = null;
+
+        public FamilyCore(ref Mugurtham.Core.Login.LoggedInUser objLoggedInUser)
+        {
+            _objLoggedInUser = objLoggedInUser;
+        }
+
         public int Add(ref Mugurtham.Core.Family.FamilyCoreEntity objFamilyCoreEntity)
         {
             try
             {
-                IUnitOfWork objIUnitOfWork = new UnitOfWork();
+                IUnitOfWork objIUnitOfWork = new UnitOfWork(_objLoggedInUser.ConnectionStringAppKey);
                 using (objIUnitOfWork as IDisposable)
                 {
                     Mugurtham.DTO.Profile.Family objDTOFamily = new DTO.Profile.Family();
@@ -39,7 +46,7 @@ namespace Mugurtham.Core.Family
         {
             try
             {
-                IUnitOfWork objIUnitOfWork = new UnitOfWork();
+                IUnitOfWork objIUnitOfWork = new UnitOfWork(_objLoggedInUser.ConnectionStringAppKey);
                 using (objIUnitOfWork as IDisposable)
                 {
                     Mugurtham.DTO.Profile.Family objDTOFamily = new DTO.Profile.Family();
@@ -62,7 +69,7 @@ namespace Mugurtham.Core.Family
 
         public FamilyCoreEntity GetByProfileID(string strProfileID, string strLoggedInUserID)
         {
-            Profile.ProfileSecurity objProfileSecurity = new Profile.ProfileSecurity();
+            Profile.ProfileSecurity objProfileSecurity = new Profile.ProfileSecurity(ref _objLoggedInUser);
             using (objProfileSecurity as IDisposable)
             {
                 if (!string.IsNullOrEmpty(strLoggedInUserID))
@@ -83,7 +90,7 @@ namespace Mugurtham.Core.Family
             try
             {
                 Mugurtham.DTO.Profile.Family objFamily = new Mugurtham.DTO.Profile.Family();
-                IUnitOfWork objUOW = new UnitOfWork();
+                IUnitOfWork objUOW = new UnitOfWork(_objLoggedInUser.ConnectionStringAppKey);
                 using (objUOW as IDisposable)
                     objFamily = objUOW.RepositoryFamily.GetAll().ToList().Where(p => p.ProfileID.Trim().ToLower() == strProfileID.Trim().ToLower()).FirstOrDefault();
                 objUOW = null;

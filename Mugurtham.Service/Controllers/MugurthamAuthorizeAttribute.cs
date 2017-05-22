@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using Mugurtham.Core.Login;
 
 
+
 namespace Mugurtham.Service.Controllers
 {
     public class MugurthamAuthorizeAttribute : System.Web.Mvc.AuthorizeAttribute
@@ -19,7 +20,8 @@ namespace Mugurtham.Service.Controllers
         protected override bool AuthorizeCore(HttpContextBase httpContext)
         {
             bool authorize = false;
-            Mugurtham.Core.Login.LoggedInUser objLoggedIn = new LoggedInUser(HttpContext.Current.User.Identity.Name);
+            //Mugurtham.Core.Login.LoggedInUser objLoggedIn = new LoggedInUser(HttpContext.Current.User.Identity.Name);
+            Mugurtham.Core.Login.LoggedInUser objLoggedIn = (Mugurtham.Core.Login.LoggedInUser)HttpContext.Current.Session["LoggedInUser"];
             using (objLoggedIn as IDisposable)
             {
                 foreach (var strRoleID in arrAuthourizedRoles)

@@ -30,7 +30,9 @@ var ControllerSearchProfileID = angular.module('MugurthamApp').controller('Contr
                     method: "GET", url: '/SearchAPI/AllProfilesAPI/getByProfileID/' + $scope.frmData[0].ProfileID.toLowerCase(),
                     params: { "MugurthamUserToken": getLoggedInUserID() },
                     headers: {
-                        "MugurthamUserToken": getLoggedInUserID()
+                        'content-Type': 'application/x-www-form-urlencoded',
+                        "MugurthamUserToken": getLoggedInUserID(),
+                        "CommunityID": getLoggedInUserCommunityID()
                     }
                 }).
 success(function (data, status, headers, config) {

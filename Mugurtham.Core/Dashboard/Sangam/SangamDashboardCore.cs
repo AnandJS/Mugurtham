@@ -12,13 +12,19 @@ namespace Mugurtham.Core.Dashboard.Sangam
 {
     public class SangamDashboardCore
     {
+        private Mugurtham.Core.Login.LoggedInUser _objLoggedInUser = null;
+
+        public SangamDashboardCore(ref Mugurtham.Core.Login.LoggedInUser objLoggedInUser)
+        {
+            objLoggedInUser = _objLoggedInUser;
+        }
         public List<SangamDashboardCoreEntity> GetAll(string strSangamID)
         {
             List<SangamDashboardCoreEntity> objListSangamDashboardCoreEntity = new List<SangamDashboardCoreEntity>();
             try
             {
                 List<Mugurtham.DTO.Dashboard.Sangam.SangamDashboardChart> objListSangamDashboardChart = new List<Mugurtham.DTO.Dashboard.Sangam.SangamDashboardChart>();
-                IUnitOfWork objUOW = new UnitOfWork();
+                IUnitOfWork objUOW = new UnitOfWork(_objLoggedInUser.ConnectionStringAppKey);
                 using (objUOW as IDisposable)
                     objListSangamDashboardChart = objUOW.RepositorySangamDashboardChart.getSangamDashboardChartData(strSangamID).ToList();
                 objUOW = null;

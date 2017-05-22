@@ -31,7 +31,7 @@ var ControllerSearchGeneral = angular.module('MugurthamApp').controller('Control
             $scope.arrStar = ['Anusham', 'Aswini', 'Avittam', 'Aayilyam', 'Bharani', 'Chithirai', 'Hastham', 'Karthigai', 'Kettai', 'Makam', 'Moolam', 'Mrigasheersham', 'Pooraadam', 'Pooram', 'Poorattathi', 'Poosam', 'Punarpoosam', 'Revathi', 'Rohini', 'Sadayam', 'Swaathi', 'Thiruvaathirai', 'Thiruvonam', 'Uthiraadam', 'Uthiram', 'Uthirattathi', 'Visaakam'];
             $scope.arrSubCaste = ['Avusula', 'Kai Kolar', 'Kammari', 'Kanchari', 'Shipi', 'Vadrangi', 'Kamalar', 'Achari'];
             $scope.arrFromAge = ['18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46', '47', '48', '49', '50'];
-            $scope.arrToAge = ['18', '19', '20', '21', '22', '23', '24', '25', '26','27', '28', '29', '30', '31', '32', '33', '34', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46', '47', '48', '49', '50'];
+            $scope.arrToAge = ['18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46', '47', '48', '49', '50'];
 
 
             //===================================================
@@ -40,7 +40,11 @@ var ControllerSearchGeneral = angular.module('MugurthamApp').controller('Control
             $scope.getLookup = function () {
                 var strGetURL = '/Lookup/LookupAPI';
                 $http({
-                    method: "GET", url: strGetURL
+                    method: "GET", url: strGetURL,
+                    headers: {
+                        "MugurthamUserToken": getLoggedInUserID(),
+                        "CommunityID": getLoggedInUserCommunityID()
+                    }
                 }).
             success(function (data, status, headers, config) {
                 $scope.arrSangamID = data.SangamCoreEntity;
@@ -57,14 +61,14 @@ var ControllerSearchGeneral = angular.module('MugurthamApp').controller('Control
             //AJAX GET REQUEST - GETTING ALL PROFILES
             //===================================================
             $scope.getAllGeneralSearchProfiles = function () {
-              /*  if (typeof (Storage) !== "undefined") {
-                    if ((!sessionStorage.getItem('AllProfiles')))
-                        $scope.getAllGeneralSearchProfilesfromAPI();
-                    else
-                        $scope.getAllGeneralSearchProfilesfromSession();
-                }
-                else
-                    $scope.getAllGeneralSearchProfilesfromAPI();*/
+                /*  if (typeof (Storage) !== "undefined") {
+                      if ((!sessionStorage.getItem('AllProfiles')))
+                          $scope.getAllGeneralSearchProfilesfromAPI();
+                      else
+                          $scope.getAllGeneralSearchProfilesfromSession();
+                  }
+                  else
+                      $scope.getAllGeneralSearchProfilesfromAPI();*/
                 $scope.initData();
             }
 

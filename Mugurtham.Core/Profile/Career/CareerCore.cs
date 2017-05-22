@@ -10,11 +10,18 @@ namespace Mugurtham.Core.Career
 {
     public class CareerCore
     {
+        private Mugurtham.Core.Login.LoggedInUser _objLoggedInUser = null;
+
+        public CareerCore(ref Mugurtham.Core.Login.LoggedInUser objLoggedInUser)
+        {
+            _objLoggedInUser = objLoggedInUser;
+        }
+
         public int Add(ref Mugurtham.Core.Career.CareerCoreEntity objCareerCoreEntity)
         {
             try
             {
-                IUnitOfWork objIUnitOfWork = new UnitOfWork();
+                IUnitOfWork objIUnitOfWork = new UnitOfWork(_objLoggedInUser.ConnectionStringAppKey);
                 using (objIUnitOfWork as IDisposable)
                 {
                     Mugurtham.DTO.Profile.Career objDTOCareer = new DTO.Profile.Career();
@@ -39,7 +46,7 @@ namespace Mugurtham.Core.Career
         {
             try
             {
-                IUnitOfWork objIUnitOfWork = new UnitOfWork();
+                IUnitOfWork objIUnitOfWork = new UnitOfWork(_objLoggedInUser.ConnectionStringAppKey);
                 using (objIUnitOfWork as IDisposable)
                 {
                     Mugurtham.DTO.Profile.Career objDTOCareer = new DTO.Profile.Career();
@@ -62,7 +69,7 @@ namespace Mugurtham.Core.Career
 
         public CareerCoreEntity GetByProfileID(string strProfileID, string strLoggedInUserID)
         {
-            Profile.ProfileSecurity objProfileSecurity = new Profile.ProfileSecurity();
+            Profile.ProfileSecurity objProfileSecurity = new Profile.ProfileSecurity(ref _objLoggedInUser);
             using (objProfileSecurity as IDisposable)
             {
                 if (!string.IsNullOrEmpty(strLoggedInUserID))
@@ -83,7 +90,7 @@ namespace Mugurtham.Core.Career
             try
             {
                 Mugurtham.DTO.Profile.Career objCareer = new Mugurtham.DTO.Profile.Career();
-                IUnitOfWork objUOW = new UnitOfWork();
+                IUnitOfWork objUOW = new UnitOfWork(_objLoggedInUser.ConnectionStringAppKey);
                 using (objUOW as IDisposable)
                     objCareer = objUOW.RepositoryCareer.GetAll().ToList().Where(p => p.ProfileID.Trim().ToLower() == strProfileID.Trim().ToLower()).FirstOrDefault();
                 objUOW = null;

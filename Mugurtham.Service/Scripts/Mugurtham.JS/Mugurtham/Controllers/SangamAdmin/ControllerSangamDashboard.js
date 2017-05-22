@@ -98,7 +98,12 @@ var ControllerSangamDashboard = angular.module('MugurthamApp').controller('Contr
                 var strGetURL = '/Home/getSangamDashBoardChart';
 
                 $http({
-                    method: "GET", url: strGetURL
+                    method: "GET", url: strGetURL,
+                    headers: {
+                        'content-Type': 'application/x-www-form-urlencoded',
+                        "MugurthamUserToken": getLoggedInUserID(),
+                        "CommunityID": getLoggedInUserCommunityID()
+                    }
                 }).
                 success(function (data, status, headers, config) {
                     var strChartData = [];
@@ -125,7 +130,12 @@ var ControllerSangamDashboard = angular.module('MugurthamApp').controller('Contr
             $scope.getDashboardData = function () {
                 var strGetURL = '/SangamAdmin/SangamAdmin/getSangamDashboardData';
                 $http({
-                    method: "GET", url: strGetURL
+                    method: "GET", url: strGetURL,
+                    headers: {
+                        'content-Type': 'application/x-www-form-urlencoded',
+                        "MugurthamUserToken": getLoggedInUserID(),
+                        "CommunityID": getLoggedInUserCommunityID()
+                    }
                 }).
                 success(function (data, status, headers, config) {
                     $scope.LoggedInCount = data.TotalLogin;

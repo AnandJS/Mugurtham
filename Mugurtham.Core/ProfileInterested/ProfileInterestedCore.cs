@@ -16,6 +16,14 @@ namespace Mugurtham.Core.ProfileInterested
 {
     public class ProfileInterestedCore
     {
+        //private string _objLoggedInUser.ConnectionString = string.Empty;
+        Mugurtham.Core.Login.LoggedInUser _objLoggedInUser = null;
+
+        public ProfileInterestedCore(ref Mugurtham.Core.Login.LoggedInUser objLoggedInUser)
+        {
+            _objLoggedInUser = objLoggedInUser;
+        }
+
         public int Add(ref Mugurtham.Core.ProfileInterested.ProfileInterestedCoreEntity objProfileInterestedCoreEntity)
         {
             try
@@ -23,7 +31,7 @@ namespace Mugurtham.Core.ProfileInterested
                 string strMappingID = string.Empty;
                 string strViewerID = objProfileInterestedCoreEntity.ViewerID;
                 string strInterestedInID = objProfileInterestedCoreEntity.InterestedInID;
-                IUnitOfWork objIUnitOfWork = new UnitOfWork();
+                IUnitOfWork objIUnitOfWork = new UnitOfWork(_objLoggedInUser.ConnectionStringAppKey);
                 using (objIUnitOfWork as IDisposable)
                 {
                     Mugurtham.DTO.ProfileInterested.ProfileInterested objDTOProfileInterested = new DTO.ProfileInterested.ProfileInterested();
@@ -45,7 +53,7 @@ namespace Mugurtham.Core.ProfileInterested
                     }
                     if (objProfileInterested.Count == 0)
                     {
-                        IUnitOfWork objIUnitOfWorkAdd = new UnitOfWork();
+                        IUnitOfWork objIUnitOfWorkAdd = new UnitOfWork(_objLoggedInUser.ConnectionStringAppKey);
                         using (objIUnitOfWorkAdd as IDisposable)
                         {
                             objIUnitOfWorkAdd.RepositoryProfileInterested.Add(objDTOProfileInterested);
@@ -67,7 +75,7 @@ namespace Mugurtham.Core.ProfileInterested
         {
             try
             {
-                IUnitOfWork objIUnitOfWork = new UnitOfWork();
+                IUnitOfWork objIUnitOfWork = new UnitOfWork(_objLoggedInUser.ConnectionStringAppKey);
                 using (objIUnitOfWork as IDisposable)
                 {
                     Mugurtham.DTO.ProfileInterested.ProfileInterested objProfileInterested = new DTO.ProfileInterested.ProfileInterested();
@@ -79,7 +87,7 @@ namespace Mugurtham.Core.ProfileInterested
                     }
                     if (objProfileInterested != null)
                     {
-                        IUnitOfWork objIUnitOfWorkAdd = new UnitOfWork();
+                        IUnitOfWork objIUnitOfWorkAdd = new UnitOfWork(_objLoggedInUser.ConnectionStringAppKey);
                         using (objIUnitOfWorkAdd as IDisposable)
                         {
                             objIUnitOfWorkAdd.RepositoryProfileInterested.Delete(objProfileInterested);
@@ -277,7 +285,7 @@ namespace Mugurtham.Core.ProfileInterested
             bool boolInterestedProfile = false;
             try
             {
-                IUnitOfWork objIUnitOfWork = new UnitOfWork();
+                IUnitOfWork objIUnitOfWork = new UnitOfWork(_objLoggedInUser.ConnectionStringAppKey);
                 using (objIUnitOfWork as IDisposable)
                 {
                     Mugurtham.DTO.ProfileInterested.ProfileInterested objProfileInterested = new DTO.ProfileInterested.ProfileInterested();

@@ -30,7 +30,7 @@ var ControllerRole = angular.module('MugurthamApp').controller('ControllerRole',
             $scope.frmData = []; // To store the values of the controls in form
             // Form Control Variables            
             $scope.ID = '';
-            $scope.Name = '';            
+            $scope.Name = '';
             $scope.Description = '';
             //========================================
             //GLOBAL EVENT HANDLER FOR THIS CONTROLLER
@@ -49,7 +49,7 @@ var ControllerRole = angular.module('MugurthamApp').controller('ControllerRole',
             //=====================================
             $scope.initFormData = function () {
                 $scope.Name = $scope.frmData[0].Name;
-                $scope.Description = $scope.frmData[0].Description;                
+                $scope.Description = $scope.frmData[0].Description;
             }
 
             //===================================================
@@ -60,9 +60,13 @@ var ControllerRole = angular.module('MugurthamApp').controller('ControllerRole',
                     method: "post", url: '/Role/RoleAPI', data: $.param({
                         Name: $scope.frmData[0].Name,
                         ID: $scope.frmData[0].ID,
-                        Description: $scope.frmData[0].Description                        
+                        Description: $scope.frmData[0].Description
                     }),
-                    headers: { 'content-Type': 'application/x-www-form-urlencoded' }
+                    headers: {
+                        'content-Type': 'application/x-www-form-urlencoded',
+                        "MugurthamUserToken": getLoggedInUserID(),
+                        "CommunityID": getLoggedInUserCommunityID()
+                    }
                 }).
             success(function (data, status, headers, config) {
                 NotifySuccessStatus('11');
@@ -79,7 +83,12 @@ var ControllerRole = angular.module('MugurthamApp').controller('ControllerRole',
             $scope.getRoleByID = function () {
                 var strGetURL = '/Role/RoleAPI/' + $scope.globalRoleID;
                 $http({
-                    method: "GET", url: strGetURL
+                    method: "GET", url: strGetURL,
+                    headers: {
+                        'content-Type': 'application/x-www-form-urlencoded',
+                        "MugurthamUserToken": getLoggedInUserID(),
+                        "CommunityID": getLoggedInUserCommunityID()
+                    }
                 }).
             success(function (data, status, headers, config) {
                 $scope.frmData.push({
@@ -103,7 +112,11 @@ var ControllerRole = angular.module('MugurthamApp').controller('ControllerRole',
                         ID: $scope.frmData[0].ID,
                         Description: $scope.frmData[0].Description
                     }),
-                    headers: { 'content-Type': 'application/x-www-form-urlencoded' }
+                    headers: {
+                        'content-Type': 'application/x-www-form-urlencoded',
+                        "MugurthamUserToken": getLoggedInUserID(),
+                        "CommunityID": getLoggedInUserCommunityID()
+                    }
                 }).
             success(function (data, status, headers, config) {
                 NotifySuccessStatus('12');
@@ -119,7 +132,12 @@ var ControllerRole = angular.module('MugurthamApp').controller('ControllerRole',
             $scope.getAllRoles = function () {
                 $("#divContainer").mask("Loading all roles please wait...");
                 $http({
-                    method: "GET", url: '/Role/RoleAPI'
+                    method: "GET", url: '/Role/RoleAPI',
+                    headers: {
+                        'content-Type': 'application/x-www-form-urlencoded',
+                        "MugurthamUserToken": getLoggedInUserID(),
+                        "CommunityID": getLoggedInUserCommunityID()
+                    }
                 }).
             success(function (data, status, headers, config) {
                 $("#divContainer").unmask();

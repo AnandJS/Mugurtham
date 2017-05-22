@@ -10,11 +10,16 @@ namespace Mugurtham.Core.Amsam
 {
     public class AmsamCore
     {
+        private Mugurtham.Core.Login.LoggedInUser _objLoggedInUser = null;
+        public AmsamCore(ref Mugurtham.Core.Login.LoggedInUser objLoggedInUser)
+        {
+            _objLoggedInUser = objLoggedInUser;
+        }
         public int Add(ref Mugurtham.Core.Amsam.AmsamCoreEntity objAmsamCoreEntity)
         {
             try
             {
-                IUnitOfWork objIUnitOfWork = new UnitOfWork();
+                IUnitOfWork objIUnitOfWork = new UnitOfWork(_objLoggedInUser.ConnectionStringAppKey);
                 using (objIUnitOfWork as IDisposable)
                 {
                     Mugurtham.DTO.Profile.Amsam objDTOAmsam = new DTO.Profile.Amsam();
@@ -38,7 +43,7 @@ namespace Mugurtham.Core.Amsam
         {
             try
             {
-                IUnitOfWork objIUnitOfWork = new UnitOfWork();
+                IUnitOfWork objIUnitOfWork = new UnitOfWork(_objLoggedInUser.ConnectionStringAppKey);
                 using (objIUnitOfWork as IDisposable)
                 {
                     Mugurtham.DTO.Profile.Amsam objDTOAmsam = new DTO.Profile.Amsam();
@@ -64,7 +69,7 @@ namespace Mugurtham.Core.Amsam
             try
             {
                 Mugurtham.DTO.Profile.Amsam objAmsam = new Mugurtham.DTO.Profile.Amsam();
-                IUnitOfWork objUOW = new UnitOfWork();
+                IUnitOfWork objUOW = new UnitOfWork(_objLoggedInUser.ConnectionStringAppKey);
                 using (objUOW as IDisposable)
                     objAmsam = objUOW.RepositoryAmsam.GetAll().ToList().Where(p => p.ProfileID.Trim().ToLower() == strProfileID.Trim().ToLower()).FirstOrDefault();
                 objUOW = null;

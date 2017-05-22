@@ -10,12 +10,19 @@ namespace Mugurtham.Core.Role
 {
     public class RoleCore
     {
+        private Mugurtham.Core.Login.LoggedInUser _objLoggedInUser = null;
+
+        public RoleCore(ref Mugurtham.Core.Login.LoggedInUser objLoggedInUser)
+        {
+            _objLoggedInUser = objLoggedInUser;
+        }
+
         public int Add(ref Mugurtham.Core.Role.RoleCoreEntity objRoleCoreEntity, out string strRoleID)
         {
             strRoleID = Helpers.primaryKey;
             try
             {
-                IUnitOfWork objIUnitOfWork = new UnitOfWork();
+                IUnitOfWork objIUnitOfWork = new UnitOfWork(_objLoggedInUser.ConnectionStringAppKey);
                 using (objIUnitOfWork as IDisposable)
                 {
                     Mugurtham.DTO.Role.Role objDTORole = new DTO.Role.Role();
@@ -41,7 +48,7 @@ namespace Mugurtham.Core.Role
         {
             try
             {
-                IUnitOfWork objIUnitOfWork = new UnitOfWork();
+                IUnitOfWork objIUnitOfWork = new UnitOfWork(_objLoggedInUser.ConnectionStringAppKey);
                 using (objIUnitOfWork as IDisposable)
                 {
                     Mugurtham.DTO.Role.Role objDTORole = new DTO.Role.Role();
@@ -68,7 +75,7 @@ namespace Mugurtham.Core.Role
             try
             {
                 Mugurtham.DTO.Role.Role objSangam = new Mugurtham.DTO.Role.Role();
-                IUnitOfWork objUOW = new UnitOfWork();
+                IUnitOfWork objUOW = new UnitOfWork(_objLoggedInUser.ConnectionStringAppKey);
                 using (objUOW as IDisposable)
                     objSangam = objUOW.RepositoryRole.GetAll().ToList().Where(p => p.ID.Trim().ToLower() == strID.Trim().ToLower()).FirstOrDefault();
                 objUOW = null;
@@ -92,7 +99,7 @@ namespace Mugurtham.Core.Role
         {
             try
             {
-                IUnitOfWork objIUnitOfWork = new UnitOfWork();
+                IUnitOfWork objIUnitOfWork = new UnitOfWork(_objLoggedInUser.ConnectionStringAppKey);
                 using (objIUnitOfWork as IDisposable)
                 {
                     foreach (Mugurtham.DTO.Role.Role objSangam in objIUnitOfWork.RepositoryRole.GetAll().ToList().OrderBy(x => x.Name))

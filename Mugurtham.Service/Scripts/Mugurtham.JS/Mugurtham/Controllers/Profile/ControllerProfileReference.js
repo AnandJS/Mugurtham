@@ -63,7 +63,8 @@ var ControllerProfileReference = angular.module('MugurthamApp').controller('Cont
                     }),
                     headers: {
                         'content-Type': 'application/x-www-form-urlencoded',
-                        "MugurthamUserToken": getLoggedInUserID()
+                        "MugurthamUserToken": getLoggedInUserID(),
+                        "CommunityID": getLoggedInUserCommunityID()
                     }
                 }).
             success(function (data, status, headers, config) {
@@ -83,7 +84,9 @@ var ControllerProfileReference = angular.module('MugurthamApp').controller('Cont
                 $http({
                     method: "GET", url: strGetURL,
                     headers: {
-                        "MugurthamUserToken": getLoggedInUserID()
+                        'content-Type': 'application/x-www-form-urlencoded',
+                        "MugurthamUserToken": getLoggedInUserID(),
+                        "CommunityID": getLoggedInUserCommunityID()
                     }
                 }).
             success(function (data, status, headers, config) {
@@ -110,7 +113,8 @@ var ControllerProfileReference = angular.module('MugurthamApp').controller('Cont
                     }),
                     headers: {
                         'content-Type': 'application/x-www-form-urlencoded',
-                        "MugurthamUserToken": getLoggedInUserID()
+                        "MugurthamUserToken": getLoggedInUserID(),
+                        "CommunityID": getLoggedInUserCommunityID()
                     }
                 }).
             success(function (data, status, headers, config) {
