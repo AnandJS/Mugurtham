@@ -113,6 +113,7 @@ var ControllerRole = angular.module('MugurthamApp').controller('ControllerRole',
                         Description: $scope.frmData[0].Description
                     }),
                     headers: {
+                        'content-Type': 'application/x-www-form-urlencoded',
                         "MugurthamUserToken": getLoggedInUserID(),
                         "CommunityID": getLoggedInUserCommunityID()
                     }

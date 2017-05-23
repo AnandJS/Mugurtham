@@ -207,6 +207,7 @@ var ControllerUser = angular.module('MugurthamApp').controller('ControllerUser',
                         PaymentDate: $scope.PaymentDate
                     }),
                     headers: {
+                        'content-Type': 'application/x-www-form-urlencoded',
                         "MugurthamUserToken": getLoggedInUserID(),
                         "CommunityID": getLoggedInUserCommunityID()
                     }
@@ -306,6 +307,7 @@ var ControllerUser = angular.module('MugurthamApp').controller('ControllerUser',
                         PaymentDate: $scope.userFormData[0].PaymentDate
                     }),
                     headers: {
+                        'content-Type': 'application/x-www-form-urlencoded',
                         "MugurthamUserToken": getLoggedInUserID(),
                         "CommunityID": getLoggedInUserCommunityID()
                     }
