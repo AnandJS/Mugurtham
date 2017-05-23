@@ -112,7 +112,6 @@ var ControllerSangam = angular.module('MugurthamApp').controller('ControllerSang
                 $http({
                     method: "GET", url: strGetURL,
                     headers: {
-                        'content-Type': 'application/x-www-form-urlencoded',
                         "MugurthamUserToken": getLoggedInUserID(),
                         "CommunityID": getLoggedInUserCommunityID()
                     }
@@ -158,7 +157,6 @@ var ControllerSangam = angular.module('MugurthamApp').controller('ControllerSang
                         MugurthamSPOC: $scope.frmData[0].MugurthamSPOC
                     }),
                     headers: {
-                        'content-Type': 'application/x-www-form-urlencoded',
                         "MugurthamUserToken": getLoggedInUserID(),
                         "CommunityID": getLoggedInUserCommunityID()
                     }
@@ -179,7 +177,6 @@ var ControllerSangam = angular.module('MugurthamApp').controller('ControllerSang
                 $http({
                     method: "GET", url: '/SangamAPI/SangamAPI/GetAllWithoutRestrictions',
                     headers: {
-                        'content-Type': 'application/x-www-form-urlencoded',
                         "MugurthamUserToken": getLoggedInUserID(),
                         "CommunityID": getLoggedInUserCommunityID()
                     }

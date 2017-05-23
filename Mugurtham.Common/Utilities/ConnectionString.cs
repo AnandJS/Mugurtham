@@ -44,6 +44,18 @@ namespace Mugurtham.Common.Utilities
                     _AppKeyConnectionstring = "thevar";
                     _Connectionstring = System.Configuration.ConfigurationManager.ConnectionStrings[_AppKeyConnectionstring].ConnectionString;
                 }
+                else if (_CommunityID == "4")
+                {
+                    _CommunityName = "vishwakarma";
+                    _AppKeyConnectionstring = "vishwakarma";
+                    _Connectionstring = System.Configuration.ConfigurationManager.ConnectionStrings[_AppKeyConnectionstring].ConnectionString;
+                }
+                else if (_CommunityID == "0")
+                {
+                    _CommunityName = "vishwakarmadev";
+                    _AppKeyConnectionstring = "vishwakarmadev";
+                    _Connectionstring = System.Configuration.ConfigurationManager.ConnectionStrings[_AppKeyConnectionstring].ConnectionString;
+                }
             }
             catch (Exception objEx)
             {

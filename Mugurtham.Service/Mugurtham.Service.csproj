@@ -264,6 +264,7 @@
     <Content Include="Areas\HomePage\images\slider\mugurtham_02.jpg" />
     <Content Include="Areas\HomePage\images\slider\mugurtham_14.png" />
     <Content Include="Areas\HomePage\images\slider\banner.jpg" />
+    <Content Include="Areas\HomePage\images\slider\pic2.png" />
     <Content Include="Areas\HomePage\images\stage-decor.jpg" />
     <Content Include="Areas\HomePage\images\test-1.jpg" />
     <Content Include="Areas\HomePage\images\test-2.jpg" />
@@ -324,6 +325,7 @@
     <Content Include="Images\Mugurtham\calendar.gif" />
     <Content Include="Images\Mugurtham\Flag.jpg" />
     <Content Include="Images\Mugurtham\General\like.png" />
+    <Content Include="Images\Mugurtham\General\logo.png" />
     <Content Include="Images\Mugurtham\General\Mugurtham_01.jpg" />
     <Content Include="Images\Mugurtham\General\Mugurtham_02.jpg" />
     <Content Include="Images\Mugurtham\General\View.png" />

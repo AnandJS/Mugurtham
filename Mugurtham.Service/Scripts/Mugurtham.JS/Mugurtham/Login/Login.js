@@ -52,8 +52,10 @@ function (data, status) {
             homePagePath = '/' + data.HomePagePath;
         else if (window.location.href.indexOf('Home') !== -1)
             homePagePath = '/' + data.HomePagePath;
-        else
-            homePagePath = '/Mugurtham#' + window.location.href.split('/Mugurtham/')[1];
+        else {
+            //homePagePath = '/Mugurtham#' + window.location.href.split('/Mugurtham/')[1];
+            homePagePath = '/' + data.HomePagePath;
+        }
 
         window.location = homePagePath;
     }

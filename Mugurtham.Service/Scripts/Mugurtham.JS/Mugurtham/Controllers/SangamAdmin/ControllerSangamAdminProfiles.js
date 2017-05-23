@@ -30,7 +30,6 @@ var ControllerSearchAllProfiles = angular.module('MugurthamApp').controller('Con
                 $http({
                     method: "GET", url: strGetURL,
                     headers: {
-                        'content-Type': 'application/x-www-form-urlencoded',
                         "MugurthamUserToken": getLoggedInUserID(),
                         "CommunityID": getLoggedInUserCommunityID()
                     }

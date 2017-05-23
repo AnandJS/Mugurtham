@@ -164,7 +164,6 @@ var ControllerProfileFamily = angular.module('MugurthamApp').controller('Control
                 $http({
                     method: "GET", url: strGetURL,
                     headers: {
-                        'content-Type': 'application/x-www-form-urlencoded',
                         "MugurthamUserToken": getLoggedInUserID(),
                         "CommunityID": getLoggedInUserCommunityID()
                     }

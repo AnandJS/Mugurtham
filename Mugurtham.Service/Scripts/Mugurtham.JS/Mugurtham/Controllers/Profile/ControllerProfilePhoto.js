@@ -39,7 +39,6 @@ var ControllerProfilePhoto = angular.module('MugurthamApp').controller('Controll
                     method: "GET", url: '/SearchAPI/AllProfilesAPI/getByProfileID/' + $rootScope.globalProfileID,
                     params: { "MugurthamUserToken": getLoggedInUserID() },
                     headers: {
-                        'content-Type': 'application/x-www-form-urlencoded',
                         "MugurthamUserToken": getLoggedInUserID(),
                         "CommunityID": getLoggedInUserCommunityID()
                     }
@@ -119,7 +118,6 @@ success(function (data, status, headers, config) {
                     method: "GET", url: '/Profile/Profile/RemoveProfilePic/' + strPhotoID,
                     headers: {
 
-                        'content-Type': 'application/x-www-form-urlencoded',
                         "MugurthamUserToken": getLoggedInUserID(),
                         "CommunityID": getLoggedInUserCommunityID()
                     }
