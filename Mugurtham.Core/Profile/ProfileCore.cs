@@ -109,7 +109,7 @@ namespace Mugurtham.Core.Profile.API
                         objUserCoreEntity.Password = strProfileID; // Helpers.passwordGenerator();
                         objUserCoreEntity.SangamID = objLoggedIn.sangamID;
                         objUserCoreEntity.RoleID = Constants.RoleIDForUserProfile;
-                        objUserCoreEntity.ThemeID = Constants.ThemeBootstrap;
+                        objUserCoreEntity.ThemeID = Constants.ThemeFlatly;
                         objUserCoreEntity.LocaleID = Constants.LocaleUSEnglish;
                         objUserCoreEntity.IsActivated = "1"; // Activated by default
                         objUserCoreEntity.HomePagePath = Constants.HomePagePathForProfileUser;

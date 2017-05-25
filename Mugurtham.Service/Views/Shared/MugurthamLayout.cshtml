@@ -459,7 +459,8 @@
     <script type="text/javascript">
         $(document).ready(function () {
             landingPageCounter();
-            setTimeout(setUserStyleLocale, 1000, '@objLoggedIn.themeID');
+            setUserStyleLocale('@objLoggedIn.themeID');
+            //setTimeout(setUserStyleLocale, 1000, '@objLoggedIn.themeID');
 
             // ===== Scroll to Top ====
             $(window).scroll(function () {

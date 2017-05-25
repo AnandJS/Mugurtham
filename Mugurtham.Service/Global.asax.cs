@@ -17,6 +17,14 @@ namespace Mugurtham.Service
     {
         protected void Application_Start()
         {
+            //Performance Boost
+            ViewEngines.Engines.Clear();
+            ViewEngines.Engines.Add(new RazorViewEngine());
+            //base.Application_Start();
+
+
+
+
             //This is the [Authourize] attribute set in global level for Mugurtham
             GlobalFilters.Filters.Add(new System.Web.Mvc.AuthorizeAttribute());
             //Error Handling

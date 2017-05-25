@@ -102,15 +102,28 @@ namespace Mugurtham.Service.Areas.SangamAdmin.Controllers.MVC
         [HttpGet]
         public ActionResult getSangamDashboardData()
         {
-            Mugurtham.Core.Login.LoggedInUser objLoggedIn = (Mugurtham.Core.Login.LoggedInUser)Session["LoggedInUser"];
             Core.Sangam.SangamDashboardEntity objSangamDashboardEntity = new Core.Sangam.SangamDashboardEntity();
-            SangamDashboardCore objSangamDashboardCore = new SangamDashboardCore(ref objLoggedIn);
-            using (objSangamDashboardCore as IDisposable)
+            try
             {
-                objSangamDashboardCore.GetSangamDashboardData(objLoggedIn.ConnectionString, objLoggedIn.sangamID, ref objSangamDashboardEntity);
+                Mugurtham.Core.Login.LoggedInUser objLoggedIn = (Mugurtham.Core.Login.LoggedInUser)Session["LoggedInUser"];
+                SangamDashboardCore objSangamDashboardCore = new SangamDashboardCore(ref objLoggedIn);
+                using (objSangamDashboardCore as IDisposable)
+                {
+                    objSangamDashboardCore.GetSangamDashboardData(objLoggedIn.ConnectionString, objLoggedIn.sangamID, ref objSangamDashboardEntity);
+                }
+                objSangamDashboardCore = null;
+
             }
-            objSangamDashboardCore = null;
+            catch (Exception objEx)
+            {
+                Helpers.LogExceptionInFlatFile(objEx);
+            }
+            finally
+            {
+               // ((IDisposable)objSangamDashboardEntity).Dispose();
+            }
             return this.Json(objSangamDashboardEntity, JsonRequestBehavior.AllowGet);
+
         }
 
 

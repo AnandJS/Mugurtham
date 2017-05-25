@@ -16,9 +16,16 @@ namespace Mugurtham.Core
 
         // THEMEMASTER DATABASE TABLE CONSTANTS
         public const string ThemeBootstrap = "Bootstrap";
+        public const string ThemeFlatly = "Flatly";
+        public const string ThemeSpacelab = "Spacelab";
 
         // LOCALEMASTER DATABASE TABLE CONSTANTS
-        public const string LocaleUSEnglish = "0449";
+        public const string LocaleTamil = "0449";
+        public const string LocaleUSEnglish = "0409";
+        public const string LocaleHindi = "0439";
+        public const string LocaleTelgu = "044a";
+        public const string LocaleMalayalam = "044c";
+        public const string LocaleKannada = "044b";
 
         // HOME PAGE PATH
         public const string HomePagePathForProfileUser = "Mugurtham#/ProfileUserDashboard";

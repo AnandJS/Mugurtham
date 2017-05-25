@@ -16,7 +16,7 @@ namespace Mugurtham.Core.Dashboard.Sangam
 
         public SangamDashboardCore(ref Mugurtham.Core.Login.LoggedInUser objLoggedInUser)
         {
-            objLoggedInUser = _objLoggedInUser;
+            _objLoggedInUser = objLoggedInUser;
         }
         public List<SangamDashboardCoreEntity> GetAll(string strSangamID)
         {

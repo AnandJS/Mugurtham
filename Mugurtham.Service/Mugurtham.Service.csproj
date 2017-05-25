@@ -169,6 +169,7 @@
     <Compile Include="Areas\View\ViewAreaRegistration.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginUserAPIController.cs" />
+    <Compile Include="Controllers\MatrimonyController.cs" />
     <Compile Include="Controllers\MugurthamAuthorizeAttribute.cs" />
     <Compile Include="Controllers\MugurthamController.cs" />
     <Compile Include="Global.asax.cs">
@@ -565,6 +566,7 @@
     <Content Include="Views\Shared\MugurthamLayout.cshtml" />
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\Jsons\SearchAllProfiles.json" />
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\Services\SearchAllProfiles.json" />
+    <Content Include="Views\Matrimony\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

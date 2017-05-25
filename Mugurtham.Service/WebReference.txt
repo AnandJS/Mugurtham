@@ -1,4 +1,18 @@
-﻿
+﻿    <!--
+    <rewrite>
+               <rules>
+               <rule name="Redirect to HTTPS" stopProcessing="true">
+               <match url="(.*)" />
+                    <conditions>
+                    <add input="{HTTPS}" pattern="^OFF$" />
+                    </conditions>
+               <action type="Redirect" url="https://www.mugurtham.com/{R:1}" redirectType="Permanent" />
+               </rule>
+               </rules>
+     </rewrite>
+    -->
+
+
 Best
 ========
 https://colorlib.com/wp/bootstrap-website-templates/

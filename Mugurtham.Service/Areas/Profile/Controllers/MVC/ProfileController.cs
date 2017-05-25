@@ -108,56 +108,63 @@ namespace Mugurtham.Service.Areas.Profile.Controllers.MVC
         [HttpPost]
         public ActionResult SaveProfilePhotoAlbum(List<HttpPostedFileBase> file, string ProfileID)
         {
-            string strFileName = string.Empty;
-            string strProfilePhotoPath = string.Empty;
-            int intProfilePhotoIndex = 1;
-            // Create if profile directory does not exsist
-            Mugurtham.Core.Login.LoggedInUser objLoggedIn = (Mugurtham.Core.Login.LoggedInUser)Session["LoggedInUser"];
-            string strProfileFolderPath = Path.Combine(Server.MapPath("~/Areas/Profile/Images/ProfilePhoto/" + objLoggedIn.CommunityName + " / " + ProfileID));
-            if (!Directory.Exists(strProfileFolderPath))
-                Directory.CreateDirectory(strProfileFolderPath);
-            foreach (HttpPostedFileBase item in file)
+            try
             {
-                if (item != null)
+                string strFileName = string.Empty;
+                string strProfilePhotoPath = string.Empty;
+                int intProfilePhotoIndex = 1;
+                // Create if profile directory does not exsist
+                Mugurtham.Core.Login.LoggedInUser objLoggedIn = (Mugurtham.Core.Login.LoggedInUser)Session["LoggedInUser"];
+                string strProfileFolderPath = Path.Combine(Server.MapPath("~/Areas/Profile/Images/ProfilePhoto/" + objLoggedIn.CommunityName.Trim() + "/" + ProfileID));
+                if (!Directory.Exists(strProfileFolderPath))
+                    Directory.CreateDirectory(strProfileFolderPath);
+                foreach (HttpPostedFileBase item in file)
                 {
-                    strFileName = Helpers.primaryKey;
-                    strProfilePhotoPath = "/Areas/Profile/Images/ProfilePhoto/" + objLoggedIn.CommunityName + " / " +  ProfileID + "/" + strFileName + Path.GetExtension(Path.GetFileName(item.FileName));
-                }
-                //if (Array.Exists(model.FilesToBeUploaded.Split(','), s => s.Equals(item.FileName)))                
-                if (
-                    Path.GetExtension(Path.GetFileName(item.FileName)).ToString().ToLower() == ".jpg".ToString().ToLower() ||
-                    Path.GetExtension(Path.GetFileName(item.FileName)).ToString().ToLower() == ".jpeg".ToString().ToLower() ||
-                    Path.GetExtension(Path.GetFileName(item.FileName)).ToString().ToLower() == ".gif".ToString().ToLower() ||
-                    Path.GetExtension(Path.GetFileName(item.FileName)).ToString().ToLower() == ".png".ToString().ToLower()
-                    )
-                {
-                    try
+                    if (item != null)
                     {
-                        Mugurtham.Core.BasicInfo.BasicInfoCore objBasicInfoCore = new Core.BasicInfo.BasicInfoCore(ref objLoggedIn);
-                        using (objBasicInfoCore as IDisposable)
+                        strFileName = Helpers.primaryKey;
+                        strProfilePhotoPath = "/Areas/Profile/Images/ProfilePhoto/" + objLoggedIn.CommunityName + "/" + ProfileID + "/" + strFileName + Path.GetExtension(Path.GetFileName(item.FileName));
+                    }
+                    //if (Array.Exists(model.FilesToBeUploaded.Split(','), s => s.Equals(item.FileName)))                
+                    if (
+                        Path.GetExtension(Path.GetFileName(item.FileName)).ToString().ToLower() == ".jpg".ToString().ToLower() ||
+                        Path.GetExtension(Path.GetFileName(item.FileName)).ToString().ToLower() == ".jpeg".ToString().ToLower() ||
+                        Path.GetExtension(Path.GetFileName(item.FileName)).ToString().ToLower() == ".gif".ToString().ToLower() ||
+                        Path.GetExtension(Path.GetFileName(item.FileName)).ToString().ToLower() == ".png".ToString().ToLower()
+                        )
+                    {
+                        try
                         {
-                            Mugurtham.Core.BasicInfo.BasicInfoCoreEntity objBasicInfoCoreEntity = new Core.BasicInfo.BasicInfoCoreEntity();
-                            using (objBasicInfoCoreEntity as IDisposable)
+                            Mugurtham.Core.BasicInfo.BasicInfoCore objBasicInfoCore = new Core.BasicInfo.BasicInfoCore(ref objLoggedIn);
+                            using (objBasicInfoCore as IDisposable)
                             {
-                                objBasicInfoCoreEntity = objBasicInfoCore.GetByProfileID(ProfileID);
-                                objBasicInfoCoreEntity.PhotoPath = strProfilePhotoPath;
-                                string strFilePath = Path.Combine(Server.MapPath("~/Areas/Profile/Images/ProfilePhoto/" + objLoggedIn.CommunityName + " / " + ProfileID),
-                                                  strFileName + Path.GetExtension(Path.GetFileName(item.FileName)));
-                                item.SaveAs(strFilePath);
-                                savePhotoToFolder(strProfilePhotoPath, ProfileID);
-                                if (intProfilePhotoIndex == 1)
-                                    objBasicInfoCore.Edit(ref objBasicInfoCoreEntity);
+                                Mugurtham.Core.BasicInfo.BasicInfoCoreEntity objBasicInfoCoreEntity = new Core.BasicInfo.BasicInfoCoreEntity();
+                                using (objBasicInfoCoreEntity as IDisposable)
+                                {
+                                    objBasicInfoCoreEntity = objBasicInfoCore.GetByProfileID(ProfileID);
+                                    objBasicInfoCoreEntity.PhotoPath = strProfilePhotoPath;
+                                    string strFilePath = Path.Combine(Server.MapPath("~/Areas/Profile/Images/ProfilePhoto/" + objLoggedIn.CommunityName.Trim() + "/" + ProfileID.Trim()),
+                                                      strFileName + Path.GetExtension(Path.GetFileName(item.FileName)));
+                                    item.SaveAs(strFilePath);
+                                    savePhotoToFolder(strProfilePhotoPath, ProfileID);
+                                    if (intProfilePhotoIndex == 1)
+                                        objBasicInfoCore.Edit(ref objBasicInfoCoreEntity);
+                                }
+                                objBasicInfoCoreEntity = null;
                             }
-                            objBasicInfoCoreEntity = null;
+                            objBasicInfoCore = null;
                         }
-                        objBasicInfoCore = null;
+                        catch (Exception ex)
+                        {
+                            ViewBag.Message = "ERROR:" + ex.Message.ToString();
+                        }
                     }
-                    catch (Exception ex)
-                    {
-                        ViewBag.Message = "ERROR:" + ex.Message.ToString();
-                    }
+                    intProfilePhotoIndex += 1;
                 }
-                intProfilePhotoIndex += 1;
+            }
+            catch(Exception objEx)
+            {
+                Helpers.LogExceptionInFlatFile(objEx);
             }
             return Redirect("/Mugurtham#/Photo");
         }
@@ -197,7 +204,7 @@ namespace Mugurtham.Service.Areas.Profile.Controllers.MVC
             if (file != null && file.ContentLength > 0)
                 try
                 {
-                    string strProfileHoroFolderPath = Path.Combine(Server.MapPath("~/Areas/Profile/Images/ProfilePhoto/" + objLoggedIn.CommunityName + " / " + ProfileID + "/Horoscope"));
+                    string strProfileHoroFolderPath = Path.Combine(Server.MapPath("~/Areas/Profile/Images/ProfilePhoto/" + objLoggedIn.CommunityName + "/" + ProfileID + "/Horoscope"));
 
                     if (!Directory.Exists(strProfileHoroFolderPath))
                         Directory.CreateDirectory(strProfileHoroFolderPath);
@@ -212,8 +219,8 @@ namespace Mugurtham.Service.Areas.Profile.Controllers.MVC
                     {
                         objDir.Delete(true);
                     }
-                    string path = Path.Combine(Server.MapPath("~/Areas/Profile/Images/ProfilePhoto/" + objLoggedIn.CommunityName + " / " + ProfileID + "/Horoscope/" + ProfileID + Path.GetExtension(Path.GetFileName(file.FileName))));
-                    string strProfileHoroPath = "/Areas/Profile/Images/ProfilePhoto/" + objLoggedIn.CommunityName + " / " + ProfileID + "/Horoscope/" + ProfileID + Path.GetExtension(Path.GetFileName(file.FileName));
+                    string path = Path.Combine(Server.MapPath("~/Areas/Profile/Images/ProfilePhoto/" + objLoggedIn.CommunityName + "/" + ProfileID + "/Horoscope/" + ProfileID + Path.GetExtension(Path.GetFileName(file.FileName))));
+                    string strProfileHoroPath = "/Areas/Profile/Images/ProfilePhoto/" + objLoggedIn.CommunityName + "/" + ProfileID + "/Horoscope/" + ProfileID + Path.GetExtension(Path.GetFileName(file.FileName));
                     if (
                     Path.GetExtension(Path.GetFileName(file.FileName)).ToString().ToLower() == ".jpg".ToString().ToLower() ||
                     Path.GetExtension(Path.GetFileName(file.FileName)).ToString().ToLower() == ".jpeg".ToString().ToLower() ||

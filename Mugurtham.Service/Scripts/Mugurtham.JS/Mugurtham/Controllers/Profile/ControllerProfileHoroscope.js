@@ -226,6 +226,7 @@ var ControllerProfileHoroscope = angular.module('MugurthamApp').controller('Cont
                         Day: $scope.frmData[0].Day
                     }),
                     headers: {
+                        'content-Type': 'application/x-www-form-urlencoded',
                         "MugurthamUserToken": getLoggedInUserID(),
                         "CommunityID": getLoggedInUserCommunityID()
                     }
