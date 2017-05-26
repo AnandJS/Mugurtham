@@ -28,26 +28,44 @@ namespace Mugurtham.Common.Utilities
             {
                 if (_CommunityID == "1")
                 {
-                    _CommunityName = "udayar";
-                    _AppKeyConnectionstring = "udayar";
+                    _CommunityName = "mudaliyar";
+                    _AppKeyConnectionstring = "mudaliyar";
                     _Connectionstring = System.Configuration.ConfigurationManager.ConnectionStrings[_AppKeyConnectionstring].ConnectionString;
                 }
                 else if (_CommunityID == "2")
+                {
+                    _CommunityName = "naidu";
+                    _AppKeyConnectionstring = "naidu";
+                    _Connectionstring = System.Configuration.ConfigurationManager.ConnectionStrings[_AppKeyConnectionstring].ConnectionString;
+                }
+                else if (_CommunityID == "3")
                 {
                     _CommunityName = "pillai";
                     _AppKeyConnectionstring = "pillai";
                     _Connectionstring = System.Configuration.ConfigurationManager.ConnectionStrings[_AppKeyConnectionstring].ConnectionString;
                 }
-                else if (_CommunityID == "3")
+                else if (_CommunityID == "4")
                 {
                     _CommunityName = "thevar";
                     _AppKeyConnectionstring = "thevar";
                     _Connectionstring = System.Configuration.ConfigurationManager.ConnectionStrings[_AppKeyConnectionstring].ConnectionString;
                 }
-                else if (_CommunityID == "4")
+                else if (_CommunityID == "5")
                 {
-                    _CommunityName = "vishwakarma";
-                    _AppKeyConnectionstring = "vishwakarma";
+                    _CommunityName = "udayar";
+                    _AppKeyConnectionstring = "udayar";
+                    _Connectionstring = System.Configuration.ConfigurationManager.ConnectionStrings[_AppKeyConnectionstring].ConnectionString;
+                }
+                else if (_CommunityID == "6")
+                {
+                    _CommunityName = "vanniyar";
+                    _AppKeyConnectionstring = "vanniyar";
+                    _Connectionstring = System.Configuration.ConfigurationManager.ConnectionStrings[_AppKeyConnectionstring].ConnectionString;
+                }
+                else if (_CommunityID == "7")
+                {
+                    _CommunityName = "Vishwakarma";
+                    _AppKeyConnectionstring = "Vishwakarma";
                     _Connectionstring = System.Configuration.ConfigurationManager.ConnectionStrings[_AppKeyConnectionstring].ConnectionString;
                 }
                 else if (_CommunityID == "0")

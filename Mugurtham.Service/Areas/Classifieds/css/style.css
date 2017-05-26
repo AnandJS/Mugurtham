@@ -197,7 +197,8 @@ button {
 }
 
 button, html input[type=button], input[type=reset], input[type=submit] {
-    background: #ffa405;
+    background: #184879;
+    /*background: #ffa405;*/
     color: #fff;
     border-radius: 4px;
 }
@@ -714,9 +715,11 @@ button .btn-default {
             }
 
 .header {
-    background-color: #00aeaf;
+    background-color: #bfddb6;
+    /*background-color: #00aeaf;*/
     z-index: 9;
     position: relative;
+    height:90px;
 }
 
 .navbar-brand {
@@ -4727,7 +4730,8 @@ figure.effect-oscar {
 }
 
     .vendor-total-thumb img {
-        opacity: .8;
+        /*opacity: .8;*/
+        opacity: 1;
     }
 
         .vendor-total-thumb img:hover {
@@ -5208,7 +5212,7 @@ input[type=text], input[type=password] {
     display: inline-block;
     border: 1px solid #ccc;
     box-sizing: border-box;
-    text-align:center;
+    text-align: center;
 }
 
 /* Set a style for all buttons */
@@ -5222,9 +5226,9 @@ input[type=text], input[type=password] {
     width: 100%;
 }
 
-    button:hover {
-        opacity: 0.8;
-    }
+button:hover {
+    opacity: 0.8;
+}
 
 /* Extra styles for the cancel button */
 .cancelbtn {
@@ -5241,8 +5245,8 @@ input[type=text], input[type=password] {
 }
 
 img.avatar {
-    width: 15%;
-    border-radius: 50%;
+    width: 50%;
+    /*border-radius: 50%;*/
 }
 
 .matrimonyContainer {
@@ -5258,20 +5262,20 @@ span.psw {
 .matrimonyModal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
+    z-index: 10; /* Sit on top */
     left: 0;
-    top: 10px;
-    bottom: 20px;
+    top: 5px;
+    bottom: 5px;
     width: 100%; /* Full width */
     height: 100%; /* Full height */
     overflow: auto; /* Enable scroll if needed */
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-    padding-top: 70px;
-        padding-right: 70px;
-padding-left: 90px;
-padding-bottom: 90px;
+    padding-right: 70px;
+    padding-left: 90px;
+    padding-bottom: 90px;
 }
+
 }
 
 /* Modal Content/Box */

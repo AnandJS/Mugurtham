@@ -39,7 +39,7 @@ function (data, status) {
         if (typeof (Storage) !== "undefined") {
             localStorage.setItem("landingFirstTimeCount", "0");
             localStorage.setItem("LoggedInUserID", $('#LoginID').val());
-            localStorage.setItem("CommunityID", $('#CommunityID').val());
+            localStorage.setItem("CommunityID", $('#ddlCommunityPopup').val());
         }
         else {
             toastr.error("Sorry, your browser does not support web storage...");

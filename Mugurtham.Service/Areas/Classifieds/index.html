@@ -17,7 +17,7 @@
     <link rel="stylesheet" type="text/css" href="css/owl.transitions.css">
 
     <link rel="stylesheet" type="text/css" href="/App_Themes/MugurthamTheme/css/Mugurtham/Mask/jquery.loadmask.css">
-    
+
     <!-- Font used in template -->
     <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700|Roboto:400,400italic,500,500italic,700,700italic,300italic,300' rel='stylesheet' type='text/css'>
     <!--font awesome icon -->
@@ -108,7 +108,7 @@
             <div class="row">
                 <div class="col-md-3 col-sm-12 logo">
                     <div class="navbar-brand">
-                        <a href="index.html"><img src="images/logo.png" alt="Wedding Vendors" class="img-responsive"></a>
+                        <a href="index.html"><img src="/images/Mugurtham/General/logo.png" alt="Wedding Vendors" class="img-responsive"></a>
                     </div>
                 </div>
                 <div class="col-md-9 col-sm-12">
@@ -151,8 +151,7 @@
                                 <div class="row">
                                     <div class="form-group col-md-3">
                                         <select class="form-control" id="ddlCategory">
-                                            <option>Select Vendor</option>
-                                            <option value="html/vendorAccessories.html">Accessories</option>
+                                            <option value="/html/vendorAccessories.html">Accessories</option>
                                             <option value="/html/vendorAstrology.html">Astrology</option>
                                             <option value="/html/vendorBands.html">Bands</option>
                                             <option value="/html/vendorBridalWear.html">Bridal Wear</option>
@@ -936,46 +935,54 @@
         <form class="modal-content animate" action="/Home/ValidateLogin">
             <div class="imgcontainer">
                 <span onclick="document.getElementById('divLoginPopup').style.display='none'" class="close" title="Close Modal">&times;</span>
-                <img src="images/img_avatar2.png" alt="Avatar" class="avatar">
+                <img src="/images/Mugurtham/General/logo.png" alt="Avatar" class="avatar">
             </div>
 
             <div class="matrimonyContainer">
                 <div class="row">
                     <label class="col-md-12"><b>Username</b></label>
-                    <input type="text" placeholder="Enter Username" name="uname" required class="matrimonyTextBox col-md-10" id="LoginID">
+                    <div class="col-md-1"></div>
+                    <input type="text" placeholder="Enter Username" name="uname" required class="matrimonyTextBox col-md-8" id="LoginID">
+                    <div class="col-md-1"></div>
                 </div>
                 <div class="row">
                     <label class="col-md-12"><b>Password</b></label>
-                    <input type="password" placeholder="Enter Password" name="psw" id="Password" required class="matrimonyTextBox col-md-10">
+                    <div class="col-md-1"></div>
+                    <input type="password" placeholder="Enter Password" name="psw" id="Password" required class="matrimonyTextBox col-md-8">
+                    <div class="col-md-1"></div>
                 </div>
                 <div class="row">
                     <label class="col-md-12"><b>Community</b></label>
-
-
-
                     <div class="col-md-12">
-                        <select class="col-md-12" style="padding: 12px 20px" id="ddlCommunityPopup">
-                            <option value="1">Vishwakarma Matrimony</option>
-                            <option value="2">Naidu Matrimony</option>
-                            <option value="3">Mudaliyar Matrimony</option>
-                            <option value="4">Vanniyar Matrimony</option>
-                            <option value="5">Vanniyar Matrimony</option>
+                        <div class="col-md-1"></div>
+                        <select class="col-md-10" id="ddlCommunityPopup" style="padding: 12px 20px">
+                            <option value="1">Vishwakarma</option>
+                            <option value="2">Naidu</option>
+                            <option value="3">Mudaliyar</option>
+                            <option value="4">Vanniyar</option>
+                            <option value="5">Vanniyar</option>
                         </select>
+                        <div class="col-md-1"></div>
                     </div>
-                    </div>
-
-                    
-                    <div class="row">
-                        <input id="btnLogin" name="btnLogin" type="button" value="Sign in" class="btn btn-primary btn-lg  col-md-8 text-center" />
-                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2"><br /></div>
+                    <div class="col-md-2"><br /></div>
+                    <div class="col-md-2"></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-1"></div>
+                    <input id="btnLogin" name="btnLogin" type="button" value="Sign in" class="btn btn-primary btn-lg  col-md-10 text-center" />
+                    <div class="col-md-1"></div>
+                </div>
             </div>
 
             <div class="matrimonyContainer" style="background-color:#f1f1f1">
                 <button type="button" onclick="document.getElementById('divLoginPopup').style.display='none'" class="cancelbtn">Cancel</button>
-                <span class="psw">Forgot <a href="#">password?</a></span>
             </div>
         </form>
     </div>
+
     <!-- Matrimony Login Popup Ends-->
     <!-- Return to Top -->
     <a href="javascript:" id="return-to-top"><i class="icon-chevron-up"></i></a>
@@ -1004,7 +1011,7 @@
     <script src="js/jquery.sticky.js"></script>
     <script src="js/header-sticky.js"></script>
 
-   
+
     <script src="/Scripts/Mugurtham.JS/JQuery/jquery.loadmask.js"></script>
     <script src="/Scripts/Mugurtham.js/Mugurtham/Login/Login.js"></script>
     <script>
