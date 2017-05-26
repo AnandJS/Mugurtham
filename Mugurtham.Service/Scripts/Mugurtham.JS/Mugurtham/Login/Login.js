@@ -1,4 +1,4 @@
-﻿ $(document).ready(function () {
+﻿$(document).ready(function () {
 
     $('#Password').keypress(function (e) {
         var key = e.which;
@@ -9,6 +9,7 @@
         }
     });
     $("#btnLogin").click(function () {
+
         if ($('#LoginID').val().length == 0) {
             alert('Please enter Login ID');
             $('#LoginID').focus();
@@ -19,16 +20,18 @@
             $('#Password').focus();
             return false;
         }
-        $("#container").mask("Signing in please wait...");
+        $("#divLoginPopup").mask("Signing in please wait...");
         $.post("/Home/validateLogin",
 {
     LoginID: $('#LoginID').val(),
     Password: $('#Password').val(),
-    CommunityID: $('#CommunityID').val()
+    CommunityID: $('#ddlCommunityPopup').val()
 
 },
 function (data, status) {
-    $("#container").unmask();
+    $("#divLoginPopup").unmask();
+
+
     if (data.LoginStatus == '1') {
         //location.reload(); // IE fix - IE doesnt support this command
 
@@ -111,3 +114,8 @@ function (data, status) {
     });// Link click
 
 });
+
+
+function setLoginCommunityDDL() {
+    $("#ddlCommunityPopup").val($('#ddlCommunity').val());
+}
