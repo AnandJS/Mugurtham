@@ -136,6 +136,8 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\Classifieds\ClassifiedsAreaRegistration.cs" />
+    <Compile Include="Areas\Classifieds\Controllers\CategoryController.cs" />
     <Compile Include="Areas\MugurthamAdmin\Controllers\API\LookupAPIController.cs" />
     <Compile Include="Areas\MugurthamAdmin\Controllers\API\RoleAPIController.cs" />
     <Compile Include="Areas\MugurthamAdmin\Controllers\API\SangamAPIController.cs" />
@@ -231,7 +233,7 @@
     </Content>
     <Content Include="App_Themes\MugurthamTheme\css\Mugurtham\Toastr\toaster.min.css" />
     <Content Include="App_Themes\MugurthamTheme\css\Mugurtham\Toastr\toastr.min.css" />
-    <Content Include="Areas\Classifieds\index.html" />
+    <Content Include="Areas\Classifieds1\index.html" />
     <Content Include="Areas\Profile\Images\ProfilePhoto\Default.txt" />
     <Content Include="Areas\Search\Sivan.jpg" />
     <Content Include="Build.html" />
@@ -396,11 +398,12 @@
     <Content Include="WebReference.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Areas\Classifieds\css\" />
-    <Folder Include="Areas\Classifieds\fonts\" />
-    <Folder Include="Areas\Classifieds\html\" />
-    <Folder Include="Areas\Classifieds\images\" />
-    <Folder Include="Areas\Classifieds\js\" />
+    <Folder Include="Areas\Classifieds1\css\" />
+    <Folder Include="Areas\Classifieds1\fonts\" />
+    <Folder Include="Areas\Classifieds1\html\" />
+    <Folder Include="Areas\Classifieds1\images\" />
+    <Folder Include="Areas\Classifieds1\js\" />
+    <Folder Include="Areas\Classifieds\Models\" />
     <Folder Include="Areas\MugurthamAdmin\Models\" />
     <Folder Include="Areas\Profile\Models\" />
     <Folder Include="Areas\SangamAdmin\Models\" />
@@ -486,6 +489,9 @@
     <Content Include="Areas\Search\Views\Search\EducationSearch.cshtml" />
     <Content Include="Areas\Search\Views\Search\OccupationSearch.cshtml" />
     <Content Include="Areas\User\Views\User\MyMatchingProfiles.cshtml" />
+    <Content Include="Areas\Classifieds\Views\web.config" />
+    <Content Include="Areas\Classifieds\Views\Category\Index.cshtml" />
+    <Content Include="Areas\Classifieds\Views\Shared\ClassifiedsLayout.cshtml" />
     <None Include="bundleconfig.json" />
     <Content Include="Log\MugurthamLog.log" />
     <None Include="Properties\PublishProfiles\ProfileMugurtham.pubxml" />

@@ -31,6 +31,8 @@
 function (data, status) {
     $("#divLoginPopup").unmask();
 
+    //quick fix for homepage masking bug -- please find solution and remove below line
+    localStorage.setItem("landingFirstTimeCount", "0");
 
     if (data.LoginStatus == '1') {
         //location.reload(); // IE fix - IE doesnt support this command
