@@ -78,16 +78,20 @@ namespace Mugurtham.Core.Profile.API
         {
             strProfileID = string.Empty;
             string strUserID = string.Empty;
+            string sangamID = objLoggedIn.sangamID;
             SangamCore objSangamCore = new SangamCore(_objLoggedInUser.ConnectionStringAppKey);
             try
             {
+                if (!string.IsNullOrEmpty(objBasicInfoCoreEntity.ProfileSangamID))
+                {
+                    sangamID = objBasicInfoCoreEntity.ProfileSangamID;
+                }
                 using (objSangamCore as IDisposable)
                 {
-                    objSangamCore.GetNewProfileID(out strProfileID, objLoggedIn);
                     Mugurtham.Core.Sangam.SangamCoreEntity objSangamCoreEntity = new SangamCoreEntity();
                     using (objSangamCoreEntity as IDisposable)
                     {
-                        objSangamCoreEntity = objSangamCore.GetByID(objLoggedIn.sangamID);
+                        objSangamCore.GetNewProfileID(out strProfileID, sangamID, ref objSangamCoreEntity);
                         if (string.IsNullOrEmpty(objSangamCoreEntity.LastProfileIDNo.ToString()))
                             return -1;
                         objSangamCoreEntity.LastProfileIDNo += 1;
@@ -107,12 +111,13 @@ namespace Mugurtham.Core.Profile.API
                         objUserCoreEntity.Name = objBasicInfoCoreEntity.Name;
                         objUserCoreEntity.LoginID = strProfileID;
                         objUserCoreEntity.Password = strProfileID; // Helpers.passwordGenerator();
-                        objUserCoreEntity.SangamID = objLoggedIn.sangamID;
+                        objUserCoreEntity.SangamID = sangamID;
                         objUserCoreEntity.RoleID = Constants.RoleIDForUserProfile;
                         objUserCoreEntity.ThemeID = Constants.ThemeFlatly;
                         objUserCoreEntity.LocaleID = Constants.LocaleUSEnglish;
                         objUserCoreEntity.IsActivated = "1"; // Activated by default
                         objUserCoreEntity.HomePagePath = Constants.HomePagePathForProfileUser;
+                        objUserCoreEntity.CreatedBy = objBasicInfoCoreEntity.ProfileCreator;
                         objUserCore.Add(ref objUserCoreEntity, out strUserID);
                     }
                     objUserCoreEntity = null;
@@ -124,7 +129,7 @@ namespace Mugurtham.Core.Profile.API
                 {
                     objBasicInfoCoreEntity.ProfileID = strProfileID;
                     objBasicInfoCoreEntity.ElanUserID = strUserID;
-                    objBasicInfoCoreEntity.SangamID = objLoggedIn.sangamID;
+                    objBasicInfoCoreEntity.SangamID = sangamID;
                     objBasicInfoCore.Add(ref objBasicInfoCoreEntity, objLoggedIn.LoginID);
                 }
                 objBasicInfoCore = null;
@@ -472,7 +477,7 @@ namespace Mugurtham.Core.Profile.API
                     objIUnitOfWork = null;
                     foreach (BasicInfoCoreEntity objBasicInfoCoreEntity in objBasicInfoCoreEntityList)
                     {
-                        ProfileCore objProfileCore = null;                        
+                        ProfileCore objProfileCore = null;
                         //May 13 2017 -- commented as this function is not used anywhere
                         // and loggedin  parameter is made as required in the below function
                         //Analyze more please

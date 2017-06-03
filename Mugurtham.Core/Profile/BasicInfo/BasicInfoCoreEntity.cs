@@ -54,5 +54,12 @@ namespace Mugurtham.Core.BasicInfo
         public string TOB { get; set; }
         public string PhotoPath { get; set; }
         public string Paadham { get; set; }
+
+        //Out of dbtable column
+        // for tracking profile creator as Mugurtham admin role
+        public string ProfileCreator { get; set; }
+        public string ProfileSangamID { get; set; }
+
+
     }
 }

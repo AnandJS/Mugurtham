@@ -154,7 +154,7 @@
        /*ROUTING FOR MUGURTHAM ADMIN STARTS HERE*/
        /*======================================================*/
           // route for the  fullview View
-        .when('/MugurthamDashboard', {
+        .when('/MugurthamAdminDashboard', {
             templateUrl: '/MugurthamAdmin/MugurthamAdmin/Dashboard'
         })
         .when('/SangamList', {
@@ -257,7 +257,7 @@
             });
         }
         */
-
+        $locationProvider.html5Mode(true);
 
         //My Reference for transalation - best one
         //https://angular-translate.github.io/

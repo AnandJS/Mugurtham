@@ -22,8 +22,8 @@ namespace Mugurtham.Core.BasicInfo
             try
             {
                 bool GrantAddAccess = false;
-                //One & Only Sangam Admin can add New Profiles.
-                //So validate if the user is in SangamAdmin Role and the proceed
+                //One & Only Sangam Admin, Mugurtham Admin can add New Profiles.
+                //So validate if the user is in SangamAdmin, MugurthamAdmin Role and the proceed
                 Profile.ProfileSecurity objProfileSecurity = new Profile.ProfileSecurity(ref _objLoggedInUser);
                 using (objProfileSecurity as IDisposable)
                 {
@@ -257,7 +257,7 @@ namespace Mugurtham.Core.BasicInfo
                 objBasicInfo.Caste = objBasicInfoCoreEntity.Caste;
                 objBasicInfo.ChildrenLivingStatus = objBasicInfoCoreEntity.ChildrenLivingStatus;
                 objBasicInfo.Complexion = objBasicInfoCoreEntity.Complexion;
-                objBasicInfo.CreatedBy = objBasicInfoCoreEntity.ProfileCreatedBy;
+                objBasicInfo.CreatedBy = objBasicInfoCoreEntity.ProfileCreator;
                 objBasicInfo.CreatedDate = objBasicInfoCoreEntity.CreatedDate;
                 objBasicInfo.DateOfBirth = objBasicInfoCoreEntity.DOB;
                 objBasicInfo.Drinking = objBasicInfoCoreEntity.Drinking;
@@ -292,6 +292,7 @@ namespace Mugurtham.Core.BasicInfo
                 objBasicInfo.ZodiacDay = objBasicInfoCoreEntity.ZodiacYear;
                 objBasicInfo.PhotoPath = objBasicInfoCoreEntity.PhotoPath;
                 objBasicInfo.Paadham = objBasicInfoCoreEntity.Paadham;
+                objBasicInfo.CreatedBy = objBasicInfoCoreEntity.ProfileCreator;
             }
             catch (Exception objEx)
             {
@@ -347,6 +348,7 @@ namespace Mugurtham.Core.BasicInfo
                 objBasicInfoCoreEntity.PhotoPath = objBasicInfo.PhotoPath;
                 objBasicInfoCoreEntity.CreatedDate = objBasicInfo.CreatedDate;
                 objBasicInfoCoreEntity.Paadham = objBasicInfo.Paadham;
+                objBasicInfoCoreEntity.ProfileCreator = objBasicInfo.CreatedBy;
             }
             catch (Exception objEx)
             {

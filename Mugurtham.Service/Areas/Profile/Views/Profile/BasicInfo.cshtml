@@ -2,10 +2,10 @@
     ViewBag.Title = "Family";
     Layout = "~/Areas/Profile/Views/Shared/layoutProfile.cshtml";
 }
-<div class="col-lg-8 " >
-    <div class="FormShadow panel panel-primary bs-example well bs-component " >
-        <div class="panel-heading" >
-            <h3 class="panel-title" >
+<div class="col-lg-8 " data-ng-init="getLookup();">
+    <div class="FormShadow panel panel-primary bs-example well bs-component ">
+        <div class="panel-heading">
+            <h3 class="panel-title">
                 <center>{{'BIBINFREGFRM'  | translate}}</center>
             </h3>
         </div>
@@ -13,6 +13,14 @@
             <div class="row">
                 <div class="col-sm-12">
                     <form class="form-horizontal">
+                        <div class="form-group" id="divSangam">
+                            <label for="SangamID" class="col-lg-3 control-label">{{'GENSANGAM'  | translate}}</label>
+                            <div class="col-lg-9">
+                                <select class="form-control" ng-model="frmData[0].SangamID" id="ddlSangam">
+                                    <option ng-repeat="Sangam in arrSangamID" value="{{Sangam.ID}}">{{Sangam.Name}}</option>
+                                </select>
+                            </div>
+                        </div>
                         <div class="form-group">
                             <label for="SangamUserID" class="col-lg-3 control-label">{{'BISANGAMUSERID'  | translate}}</label>
                             <div class="col-lg-9">
@@ -37,9 +45,11 @@
                             <div class="col-lg-9">
                                 <div class="radio">
                                     <label>
-                                        <input type="radio" name="radProfileGender" id="radProfileMale" value="male" class="radProfileGender" />{{'GENMALE'  | translate}}</label>
+                                        <input type="radio" name="radProfileGender" id="radProfileMale" value="male" class="radProfileGender" />{{'GENMALE'  | translate}}
+                                    </label>
                                     <label>
-                                        <input type="radio" name="radProfileGender" id="radProfileFeMale" value="female" class="radProfileGender" />{{'GENFEMALE'  | translate}}</label>
+                                        <input type="radio" name="radProfileGender" id="radProfileFeMale" value="female" class="radProfileGender" />{{'GENFEMALE'  | translate}}
+                                    </label>
                                 </div>
                             </div>
                         </div>
@@ -187,7 +197,7 @@
                         <hr />
                         <div class="form-group">
                             <label for="Gothra(m)" class="col-lg-3 control-label">{{'BIGOTHRM'  | translate}}</label>
-                            <div class="col-lg-9">                                
+                            <div class="col-lg-9">
                                 <select class="form-control" id="ddlGothram" ng-model="frmData[0].Gothram">
                                     <option value="-1">--Select--</option>
                                     <option ng-repeat="arrGothram in arrGothram" value="{{arrGothram}}">{{arrGothram}}</option>

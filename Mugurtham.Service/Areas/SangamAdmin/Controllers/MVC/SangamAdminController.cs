@@ -61,7 +61,7 @@ namespace Mugurtham.Service.Areas.SangamAdmin.Controllers.MVC
             {
                 ViewBag.Message = "You have not specified a file.";
             }
-            return Redirect("/Mugurtham#/SangamAdminSettings");
+            return Redirect("/Matrimony#/SangamAdminSettings");
         }
 
         [HttpPost]
@@ -96,7 +96,7 @@ namespace Mugurtham.Service.Areas.SangamAdmin.Controllers.MVC
             {
                 ViewBag.Message = "You have not specified a file.";
             }
-            return Redirect("/Mugurtham#/SangamAdminSettings");
+            return Redirect("/Matrimony#/SangamAdminSettings");
         }
 
         [HttpGet]

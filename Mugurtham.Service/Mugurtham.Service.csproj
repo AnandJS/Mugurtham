@@ -398,11 +398,11 @@
     <Content Include="WebReference.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Areas\Classifieds1\css\" />
-    <Folder Include="Areas\Classifieds1\fonts\" />
-    <Folder Include="Areas\Classifieds1\html\" />
-    <Folder Include="Areas\Classifieds1\images\" />
-    <Folder Include="Areas\Classifieds1\js\" />
+    <Folder Include="Areas\Classifieds\css\" />
+    <Folder Include="Areas\Classifieds\fonts\" />
+    <Folder Include="Areas\Classifieds\html\" />
+    <Folder Include="Areas\Classifieds\images\" />
+    <Folder Include="Areas\Classifieds\js\" />
     <Folder Include="Areas\Classifieds\Models\" />
     <Folder Include="Areas\MugurthamAdmin\Models\" />
     <Folder Include="Areas\Profile\Models\" />

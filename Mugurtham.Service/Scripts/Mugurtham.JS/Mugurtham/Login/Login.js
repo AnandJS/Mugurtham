@@ -48,7 +48,7 @@ function (data, status) {
         }
         var homePagePath = '/' + data.HomePagePath;
         if (window.location.href.indexOf('FullView') !== -1)
-            homePagePath = '/Mugurtham#' + window.location.href.split('/Mugurtham/')[1];
+            homePagePath = '/' + window.location.href.split('/Mugurtham/')[1];
         else if (window.location.href.indexOf('Dashboard') !== -1)
             homePagePath = '/' + data.HomePagePath;
         else if (window.location.href.indexOf('ProfileID') !== -1)
@@ -58,10 +58,10 @@ function (data, status) {
         else if (window.location.href.indexOf('Home') !== -1)
             homePagePath = '/' + data.HomePagePath;
         else {
-            //homePagePath = '/Mugurtham#' + window.location.href.split('/Mugurtham/')[1];
+            //homePagePath = '/Matrimony#' + window.location.href.split('/Mugurtham/')[1];
             homePagePath = '/' + data.HomePagePath;
         }
-
+        
         window.location = homePagePath;
     }
     else if (data.LoginStatus == '2') {

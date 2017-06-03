@@ -282,6 +282,18 @@ function getLoggedInUserID() {
     }
     return LoggedInUserID;
 }
+function getLoggedInUserRole() {
+    var LoggedInUserRole;
+    if (typeof (Storage) !== "undefined") {
+        if (localStorage.getItem("LoggedInUser")) {
+            LoggedInUserRole = JSON.parse(localStorage.getItem("LoggedInUser")).UserCoreEntity.RoleID;
+        }
+    }
+    else {
+        toastr.error("Sorry, your browser does not support web storage...");
+    }
+    return LoggedInUserRole;
+}
 
 // Global Function to retrieve the loggedIn user from the client side
 function getLoggedInUserCommunityID() {

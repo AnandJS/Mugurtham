@@ -104,6 +104,7 @@ var ControllerProfileBasicInfo = angular.module('MugurthamApp').controller('Cont
             $scope.ProfileCreatedDate = '';
             $scope.PlaceOfBirth = '';
             $scope.Paadham = '';
+            $scope.ProfileCreator = '';
 
             //========================================
             //GLOBAL EVENT HANDLER FOR THIS CONTROLLER
@@ -154,6 +155,8 @@ var ControllerProfileBasicInfo = angular.module('MugurthamApp').controller('Cont
                 $scope.ProfileCreatedDate = $scope.frmData[0].ProfileCreatedDate;
                 $scope.PlaceOfBirth = $scope.frmData[0].PlaceOfBirth;
                 $scope.Paadham = $scope.frmData[0].Paadham;
+                $scope.ProfileCreator = $scope.frmData[0].ProfileCreator;
+                $scope.SangamID = $scope.frmData[0].SangamID;
             }
 
             //=========================================
@@ -197,7 +200,9 @@ var ControllerProfileBasicInfo = angular.module('MugurthamApp').controller('Cont
                         PartnerExpectation: $scope.PartnerExpectation,
                         PhotoPath: $scope.PhotoPath,
                         PlaceOfBirth: $scope.PlaceOfBirth,
-                        Paadham: $scope.Paadham
+                        Paadham: $scope.Paadham,
+                        ProfileCreator: MugurthamUserToken,
+                        ProfileSangamID: $scope.SangamID
                     }),
                     headers: {
                         'content-Type': 'application/x-www-form-urlencoded',
@@ -264,7 +269,8 @@ var ControllerProfileBasicInfo = angular.module('MugurthamApp').controller('Cont
                         PhotoPath: $scope.PhotoPath,
                         CreatedDate: $scope.frmData[0].ProfileCreatedDate,
                         PlaceOfBirth: $scope.frmData[0].PlaceOfBirth,
-                        Paadham: $scope.Paadham
+                        Paadham: $scope.Paadham,
+                        ProfileCreator: $scope.frmData[0].ProfileCreator,
                     }),
                     headers: {
                         'content-Type': 'application/x-www-form-urlencoded',
@@ -293,7 +299,7 @@ var ControllerProfileBasicInfo = angular.module('MugurthamApp').controller('Cont
                 $http({
                     method: "GET",
                     url: strGetURL,
-                    params: {"MugurthamUserToken": MugurthamUserToken},
+                    params: { "MugurthamUserToken": MugurthamUserToken },
                     headers: {
                         "MugurthamUserToken": MugurthamUserToken,
                         "CommunityID": getLoggedInUserCommunityID()
@@ -336,7 +342,8 @@ var ControllerProfileBasicInfo = angular.module('MugurthamApp').controller('Cont
                     PartnerExpectation: data.PartnerExpectation,
                     PhotoPath: data.PhotoPath,
                     PlaceOfBirth: data.PlaceOfBirth,
-                    Paadham: data.Paadham
+                    Paadham: data.Paadham,
+                    ProfileCreator: data.ProfileCreator
                 });
 
                 /*Logic to add 1 day to JQuery Formatting*/
@@ -358,6 +365,34 @@ var ControllerProfileBasicInfo = angular.module('MugurthamApp').controller('Cont
                 $("#body").unmask();
                 NotifyErrorStatus(data, status);
             });
+            }
+
+
+
+            //===================================================
+            //AJAX GET REQUEST - GETTING LOOKUP DTO
+            //===================================================
+            $scope.getLookup = function () {
+                var strGetURL = '/Lookup/LookupAPI';
+                $http({
+                    method: "GET", url: strGetURL,
+                    headers: {
+                        "MugurthamUserToken": getLoggedInUserID(),
+                        "CommunityID": getLoggedInUserCommunityID()
+                    }
+                }).
+            success(function (data, status, headers, config) {
+                $scope.arrSangamID = data.SangamCoreEntity;
+                $scope.arrRoleID = data.RoleCoreEntity;
+            }).
+            error(function (data, status, headers, config) {
+                NotifyStatus('2');
+            });
+
+                // Hiding the Sangam dropdown list, since it must be used by Mugurtham Admin Role only
+                if (getLoggedInUserRole() != 'FE1C8DE449F4AA8A0') { // Mugurtham Admin Role Hard coded
+                    $('#divSangam').hide();
+                }
             }
         }])
 

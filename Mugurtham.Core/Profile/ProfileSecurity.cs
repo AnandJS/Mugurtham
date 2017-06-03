@@ -109,7 +109,11 @@ namespace Mugurtham.Core.Profile
                 using (objUserCoreEntity as IDisposable)
                 {
                     objUserCoreEntity = objUserCore.GetByLoginID(profileID);
-                    if(objUserCoreEntity.RoleID == Constants.RoleIDForSangamAdmin)
+                    if (objUserCoreEntity.RoleID == Constants.RoleIDForSangamAdmin)
+                    {
+                        IsSangamAdmin = true;
+                    }
+                    else if (objUserCoreEntity.RoleID == Constants.RoleIDForMugurthamAdmin)
                     {
                         IsSangamAdmin = true;
                     }

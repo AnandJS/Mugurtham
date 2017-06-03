@@ -158,19 +158,15 @@ namespace Mugurtham.Core.Sangam
             return 0;
         }
 
-        public int GetNewProfileID(out string strNewProfileID, Mugurtham.Core.Login.LoggedInUser objLoggedIn)
+        public int GetNewProfileID(out string strNewProfileID, string sangamID, ref SangamCoreEntity objSangamCoreEntity)
         {
             strNewProfileID = string.Empty;
             try
             {
-                if (!string.IsNullOrWhiteSpace(objLoggedIn.sangamID))
+                if (!string.IsNullOrWhiteSpace(sangamID))
                 {
-                    SangamCoreEntity objSangamCoreEntity = new SangamCoreEntity();
-                    using (objSangamCoreEntity as IDisposable)
-                    {
-                        objSangamCoreEntity = GetByID(objLoggedIn.sangamID);
-                        strNewProfileID = objSangamCoreEntity.ProfileIDStartsWith + (objSangamCoreEntity.LastProfileIDNo + 1).ToString();
-                    }
+                    objSangamCoreEntity = GetByID(sangamID);
+                    strNewProfileID = objSangamCoreEntity.ProfileIDStartsWith + (objSangamCoreEntity.LastProfileIDNo + 1).ToString();
                 }
             }
             catch (Exception objEx)

@@ -28,10 +28,10 @@ namespace Mugurtham.Core
         public const string LocaleKannada = "044b";
 
         // HOME PAGE PATH
-        public const string HomePagePathForProfileUser = "Mugurtham#/ProfileUserDashboard";
-        public const string HomePagePathForPublicUser = "Mugurtham#/PublicUserDashboard";
-        public const string HomePagePathForMugurthamAdmin = "Mugurtham#/MugurthamDashboard";
-        public const string HomePagePathForSangamAdmin = "Mugurtham#/SangamDashboard";
+        public const string HomePagePathForProfileUser = "Matrimony#/ProfileUserDashboard";
+        public const string HomePagePathForPublicUser = "Matrimony#/PublicUserDashboard";
+        public const string HomePagePathForMugurthamAdmin = "Matrimony#/MugurthamDashboard";
+        public const string HomePagePathForSangamAdmin = "Matrimony#/SangamDashboard";
 
         // APPSETTINGS VALUE IN THE WEB.CONFIG - CONSTANTS
         public const string AppSetttingsKeyProductVersion = "ProductVersion";

@@ -89,7 +89,7 @@ namespace Mugurtham.Service.Areas.Profile.Controllers.MVC
             {
                 ViewBag.Message = "You have not specified a file.";
             }
-            return Redirect("/Mugurtham#/Photo");
+            return Redirect("/Matrimony#/Photo");
         }
         [HttpPost]
         public ActionResult Add([System.Web.Http.FromBody]Mugurtham.Core.BasicInfo.BasicInfoCoreEntity objBasicInfoCoreEntity)
@@ -166,7 +166,7 @@ namespace Mugurtham.Service.Areas.Profile.Controllers.MVC
             {
                 Helpers.LogExceptionInFlatFile(objEx);
             }
-            return Redirect("/Mugurtham#/Photo");
+            return Redirect("/Matrimony#/Photo");
         }
         private int savePhotoToFolder(string strPhotoPath, string strProfileID)
         {
@@ -253,7 +253,7 @@ namespace Mugurtham.Service.Areas.Profile.Controllers.MVC
             {
                 ViewBag.Message = "You have not specified a file.";
             }
-            return Redirect("/Mugurtham#/Horoscope");
+            return Redirect("/Matrimony#/Horoscope");
         }
     }
 }
