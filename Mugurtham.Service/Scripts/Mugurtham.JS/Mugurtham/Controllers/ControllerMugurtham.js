@@ -332,3 +332,22 @@ success(function (data, status, headers, config) {
     });
     return LoggedInUserInfo;
 }
+
+
+//Function that retrieves the details of caste and sub-caste of the loggedin user
+function getCasteOfLoggedInUser() {
+    var arrCaste = '';
+    if (getLoggedInUserCommunityID() == '21')
+        arrCaste = ['VishwakarmaTestedd'];
+    return arrCaste;
+}
+
+    //Function that retrieves the details of caste and sub-caste of the loggedin user
+function getSubCasteOfLoggedInUser(CommunityName) {
+    var arrsubCaste = '';
+    var subCaste = '';
+    if (CommunityName == 'VishwakarmaTestedd') {
+        arrsubCaste = ['adsb1', 'adsubcaste2', 'adsubcaste3'];
+    }
+    return arrsubCaste;
+}

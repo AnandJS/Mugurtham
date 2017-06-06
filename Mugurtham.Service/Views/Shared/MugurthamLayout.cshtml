@@ -125,10 +125,10 @@
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));</script>
     <script type="text/javascript">
- //<![CDATA[
-var tlJsHost = ((window.location.protocol == "https:") ? "https://secure.comodo.com/" : "http://www.trustlogo.com/");
-document.write(unescape("%3Cscript src='" + tlJsHost + "trustlogo/javascript/trustlogo.js' type='text/javascript'%3E%3C/script%3E"));
-//]]>
+        //<![CDATA[
+        var tlJsHost = ((window.location.protocol == "https:") ? "https://secure.comodo.com/" : "http://www.trustlogo.com/");
+        document.write(unescape("%3Cscript src='" + tlJsHost + "trustlogo/javascript/trustlogo.js' type='text/javascript'%3E%3C/script%3E"));
+        //]]>
     </script>
     <!-- // to know more about setting base URL visit: https://docs.angularjs.org/error/$location/nobase-->
     <base href="/Matrimony">
@@ -159,6 +159,9 @@ document.write(unescape("%3Cscript src='" + tlJsHost + "trustlogo/javascript/tru
 
                         <ul class="nav navbar-nav navbar-middle ">
                             <li class="navbar-brand">@objLoggedIn.SangamName</li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-middle ">
+                            <li class="navbar-brand"> - @objLoggedIn.CommunityName</li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right ">
                             <li>
@@ -469,7 +472,7 @@ document.write(unescape("%3Cscript src='" + tlJsHost + "trustlogo/javascript/tru
 
     <script type="text/javascript">
         $(document).ready(function () {
-            landingPageCounter();
+            // landingPageCounter();
             setUserStyleLocale('@objLoggedIn.themeID');
             //setTimeout(setUserStyleLocale, 1000, '@objLoggedIn.themeID');
 

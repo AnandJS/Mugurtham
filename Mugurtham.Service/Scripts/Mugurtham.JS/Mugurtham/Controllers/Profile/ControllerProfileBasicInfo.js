@@ -373,6 +373,7 @@ var ControllerProfileBasicInfo = angular.module('MugurthamApp').controller('Cont
             //AJAX GET REQUEST - GETTING LOOKUP DTO
             //===================================================
             $scope.getLookup = function () {
+                $scope.arrCaste = getCasteOfLoggedInUser();
                 var strGetURL = '/Lookup/LookupAPI';
                 $http({
                     method: "GET", url: strGetURL,
@@ -384,6 +385,7 @@ var ControllerProfileBasicInfo = angular.module('MugurthamApp').controller('Cont
             success(function (data, status, headers, config) {
                 $scope.arrSangamID = data.SangamCoreEntity;
                 $scope.arrRoleID = data.RoleCoreEntity;
+
             }).
             error(function (data, status, headers, config) {
                 NotifyStatus('2');
@@ -394,8 +396,14 @@ var ControllerProfileBasicInfo = angular.module('MugurthamApp').controller('Cont
                     $('#divSangam').hide();
                 }
             }
+
+
+            $scope.getSubCasteForCaste = function getSubCasteForCaste(CommunityName) {
+                $scope.arrSubCaste = getSubCasteOfLoggedInUser($scope.frmData[0].Caste);
+            }
         }])
 
 function MaintainState(arrFrmData) {
     $('input[name="radProfileGender"][value="' + arrFrmData.Gender + '"]').prop('checked', true);
 }
+

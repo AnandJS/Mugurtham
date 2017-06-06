@@ -23,7 +23,6 @@ namespace Mugurtham.Service.Areas.MugurthamAdmin.Controllers.API
             UserCore objUserCore = new UserCore(objLoggedIn.ConnectionStringAppKey);
             using (objUserCore as IDisposable)
             {
-                objUserCoreEntity.RoleID = Mugurtham.Core.Constants.RoleIDForSangamAdmin;
                 objUserCore.Add(ref objUserCoreEntity, out strUserID);
             }
             objUserCore = null;

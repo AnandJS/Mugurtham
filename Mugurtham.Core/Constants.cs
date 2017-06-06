@@ -30,7 +30,7 @@ namespace Mugurtham.Core
         // HOME PAGE PATH
         public const string HomePagePathForProfileUser = "Matrimony#/ProfileUserDashboard";
         public const string HomePagePathForPublicUser = "Matrimony#/PublicUserDashboard";
-        public const string HomePagePathForMugurthamAdmin = "Matrimony#/MugurthamDashboard";
+        public const string HomePagePathForMugurthamAdmin = "Matrimony#/MugurthamAdminDashboard";
         public const string HomePagePathForSangamAdmin = "Matrimony#/SangamDashboard";
 
         // APPSETTINGS VALUE IN THE WEB.CONFIG - CONSTANTS

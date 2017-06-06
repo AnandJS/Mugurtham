@@ -10,6 +10,7 @@ using System.IO;
 using Mugurtham.Core.Profile.API;
 using Mugurtham.Core.Dashboard.Sangam;
 using System.Text;
+using CCA.Util;
 
 namespace Mugurtham.Service.Controllers
 {
@@ -19,6 +20,16 @@ namespace Mugurtham.Service.Controllers
         //
         // GET: /Home/
         public ActionResult Index(string returnURL)
+        {
+            return View();
+        }
+
+        public ActionResult processor()
+        {
+            return View();
+        }
+
+        public ActionResult ccAvenue()
         {
             return View();
         }

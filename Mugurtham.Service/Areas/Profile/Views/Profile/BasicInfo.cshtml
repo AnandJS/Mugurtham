@@ -179,7 +179,7 @@
                         <div class="form-group">
                             <label for="Caste" class="col-lg-3 control-label">{{'BICST'  | translate}}</label>
                             <div class="col-lg-9">
-                                <select class="form-control" id="ddlCaste" ng-model="frmData[0].Caste">
+                                <select class="form-control" id="ddlCaste" ng-model="frmData[0].Caste" ng-change="getSubCasteForCaste();" >
                                     <option value="-1">--Select--</option>
                                     <option ng-repeat="arrCaste in arrCaste" value="{{arrCaste}}">{{arrCaste}}</option>
                                 </select>

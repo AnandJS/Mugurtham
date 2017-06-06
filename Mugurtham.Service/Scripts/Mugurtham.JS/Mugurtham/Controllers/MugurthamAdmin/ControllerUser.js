@@ -90,6 +90,11 @@ var ControllerUser = angular.module('MugurthamApp').controller('ControllerUser',
             //AJAX POST REQUEST - CREATING NEW User
             //===================================================
             $scope.Add = function () {
+                var strRoleID = '';
+                if (typeof $('#ddlRoles').val() === "undefined")
+                    strRoleID = $scope.userFormData[0].RoleID
+                else
+                    strRoleID = $('#ddlRoles').val();
                 $http({
                     method: "post", url: '/MugurthamUser/UserAPI', data: $.param({
                         Name: $scope.userFormData[0].Name,
@@ -97,7 +102,7 @@ var ControllerUser = angular.module('MugurthamApp').controller('ControllerUser',
                         LoginID: $scope.userFormData[0].LoginID,
                         Password: $scope.userFormData[0].Password,
                         SangamID: $('#ddlSangams').val(),
-                        RoleID: $('#ddlRoles').val(),
+                        RoleID: strRoleID,
                         ThemeID: $scope.userFormData[0].ThemeID,
                         LocaleID: $scope.userFormData[0].LocaleID,
                         IsActivated: geActivation('userActivationCheckbox'),

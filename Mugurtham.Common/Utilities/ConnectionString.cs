@@ -28,7 +28,7 @@ namespace Mugurtham.Common.Utilities
             {
                 if (_CommunityID == "1")
                 {
-                    _CommunityName = "Adidravidar";
+                    _CommunityName = "Aadhidhravidar";
                     _AppKeyConnectionstring = "AdidravidarMugurtham";
                     _Connectionstring = System.Configuration.ConfigurationManager.ConnectionStrings[_AppKeyConnectionstring].ConnectionString;
                 }
@@ -137,7 +137,7 @@ namespace Mugurtham.Common.Utilities
                 else if (_CommunityID == "19")
                 {
                     _CommunityName = "vanniyar";
-                    _AppKeyConnectionstring = "vanniyar";
+                    _AppKeyConnectionstring = "VanniyarMugurtham";
                     _Connectionstring = System.Configuration.ConfigurationManager.ConnectionStrings[_AppKeyConnectionstring].ConnectionString;
                 }
                 else if (_CommunityID == "20")

@@ -1,0 +1,147 @@
+﻿@using CCA.Util;
+@using System.Collections.Specialized;
+
+
+@{
+    Random randomValue = new Random();
+    var randomId = randomValue.Next().ToString();
+    var tid = "WE16-" + randomId;
+}
+
+@{
+    if (IsPost)
+    {
+        string workingKey = "B919351439C26311921A149071904825";//put in the 32bit alpha numeric key in the quotes provided here
+        CCACrypto ccaCrypto = new CCACrypto();
+        string encResponse = ccaCrypto.Decrypt(Request.Form["encResp"], workingKey);
+        NameValueCollection Params = new NameValueCollection();
+        string[] segments = encResponse.Split('&');
+        foreach (string seg in segments)
+        {
+            string[] parts = seg.Split('=');
+            if (parts.Length > 0)
+            {
+                string Key = parts[0].Trim();
+                string Value = parts[1].Trim();
+                Params.Add(Key, Value);
+            }
+        }
+    
+
+        for (int i = 0; i < Params.Count; i++)
+        {
+            //Response.Write(Params.Keys[i] + " = " + Params[i] + "<br>");
+        }
+
+        <div>
+            <div class="row">
+                <div class="small-12 large-12 columns">
+                    <div class="panel" id="payment-confirmation">
+                        <h2 class="text-center">Payment received successfully</h2>
+                        <div>
+                            <table align="center">
+                                <tbody>
+                                    <tr><td>Payment Status</td><td>@Params.Get("order_status")</td></tr>
+                                    <tr><td>Total Amount</td><td>₹ @Params.Get("amount")</td></tr>
+                                    <tr><td>Email Address</td><td>@Params.Get("billing_email")</td></tr>
+                                    <tr><td>Order ID</td><td>@Params.Get("order_id")</td></tr>
+                                    <tr><td>Payment ID</td><td>@Params.Get("tracking_id")</td></tr>
+                                    <tr><td>Bank Reference</td><td>@Params.Get("bank_ref_no")</td></tr>
+                                    <tr><td>Transaction Date</td><td>@DateTime.Now</td></tr>
+                                    <tr><td>Address</td><td>@Params.Get("billing_address")</td></tr>
+                                    <tr><td>City</td><td>@Params.Get("billing_city")</td></tr>
+                                    <tr><td>State</td><td>@Params.Get("billing_state") - @Params.Get("billing_zip")</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+
+            </div>
+        </div>
+    }
+    else
+    {
+        <div id="container1">
+            <div class="row">
+                <div class="small-12 large-12 columns">
+                    <h2>Confirm your details</h2>
+                </div>
+            </div>
+            <form id="payment" name="payment" method="post" action="~/home/processor">
+                <div class="row">
+                    <div class="small-12 large-12 columns">
+                        <label>
+                            Full Name*
+                            <input type="text" name="billing_name" id="billing_name" placeholder="Full Name" required />
+                        </label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="small-12 large-6 columns">
+                        <label>
+                            Email Address*
+                            <input type="email" name="billing_email" id="billing_email" placeholder="Email Address" required />
+                        </label>
+                    </div>
+                    <div class="small-12 large-6 columns">
+                        <label>
+                            Mobile Number
+                            <input type="number" name="billing_tel" id="billing_tel" placeholder="Mobile Number" />
+                        </label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="small-12 large-12 columns">
+                        <label>
+                            Address
+                            <textarea placeholder="billing_address" name="billing_address" id="address"></textarea>
+                        </label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="small-12 large-3 columns">
+                        <label>City  <input type="text" name="billing_city" id="billing_city" placeholder="City" /> </label>
+                    </div>
+                    <div class="small-12 large-3 columns">
+                        <label>Pin/Zip code  <input type="text" name="billing_zip" id="billing_zip" placeholder="pincode or zipcode" /> </label>
+                    </div>
+                    <div class="small-12 large-3 columns">
+                        <label>State  <input type="text" name="billing_state" id="billing_state" placeholder="State" /> </label>
+                    </div>
+                    <div class="small-12 large-3 columns">
+                        <label>Country  <input type="text" name="billing_country" id="billing_country" placeholder="country" /> </label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="small-12 large-12 columns">
+                        <label>
+                            Notes:
+                            <textarea placeholder="Note (if any)" name="notes" id="notes"></textarea>
+                        </label>
+                    </div>
+                </div>
+
+                <! -- to checkout -->
+                <div>
+                    <input type="text" id="merchant_id" name="merchant_id" value="133253" /> <!-- pass this merchant id from any secure way-->
+                    <input type="hidden" id="order_id" name="order_id" value="@tid" />
+                    <input type="hidden" id="currency" name="currency" value="INR" />
+                    <input type="hidden" id="language" name="language" value="en" />
+                    <input type="hidden" id="amount" name="amount" value="1" />
+                    <input type="hidden" id="redirect_url" name="redirect_url" value="/" />
+                    <input type="hidden" id="cancel_url" name="cancel_url" value="/" />
+                    <input type="hidden" id="merchant_param1" name="merchant_param1" value="We support Credit Card/ Debit Card/ Net Banking/ Wallets..." />
+                    <input type="hidden" id="tid" name="tid" value="@randomId" />
+                </div>
+                <div class="row">
+                    <div class="small-12 large-12 columns">
+                        <button type="submit" class="button success expand right"> Proceed to checkout <i class="fi-lock"></i></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    }
+}

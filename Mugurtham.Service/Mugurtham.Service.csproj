@@ -53,6 +53,10 @@
       <HintPath>..\packages\log4net.2.0.5\lib\net45-full\log4net.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="MCPG.CCA.Util, Version=1.0.0.0, Culture=neutral, PublicKeyToken=3d7072b2634875da, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Areas\Payment\Library\MCPG.CCA.Util.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
@@ -147,6 +151,7 @@
     <Compile Include="Areas\MugurthamAdmin\Controllers\MVC\SangamController.cs" />
     <Compile Include="Areas\MugurthamAdmin\Controllers\MVC\UserController.cs" />
     <Compile Include="Areas\MugurthamAdmin\MugurthamAdminAreaRegistration.cs" />
+    <Compile Include="Areas\Payment\PaymentAreaRegistration.cs" />
     <Compile Include="Areas\Profile\Controllers\API\BasicInfoAPIController.cs" />
     <Compile Include="Areas\Profile\Controllers\API\CareerAPIController.cs" />
     <Compile Include="Areas\Profile\Controllers\API\ContactAPIController.cs" />
@@ -233,7 +238,7 @@
     </Content>
     <Content Include="App_Themes\MugurthamTheme\css\Mugurtham\Toastr\toaster.min.css" />
     <Content Include="App_Themes\MugurthamTheme\css\Mugurtham\Toastr\toastr.min.css" />
-    <Content Include="Areas\Classifieds1\index.html" />
+    <Content Include="Areas\Payment\Library\MCPG.CCA.Util.dll" />
     <Content Include="Areas\Profile\Images\ProfilePhoto\Default.txt" />
     <Content Include="Areas\Search\Sivan.jpg" />
     <Content Include="Build.html" />
@@ -405,6 +410,9 @@
     <Folder Include="Areas\Classifieds\js\" />
     <Folder Include="Areas\Classifieds\Models\" />
     <Folder Include="Areas\MugurthamAdmin\Models\" />
+    <Folder Include="Areas\Payment\Controllers\" />
+    <Folder Include="Areas\Payment\Models\" />
+    <Folder Include="Areas\Payment\Views\Shared\" />
     <Folder Include="Areas\Profile\Models\" />
     <Folder Include="Areas\SangamAdmin\Models\" />
     <Folder Include="Areas\Search\Models\" />
@@ -492,6 +500,7 @@
     <Content Include="Areas\Classifieds\Views\web.config" />
     <Content Include="Areas\Classifieds\Views\Category\Index.cshtml" />
     <Content Include="Areas\Classifieds\Views\Shared\ClassifiedsLayout.cshtml" />
+    <Content Include="Areas\Payment\Views\web.config" />
     <None Include="bundleconfig.json" />
     <Content Include="Log\MugurthamLog.log" />
     <None Include="Properties\PublishProfiles\ProfileMugurtham.pubxml" />
@@ -503,6 +512,8 @@
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\Jsons\SearchAllProfiles.json" />
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\Services\SearchAllProfiles.json" />
     <Content Include="Views\Matrimony\Index.cshtml" />
+    <Content Include="Views\Home\ccAvenue.cshtml" />
+    <Content Include="Views\Home\processor.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -1,0 +1,52 @@
+﻿@using CCA.Util;
+@using System.Collections.Specialized;
+
+
+@{
+
+    if (IsPost)
+    {
+        var workingKey = "56FDB199FAF2C31B82E95CC1551BB423";//put in the 32bit alpha numeric key in the quotes provided here
+        var ccaRequest = "";
+        var strEncRequest = "";
+        var strAccessCode = "AVYE70EE68AT08EYTA";// put the access key in the quotes provided here.
+                                                       //var strAccessCode = "AVVK63DB84AD40KVDA";
+
+        CCACrypto ccaCrypto = new CCACrypto();
+        foreach (var name in Request.Form)
+        {
+            if (name != null)
+            {
+                if (!name.ToString().StartsWith("_"))
+                {
+                    ccaRequest = ccaRequest + name + "=" + Request.Form[name.ToString()] + "&";
+                    //Response.Write(name + "=" + Request.Form[name.ToString()]);
+                    //Response.Write("</br>");
+                }
+            }
+        }
+        strEncRequest = ccaCrypto.Encrypt(ccaRequest, workingKey);
+        <div>
+            <form method="post" id="payment_processor" action="https://test.ccavenue.com/transaction/transaction.do?command=initiateTransaction">
+                <input type="hidden" id="encRequest" name="encRequest" value="@strEncRequest" />
+                <input type="hidden" id="access_code" name="access_code" value="@strAccessCode" />
+            </form>
+        </div>
+
+
+        <div class="row" style="text-align:center">
+            <div class="small-12 large-12">
+                <h2 class="text-center">Processing...</h2>
+            </div>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+                integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+                crossorigin="anonymous"></script>
+
+        <script>
+             $("#payment_processor").submit();
+        </script>
+    }
+
+}
