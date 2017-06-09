@@ -514,6 +514,7 @@
     <Content Include="Views\Matrimony\Index.cshtml" />
     <Content Include="Views\Home\ccAvenue.cshtml" />
     <Content Include="Views\Home\processor.cshtml" />
+    <Content Include="Views\Home\ccResponse.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

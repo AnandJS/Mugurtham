@@ -14,6 +14,11 @@ using CCA.Util;
 
 namespace Mugurtham.Service.Controllers
 {
+    public class ccavenueresponse
+    {
+       public string data { get; set; }
+    }
+
     [AllowAnonymous]
     public class HomeController : MugurthamBaseController
     {
@@ -23,6 +28,32 @@ namespace Mugurtham.Service.Controllers
         {
             return View();
         }
+        [HttpPost]
+        public ActionResult ccResponse(string encResp)
+        {
+            ccavenueresponse obj = new Controllers.ccavenueresponse();
+            //obj.data = encResp + " ddddddd";
+
+            try
+            {
+                Helpers.LogMessageInFlatFile(encResp);
+                /*Do not change the encResp.If you change it you will not get any response.
+    Decode the encResp*/
+                var decryption = new CCACrypto();
+                var decryptedParameters = decryption.Decrypt(encResp,
+                "225D556950FC292B1B926D30B0274526");
+                /*split the decryptedParameters by & and then by = and save your values*/
+                Helpers.LogMessageInFlatFile(decryptedParameters);
+
+                obj.data = decryptedParameters.ToString();
+            }
+            catch(Exception objEx)
+            {
+                Helpers.LogExceptionInFlatFile(objEx);
+            }
+            return View(obj);
+        }
+
 
         public ActionResult processor()
         {

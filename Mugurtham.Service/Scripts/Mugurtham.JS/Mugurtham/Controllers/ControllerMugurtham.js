@@ -98,24 +98,24 @@ var MugurthamController = angular.module('MugurthamApp').
                  var loadAll;
                  try {
                      loadAllProfilesSliced(ServiceUserChamber);
-                   /*  ServiceUserChamber.getHighlightedProfilesJSON().then(function (response) {
-                         sessionStorage.setItem('HiglightedProfiles', JSON.stringify(response));
-                     });
-                     ServiceUserChamber.getRecentlyJoinedProfilesJSON().then(function (response) {
-                         sessionStorage.setItem('RecentlyJoinedProfiles', JSON.stringify(response));
-                     });
-                     ServiceUserChamber.getRecentlyViewedProfilesJSON().then(function (response) {
-                         sessionStorage.setItem('RecentlyViewedProfiles', JSON.stringify(response));
-                     });
-                     ServiceUserChamber.getInterestedProfilesJSON().then(function (response) {
-                         sessionStorage.setItem('InterestedProfiles', JSON.stringify(response));
-                     });
-                     ServiceUserChamber.getViewedMeProfilesJSON().then(function (response) {
-                         sessionStorage.setItem('ViewedMeProfiles', JSON.stringify(response));
-                     });
-                     ServiceUserChamber.getInterestedInMeProfilesJSON().then(function (response) {
-                         sessionStorage.setItem('InterestedInMeProfiles', JSON.stringify(response));
-                     });*/
+                     /*  ServiceUserChamber.getHighlightedProfilesJSON().then(function (response) {
+                           sessionStorage.setItem('HiglightedProfiles', JSON.stringify(response));
+                       });
+                       ServiceUserChamber.getRecentlyJoinedProfilesJSON().then(function (response) {
+                           sessionStorage.setItem('RecentlyJoinedProfiles', JSON.stringify(response));
+                       });
+                       ServiceUserChamber.getRecentlyViewedProfilesJSON().then(function (response) {
+                           sessionStorage.setItem('RecentlyViewedProfiles', JSON.stringify(response));
+                       });
+                       ServiceUserChamber.getInterestedProfilesJSON().then(function (response) {
+                           sessionStorage.setItem('InterestedProfiles', JSON.stringify(response));
+                       });
+                       ServiceUserChamber.getViewedMeProfilesJSON().then(function (response) {
+                           sessionStorage.setItem('ViewedMeProfiles', JSON.stringify(response));
+                       });
+                       ServiceUserChamber.getInterestedInMeProfilesJSON().then(function (response) {
+                           sessionStorage.setItem('InterestedInMeProfiles', JSON.stringify(response));
+                       });*/
                      if (loadAll !== undefined) {
                          $timeout.cancel(loadAll);
                      }
@@ -129,7 +129,7 @@ var MugurthamController = angular.module('MugurthamApp').
                  }
              };
 
-            
+
 
              /*============================================SEARCH GLOBAL FILTER PANEL=================================*/
              //http://stackoverflow.com/questions/14514461/how-to-bind-to-list-of-checkbox-values-with-angularjs
@@ -145,7 +145,7 @@ var MugurthamController = angular.module('MugurthamApp').
 
 function loadAllProfilesSliced(ServiceUserChamber) {
     var objAllProfilesJSON;
-    try {        
+    try {
         if (sessionStorage.getItem('AllProfiles')) {
         }
         else {
@@ -166,7 +166,7 @@ function loadAllProfilesSliced(ServiceUserChamber) {
     }
 }
 function loadAllProfiles(ServiceUserChamber) {
-    try {       
+    try {
         ServiceUserChamber.geAllProfilesJSON().then(function (response) {
             objAllProfilesJSON = response;
             sessionStorage.removeItem('AllProfiles');
@@ -184,7 +184,7 @@ function loadAllProfiles(ServiceUserChamber) {
     }
 }
 
- 
+
 
 function setUserStyleLocale(themeID) {
     // Set loggedin user style
@@ -337,12 +337,56 @@ success(function (data, status, headers, config) {
 //Function that retrieves the details of caste and sub-caste of the loggedin user
 function getCasteOfLoggedInUser() {
     var arrCaste = '';
-    if (getLoggedInUserCommunityID() == '21')
-        arrCaste = ['VishwakarmaTestedd'];
+    var communityID = getLoggedInUserCommunityID();
+    if (communityID == '1')
+        arrCaste = ['Aadhidhravidar'];
+    else if (communityID == '2')
+        arrCaste = ['Agamudayar'];
+    else if (communityID == '3')
+        arrCaste = ['Brahmin'];
+    else if (communityID == '4')
+        arrCaste = ['Christian'];
+    else if (communityID == '5')
+        arrCaste = ['Gounder'];
+    else if (communityID == '6')
+        arrCaste = ['Maruthuvar'];
+    else if (communityID == '7')
+        arrCaste = ['Mudaliyar'];
+    else if (communityID == '8')
+        arrCaste = ['Mukkulathor'];
+    else if (communityID == '9')
+        arrCaste = ['Nadar'];
+    else if (communityID == '10')
+        arrCaste = ['Naidu'];
+    else if (communityID == '11')
+        arrCaste = ['Others'];
+    else if (communityID == '12')
+        arrCaste = ['Padayachi'];
+    else if (communityID == '13')
+        arrCaste = ['Parvatharajakulam'];
+    else if (communityID == '14')
+        arrCaste = ['Pillai'];
+    else if (communityID == '15')
+        arrCaste = ['Reddiar'];
+    else if (communityID == '16')
+        arrCaste = ['ReMarriage'];
+    else if (communityID == '17')
+        arrCaste = ['Thevar'];
+    else if (communityID == '18')
+        arrCaste = ['Udayar'];
+    else if (communityID == '19')
+        arrCaste = ['vanniyar'];
+    else if (communityID == '20')
+        arrCaste = ['Vellalar'];
+    else if (communityID == '21')
+        arrCaste = ['Vishwakarma'];
+    else if (communityID == '22')
+        arrCaste = ['Yadava'];
+
     return arrCaste;
 }
 
-    //Function that retrieves the details of caste and sub-caste of the loggedin user
+//Function that retrieves the details of caste and sub-caste of the loggedin user
 function getSubCasteOfLoggedInUser(CommunityName) {
     var arrsubCaste = '';
     var subCaste = '';
