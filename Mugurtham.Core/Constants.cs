@@ -38,15 +38,15 @@ namespace Mugurtham.Core
         public const string AppSetttingsKeyLogFilePath = "LogFilePath";
 
         //CCAVENUE TEST SERVER CREDENTIALS
-        public const string ccAvenueworkingKeyTest = "B919351439C26311921A149071904825";
+        public const string ccAvenueworkingKeyTest = "56FDB199FAF2C31B82E95CC1551BB423";
         public const string ccAvenueMerchantIDTest = "133253";
-        public const string ccAvenueAccessCodeTest = "AVPB01EF13AP31BPPA";
+        public const string ccAvenueAccessCodeTest = "AVYE70EE68AT08EYTA";
         public const string ccAvenueTransactionURLTest = "https://test.ccavenue.com/transaction/transaction.do?command=initiateTransaction";
 
         //CCAVENUE PRODUCTION SERVER CREDENTIALS
-        public const string ccAvenueworkingKey = "56FDB199FAF2C31B82E95CC1551BB423";
+        public const string ccAvenueworkingKey = "3A06578B61932B9F5DCB333BBCCF727B";
         public const string ccAvenueMerchantID = "133253";
-        public const string ccAvenueAccessCode = "AVYE70EE68AT08EYTA";
+        public const string ccAvenueAccessCode = "AVWW71EF27AP21WWPA";
         public const string ccAvenueTransactionURL = "https://secure.ccavenue.com/transaction/transaction.do?command=initiateTransaction";
 
 

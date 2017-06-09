@@ -11,7 +11,7 @@
 @{
     if (IsPost)
     {
-        string workingKey = "B919351439C26311921A149071904825";//put in the 32bit alpha numeric key in the quotes provided here
+        string workingKey = "56FDB199FAF2C31B82E95CC1551BB423";//put in the 32bit alpha numeric key in the quotes provided here
         CCACrypto ccaCrypto = new CCACrypto();
         string encResponse = ccaCrypto.Decrypt(Request.Form["encResp"], workingKey);
         NameValueCollection Params = new NameValueCollection();
