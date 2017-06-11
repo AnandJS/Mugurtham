@@ -6,10 +6,10 @@
 
     if (IsPost)
     {
-        var workingKey = "56FDB199FAF2C31B82E95CC1551BB423";//put in the 32bit alpha numeric key in the quotes provided here
+        var workingKey = "3A06578B61932B9F5DCB333BBCCF727B";//put in the 32bit alpha numeric key in the quotes provided here
         var ccaRequest = "";
         var strEncRequest = "";
-        var strAccessCode = "AVYE70EE68AT08EYTA";// put the access key in the quotes provided here.
+        var strAccessCode = "AVWW71EF27AP21WWPA";// put the access key in the quotes provided here.
                                                        //var strAccessCode = "AVVK63DB84AD40KVDA";
 
         CCACrypto ccaCrypto = new CCACrypto();
@@ -27,7 +27,7 @@
         }
         strEncRequest = ccaCrypto.Encrypt(ccaRequest, workingKey);
         <div>
-            <form method="post" id="payment_processor" action="https://test.ccavenue.com/transaction/transaction.do?command=initiateTransaction">
+            <form method="post" id="payment_processor" action="https://secure.ccavenue.com/transaction/transaction.do?command=initiateTransaction">
                 <input type="hidden" id="encRequest" name="encRequest" value="@strEncRequest" />
                 <input type="hidden" id="access_code" name="access_code" value="@strAccessCode" />
             </form>
