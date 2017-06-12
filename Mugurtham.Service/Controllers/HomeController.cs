@@ -41,7 +41,7 @@ namespace Mugurtham.Service.Controllers
     Decode the encResp*/
                 var decryption = new CCACrypto();
                 var decryptedParameters = decryption.Decrypt(encResp,
-                "3A06578B61932B9F5DCB333BBCCF727B");
+                "56FDB199FAF2C31B82E95CC1551BB423");
                 /*split the decryptedParameters by & and then by = and save your values*/
                 Helpers.LogMessageInFlatFile(decryptedParameters);
 

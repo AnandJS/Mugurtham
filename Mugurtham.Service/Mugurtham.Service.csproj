@@ -151,6 +151,7 @@
     <Compile Include="Areas\MugurthamAdmin\Controllers\MVC\SangamController.cs" />
     <Compile Include="Areas\MugurthamAdmin\Controllers\MVC\UserController.cs" />
     <Compile Include="Areas\MugurthamAdmin\MugurthamAdminAreaRegistration.cs" />
+    <Compile Include="Areas\Payment\Controllers\PaymentController.cs" />
     <Compile Include="Areas\Payment\PaymentAreaRegistration.cs" />
     <Compile Include="Areas\Profile\Controllers\API\BasicInfoAPIController.cs" />
     <Compile Include="Areas\Profile\Controllers\API\CareerAPIController.cs" />
@@ -571,9 +572,7 @@
   <ItemGroup>
     <Folder Include="Areas\Classifieds\Models\" />
     <Folder Include="Areas\MugurthamAdmin\Models\" />
-    <Folder Include="Areas\Payment\Controllers\" />
     <Folder Include="Areas\Payment\Models\" />
-    <Folder Include="Areas\Payment\Views\Shared\" />
     <Folder Include="Areas\Profile\Models\" />
     <Folder Include="Areas\SangamAdmin\Models\" />
     <Folder Include="Areas\Search\Models\" />
@@ -668,6 +667,15 @@
     <Content Include="Areas\Payment\Views\web.config" />
     <Content Include="App_Themes\MugurthamTheme\css\Mugurtham\Classifieds\.DS_Store" />
     <Content Include="App_Themes\MugurthamTheme\css\Mugurtham\Classifieds\bootstrap.css.map" />
+    <Content Include="Areas\Payment\Views\Shared\LayoutPayment.cshtml" />
+    <Content Include="Areas\Payment\Views\Payment\Index.cshtml" />
+    <Content Include="Areas\Payment\Views\Payment\Invoice.cshtml" />
+    <Content Include="Areas\Payment\Views\Payment\Transactions.cshtml" />
+    <Content Include="Areas\Payment\Views\Payment\PaymentRequest.cshtml" />
+    <Content Include="Areas\Payment\Views\Payment\PaymentSuccess.cshtml" />
+    <Content Include="Areas\Payment\Views\Payment\PaymentFailure.cshtml" />
+    <Content Include="Areas\Payment\Views\Payment\Processor.cshtml" />
+    <Content Include="Areas\Payment\Views\Payment\ccResponse.cshtml" />
     <None Include="bundleconfig.json" />
     <Content Include="Log\MugurthamLog.log" />
     <Content Include="Images\Mugurtham\Classifieds\.DS_Store" />
@@ -684,6 +692,7 @@
     <Content Include="Views\Home\processor.cshtml" />
     <Content Include="Views\Home\ccResponse.cshtml" />
     <Content Include="Scripts\Mugurtham.JS\Classifieds\.DS_Store" />
+    <Content Include="Views\Home\HttpError500.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

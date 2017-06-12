@@ -11,7 +11,7 @@
 @{
     if (IsPost)
     {
-        string workingKey = "3A06578B61932B9F5DCB333BBCCF727B";//put in the 32bit alpha numeric key in the quotes provided here
+        string workingKey = "56FDB199FAF2C31B82E95CC1551BB423";//put in the 32bit alpha numeric key in the quotes provided here
         CCACrypto ccaCrypto = new CCACrypto();
         string encResponse = ccaCrypto.Decrypt(Request.Form["encResp"], workingKey);
         NameValueCollection Params = new NameValueCollection();
@@ -131,7 +131,7 @@
                     <input type="hidden" id="currency" name="currency" value="INR" />
                     <input type="hidden" id="language" name="language" value="en" />
                     <input type="hidden" id="amount" name="amount" value="1" />
-                    <input type="hidden" id="redirect_url" name="redirect_url" value="https://www.mugurtham.com/home/ccResponse" />
+                    <input type="hidden" id="redirect_url" name="redirect_url" value="https://www.mugurtham.com/payment/payment/paymentsuccess" />
                     <input type="hidden" id="cancel_url" name="cancel_url" value="/" />
                     <input type="hidden" id="merchant_param1" name="merchant_param1" value="We support Credit Card/ Debit Card/ Net Banking/ Wallets..." />
                     <input type="hidden" id="tid" name="tid" value="@randomId" />

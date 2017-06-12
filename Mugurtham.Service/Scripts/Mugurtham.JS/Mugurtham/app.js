@@ -235,6 +235,31 @@
              controller: 'ControllerRecentlyJoined'
 
          })
+        /*======================================================*/
+        /*ROUTING FOR PAYMENT HERE*/
+        /*======================================================*/
+
+         .when('/Invoice', {
+             templateUrl: '/Payment/Payment/Invoice'
+         })
+            .when('/PaymentProcessor', {
+                templateUrl: '/Payment/Payment/Processor'
+            })
+             .when('/PaymentSuccess', {
+                 templateUrl: '/Payment/Payment/PaymentSuccess'
+             })
+             .when('/PaymentFailure', {
+                 templateUrl: '/Payment/Payment/PaymentFailure'
+             })
+            .when('/ccResponse', {
+                templateUrl: '/Home/ccResponse'
+            })
+         .when('/Transactions', {
+             templateUrl: '/Payment/Payment/Transactions',
+             controller: 'ControllerRecentlyJoined'
+
+         })
+
 
         // a default page redirect -- fallback
         //.
