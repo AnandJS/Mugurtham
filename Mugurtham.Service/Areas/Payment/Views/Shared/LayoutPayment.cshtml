@@ -1,31 +1,49 @@
-﻿<!--
-    THIS PAGE IS THE LAYOUT PAGE FOR THE PAYMENT MODULE
+﻿@{
+    Mugurtham.Core.Login.LoggedInUser objLoggedIn = (Mugurtham.Core.Login.LoggedInUser)Session["LoggedInUser"];
+}
+<!--
+    THIS PAGE IS THE LAYOUT PAGE FOR THE PROFILE REGISTRATION MODULE
     -->
 <!-- Rending Body from child page-->
 <div>
     <ul class="breadcrumb">
-        <li class="active">Home</li>
+        <li><a href="@objLoggedIn.HomePagePath" translate="">{{ 'GENHOME' | translate }}</a></li>
+        <li><a href="#ProfileID">{{ 'GENSRCH' | translate }}</a></li>
+        <li><a href="#FullView/{{globalProfileID}}">{{ 'GENVIEW' | translate }}</a></li>
+        <li class="active">Payment</li>
     </ul>
 </div>
 <div class="panel panel-primary bs-example FormShadow">
     <div class="panel-heading">
-        <h3 class="panel-title" translate="">Payment</h3>
-
+        <h3 class="panel-title">Payment Administration</h3>
         @RenderSection("featured", required: false)
     </div>
     <div class="panel-body">
         <div class="row">
             <div class="col-sm-3">
-
-                <ul class="list-group">
-                    <li class="list-group-item">
-                        <a href="/Invoice">Invoice</a>
-                    </li>
-                    <li class="list-group-item">
-                        <span class="badge">2</span>
-                        <a href="/Transactions">Payment History</a>
-                    </li>
-                </ul>
+                <div class="panel-group" id="accordion">
+                    <div class="panel panel-primary FormShadow">
+                        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" data-target="#collapseOne">
+                            <h4 class="panel-title">
+                                <a class="accordion-toggle">
+                                    Payment Layout
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseOne" class="panel-collapse collapse in">
+                            <div class="panel-body">
+                                <ul class="list-group">
+                                    <li class="list-group-item">
+                                        <a href="/Invoice">Invoice</a>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <a href="/Transactions">Transaction History</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="col-sm-9">
                 @RenderBody()
@@ -33,3 +51,4 @@
         </div>
     </div>
 </div>
+
