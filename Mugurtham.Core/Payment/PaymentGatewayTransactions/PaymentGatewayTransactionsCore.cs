@@ -58,6 +58,10 @@ namespace Mugurtham.Core.Payment.PaymentGatewayTransactions
             try
             {
                 objPaymentGatewayTransactionsCoreEntity.TransactionID = Helpers.primaryKey;
+                objPaymentGatewayTransactionsCoreEntity.CreatedDate = DateTime.Now;
+                objPaymentGatewayTransactionsCoreEntity.CreatedBy = _objLoggedInUser.LoginID;
+                objPaymentGatewayTransactionsCoreEntity.TranDate = DateTime.Now;
+                objPaymentGatewayTransactionsCoreEntity.EncryptedText = EncryptedString;
                 string workingKey = "56FDB199FAF2C31B82E95CC1551BB423";//put in the 32bit alpha numeric key in the quotes provided here
                 CCACrypto ccaCrypto = new CCACrypto();
                 string encResponse = ccaCrypto.Decrypt(EncryptedString, workingKey);
