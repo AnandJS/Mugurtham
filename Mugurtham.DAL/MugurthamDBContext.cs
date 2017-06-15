@@ -10,6 +10,7 @@ using Mugurtham.DTO.Role;
 using Mugurtham.DTO.User;
 using Mugurtham.DTO.ProfileViewed;
 using Mugurtham.DTO.ProfileInterested;
+using Mugurtham.DTO.Payment;
 
 namespace Mugurtham.DAL
 {
@@ -44,6 +45,9 @@ namespace Mugurtham.DAL
         public DbSet<ProfileInterested> ProfileInterested { get; set; }
         public DbSet<Photo> Photo { get; set; }
         public DbSet<Horoscope> Horoscope { get; set; }
+        public DbSet<PaymentGatewayTransactionsModel> PaymentGatewayTransactions { get; set; }
+        public DbSet<PaymentProfileTransactionsModel> PaymentProfileTransaction { get; set; }
+        public DbSet<PaymentSangamTransactionsModel> PaymentSangamTransaction { get; set; }
 
 
     }

@@ -16,7 +16,7 @@ namespace Mugurtham.Service.Controllers
 {
     public class ccavenueresponse
     {
-       public string data { get; set; }
+        public string data { get; set; }
     }
 
     [AllowAnonymous]
@@ -26,6 +26,7 @@ namespace Mugurtham.Service.Controllers
         // GET: /Home/
         public ActionResult Index(string returnURL)
         {
+
             return View();
         }
         [HttpPost]
@@ -47,7 +48,7 @@ namespace Mugurtham.Service.Controllers
 
                 obj.data = decryptedParameters.ToString();
             }
-            catch(Exception objEx)
+            catch (Exception objEx)
             {
                 Helpers.LogExceptionInFlatFile(objEx);
             }

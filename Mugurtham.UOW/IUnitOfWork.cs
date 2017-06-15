@@ -38,5 +38,10 @@ namespace Mugurtham.UOW
         Mugurtham.Repository.Profile.Photo.IPhoto RepositoryPhoto { get; }
         // To get Horoscope Details
         Mugurtham.Repository.Profile.Horoscope.IHoroscope RepositoryHoroscope { get; }
+        Mugurtham.Repository.Payment.PaymentGatewayTransactions.IPaymentGatewayTransactions RepositoryPaymentGatewayTransactions { get; }
+        Mugurtham.Repository.Payment.PaymentProfileTransactions.IPaymentProfileTransactions RepositoryPaymentProfileTransactions { get; }
+        Mugurtham.Repository.Payment.PaymentSangamTransactions.IPaymentSangamTransactions RepositoryPaymentSangamTransactions { get; }
+
+
     }
 }

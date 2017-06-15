@@ -45,6 +45,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dashboard\Sangam\SangamDashboardChart.cs" />
+    <Compile Include="Payment\PaymentGatewayTransactionsModel.cs" />
+    <Compile Include="Payment\PaymentProfileTransactionsModel.cs" />
+    <Compile Include="Payment\PaymentSangamTransactionsModel.cs" />
     <Compile Include="ProfileInterested\ProfileInterested.cs" />
     <Compile Include="ProfileViewed\ProfileViewed.cs" />
     <Compile Include="Profile\Amsam.cs" />

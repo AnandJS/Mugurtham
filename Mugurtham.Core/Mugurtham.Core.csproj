@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MCPG.CCA.Util">
+      <HintPath>..\Mugurtham.Service\Areas\Payment\Library\MCPG.CCA.Util.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
@@ -42,6 +45,8 @@
   <ItemGroup>
     <Compile Include="Dashboard\Sangam\SangamDashboardCore.cs" />
     <Compile Include="Dashboard\Sangam\SangamDashboardCoreEntity.cs" />
+    <Compile Include="Payment\PaymentGatewayTransactions\PaymentGatewayTransactionsCore.cs" />
+    <Compile Include="Payment\PaymentGatewayTransactions\PaymentGatewayTransactionsCoreEntity.cs" />
     <Compile Include="ProfileInterested\ProfileInterestedCore.cs" />
     <Compile Include="ProfileInterested\ProfileInterestedCoreEntity.cs" />
     <Compile Include="ProfileViewed\ProfileViewedCore.cs" />
@@ -102,7 +107,10 @@
       <Name>Mugurtham.UOW</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Payment\PaymentProfileTransactions\" />
+    <Folder Include="Payment\PaymentSangamTransactions\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

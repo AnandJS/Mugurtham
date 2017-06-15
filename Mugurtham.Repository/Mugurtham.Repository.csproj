@@ -46,6 +46,12 @@
   <ItemGroup>
     <Compile Include="GenericRepository.cs" />
     <Compile Include="IRepository.cs" />
+    <Compile Include="Payment\PaymentGatewayTransactions\PaymentGatewayTransactions.cs" />
+    <Compile Include="Payment\PaymentProfileTransactions\IPaymentProfileTransactions.cs" />
+    <Compile Include="Payment\PaymentGatewayTransactions\IPaymentGatewayTransactions.cs" />
+    <Compile Include="Payment\PaymentProfileTransactions\PaymentProfileTransactions.cs" />
+    <Compile Include="Payment\PaymentSangamTransactions\IPaymentSangamTransactions.cs" />
+    <Compile Include="Payment\PaymentSangamTransactions\PaymentSangamTransactions.cs" />
     <Compile Include="ProfileInterested\IProfileInterested.cs" />
     <Compile Include="ProfileInterested\ProfileInterested.cs" />
     <Compile Include="ProfileViewed\IProfileViewed.cs" />

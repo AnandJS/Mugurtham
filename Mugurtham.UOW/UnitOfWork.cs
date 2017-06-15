@@ -30,6 +30,9 @@ namespace Mugurtham.UOW
         private Mugurtham.Repository.ProfileInterested.IProfileInterested _IProfileInterested;
         private Mugurtham.Repository.Profile.Photo.IPhoto _IPhoto;
         private Mugurtham.Repository.Profile.Horoscope.IHoroscope _IHoroscope;
+        private Mugurtham.Repository.Payment.PaymentGatewayTransactions.IPaymentGatewayTransactions _IPaymentGatewayTransactions;
+        private Mugurtham.Repository.Payment.PaymentProfileTransactions.IPaymentProfileTransactions _IPaymentProfileTransactions;
+        private Mugurtham.Repository.Payment.PaymentSangamTransactions.IPaymentSangamTransactions _IPaymentSangamTransactions;
 
         public UnitOfWork(string ConnectionStringAppKey)
         {
@@ -245,6 +248,46 @@ namespace Mugurtham.UOW
             }
         }
 
+        /*private Mugurtham.Repository.Payment.PaymentGatewayTransactions.IPaymentGatewayTransactions _IPaymentGatewayTransactions;
+        private Mugurtham.Repository.Payment.PaymentProfileTransactions.IPaymentProfileTransactions _IPaymentProfileTransactions;
+        private Mugurtham.Repository.Payment.PaymentSangamTransactions.IPaymentSangamTransactions _IPaymentSangamTransactions;*/
+
+        public Mugurtham.Repository.Payment.PaymentGatewayTransactions.IPaymentGatewayTransactions RepositoryPaymentGatewayTransactions
+        {
+            get
+            {
+                if (_IHoroscope == null)
+                {
+                    _IPaymentGatewayTransactions = new Mugurtham.Repository.Payment.PaymentGatewayTransactions.PaymentGatewayTransactions(_DbContext);
+                }
+                return _IPaymentGatewayTransactions;
+            }
+        }
+
+        public Mugurtham.Repository.Payment.PaymentProfileTransactions.IPaymentProfileTransactions RepositoryPaymentProfileTransactions
+        {
+            get
+            {
+                if (_IHoroscope == null)
+                {
+                    _IPaymentProfileTransactions = new Mugurtham.Repository.Payment.PaymentProfileTransactions.PaymentProfileTransactions(_DbContext);
+                }
+                return _IPaymentProfileTransactions;
+            }
+        }
+
+        public Mugurtham.Repository.Payment.PaymentSangamTransactions.IPaymentSangamTransactions RepositoryPaymentSangamTransactions
+        {
+            get
+            {
+                if (_IHoroscope == null)
+                {
+                    _IPaymentSangamTransactions = new Mugurtham.Repository.Payment.PaymentSangamTransactions.PaymentSangamTransactions(_DbContext);
+                }
+                return _IPaymentSangamTransactions;
+            }
+        }
+
 
         // ...
         #region IDisposable Members
@@ -262,7 +305,7 @@ namespace Mugurtham.UOW
                 GC.SuppressFinalize(this);
                 this.boolDisposeClosed = true;
             }
-            
+
             // If this function is being called the user wants to release the
             // resources. lets call the Dispose which will do this for us.
             Dispose(true);
@@ -290,7 +333,7 @@ namespace Mugurtham.UOW
                 // clean up unmanaged resources
             }
             //never dispose data not getting saved - else analyze and fix to dispose objects
-           // _DbContext.Dispose();
+            // _DbContext.Dispose();
             // Release the unmanaged resource in any case as they will not be 
             // released by GC
 
@@ -298,6 +341,6 @@ namespace Mugurtham.UOW
 
         #endregion
 
-        
+
     }
 }
