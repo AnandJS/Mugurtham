@@ -67,6 +67,7 @@ namespace Mugurtham.Core.Payment.PaymentProfileTransactions
                 objPaymentProfileTransactionsCoreEntity.ProfileID = objPaymentGatewayTransactionsCoreEntity.MerchantParam1;
                 objPaymentProfileTransactionsCoreEntity.TransactionID = objPaymentGatewayTransactionsCoreEntity.TransactionID;
                 objPaymentProfileTransactionsCoreEntity.ValidityExpiryDate = objPaymentGatewayTransactionsCoreEntity.TranDate.AddMonths(Constants.MEMBERSHIPFORSIXMONTHS);
+                objPaymentProfileTransactionsCoreEntity.SangamID = _objLoggedInUser.sangamID;
             }
             catch(Exception objEx)
             {
