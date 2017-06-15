@@ -14,45 +14,44 @@ using CCA.Util;
 
 namespace Mugurtham.Service.Controllers
 {
-    public class ccavenueresponse
-    {
-        public string data { get; set; }
-    }
-
     [AllowAnonymous]
     public class HomeController : MugurthamBaseController
     {
         //
         // GET: /Home/
         public ActionResult Index(string returnURL)
-        {
-
+        {            
             return View();
         }
         [HttpPost]
         public ActionResult ccResponse(string encResp)
         {
-            ccavenueresponse obj = new Controllers.ccavenueresponse();
-            //obj.data = encResp + " ddddddd";
-
+            string _TrasactionID = string.Empty;
+                ccavenueresponse objccavenueresponse = new ccavenueresponse();
             try
             {
-                Helpers.LogMessageInFlatFile(encResp);
-                /*Do not change the encResp.If you change it you will not get any response.
-    Decode the encResp*/
-                var decryption = new CCACrypto();
-                var decryptedParameters = decryption.Decrypt(encResp,
-                "56FDB199FAF2C31B82E95CC1551BB423");
-                /*split the decryptedParameters by & and then by = and save your values*/
-                Helpers.LogMessageInFlatFile(decryptedParameters);
-
-                obj.data = decryptedParameters.ToString();
+                Mugurtham.Core.Login.LoggedInUser objLoggedIn = (Mugurtham.Core.Login.LoggedInUser)Session["LoggedInUser"];
+                Core.Payment.PaymentGatewayTransactions.PaymentGatewayTransactionsCore objPaymentGatewayTransactionsCore =
+                    new Core.Payment.PaymentGatewayTransactions.PaymentGatewayTransactionsCore(objLoggedIn);
+                using (objPaymentGatewayTransactionsCore as IDisposable)
+                {
+                    objPaymentGatewayTransactionsCore.Add(encResp, out _TrasactionID);
+                }
+                objPaymentGatewayTransactionsCore = null;
+                objccavenueresponse.TransactioID = _TrasactionID;
             }
             catch (Exception objEx)
             {
                 Helpers.LogExceptionInFlatFile(objEx);
             }
-            return View(obj);
+            finally            
+            {
+                if (objccavenueresponse != null)
+                {
+                    ((IDisposable)objccavenueresponse).Dispose();
+                }
+            }
+            return View(objccavenueresponse);
         }
 
 
@@ -183,5 +182,10 @@ namespace Mugurtham.Service.Controllers
             objSangamDashboardCore = null;
             return this.Json(objListSangamDashboardCoreEntity, JsonRequestBehavior.AllowGet);
         }
+    }
+
+    public class ccavenueresponse
+    {
+        public string TransactioID { get; set; }
     }
 }

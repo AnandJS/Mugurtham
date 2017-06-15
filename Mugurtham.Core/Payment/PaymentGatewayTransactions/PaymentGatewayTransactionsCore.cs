@@ -10,6 +10,7 @@ using System.Data;
 using CCA.Util;
 using System.Collections.Specialized;
 using Mugurtham.DTO.Payment;
+using Mugurtham.Core.Payment.PaymentProfileTransactions;
 
 namespace Mugurtham.Core.Payment.PaymentGatewayTransactions
 {
@@ -21,8 +22,9 @@ namespace Mugurtham.Core.Payment.PaymentGatewayTransactions
             _objLoggedInUser = objLoggedInUser;
         }
 
-        public int Add(string EncryptedString)
+        public int Add(string EncryptedString,out string TrasactionID)
         {
+            TrasactionID = string.Empty;
             try
             {
                 PaymentGatewayTransactionsCoreEntity objPaymentGatewayTransactionsCoreEntity = new PaymentGatewayTransactionsCoreEntity();
@@ -38,11 +40,18 @@ namespace Mugurtham.Core.Payment.PaymentGatewayTransactions
                         {
                             objIUnitOfWorkAdd.RepositoryPaymentGatewayTransactions.Add(objPaymentGatewayTransactionsModel);
                             objIUnitOfWorkAdd.commit();
+                            TrasactionID = objPaymentGatewayTransactionsCoreEntity.TransactionID;
                         }
                         objIUnitOfWorkAdd = null;
                     }
                     objPaymentGatewayTransactionsModel = null;
                 }
+                PaymentProfileTransactionsCore objPaymentProfileTransactionsCore = new PaymentProfileTransactionsCore(_objLoggedInUser);
+                using (objPaymentProfileTransactionsCore as IDisposable)
+                {
+                    objPaymentProfileTransactionsCore.Add(ref objPaymentGatewayTransactionsCoreEntity);
+                }
+                objPaymentProfileTransactionsCore = null;
                 objPaymentGatewayTransactionsCoreEntity = null;
             }
             catch(Exception objEx)
@@ -55,18 +64,18 @@ namespace Mugurtham.Core.Payment.PaymentGatewayTransactions
 
         private int getPaymentGatewayTransactionsCoreEntity(string EncryptedString, ref PaymentGatewayTransactionsCoreEntity objPaymentGatewayTransactionsCoreEntity)
         {
+           NameValueCollection Params = new NameValueCollection();
             try
             {
-                objPaymentGatewayTransactionsCoreEntity.TransactionID = Helpers.primaryKey;
-                objPaymentGatewayTransactionsCoreEntity.CreatedDate = DateTime.Now;
-                objPaymentGatewayTransactionsCoreEntity.CreatedBy = _objLoggedInUser.LoginID;
-                objPaymentGatewayTransactionsCoreEntity.TranDate = DateTime.Now;
-                objPaymentGatewayTransactionsCoreEntity.EncryptedText = EncryptedString;
-                string workingKey = "56FDB199FAF2C31B82E95CC1551BB423";//put in the 32bit alpha numeric key in the quotes provided here
-                CCACrypto ccaCrypto = new CCACrypto();
-                string encResponse = ccaCrypto.Decrypt(EncryptedString, workingKey);
-                NameValueCollection Params = new NameValueCollection();
-                string[] segments = encResponse.Split('&');
+                string DecryptedValue = string.Empty;
+                string workingKey = Constants.ccAvenueworkingKeyTest; //put in the 32bit alpha numeric key in the quotes provided here
+                CCACrypto objccaCrypto = new CCACrypto();
+                using (objccaCrypto as IDisposable)
+                {
+                    DecryptedValue = objccaCrypto.Decrypt(EncryptedString, workingKey);
+                }
+                objccaCrypto = null;
+                string[] segments = DecryptedValue.Split('&');
                 foreach (string seg in segments)
                 {
                     string[] parts = seg.Split('=');
@@ -77,6 +86,12 @@ namespace Mugurtham.Core.Payment.PaymentGatewayTransactions
                         Params.Add(Key, Value);
                     }
                 }
+                objPaymentGatewayTransactionsCoreEntity.TransactionID = Helpers.primaryKey;
+                objPaymentGatewayTransactionsCoreEntity.CreatedDate = DateTime.Now;
+                objPaymentGatewayTransactionsCoreEntity.CreatedBy = _objLoggedInUser.LoginID;
+                objPaymentGatewayTransactionsCoreEntity.TranDate = DateTime.Now;
+                objPaymentGatewayTransactionsCoreEntity.EncryptedText = EncryptedString;
+                objPaymentGatewayTransactionsCoreEntity.DecryptedText = DecryptedValue;
                 for (int i = 0; i < Params.Count; i++)
                 {
                     //Helpers.LogMessageInFlatFile(Params.Keys[i] + " = " + Params[i] + "<br>");
@@ -165,6 +180,14 @@ namespace Mugurtham.Core.Payment.PaymentGatewayTransactions
                         case "delivery_tel":
                             objPaymentGatewayTransactionsCoreEntity.DeliveryTel = Params[i];
                             break;
+                        case "mer_amount":
+                            {
+                                decimal merAmount = 0;
+                                if (!string.IsNullOrEmpty(Params[i]))
+                                    merAmount = Convert.ToDecimal(Params[i]);
+                                objPaymentGatewayTransactionsCoreEntity.MerAmount = merAmount;
+                            }
+                            break;
                         case "merchant_param1":
                             objPaymentGatewayTransactionsCoreEntity.MerchantParam1 = Params[i];
                             break;
@@ -226,6 +249,12 @@ namespace Mugurtham.Core.Payment.PaymentGatewayTransactions
             {
                 Helpers.LogExceptionInFlatFile(objEx);
             }
+            finally
+            {
+                if (Params != null)
+                    Params = null;
+                   // ((IDisposable)Params).Dispose();
+            }
             return 0;
         }
 
@@ -263,6 +292,7 @@ namespace Mugurtham.Core.Payment.PaymentGatewayTransactions
                 objPaymentGatewayTransactionsModel.DiscountValue = objPaymentGatewayTransactionsEntity.DiscountValue;
                 objPaymentGatewayTransactionsModel.ECIValue = objPaymentGatewayTransactionsEntity.ECIValue;
                 objPaymentGatewayTransactionsModel.EncryptedText = objPaymentGatewayTransactionsEntity.EncryptedText;
+                objPaymentGatewayTransactionsModel.DecryptedText = objPaymentGatewayTransactionsEntity.DecryptedText;
                 objPaymentGatewayTransactionsModel.FailureMessage = objPaymentGatewayTransactionsEntity.FailureMessage;
                 objPaymentGatewayTransactionsModel.TransactionID = objPaymentGatewayTransactionsEntity.TransactionID;
                 objPaymentGatewayTransactionsModel.MerAmount = objPaymentGatewayTransactionsEntity.MerAmount;

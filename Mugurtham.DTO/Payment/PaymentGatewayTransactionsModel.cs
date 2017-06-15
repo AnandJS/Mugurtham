@@ -58,6 +58,7 @@ namespace Mugurtham.DTO.Payment
         public string BillingNotes { get; set; }
         public string BinCountry { get; set; }
         public string EncryptedText { get; set; }
+        public string DecryptedText { get; set; }
         public string CreatedBy { get; set; }
     }
 }

@@ -3,13 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Mugurtham.DTO.Payment
+namespace Mugurtham.Core.Payment.PaymentProfileTransactions
 {
-    [Table("PaymentProfileTransactions")]
-    public class PaymentProfileTransactionsModel
+    public class PaymentProfileTransactionsCoreEntity
     {
         public Decimal? PaymentAmount { get; set; }
 
@@ -17,7 +14,7 @@ namespace Mugurtham.DTO.Payment
         public DateTime? PaymentDate { get; set; }
         public DateTime? ValidityStartDate { get; set; }
         public DateTime? ValidityExpiryDate { get; set; }
-        [Key]
+
         public string TransactionID { get; set; }
         public string ProfileID { get; set; }
         public string SangamID { get; set; }

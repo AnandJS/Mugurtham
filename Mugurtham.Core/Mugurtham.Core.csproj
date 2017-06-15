@@ -47,6 +47,8 @@
     <Compile Include="Dashboard\Sangam\SangamDashboardCoreEntity.cs" />
     <Compile Include="Payment\PaymentGatewayTransactions\PaymentGatewayTransactionsCore.cs" />
     <Compile Include="Payment\PaymentGatewayTransactions\PaymentGatewayTransactionsCoreEntity.cs" />
+    <Compile Include="Payment\PaymentProfileTransactions\PaymentProfileTransactionsCore.cs" />
+    <Compile Include="Payment\PaymentProfileTransactions\PaymentProfileTransactionsCoreEntity.cs" />
     <Compile Include="ProfileInterested\ProfileInterestedCore.cs" />
     <Compile Include="ProfileInterested\ProfileInterestedCoreEntity.cs" />
     <Compile Include="ProfileViewed\ProfileViewedCore.cs" />
@@ -108,7 +110,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Payment\PaymentProfileTransactions\" />
     <Folder Include="Payment\PaymentSangamTransactions\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

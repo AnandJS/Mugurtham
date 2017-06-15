@@ -369,7 +369,7 @@ function getCasteOfLoggedInUser() {
     else if (communityID == '15')
         arrCaste = ['Reddiar'];
     else if (communityID == '16')
-        arrCaste = ['ReMarriage'];
+        arrCaste = ['Agamudayar','Brahmin', 'Christian', 'Gounder','Maruthuvar', 'Mudaliyar', 'Mukkulathor', 'Nadar', 'Naidu', 'Others', 'Padayachi', 'Parvatharajakulam', 'Pillai','Reddiar', 'ReMarriage', 'Thevar', 'Udayar',  'vanniyar', 'Vellalar', 'Vishwakarma', 'Yadava'];
     else if (communityID == '17')
         arrCaste = ['Thevar'];
     else if (communityID == '18')
@@ -382,6 +382,9 @@ function getCasteOfLoggedInUser() {
         arrCaste = ['Vishwakarma'];
     else if (communityID == '22')
         arrCaste = ['Yadava'];
+    else if (communityID == '23')
+        arrCaste = ['Agamudayar', 'Brahmin', 'Christian', 'Gounder', 'Maruthuvar', 'Mudaliyar', 'Mukkulathor', 'Nadar', 'Naidu', 'Others', 'Padayachi', 'Parvatharajakulam', 'Pillai', 'Reddiar', 'ReMarriage', 'Thevar', 'Udayar', 'vanniyar', 'Vellalar', 'Vishwakarma', 'Yadava'];
+
 
     return arrCaste;
 }

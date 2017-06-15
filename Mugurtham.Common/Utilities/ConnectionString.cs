@@ -158,6 +158,12 @@ namespace Mugurtham.Common.Utilities
                     _AppKeyConnectionstring = "YadavaMugurtham";
                     _Connectionstring = System.Configuration.ConfigurationManager.ConnectionStrings[_AppKeyConnectionstring].ConnectionString;
                 }
+                else if (_CommunityID == "23")
+                {
+                    _CommunityName = "CasteNoBar";
+                    _AppKeyConnectionstring = "CasteNoBarMugurtham";
+                    _Connectionstring = System.Configuration.ConfigurationManager.ConnectionStrings[_AppKeyConnectionstring].ConnectionString;
+                }
             }
             catch (Exception objEx)
             {

@@ -49,6 +49,19 @@ namespace Mugurtham.Core
         public const string ccAvenueAccessCode = "AVWW71EF27AP21WWPA";
         public const string ccAvenueTransactionURL = "https://secure.ccavenue.com/transaction/transaction.do?command=initiateTransaction";
 
+        //MEMBERSHIP TENURE - IN MONTHS
+        public const int MEMBERSHIPFORTHREEMONTHS = 3;
+        public const int MEMBERSHIPFORSIXMONTHS = 6;
+        public const int MEMBERSHIPFORNINEMONTHS = 9;
+        public const int MEMBERSHIPFORONEYEAR = 12;
+
+        //MEMBERSHIP PAYMENT MODE
+        public const string MEMBERSHIPONLINEPAYMENT = "Mugurtham Online Payment";
+        public const string MEMBERSHIPONLINEBANKTRANSFER = "Online Bank Tranfer";
+        public const string MEMBERSHIPCHEQUEDEPOSIT = "Online Cheque Deposit";
+        public const string MEMBERSHIPCASHPAYMENT = "Cash Payment";
+        public const string MEMBERSHIPPAIDTHROUGHSANGAM = "Paid Through Sangam";
+
 
 
 
