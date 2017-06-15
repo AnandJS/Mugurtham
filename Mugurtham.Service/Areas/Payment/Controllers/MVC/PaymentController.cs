@@ -1,13 +1,14 @@
 ﻿using CCA.Util;
 using Mugurtham.Common.Utilities;
 using Mugurtham.Service.App_Code.Utility;
+using Mugurtham.Service.Controllers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Mugurtham.Service.Areas.Payment.Controllers
+namespace Mugurtham.Service.Areas.Payment.Controllers.MVC
 {
     public class ccavenueresponse
     {
@@ -15,6 +16,9 @@ namespace Mugurtham.Service.Areas.Payment.Controllers
         public string encResp { get; set; }
     }
 
+    [MugurthamAuthorizeAttribute(Mugurtham.Core.Constants.RoleIDForSangamAdmin,
+                                Mugurtham.Core.Constants.RoleIDForUserProfile,
+                                Mugurtham.Core.Constants.RoleIDForMugurthamAdmin)]
     public class PaymentController : MugurthamBaseController
     {
         // GET: Payment/Payment

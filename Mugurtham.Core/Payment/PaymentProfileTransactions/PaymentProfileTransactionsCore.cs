@@ -49,6 +49,39 @@ namespace Mugurtham.Core.Payment.PaymentProfileTransactions
             return 0;
         }
 
+
+        public int GetAllPaymentTransactions(ref List<PaymentProfileTransactionsCoreEntity> objPaymentProfileTransactionsCoreEntityList)
+        {
+            try
+            {
+                IUnitOfWork objIUnitOfWork = new UnitOfWork(_objLoggedInUser.ConnectionStringAppKey);
+                using (objIUnitOfWork as IDisposable)
+                {
+                    foreach (PaymentProfileTransactionsModel objPaymentProfileTransactionsModel in objIUnitOfWork.RepositoryPaymentProfileTransactions.GetAll().OrderByDescending(x => x.PaymentDate).ToList())
+                    {
+                        PaymentProfileTransactionsModel _objPaymentProfileTransactionsModel = objPaymentProfileTransactionsModel;
+                        using (_objPaymentProfileTransactionsModel as IDisposable)
+                        {
+                            PaymentProfileTransactionsCoreEntity objPaymentProfileTransactionsCoreEntity = new PaymentProfileTransactionsCoreEntity();
+                            using (objPaymentProfileTransactionsCoreEntity as IDisposable)
+                            {
+                                AssignEntityFromModel(ref objPaymentProfileTransactionsCoreEntity, ref _objPaymentProfileTransactionsModel);
+                                objPaymentProfileTransactionsCoreEntityList.Add(objPaymentProfileTransactionsCoreEntity);
+                            }
+                            objPaymentProfileTransactionsCoreEntity = null;
+                        }
+                        _objPaymentProfileTransactionsModel = null;
+                    }
+                }
+                objIUnitOfWork = null;
+            }
+            catch (Exception objEx)
+            {
+                Helpers.LogExceptionInFlatFile(objEx);
+            }
+            return 0;
+        }
+
         private int AssignProfileTransactionFromGatewayTransaction
                           (
                             ref PaymentGatewayTransactionsCoreEntity objPaymentGatewayTransactionsCoreEntity,
@@ -98,6 +131,34 @@ namespace Mugurtham.Core.Payment.PaymentProfileTransactions
                 objPaymentProfileTransactionsModel.ValidityStartDate = objPaymentProfileTransactionsCoreEntity.ValidityStartDate;
             }
             catch(Exception objEx)
+            {
+                Helpers.LogExceptionInFlatFile(objEx);
+            }
+            return 0;
+        }
+
+        private int AssignEntityFromModel
+                       (
+                           ref PaymentProfileTransactionsCoreEntity objPaymentProfileTransactionsCoreEntity,
+                           ref PaymentProfileTransactionsModel objPaymentProfileTransactionsModel
+                       )
+        {
+            try
+            {
+                objPaymentProfileTransactionsCoreEntity.CreatedBy = objPaymentProfileTransactionsModel.CreatedBy;
+                objPaymentProfileTransactionsCoreEntity.CreatedDate = objPaymentProfileTransactionsModel.CreatedDate;
+                objPaymentProfileTransactionsCoreEntity.PaymentAmount = objPaymentProfileTransactionsModel.PaymentAmount;
+                objPaymentProfileTransactionsCoreEntity.PaymentDate = objPaymentProfileTransactionsModel.PaymentDate;
+                objPaymentProfileTransactionsCoreEntity.PaymentFor = objPaymentProfileTransactionsModel.PaymentFor;
+                objPaymentProfileTransactionsCoreEntity.PaymentMode = objPaymentProfileTransactionsModel.PaymentMode;
+                objPaymentProfileTransactionsCoreEntity.PaymentNotes = objPaymentProfileTransactionsModel.PaymentNotes;
+                objPaymentProfileTransactionsCoreEntity.ProfileID = objPaymentProfileTransactionsModel.ProfileID;
+                objPaymentProfileTransactionsCoreEntity.SangamID = objPaymentProfileTransactionsModel.SangamID;
+                objPaymentProfileTransactionsCoreEntity.TransactionID = objPaymentProfileTransactionsModel.TransactionID;
+                objPaymentProfileTransactionsCoreEntity.ValidityExpiryDate = objPaymentProfileTransactionsModel.ValidityExpiryDate;
+                objPaymentProfileTransactionsCoreEntity.ValidityStartDate = objPaymentProfileTransactionsModel.ValidityStartDate;
+            }
+            catch (Exception objEx)
             {
                 Helpers.LogExceptionInFlatFile(objEx);
             }

@@ -151,7 +151,8 @@
     <Compile Include="Areas\MugurthamAdmin\Controllers\MVC\SangamController.cs" />
     <Compile Include="Areas\MugurthamAdmin\Controllers\MVC\UserController.cs" />
     <Compile Include="Areas\MugurthamAdmin\MugurthamAdminAreaRegistration.cs" />
-    <Compile Include="Areas\Payment\Controllers\PaymentController.cs" />
+    <Compile Include="Areas\Payment\Controllers\API\ProfilePaymentController.cs" />
+    <Compile Include="Areas\Payment\Controllers\MVC\PaymentController.cs" />
     <Compile Include="Areas\Payment\PaymentAreaRegistration.cs" />
     <Compile Include="Areas\Profile\Controllers\API\BasicInfoAPIController.cs" />
     <Compile Include="Areas\Profile\Controllers\API\CareerAPIController.cs" />
