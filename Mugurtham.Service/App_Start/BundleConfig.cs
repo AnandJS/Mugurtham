@@ -39,6 +39,7 @@ namespace Mugurtham.Service
                  "~/Scripts/Mugurtham.JS/Slider/jssor.slider.mini.js"));
             bundles.Add(new ScriptBundle("~/bundles/MugurthamApp").Include(
                     "~/Scripts/Mugurtham.JS/Mugurtham/app.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/MugurthamControllerBase").Include(
                    "~/Scripts/Mugurtham.js/Mugurtham/Controllers/ControllerMugurtham.js"));
             bundles.Add(new ScriptBundle("~/bundles/MugurthamControllerSangamAdmin").Include(
@@ -53,6 +54,10 @@ namespace Mugurtham.Service
                    "~/Scripts/Mugurtham.JS/Mugurtham/Controllers/View/*.js"));
             bundles.Add(new ScriptBundle("~/bundles/MugurthamControllerMugurthamAdmin").Include(
                    "~/Scripts/Mugurtham.JS/Mugurtham/Controllers/MugurthamAdmin/*.js"));
+            bundles.Add(new ScriptBundle("~/bundles/MugurthamControllerPayment").Include(
+                   "~/Scripts/Mugurtham.JS/Mugurtham/Controllers/Payment/*.js"));
+
+
             bundles.Add(new ScriptBundle("~/bundles/MugurthamValidation").Include(
                    "~/Scripts/Mugurtham.JS/Mugurtham/Utility/*.js"));
             bundles.Add(new ScriptBundle("~/bundles/MugurthamConstants").Include(

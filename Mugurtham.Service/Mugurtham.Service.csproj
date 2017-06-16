@@ -151,6 +151,7 @@
     <Compile Include="Areas\MugurthamAdmin\Controllers\MVC\SangamController.cs" />
     <Compile Include="Areas\MugurthamAdmin\Controllers\MVC\UserController.cs" />
     <Compile Include="Areas\MugurthamAdmin\MugurthamAdminAreaRegistration.cs" />
+    <Compile Include="Areas\Payment\Controllers\API\ProfilePaymentAPIController.cs" />
     <Compile Include="Areas\Payment\Controllers\API\ProfilePaymentController.cs" />
     <Compile Include="Areas\Payment\Controllers\MVC\PaymentController.cs" />
     <Compile Include="Areas\Payment\PaymentAreaRegistration.cs" />
@@ -508,6 +509,7 @@
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\Controllers\ControllerMugurtham.min.js">
       <DependentUpon>ControllerMugurtham.js</DependentUpon>
     </Content>
+    <Content Include="Scripts\Mugurtham.JS\Mugurtham\Controllers\Payment\ControllerPaymentProfileTransactions.js" />
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\Controllers\SangamAdmin\ControllerSangamAdminProfiles.js" />
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\Controllers\SangamAdmin\ControllerSangamDashboard.js" />
     <Content Include="Scripts\Mugurtham.JS\Mugurtham\Controllers\Profile\ControllerProfileBasicInfo.js" />

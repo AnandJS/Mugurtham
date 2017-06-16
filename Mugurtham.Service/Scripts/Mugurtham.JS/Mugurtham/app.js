@@ -256,7 +256,7 @@
             })
          .when('/Transactions', {
              templateUrl: '/Payment/Payment/Transactions',
-             controller: 'ControllerRecentlyJoined'
+             controller: 'ControllerPaymentProfileTransactions'
 
          })
 

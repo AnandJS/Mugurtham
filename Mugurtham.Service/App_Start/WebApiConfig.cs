@@ -150,6 +150,14 @@ namespace Mugurtham.Service
             routeTemplate: "Lookup/{controller}/{id}",
             defaults: new { id = RouteParameter.Optional }
         );
+            /*=================================================================================*/
+            /*PAYMENT MODULE*/
+            /*=================================================================================*/
+            config.Routes.MapHttpRoute(
+            name: "PaymentAPI",
+            routeTemplate: "PaymentAPI/{controller}/{id}",
+            defaults: new { id = RouteParameter.Optional }
+        );
 
 
 
