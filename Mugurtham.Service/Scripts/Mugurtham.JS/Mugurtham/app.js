@@ -259,6 +259,10 @@
              controller: 'ControllerPaymentProfileTransactions'
 
          })
+         .when('/PaymentSuccess/:TransactionID', {
+             templateUrl: '/Payment/Payment/PaymentSuccess',
+             controller: 'ControllerPaymenSuccess'
+         })
 
 
         // a default page redirect -- fallback
