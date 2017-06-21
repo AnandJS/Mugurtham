@@ -43,7 +43,7 @@
                         <div class="form-group">
                             <label for="UserName" class="col-lg-3 control-label">Amount</label>
                             <div class="col-lg-9">
-                                <input type="text" id="txtAmount" class="form-control" value="500">
+                                <input type="text" id="txtAmount" class="form-control" value="500.00" disabled="disabled">
                             </div>
                         </div>
                         <div class="form-group">
@@ -92,14 +92,19 @@
         $('#merchant_param2').val($('#ddlPaymentFor').val());
         // Set Merchant Parameter on Notes
         $('#merchant_param3').val($('#txtNotes').val());
+        $('#amount').val($('#txtAmount').val());
+
     });
     //Set Amount Value
     $("#ddlPaymentFor").change(function () {
-        if ($("#ddlPaymentFor").val() === 'Highlight')
-            $('#txtAmount').val('1000');
-        else if ($("#ddlPaymentFor").val() === 'Membership')
-            $('#txtAmount').val('500');
+        if ($("#ddlPaymentFor").val() === 'Highlight') {
+            $('#txtAmount').val('1000.00');
+            $('#amount').val('1000.00');
+        }
+        else if ($("#ddlPaymentFor").val() === 'Membership') {
+            $('#txtAmount').val('500.00');
+            $('#amount').val('500.00');
+        }
     });
-    $('#amount').val($('#txtAmount').val());
 </script>
 

@@ -57,7 +57,7 @@ namespace Mugurtham.Core.Payment.PaymentProfileTransactions
                 IUnitOfWork objIUnitOfWork = new UnitOfWork(_objLoggedInUser.ConnectionStringAppKey);
                 using (objIUnitOfWork as IDisposable)
                 {
-                    foreach (PaymentProfileTransactionsModel objPaymentProfileTransactionsModel in objIUnitOfWork.RepositoryPaymentProfileTransactions.GetAll().OrderByDescending(x => x.PaymentDate).ToList())
+                    foreach (PaymentProfileTransactionsModel objPaymentProfileTransactionsModel in objIUnitOfWork.RepositoryPaymentProfileTransactions.GetAll().Where(y => y.ProfileID == _objLoggedInUser.LoginID).OrderByDescending(x => x.PaymentDate).ToList())
                     {
                         PaymentProfileTransactionsModel _objPaymentProfileTransactionsModel = objPaymentProfileTransactionsModel;
                         using (_objPaymentProfileTransactionsModel as IDisposable)
@@ -102,7 +102,7 @@ namespace Mugurtham.Core.Payment.PaymentProfileTransactions
                 objPaymentProfileTransactionsCoreEntity.ValidityExpiryDate = objPaymentGatewayTransactionsCoreEntity.TranDate.AddMonths(Constants.MEMBERSHIPFORSIXMONTHS);
                 objPaymentProfileTransactionsCoreEntity.SangamID = _objLoggedInUser.sangamID;
             }
-            catch(Exception objEx)
+            catch (Exception objEx)
             {
                 Helpers.LogExceptionInFlatFile(objEx);
             }
@@ -130,7 +130,7 @@ namespace Mugurtham.Core.Payment.PaymentProfileTransactions
                 objPaymentProfileTransactionsModel.ValidityExpiryDate = objPaymentProfileTransactionsCoreEntity.ValidityExpiryDate;
                 objPaymentProfileTransactionsModel.ValidityStartDate = objPaymentProfileTransactionsCoreEntity.ValidityStartDate;
             }
-            catch(Exception objEx)
+            catch (Exception objEx)
             {
                 Helpers.LogExceptionInFlatFile(objEx);
             }

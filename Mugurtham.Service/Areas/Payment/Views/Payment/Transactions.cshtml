@@ -2,115 +2,41 @@
 @{
     ViewBag.Title = "Transactions";
     Layout = "~/Areas/Payment/Views/Shared/LayoutPayment.cshtml";
+    Mugurtham.Core.Login.LoggedInUser objLoggedIn = (Mugurtham.Core.Login.LoggedInUser)Session["LoggedInUser"];
 }
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
-
-<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
-
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css">
 
 
 
+<div id="divTransactionList" ng-init="getAllPaymentTransactions();">
+    <p class="lead">Payment Transaction List</p>
+    <hr />
+    <div class="col-lg-12" data-ng-init="getAllSangamUsers('@objLoggedIn.sangamID');">
+        <ul class="breadcrumb">
+            <li><a href="@objLoggedIn.HomePagePath">{{ 'GENHOME' | translate }}</a></li>
+            <li class="active">User List</li>
+        </ul>
+    </div>
 
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="//code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
-
-<script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
-
-
-<script>
-$(document).ready(function(){
-   $('#example').DataTable( {
-    data: [
- {
-    "Age": 38,
-    "MugurthamProfileID": "CDM2477",
-    "SangamProfileID": "AJ-02/155",
-    "Name": "M. Loganathan",
-    "Gender": "groom",
-    "Education": "10th",
-    "Location": "",
-    "Occupation": "",
-    "SangamID": "E00B70E95EA4A0E9E",
-    "SangamName": "\"ஸ்ரீ காமாட்சி அம்மன் விஸ்வகர்ம திருமண தகவல் சேவை மையம்,",
-
-    "Chidambaram\",": null,
-    "SubCaste": "",
-    "Star": "Bharani",
-    "AboutMe": "",
-    "objPhotoCoreEntityList": null
-  },
-  {
-    "Age": 42,
-    "MugurthamProfileID": "CDM2476",
-    "SangamProfileID": "AJ-0913",
-    "Name": "P. VijayKumar(A) Anand",
-    "Gender": "groom",
-    "Education": "M. C. A.",
-    "Location": "",
-    "Occupation": "Computer Software",
-    "SangamID": "E00B70E95EA4A0E9E",
-    "SangamName": "\"ஸ்ரீ காமாட்சி அம்மன் விஸ்வகர்ம திருமண தகவல் சேவை மையம்,",
-
-    "Chidambaram\",": null,
-    "SubCaste": "",
-    "Star": "Bharani",
-    "AboutMe": "",
-    "objPhotoCoreEntityList": null
-  },
-  {
-    "Age": 35,
-    "MugurthamProfileID": "CDM2475",
-    "SangamProfileID": "AJ-02/044",
-    "Name": "T. Saravanan",
-    "Gender": "groom",
-    "Education": "M. A., B.Ed.",
-    "Location": "",
-    "Occupation": "",
-    "SangamID": "E00B70E95EA4A0E9E",
-    "SangamName": "\"ஸ்ரீ காமாட்சி அம்மன் விஸ்வகர்ம திருமண தகவல் சேவை மையம்,",
-
-    "Chidambaram\",": null,
-    "SubCaste": "",
-    "Star": "Bharani",
-    "AboutMe": "",
-    "objPhotoCoreEntityList": null
-  }
-  ],
-  "columns": [
-            { "data": "Age" },
-            { "data": "MugurthamProfileID" },
-            { "data": "SangamProfileID" },
-            { "data": "Name" },
-            { "data": "Gender" }
-        ]
-
-    } );
-});
-</script>
- 
-
-    <table id="example" class="display" cellspacing="0" width="100%">
+    <table id="tblTransactions" class="display" cellspacing="0">
         <thead>
             <tr>
-                <th>Age</th>
-                <th>MugurthamProfileID</th>
-                <th>SangamProfileID</th>
-                <th>Name</th>
-                <th>Gender</th>
-
+                <th>TransactionID</th>
+                <th>Date</th>
+                <th>Amount</th>
+                <th>Mode</th>
+                <th>For</th>
+                <th>Notes</th>
             </tr>
         </thead>
         <tfoot>
             <tr>
-                <th>Age</th>
-                <th>MugurthamProfileID</th>
-                <th>SangamProfileID</th>
-                <th>Name</th>
-                <th>Gender</th>
-            </tr>
+                <th>TransactionID</th>
+                <th>Date</th>
+                <th>Amount</th>
+                <th>Mode</th>
+                <th>For</th>
+                <th>Notes</th>
         </tfoot>
     </table>
+</div>
+ 

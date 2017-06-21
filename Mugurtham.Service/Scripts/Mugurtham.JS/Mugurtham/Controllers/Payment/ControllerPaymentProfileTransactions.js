@@ -15,6 +15,8 @@
 THIS CONTROLLER IS SPECIFICALLY FOR PAYMENT PROFILE TRANSACTIONS PAGE ON PAYMENT MODULE
 ==========================================================================================
 */
+
+var dataset = '';
 var ControllerPaymentProfileTransactions = angular.module('MugurthamApp').controller('ControllerPaymentProfileTransactions',
           ['$http', '$scope', '$routeParams', '$rootScope', function ($http, $scope, $routeParams, $rootScope) {
 
@@ -22,6 +24,7 @@ var ControllerPaymentProfileTransactions = angular.module('MugurthamApp').contro
               //GLOBAL VARIABLES FOR THIS CONTROLLER
               //=========================================   
               $scope.controllerName = 'ControllerPaymentProfileTransactions';
+              //$scope.Transactions = data;
 
               //===================================================
               //AJAX GET REQUEST - GET ALL PROFILE PAYMENT TRANSACTIONS
@@ -29,7 +32,8 @@ var ControllerPaymentProfileTransactions = angular.module('MugurthamApp').contro
               $scope.getAllPaymentTransactions = function () {
                   $("#divContainer").mask("Loading all Payment Transactions please wait...");
                   $http({
-                      method: "GET", url: '/PaymentAPI/ProfilePaymentAPIController/GetAllPaymentTransactions',
+                      method: "GET", url: '/PaymentAPI/ProfilePaymentAPI/GetAllPaymentTransactions',
+                     // method: "GET", url: '/Role/RoleAPI',
                       headers: {
                           "MugurthamUserToken": getLoggedInUserID(),
                           "CommunityID": getLoggedInUserCommunityID()
@@ -37,7 +41,7 @@ var ControllerPaymentProfileTransactions = angular.module('MugurthamApp').contro
                   }).
               success(function (data, status, headers, config) {
                   $("#divContainer").unmask();
-                  $scope.AllSangams = data;
+                  loadTable(data);
               }).
                   error(function (data, status, headers, config) {
                       $("#divContainer").unmask();
@@ -45,16 +49,49 @@ var ControllerPaymentProfileTransactions = angular.module('MugurthamApp').contro
                   });
               }
 
-
-
-
-
-
-
-
-
-
-
-
           }] // Controller
    ); // Module
+
+function loadTable(objTransaction) {
+    $('#tblTransactions').DataTable({
+        dom: 'Bfrtip',
+        buttons: [
+          /*  {
+                extend: 'copyHtml5',
+                exportOptions: {
+                    columns: ':contains("Office"),:contains("Name")'
+                }
+            },*/
+
+            {
+                extend: 'print',
+                customize: function (win) {
+                    $(win.document.body)
+                        .css('font-size', '10pt')
+                        .prepend(
+                            '<img src="https://www.mugurtham.com/Images/Mugurtham/General/logo.png" style="position:absolute; opacity: 0.25;    font-size: 3em;    width: 100%;    text-align: center;    z-index: 1000; top:300; left:0;" />'
+                        );
+
+                    $(win.document.body).find('table')
+                        .addClass('compact')
+                        .css('font-size', 'inherit');
+                }
+            },
+
+          /*  'excelHtml5',
+            'csvHtml5',*/
+            'pdfHtml5'
+           // 'print'
+        ],
+        //https://datatables.net/forums/discussion/26721/add-custom-headers-to-ajax-when-loading-data
+        "data": objTransaction,
+        "columns": [
+            { "data": "TransactionID" },
+            { "data": "PaymentDate" },
+            { "data": "PaymentAmount" },
+            { "data": "PaymentMode" },
+            { "data": "PaymentFor" },
+            { "data": "PaymentNotes" } 
+        ]
+    });
+};
