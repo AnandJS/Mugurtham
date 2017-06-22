@@ -1,4 +1,11 @@
-﻿    <!--
+﻿s
+RDLC
+=======
+https://www.aspsnippets.com/Articles/How-to-create-RDLC-report-step-by-step-in-ASPNet-using-C-and-VBNet.aspx
+https://forums.asp.net/t/1070186.aspx?The+type+or+namespace+name+ScriptManager+does+not+exist+in+the+namespace+System+Web+UI+are+you+missing+an+assembly+reference+
+
+
+    <!--
     <rewrite>
                <rules>
                <rule name="Redirect to HTTPS" stopProcessing="true">
