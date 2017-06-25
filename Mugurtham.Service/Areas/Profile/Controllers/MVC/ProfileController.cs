@@ -273,5 +273,6 @@ namespace Mugurtham.Service.Areas.Profile.Controllers.MVC
             }
             return 0;
         }
+
     }
 }
