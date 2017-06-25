@@ -71,6 +71,7 @@ namespace Mugurtham.Service
                 // clear error on server
                 Server.ClearError();
                 //Response.Redirect(String.Format("/Home/{0}/?message={1}", action, exception.Message));
+                Common.Utilities.Helpers.LogExceptionInFlatFile(exception);
                 Response.Redirect(String.Format("/Home/{0}", action, exception.Message));
             }
         }

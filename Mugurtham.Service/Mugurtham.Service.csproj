@@ -58,6 +58,10 @@
       <HintPath>Areas\Payment\Library\MCPG.CCA.Util.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.ReportViewer.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportViewer.Common.VS2010.10.0.40219.1\lib\net40\Microsoft.ReportViewer.Common.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.ReportViewer.WebForms, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
@@ -176,6 +180,20 @@
     <Compile Include="Areas\SangamAdmin\Reports\Report.aspx.designer.cs">
       <DependentUpon>Report.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\SangamAdmin\Reports\test.aspx.cs">
+      <DependentUpon>test.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Areas\SangamAdmin\Reports\test.aspx.designer.cs">
+      <DependentUpon>test.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\SangamAdmin\Reports\Tester.aspx.cs">
+      <DependentUpon>Tester.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Areas\SangamAdmin\Reports\Tester.aspx.designer.cs">
+      <DependentUpon>Tester.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\SangamAdmin\SangamAdminAreaRegistration.cs" />
     <Compile Include="Areas\Search\Controllers\API\AllProfilesAPIController.cs" />
     <Compile Include="Areas\Search\Controllers\MVC\SearchController.cs" />
@@ -266,6 +284,8 @@
     <Content Include="Areas\Payment\Library\MCPG.CCA.Util.dll" />
     <Content Include="Areas\Profile\Images\ProfilePhoto\Default.txt" />
     <Content Include="Areas\SangamAdmin\Reports\Report.aspx" />
+    <Content Include="Areas\SangamAdmin\Reports\test.aspx" />
+    <Content Include="Areas\SangamAdmin\Reports\Tester.aspx" />
     <Content Include="Areas\Search\Sivan.jpg" />
     <Content Include="Build.html" />
     <Content Include="favicon.ico" />

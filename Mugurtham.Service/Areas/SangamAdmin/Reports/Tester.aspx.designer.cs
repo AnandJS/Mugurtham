@@ -10,7 +10,7 @@
 namespace Mugurtham.Service.Areas.SangamAdmin.Reports {
     
     
-    public partial class Report {
+    public partial class Tester {
         
         /// <summary>
         /// form1 control.

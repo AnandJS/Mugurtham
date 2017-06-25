@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Mugurtham.Common.Utilities
 {
-    public static class Notifications
+    public class Notifications
     {
+
     }
 }

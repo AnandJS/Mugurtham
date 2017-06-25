@@ -1,4 +1,5 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Report.aspx.cs" Inherits="Mugurtham.Service.Areas.SangamAdmin.Reports.Report" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Tester.aspx.cs" Inherits="Mugurtham.Service.Areas.SangamAdmin.Reports.Tester" %>
+
 
 <%@ Register Assembly="Microsoft.ReportViewer.WebForms, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" Namespace="Microsoft.Reporting.WebForms" TagPrefix="rsweb" %>
 
@@ -14,7 +15,7 @@
 
     Sangam Admin Report ff
         <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-        <rsweb:ReportViewer ID="ReportViewer1" runat="server" AsyncRendering="false"    Font-Names="Verdana" Font-Size="8pt" WaitMessageFont-Names="Verdana" WaitMessageFont-Size="14pt" Width="906px">
+        <rsweb:ReportViewer ID="ReportViewer1" runat="server" Font-Names="Verdana" Font-Size="8pt" WaitMessageFont-Names="Verdana" WaitMessageFont-Size="14pt" Width="906px">
             
         </rsweb:ReportViewer>
     </div>

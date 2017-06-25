@@ -10,7 +10,7 @@
 namespace Mugurtham.Service.Areas.SangamAdmin.Reports {
     
     
-    public partial class Report {
+    public partial class test {
         
         /// <summary>
         /// form1 control.
@@ -29,14 +29,5 @@ namespace Mugurtham.Service.Areas.SangamAdmin.Reports {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.ScriptManager ScriptManager1;
-        
-        /// <summary>
-        /// ReportViewer1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Microsoft.Reporting.WebForms.ReportViewer ReportViewer1;
     }
 }

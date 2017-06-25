@@ -7,7 +7,7 @@ using System.Web.Mvc;
 using Mugurtham.Service.Controllers;
 using Mugurtham.Common.Utilities;
 using Mugurtham.Core.Profile.Photo;
-
+using System.Web.Helpers;
 
 namespace Mugurtham.Service.Areas.Profile.Controllers.MVC
 {
@@ -75,6 +75,7 @@ namespace Mugurtham.Service.Areas.Profile.Controllers.MVC
                             string strFilePath = Path.Combine(Server.MapPath("~/Areas/Profile/Images/ProfilePhoto"),
                                               ProfileID + Path.GetExtension(Path.GetFileName(file.FileName)));
                             file.SaveAs(strFilePath);
+                            addTextWatermark(strFilePath);
                             objBasicInfoCore.Edit(ref objBasicInfoCoreEntity);
                         }
                         objBasicInfoCoreEntity = null;
@@ -146,6 +147,7 @@ namespace Mugurtham.Service.Areas.Profile.Controllers.MVC
                                     string strFilePath = Path.Combine(Server.MapPath("~/Areas/Profile/Images/ProfilePhoto/" + objLoggedIn.CommunityName.Trim() + "/" + ProfileID.Trim()),
                                                       strFileName + Path.GetExtension(Path.GetFileName(item.FileName)));
                                     item.SaveAs(strFilePath);
+                                    addTextWatermark(strFilePath);
                                     savePhotoToFolder(strProfilePhotoPath, ProfileID);
                                     if (intProfilePhotoIndex == 1)
                                         objBasicInfoCore.Edit(ref objBasicInfoCoreEntity);
@@ -162,7 +164,7 @@ namespace Mugurtham.Service.Areas.Profile.Controllers.MVC
                     intProfilePhotoIndex += 1;
                 }
             }
-            catch(Exception objEx)
+            catch (Exception objEx)
             {
                 Helpers.LogExceptionInFlatFile(objEx);
             }
@@ -229,6 +231,7 @@ namespace Mugurtham.Service.Areas.Profile.Controllers.MVC
                     )
                     {
                         file.SaveAs(path);
+                        addTextWatermark(path);
                         Mugurtham.Core.Profile.Horoscope.HoroscopeCore objHoroscopeCore = new Core.Profile.Horoscope.HoroscopeCore(ref objLoggedIn);
                         using (objHoroscopeCore as IDisposable)
                         {
@@ -254,6 +257,21 @@ namespace Mugurtham.Service.Areas.Profile.Controllers.MVC
                 ViewBag.Message = "You have not specified a file.";
             }
             return Redirect("/Matrimony#/Horoscope");
+        }
+
+        private int addTextWatermark(string ImagePath)
+        {
+            try
+            {
+                WebImage objWaqtermarkImage = new WebImage(ImagePath);
+                objWaqtermarkImage.AddTextWatermark("© Mugurtham", "White", 60, "Regular", "Consolas", "Right", "Bottom", 70, 5);
+                objWaqtermarkImage.Save(ImagePath);
+            }
+            catch (Exception objEx)
+            {
+                Helpers.LogExceptionInFlatFile(objEx);
+            }
+            return 0;
         }
     }
 }
