@@ -20,8 +20,14 @@ namespace Mugurtham.Service.Controllers
         //
         // GET: /Home/
         public ActionResult Index(string returnURL)
-        {            
-            return View();
+        {
+            //Common.Utilities.Notifications objNotifications = new Notifications();
+            //using (objNotifications as IDisposable)
+            //{
+            //    objNotifications.sendSMS();
+            //}
+            //objNotifications = null;
+                return View();
         }
         [HttpPost]
         public ActionResult ccResponse(string encResp)
